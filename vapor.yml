@@ -1,0 +1,11 @@
+id: 3
+name: vapor-app
+environments:
+    production:
+        storage: singo-bucket-sandeep-testing
+        memory: 1024
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan event:cache'
+        deploy:
+            - 'php artisan migrate --force'
