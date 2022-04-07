@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\FileUploadController;
 use App\Models\User;
+use App\Http\Controllers\API\UserContoller;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Models\User;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/register',[FileUploadController::class,'Register']);
-Route::post('register',[FileUploadController::class,'Register']);
-Route::get('/login',[FileUploadController::class,'login']);
+Route::get('/',[UserContoller::class,'welcome']);
+Route::post('/',[UserContoller::class,'Register']);
+Route::get('/login',[UserContoller::class,'welcome']);
+Route::post('/login',[UserContoller::class,'User_login']);
+Route::get('/dashboard',[UserContoller::class,'welcome']);

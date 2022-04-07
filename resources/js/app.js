@@ -11,7 +11,9 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+require('./components/Login');
+require('./components/AppComponent');
 require('./components/Example');
+require('./components/Registration');
 window.Vapor = require('laravel-vapor');
 

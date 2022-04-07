@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\FileUpload;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +16,11 @@ class FileUploadController extends Controller
         $file     = $request->file('files');
         $fileName = $file->getClientOriginalName();
         $FilePath = 'roshantest/uploads'; 
+        $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
         Storage::copy(
             $request->input('key'),
             str_replace('tmp/', '', $request->input('key'))
         );
-        $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
         $upload['name'] = $fileName;
         $upload['path'] = $FilePath;
         FileUpload::create($upload);
@@ -59,26 +58,4 @@ class FileUploadController extends Controller
         return $file = Storage::disk('s3')->download($FilePath);
        // dd($file);
     }
-    
-    public function Register(Request $request) 
-    { 
-        $request = new User;
-        $request->name ='roshan';
-        $request->email = 'roshan@gmail.com';
-        $request->password= bcrypt('12345678');
-        $request->save();
-    }
-
-    public function login(Request $request)
-    {
-        return \Auth::user();
-        $credentials = [
-            'email'=> 'roshan@gmail.com',
-            'password'=> '12345678'
-        ];
-        if (\Auth::attempt($credentials)){
-            $user_data = User::where('email', $credentials['email'])->first();
-           return ['success',$user_data];
-          }
-  }
 }
