@@ -27,7 +27,7 @@ export default class Login extends Component {
 						email: '',
 						password: '',
 					});
-				
+					window.location = '/dashboard';
 				};
 			})
 			.catch(function(error) {
