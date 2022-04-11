@@ -25,6 +25,7 @@ export default class AppComponent extends Component {
               <Route exact path='/login' element={<Login/>}></Route>
               <Route exact path='/forget-password' element={<ForgetPassword/>}></Route>
               <Route exact path='/dashboard' element={<Dashboard/>}></Route>
+              <Route exact path= '/User' element={<User />}></Route>
           </Routes> 
       </Router>
       
@@ -32,7 +33,6 @@ export default class AppComponent extends Component {
     )
   }
 }
-
 
 if (document.getElementById('example')) {
     ReactDOM.render(<AppComponent />, document.getElementById('example'));

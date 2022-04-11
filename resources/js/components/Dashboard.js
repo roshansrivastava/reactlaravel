@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import '../../css/app.css';
 import axios from 'axios';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
+import AlbumOutlinedIcon from '@mui/icons-material/AlbumOutlined';
+import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import PersonIcon from '@mui/icons-material/Person';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -203,72 +210,32 @@ render() {
         </li>
         <li className="navigation-header"><a className="navigation-header-text">Applications</a><i className="navigation-header-icon material-icons">more_horiz</i>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-email.html"><i className="material-icons">mail_outline</i><span className="menu-title" data-i18n="Mail">Mail</span><span className="badge new badge pill pink accent-2 float-right mr-2">5</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-email.html"> <HomeOutlinedIcon /> Home </a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-chat.html"><i className="material-icons">chat_bubble_outline</i><span className="menu-title" data-i18n="Chat">Chat</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-chat.html"><AnalyticsOutlinedIcon /> My Analytics </a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-todo.html"><i className="material-icons">check</i><span className="menu-title" data-i18n="ToDo">ToDo</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-todo.html"><AlbumOutlinedIcon /> Release Album</a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-kanban.html"><i className="material-icons">format_list_bulleted</i><span className="menu-title" data-i18n="Kanban">Kanban</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-kanban.html"> <MusicNoteOutlinedIcon /> Release New Music </a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-file-manager.html"><i className="material-icons">content_paste</i><span className="menu-title" data-i18n="File Manager">File manager</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-file-manager.html"><AccountBalanceWalletOutlinedIcon /> Wallet</a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-contacts.html"><i className="material-icons">import_contacts</i><span className="menu-title" data-i18n="Contacts">Contacts</span></a>
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-contacts.html"><PersonIcon /> Admin </a>
         </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><i className="material-icons">today</i><span className="menu-title" data-i18n="Calendar">Calendar</span></a>
-        </li>
-        <li className="bold"><a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i className="material-icons">receipt</i><span className="menu-title" data-i18n="Invoice">Invoice</span></a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="app-invoice-list.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice List">Invoice List</span></a>
-              </li>
-              <li><a href="app-invoice-view.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Invoice View</span></a>
-              </li>
-              <li><a href="app-invoice-edit.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice Edit">Invoice Edit</span></a>
-              </li>
-              <li><a href="app-invoice-add.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice Add">Invoice Add</span></a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li className="bold"><a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="eCommerce">eCommerce</span></a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="eCommerce-products-page.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Products Page">Products Page</span></a>
-              </li>
-              <li><a href="eCommerce-pricing.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Pricing">Pricing</span></a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li className="navigation-header"><a className="navigation-header-text">Pages </a><i className="navigation-header-icon material-icons">more_horiz</i>
-        </li>
-        <li className="bold"><a className="waves-effect waves-cyan " href="user-profile-page.html"><i className="material-icons">person_outline</i><span className="menu-title" data-i18n="User Profile">User Profile</span></a>
-        </li>
-        <li className="bold"><a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i className="material-icons">content_paste</i><span className="menu-title" data-i18n="Pages">Pages</span></a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="page-contact.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Contact">Contact</span></a>
-              </li>
-              <li><a href="page-blog-list.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Blog">Blog</span></a>
-              </li>
-              <li><a href="page-search.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Search">Search</span></a>
-              </li>
-              <li><a href="page-knowledge.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Knowledge">Knowledge</span></a>
-              </li>
-              <li><a href="page-timeline.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Timeline">Timeline</span></a>
-              </li>
-              <li><a href="page-faq.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="FAQs">FAQs</span></a>
-              </li>
-              <li><a href="page-account-settings.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Account Settings">Account Settings</span></a>
-              </li>
-              <li><a href="page-blank.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">Page Blank</span></a>
-              </li>
-              <li><a href="page-collapse.html"><i className="material-icons">radio_button_unchecked</i><span data-i18n="Page Collapse">Page Collapse</span></a>
-              </li>
-            </ul>
-          </div>
-        </li>
+        <li className="bold"><a className="waves-effect waves-cyan " href="/User"><PeopleAltIcon /> Users</a>
+        </li>  
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Pending Albums</a>
+        </li>  
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Approved Album </a>
+        </li>        
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Distributed Albums</a>
+        </li>  
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Declined Albums</a>
+        </li>  
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Need Edit Albums </a>
+        </li>  
+        <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> User Request</a>
+        </li>  
         <li className="bold"><a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i className="material-icons">crop_original</i><span className="menu-title" data-i18n="Medias">Medias</span></a>
           <div className="collapsible-body">
             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
