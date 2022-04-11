@@ -235,7 +235,7 @@ render() {
         <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> Need Edit Albums </a>
         </li>  
         <li className="bold"><a className="waves-effect waves-cyan " href="app-calendar.html"><PeopleAltIcon /> User Request</a>
-        </li>  
+           </li>
         <li className="bold"><a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i className="material-icons">crop_original</i><span className="menu-title" data-i18n="Medias">Medias</span></a>
           <div className="collapsible-body">
             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
@@ -481,38 +481,6 @@ render() {
         <div className="col s12">
           <div className="container">
             <div className="section">
-   
-   <div className="row vertical-modern-dashboard">
-      <div className="col s12 m4 l4">
-        
-         <div className="card animate fadeLeft">
-            <div className="card-content">
-               <h6 className="mb-0 mt-0 display-flex justify-content-between">Current Balance <i
-                     className="material-icons float-right">more_vert</i>
-               </h6>
-               <p className="medium-small">This billing cycle</p>
-               <div className="current-balance-container">
-                  <div id="current-balance-donut-chart" className="current-balance-shadow"></div>
-               </div>
-               <h5 className="center-align">$ 50,150.00</h5>
-               <p className="medium-small center-align">Used balance this billing cycle</p>
-            </div>
-         </div>
-      </div>
-      <div className="col s12 m8 l8 animate fadeRight">
-    
-         <div className="card">
-            <div className="card-content">
-               <h4 className="card-title mb-0">Total Transaction <i className="material-icons float-right">more_vert</i></h4>
-               <p className="medium-small">This month transaction</p>
-               <div className="total-transaction-container">
-                  <div id="total-transaction-line-chart" className="total-transaction-shadow"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <div className="row">
       <div className="col s12 l5">
         
