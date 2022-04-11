@@ -9068,7 +9068,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .brand-sidebar
 {
     position: fixed;
-    top: 0;
+    top: 65px;
     right: 0;
 
     width: inherit;

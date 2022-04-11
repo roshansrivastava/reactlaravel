@@ -85,6 +85,21 @@ public function User_login(Request $request)
     {
         return view('welcome');
     }
+
+    Public function Logout()
+    {
+      if (Auth::check()) 
+      {
+        Auth::user()->AauthAcessToken()->delete();
+        return response()->json(array(
+        'success' => 'you are logged out',
+        'status' => 200,
+        ));
+      }
+      else{
+        return ['not logout'];
+      }
+    }
 }
 
 

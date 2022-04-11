@@ -13,7 +13,8 @@ import {
   Routes,
 } from "react-router-dom";
 import Dashboard from './Dashboard';
-import User from './User';
+import User from '../layout/User';
+import Music from '../layout/Music';
 // import AuthService from 
 
 export default class AppComponent extends Component {
@@ -25,8 +26,9 @@ export default class AppComponent extends Component {
               <Route exact path='/' element={<Registration/>}></Route>
               <Route exact path='/login' element={<Login/>}></Route>
               <Route exact path='/forget-password' element={<ForgetPassword/>}></Route>
-              <Route exact path='/dashboard' element={<Dashboard/>}></Route>
-              <Route exact path= '/User' element={<User />}></Route>
+              <Route exact path='/dashboard'element={<Dashboard/>}></Route>
+              <Route exact path= '/dashboard/user' element={<User/>}></Route>
+              <Route exact path= '/dashboard/music'element={<Music/>}></Route>
           </Routes> 
       </Router>
       

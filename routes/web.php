@@ -24,3 +24,5 @@ Route::post('/',[UserContoller::class,'Register']);
 Route::get('/login',[UserContoller::class,'welcome']);
 Route::post('/login',[UserContoller::class,'User_login']);
 Route::get('/dashboard',[UserContoller::class,'welcome']);
+Route::get('/navbar',[UserContoller::class,'welcome']);
+Route::get('/sidebar',[UserContoller::class,'welcome']);

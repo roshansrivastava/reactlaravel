@@ -21,6 +21,7 @@ Route::post('login',[UserContoller::class,'User_login']);
 Route::post('upload-file',[FileUploadController::class,'uploads']);
 Route::get('get-file/{id}',[FileUploadController::class,'getFile']);
 // Route::post('login',[AccessTokenController::class,'issueToken'])->middleware(['api-login','throttle']);
+Route::post('logout',[UserContoller::class,'Logout']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -8925,6 +8925,13 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     color: #444;
 }
 
+
+
+.sidenav-main .brand-sidebar{
+   top: 65px;
+}
+
+
 @media only screen and (max-width: 600px)
 {
     .navbar .nav-wrapper .dropdown-content
