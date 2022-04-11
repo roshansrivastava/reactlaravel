@@ -13,6 +13,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Dashboard from './Dashboard';
+import User from './User';
 // import AuthService from 
 
 export default class AppComponent extends Component {
