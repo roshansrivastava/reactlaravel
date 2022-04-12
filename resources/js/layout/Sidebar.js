@@ -9,8 +9,8 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Link } from "react-router-dom";
-import axios from 'axios';
 export default function sidebar() {
+
   return (
     <>
     	<li className="navigation-header">
@@ -68,11 +68,14 @@ export default function sidebar() {
 								<PeopleAltIcon /> Distributed Albums
 							</a>
 						</li>
+						{/* {user.role == 'admin' && ( */}
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> Declined Albums
 							</a>
 						</li>
+
+					
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> Need Edit Albums{' '}

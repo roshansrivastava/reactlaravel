@@ -9,10 +9,4 @@ use App\Models\User;
 class OauthAccessToken extends Model
 {
     use HasFactory;
-
-    public function AauthAcessToken()
-    {
-     return $this->hasMany('\App\OauthAccessToken');
-    }
-
 }

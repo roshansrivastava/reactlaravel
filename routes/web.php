@@ -26,3 +26,4 @@ Route::post('/login',[UserContoller::class,'User_login']);
 Route::get('/dashboard',[UserContoller::class,'welcome']);
 Route::get('/navbar',[UserContoller::class,'welcome']);
 Route::get('/sidebar',[UserContoller::class,'welcome']);
+// Route::get('/logout',[UserContoller::class,'Logout']);

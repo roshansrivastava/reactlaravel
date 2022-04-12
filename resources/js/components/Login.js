@@ -1,41 +1,55 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import React,{useState} from 'react';
 import '../../css/app.css';
+import { UserLogin } from '../api/Index';
+import Api from '../api/Api';
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+export default function Login() {
+	const shouldRedirect = true;
+	const navigate = useNavigate();
 
-export default class Login extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			password: '',
-			email: '',
-		};
-		this.handleChange = (e) => {
-            this.setState({
-                [e.target.name]:e.target.value
-            });
-        }
-		this.saveStudent = async (e) => {
-            e.preventDefault();
-            axios.post('http://localhost:8000/api/login',this.state)
-			.then(res => {
-				if (res.data.status == 200)
-				{
-					// console.log('vssvvssav',res.data.token.token);
-					localStorage.setItem('token',res.data.token.token);
-					console.log(res.data.message);
-					this.setState({
-						email: '',
-						password: '',
-					});
-					window.location = '/dashboard';
-				};
-			})
-			.catch(function(error) {
+	const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
+		
+	function saveStudent(e){
+		e.preventDefault();
+		const payload = {
+			email: email,
+			password:password
+		  };
+		  UserLogin(payload)
+		  .then(res => {
+			//   console.log('bb',res.name)
+			localStorage.setItem('token',res.token.token);
+			navigate('/dashboard');
+
+		  })
+		  .catch(function(error) {
 				console.log(error);
 			});
-		}
+		// axios.post('http://localhost:8000/api/login',this.state)
+		// .then(res => {
+		// 	if (res.data.status == 200)
+		// 	{
+		// 		// console.log('vssvvssav',res.data.token.token);
+		// 		localStorage.setItem('token',res.data.token.token);
+		// 		console.log(res.data.message);
+		// 		this.setState({
+		// 			email: '',
+		// 			password: '',
+		// 		});
+		// 		window.location = '/dashboard';
+		// 	};
+		// })
+		// .catch(function(error) {
+		// 	console.log(error);
+		// });
 	}
-	render() {
+
 		return (
 			<div
 				className="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
@@ -48,7 +62,7 @@ export default class Login extends Component {
 						<div className="container">
 							<div id="login-page" className="row">
 								<div className="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-									<form onSubmit={this.saveStudent}>
+									<form onSubmit={saveStudent}>
 										<div className="row">
 											<div className="input-field col s12">
 												<h5 className="ml-4">Sign in</h5>
@@ -61,8 +75,8 @@ export default class Login extends Component {
 													id="email"
 													name ='email'
 													type="email"
-													value={this.state.email}
-													onChange= {this.handleChange}
+													value={email}
+													onChange={(e) => setEmail(e.target.value)}
 												/>
 												<label htmlFor="email" className="center-align">
 													Email
@@ -76,20 +90,17 @@ export default class Login extends Component {
 													id="password"
 													type="password"
 													name = 'password'
-													value={this.state.password}
-													onChange={this.handleChange}
+													value={password}
+													onChange={(e) => setPassword(e.target.value)}
 												/>
 												<label htmlFor="password">Password</label>
 											</div>
 										</div>
 										<div className="row">
 										<div className="input-field col s12">
-											<button
-												type="submit"
-												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
-											>
-												Login
-											</button>
+										<Button block size="lg" type="submit" disabled={!validateForm()}>
+       											   Login
+      										  </Button>
 										</div>
 									</div>
 
@@ -116,4 +127,3 @@ export default class Login extends Component {
 			</div>
 		);
 	}
-}

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class UserContoller extends Controller
 {
     
@@ -63,13 +64,16 @@ public function User_login(Request $request)
             'status'    => 'Error',
           ],403);
         }
-         else {
+         else { 
+          //\Auth::login($user);
           $success['token'] = $user->createToken('LoginToken')->accessToken;
           $success['data'] = $credentials;
           return response()->json([
-               'message'   => 'user is successfully login',
+               'message'   => Auth::user(),
                'status'    => 200,
-               'token'=>$success,
+               'token'     => $success,
+               'admin'     => $user->role_id ,
+               'name'      => $user->role->name,
             ]);
         }
       }
@@ -88,9 +92,10 @@ public function User_login(Request $request)
 
     Public function Logout()
     {
+      //return [Auth::user()];
       if (Auth::check()) 
       {
-        Auth::user()->AauthAcessToken()->delete();
+        Auth::User()->AauthAcessToken()->delete();
         return response()->json(array(
         'success' => 'you are logged out',
         'status' => 200,
