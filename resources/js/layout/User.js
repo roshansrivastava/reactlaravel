@@ -1,9 +1,19 @@
-import React from 'react'
+import React,  { useEffect, useState } from 'react'
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
+import {Getuser} from '../api/Index';
+import {Table} from 'react-bootstrap';
+
 
 export default function User() {
+    const [APIData, setAPIData] = useState([]);
+    //  const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        Getuser().then((response) => {
+                setAPIData(response.data);
+            })
+    }, []);
   return (
     <div className="App">
     <header className="page-topbar" id="header">
@@ -46,6 +56,33 @@ export default function User() {
     </aside>
     <div id="main">
         <h1>User </h1>
+<Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Full Name</th>
+      <th>Artist Name</th>
+      <th>Email</th>
+      <th>ADD </th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+  { APIData.map ((data) => {
+        return (
+            <tr >
+             <td>{data.id}</td>  
+             <td>{data.name}</td>  
+             <td>{data.email}</td> 
+            </tr>
+      )})
+  }
+  </tbody>
+</Table>
     </div>
     <Script/>
 </div>

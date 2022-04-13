@@ -19,12 +19,15 @@ class UserContoller extends Controller
         try {
         $this->validate($request, [
             'name' => 'required|min:3|max:50',
+            'artistname'=>'required|min:5|max:20',
             'email' => 'email',
             'password' => 'min:4|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:4'
             ]);
-            $user['name'] = $request->input('name');
+            $user['name'] = $request->input('first_name');
+            $user['fullname'] = $request->input('last_name');
             $user['email'] = $request->input('email');
+            $user['artistname'] = $request->input('artistname');
             $user['password']=  Hash::make($request->input('password'));
             $result = User::create($user);
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
@@ -104,6 +107,16 @@ public function User_login(Request $request)
       else{
         return ['not logout'];
       }
+    }
+
+    public function User()
+    {
+      $user = User::all();
+      return response()->json(array(
+        'Success'=> 'Loading is Successfully',
+        'Status' => 200,
+        'data' => $user,
+      ));
     }
 }
 

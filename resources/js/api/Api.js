@@ -1,6 +1,5 @@
 
 import axios from 'axios';
-import { createBrowserHistory } from 'history';
 const Api = axios.create({
     baseURL: '/api',
     headers: {
