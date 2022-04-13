@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{ useEffect, useState } from 'react'
 import { ReactDOM } from 'react';
 import '../../css/app.css';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -8,10 +8,16 @@ import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { Getuser } from '../api/Index';
 import { Link } from "react-router-dom";
 export default function sidebar() {
-
-	
+	const [APIData, setAPIData] = useState(null);
+    useEffect(() => {
+        Getuser().then((response) => {
+			console.log(response.data);
+                setAPIData(response.data);
+            })
+    }, []);
 
 console.log()
   return (
@@ -78,12 +84,13 @@ console.log()
 							</a>
 						</li>
 
-					
-						<li className="bold">
-							<a className="waves-effect waves-cyan " href="app-calendar.html">
-								<PeopleAltIcon /> Need Edit Albums{' '}
-							</a>
-						</li>
+						{ APIData != null && (
+							<li className="bold">
+								<a className="waves-effect waves-cyan " href="app-calendar.html">
+									<PeopleAltIcon /> Need Edit Albums{' '}
+								</a>
+							</li>
+						)}
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> User Request
