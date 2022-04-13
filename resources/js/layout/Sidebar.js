@@ -14,7 +14,6 @@ export default function sidebar() {
 	const [APIData, setAPIData] = useState(null);
     useEffect(() => {
         Getuser().then((response) => {
-			console.log(response.data);
                 setAPIData(response.data);
             })
     }, []);
@@ -52,16 +51,19 @@ console.log()
 								<AccountBalanceWalletOutlinedIcon /> Wallet
 							</a>
 						</li>
+						{/* {APIData.name == 1 && APIData.role_id==2 ( */}
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-contacts.html">
 								<PersonIcon /> Admin{' '}
 							</a>
 						</li>
+							{/* )} */}
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/User">
 								<PeopleAltIcon /> Users
 							</Link>
 						</li>
+
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> Pending Albums
@@ -77,20 +79,21 @@ console.log()
 								<PeopleAltIcon /> Distributed Albums
 							</a>
 						</li>
-						{/* {user.role == 'admin' && ( */}
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> Declined Albums
 							</a>
 						</li>
-
-						{ APIData != null && (
+						{/* { APIData.role == 'admin' && ( */}
 							<li className="bold">
 								<a className="waves-effect waves-cyan " href="app-calendar.html">
 									<PeopleAltIcon /> Need Edit Albums{' '}
 								</a>
 							</li>
-						)}
+						
+						{/* {name == 'roshan' && (
+							;saveStudentsdfvmlsd
+						)} */}
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> User Request
