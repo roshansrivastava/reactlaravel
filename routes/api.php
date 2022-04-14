@@ -23,6 +23,7 @@ Route::get('get-file/{id}',[FileUploadController::class,'getFile']);
 // Route::post('login',[AccessTokenController::class,'issueToken'])->middleware(['api-login','throttle']);
 Route::post('logout',[UserContoller::class,'Logout'])->middleware(['auth:api']);
 Route::get('/users',[UserContoller::class,'User'])->middleware(['auth:api']);
+Route::get('/delete/{id}',[UserContoller::class,'DeleteUser'])->middleware(['auth:api']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

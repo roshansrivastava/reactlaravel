@@ -2324,34 +2324,6 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ "./node_modules/@mui/icons-material/Delete.js":
-/*!****************************************************!*\
-  !*** ./node_modules/@mui/icons-material/Delete.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
-
-var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-}), 'Delete');
-
-exports["default"] = _default;
-
-/***/ }),
-
 /***/ "./node_modules/@mui/icons-material/HomeOutlined.js":
 /*!**********************************************************!*\
   !*** ./node_modules/@mui/icons-material/HomeOutlined.js ***!
@@ -4091,472 +4063,6 @@ if (true) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ButtonGroupContext);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/material/IconButton/IconButton.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@mui/material/IconButton/IconButton.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/utils */ "./node_modules/@mui/utils/esm/chainPropTypes.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/base/composeClasses/composeClasses.js");
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/system */ "./node_modules/@mui/system/esm/colorManipulator.js");
-/* harmony import */ var _styles_styled__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/styled */ "./node_modules/@mui/material/styles/styled.js");
-/* harmony import */ var _styles_useThemeProps__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../styles/useThemeProps */ "./node_modules/@mui/material/styles/useThemeProps.js");
-/* harmony import */ var _ButtonBase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ButtonBase */ "./node_modules/@mui/material/ButtonBase/ButtonBase.js");
-/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@mui/material/utils/capitalize.js");
-/* harmony import */ var _iconButtonClasses__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./iconButtonClasses */ "./node_modules/@mui/material/IconButton/iconButtonClasses.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-const _excluded = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
-
-
-
-
-
-
-
-
-
-
-
-
-
-const useUtilityClasses = ownerState => {
-  const {
-    classes,
-    disabled,
-    color,
-    edge,
-    size
-  } = ownerState;
-  const slots = {
-    root: ['root', disabled && 'disabled', color !== 'default' && `color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(color)}`, edge && `edge${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(edge)}`, `size${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(size)}`]
-  };
-  return (0,_mui_base__WEBPACK_IMPORTED_MODULE_6__["default"])(slots, _iconButtonClasses__WEBPACK_IMPORTED_MODULE_7__.getIconButtonUtilityClass, classes);
-};
-
-const IconButtonRoot = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_8__["default"])(_ButtonBase__WEBPACK_IMPORTED_MODULE_9__["default"], {
-  name: 'MuiIconButton',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, ownerState.color !== 'default' && styles[`color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(ownerState.color)}`], ownerState.edge && styles[`edge${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(ownerState.edge)}`], styles[`size${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__["default"])(ownerState.size)}`]];
-  }
-})(({
-  theme,
-  ownerState
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  textAlign: 'center',
-  flex: '0 0 auto',
-  fontSize: theme.typography.pxToRem(24),
-  padding: 8,
-  borderRadius: '50%',
-  overflow: 'visible',
-  // Explicitly set the default value to solve a bug on IE11.
-  color: theme.palette.action.active,
-  transition: theme.transitions.create('background-color', {
-    duration: theme.transitions.duration.shortest
-  })
-}, !ownerState.disableRipple && {
-  '&:hover': {
-    backgroundColor: (0,_mui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette.action.active, theme.palette.action.hoverOpacity),
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: 'transparent'
-    }
-  }
-}, ownerState.edge === 'start' && {
-  marginLeft: ownerState.size === 'small' ? -3 : -12
-}, ownerState.edge === 'end' && {
-  marginRight: ownerState.size === 'small' ? -3 : -12
-}), ({
-  theme,
-  ownerState
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, ownerState.color === 'inherit' && {
-  color: 'inherit'
-}, ownerState.color !== 'inherit' && ownerState.color !== 'default' && (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  color: theme.palette[ownerState.color].main
-}, !ownerState.disableRipple && {
-  '&:hover': {
-    backgroundColor: (0,_mui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[ownerState.color].main, theme.palette.action.hoverOpacity),
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: 'transparent'
-    }
-  }
-}), ownerState.size === 'small' && {
-  padding: 5,
-  fontSize: theme.typography.pxToRem(18)
-}, ownerState.size === 'large' && {
-  padding: 12,
-  fontSize: theme.typography.pxToRem(28)
-}, {
-  [`&.${_iconButtonClasses__WEBPACK_IMPORTED_MODULE_7__["default"].disabled}`]: {
-    backgroundColor: 'transparent',
-    color: theme.palette.action.disabled
-  }
-}));
-/**
- * Refer to the [Icons](/components/icons/) section of the documentation
- * regarding the available icon options.
- */
-
-const IconButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function IconButton(inProps, ref) {
-  const props = (0,_styles_useThemeProps__WEBPACK_IMPORTED_MODULE_11__["default"])({
-    props: inProps,
-    name: 'MuiIconButton'
-  });
-
-  const {
-    edge = false,
-    children,
-    className,
-    color = 'default',
-    disabled = false,
-    disableFocusRipple = false,
-    size = 'medium'
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(props, _excluded);
-
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
-    edge,
-    color,
-    disabled,
-    disableFocusRipple,
-    size
-  });
-
-  const classes = useUtilityClasses(ownerState);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(IconButtonRoot, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_3__["default"])(classes.root, className),
-    centerRipple: true,
-    focusRipple: !disableFocusRipple,
-    disabled: disabled,
-    ref: ref,
-    ownerState: ownerState
-  }, other, {
-    children: children
-  }));
-});
- true ? IconButton.propTypes
-/* remove-proptypes */
-= {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The icon to display.
-   */
-  children: (0,_mui_utils__WEBPACK_IMPORTED_MODULE_12__["default"])((prop_types__WEBPACK_IMPORTED_MODULE_13___default().node), props => {
-    const found = react__WEBPACK_IMPORTED_MODULE_2__.Children.toArray(props.children).some(child => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(child) && child.props.onClick);
-
-    if (found) {
-      return new Error(['MUI: You are providing an onClick event listener to a child of a button element.', 'Prefer applying it to the IconButton directly.', 'This guarantees that the whole <button> will be responsive to click events.'].join('\n'));
-    }
-
-    return null;
-  }),
-
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().object),
-
-  /**
-   * @ignore
-   */
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().string),
-
-  /**
-   * The color of the component.
-   * It supports both default and custom theme colors, which can be added as shown in the
-   * [palette customization guide](https://mui.com/customization/palette/#adding-new-colors).
-   * @default 'default'
-   */
-  color: prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOf(['inherit', 'default', 'primary', 'secondary', 'error', 'info', 'success', 'warning']), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().string)]),
-
-  /**
-   * If `true`, the component is disabled.
-   * @default false
-   */
-  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().bool),
-
-  /**
-   * If `true`, the  keyboard focus ripple is disabled.
-   * @default false
-   */
-  disableFocusRipple: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().bool),
-
-  /**
-   * If `true`, the ripple effect is disabled.
-   *
-   * ⚠️ Without a ripple there is no styling for :focus-visible by default. Be sure
-   * to highlight the element by applying separate styles with the `.Mui-focusVisible` class.
-   * @default false
-   */
-  disableRipple: (prop_types__WEBPACK_IMPORTED_MODULE_13___default().bool),
-
-  /**
-   * If given, uses a negative margin to counteract the padding on one
-   * side (this is often helpful for aligning the left or right
-   * side of the icon with content above or below, without ruining the border
-   * size and shape).
-   * @default false
-   */
-  edge: prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOf(['end', 'start', false]),
-
-  /**
-   * The size of the component.
-   * `small` is equivalent to the dense button styling.
-   * @default 'medium'
-   */
-  size: prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOf(['small', 'medium', 'large']), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().string)]),
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_13___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_13___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_13___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().bool)])), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_13___default().object)])
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IconButton);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/material/IconButton/iconButtonClasses.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@mui/material/IconButton/iconButtonClasses.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "getIconButtonUtilityClass": () => (/* binding */ getIconButtonUtilityClass)
-/* harmony export */ });
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js");
-
-function getIconButtonUtilityClass(slot) {
-  return (0,_mui_base__WEBPACK_IMPORTED_MODULE_0__["default"])('MuiIconButton', slot);
-}
-const iconButtonClasses = (0,_mui_base__WEBPACK_IMPORTED_MODULE_1__["default"])('MuiIconButton', ['root', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'edgeStart', 'edgeEnd', 'sizeSmall', 'sizeMedium', 'sizeLarge']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (iconButtonClasses);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/material/Stack/Stack.js":
-/*!***************************************************!*\
-  !*** ./node_modules/@mui/material/Stack/Stack.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "style": () => (/* binding */ style)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/system */ "./node_modules/@mui/system/esm/breakpoints.js");
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/system */ "./node_modules/@mui/system/esm/spacing.js");
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/system */ "./node_modules/@mui/system/esm/styleFunctionSx/extendSxProp.js");
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/utils */ "./node_modules/@mui/utils/esm/deepmerge.js");
-/* harmony import */ var _styles_styled__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/styled */ "./node_modules/@mui/material/styles/styled.js");
-/* harmony import */ var _styles_useThemeProps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/useThemeProps */ "./node_modules/@mui/material/styles/useThemeProps.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-const _excluded = ["component", "direction", "spacing", "divider", "children"];
-
-
-
-
-
-
-/**
- * Return an array with the separator React element interspersed between
- * each React node of the input children.
- *
- * > joinChildren([1,2,3], 0)
- * [1,0,2,0,3]
- */
-
-
-
-function joinChildren(children, separator) {
-  const childrenArray = react__WEBPACK_IMPORTED_MODULE_2__.Children.toArray(children).filter(Boolean);
-  return childrenArray.reduce((output, child, index) => {
-    output.push(child);
-
-    if (index < childrenArray.length - 1) {
-      output.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(separator, {
-        key: `separator-${index}`
-      }));
-    }
-
-    return output;
-  }, []);
-}
-
-const getSideFromDirection = direction => {
-  return {
-    row: 'Left',
-    'row-reverse': 'Right',
-    column: 'Top',
-    'column-reverse': 'Bottom'
-  }[direction];
-};
-
-const style = ({
-  ownerState,
-  theme
-}) => {
-  let styles = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    display: 'flex'
-  }, (0,_mui_system__WEBPACK_IMPORTED_MODULE_4__.handleBreakpoints)({
-    theme
-  }, (0,_mui_system__WEBPACK_IMPORTED_MODULE_4__.resolveBreakpointValues)({
-    values: ownerState.direction,
-    breakpoints: theme.breakpoints.values
-  }), propValue => ({
-    flexDirection: propValue
-  })));
-
-  if (ownerState.spacing) {
-    const transformer = (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.createUnarySpacing)(theme);
-    const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
-      if (ownerState.spacing[breakpoint] != null || ownerState.direction[breakpoint] != null) {
-        acc[breakpoint] = true;
-      }
-
-      return acc;
-    }, {});
-    const directionValues = (0,_mui_system__WEBPACK_IMPORTED_MODULE_4__.resolveBreakpointValues)({
-      values: ownerState.direction,
-      base
-    });
-    const spacingValues = (0,_mui_system__WEBPACK_IMPORTED_MODULE_4__.resolveBreakpointValues)({
-      values: ownerState.spacing,
-      base
-    });
-
-    const styleFromPropValue = (propValue, breakpoint) => {
-      return {
-        '& > :not(style) + :not(style)': {
-          margin: 0,
-          [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : ownerState.direction)}`]: (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.getValue)(transformer, propValue)
-        }
-      };
-    };
-
-    styles = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__["default"])(styles, (0,_mui_system__WEBPACK_IMPORTED_MODULE_4__.handleBreakpoints)({
-      theme
-    }, spacingValues, styleFromPropValue));
-  }
-
-  return styles;
-};
-const StackRoot = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_7__["default"])('div', {
-  name: 'MuiStack',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    return [styles.root];
-  }
-})(style);
-const Stack = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Stack(inProps, ref) {
-  const themeProps = (0,_styles_useThemeProps__WEBPACK_IMPORTED_MODULE_8__["default"])({
-    props: inProps,
-    name: 'MuiStack'
-  });
-  const props = (0,_mui_system__WEBPACK_IMPORTED_MODULE_9__["default"])(themeProps);
-
-  const {
-    component = 'div',
-    direction = 'column',
-    spacing = 0,
-    divider,
-    children
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(props, _excluded);
-
-  const ownerState = {
-    direction,
-    spacing
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(StackRoot, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    as: component,
-    ownerState: ownerState,
-    ref: ref
-  }, other, {
-    children: divider ? joinChildren(children, divider) : children
-  }));
-});
- true ? Stack.propTypes
-/* remove-proptypes */
-= {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The content of the component.
-   */
-  children: (prop_types__WEBPACK_IMPORTED_MODULE_10___default().node),
-
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: (prop_types__WEBPACK_IMPORTED_MODULE_10___default().elementType),
-
-  /**
-   * Defines the `flex-direction` style property.
-   * It is applied for all screen sizes.
-   * @default 'column'
-   */
-  direction: prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOf(['column-reverse', 'column', 'row-reverse', 'row']), prop_types__WEBPACK_IMPORTED_MODULE_10___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOf(['column-reverse', 'column', 'row-reverse', 'row'])), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().object)]),
-
-  /**
-   * Add an element between each child.
-   */
-  divider: (prop_types__WEBPACK_IMPORTED_MODULE_10___default().node),
-
-  /**
-   * Defines the space between immediate children.
-   * @default 0
-   */
-  spacing: prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_10___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_10___default().number), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().string)])), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().number), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().string)]),
-
-  /**
-   * The system prop, which allows defining system overrides as well as additional CSS styles.
-   */
-  sx: prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_10___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_10___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_10___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().bool)])), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_10___default().object)])
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Stack);
 
 /***/ }),
 
@@ -8531,77 +8037,6 @@ function style(options) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (style);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/system/esm/styleFunctionSx/extendSxProp.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@mui/system/esm/styleFunctionSx/extendSxProp.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ extendSxProp)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/utils */ "./node_modules/@mui/utils/esm/deepmerge.js");
-/* harmony import */ var _getThemeValue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../getThemeValue */ "./node_modules/@mui/system/esm/getThemeValue.js");
-
-
-const _excluded = ["sx"];
-
-
-
-const splitProps = props => {
-  const result = {
-    systemProps: {},
-    otherProps: {}
-  };
-  Object.keys(props).forEach(prop => {
-    if (_getThemeValue__WEBPACK_IMPORTED_MODULE_2__.propToStyleFunction[prop]) {
-      result.systemProps[prop] = props[prop];
-    } else {
-      result.otherProps[prop] = props[prop];
-    }
-  });
-  return result;
-};
-
-function extendSxProp(props) {
-  const {
-    sx: inSx
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, _excluded);
-
-  const {
-    systemProps,
-    otherProps
-  } = splitProps(other);
-  let finalSx;
-
-  if (Array.isArray(inSx)) {
-    finalSx = [systemProps, ...inSx];
-  } else if (typeof inSx === 'function') {
-    finalSx = (...args) => {
-      const result = inSx(...args);
-
-      if (!(0,_mui_utils__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(result)) {
-        return systemProps;
-      }
-
-      return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, systemProps, result);
-    };
-  } else {
-    finalSx = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, systemProps, inSx);
-  }
-
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, otherProps, {
-    sx: finalSx
-  });
-}
 
 /***/ }),
 
@@ -17543,6 +16978,7 @@ var File = function File(url, data) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteUser": () => (/* binding */ DeleteUser),
 /* harmony export */   "Getuser": () => (/* binding */ Getuser),
 /* harmony export */   "UserLogin": () => (/* binding */ UserLogin),
 /* harmony export */   "Userlogout": () => (/* binding */ Userlogout)
@@ -17565,6 +17001,10 @@ var Userlogout = function Userlogout(payload) {
 
 var Getuser = function Getuser() {
   return _Api__WEBPACK_IMPORTED_MODULE_2__["default"].get("/users");
+};
+
+var DeleteUser = function DeleteUser(id) {
+  return _Api__WEBPACK_IMPORTED_MODULE_2__["default"].get('/delete/' + id);
 };
 
 
@@ -18224,6 +17664,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_Api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api/Api */ "./resources/js/api/Api.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -18236,6 +17677,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -18389,8 +17831,8 @@ function Login() {
                     className: "input-field col s6 m6 l6",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                       className: "margin right-align medium-small",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-                        href: "/forget-password",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+                        to: "/forget-password",
                         children: "Forgot password ?"
                       })
                     })
@@ -18425,9 +17867,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 
@@ -18457,6 +17900,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -18520,18 +17964,17 @@ var Registration = /*#__PURE__*/function (_Component) {
                 console.log('add two value 2 ', fullname);
 
               case 12:
-                _context.next = 17;
+                _context.next = 16;
                 break;
 
               case 14:
-                e.preventDefault();
+                // e.preventDefault();
                 alert('Enter last name');
                 return _context.abrupt("return");
 
-              case 17:
+              case 16:
                 // console.log('bbb',fname[1]);
-                e.preventDefault();
-
+                // e.preventDefault();
                 if (_this.handleFormValidation()) {
                   alert('You have been successfully registered.');
 
@@ -18541,7 +17984,7 @@ var Registration = /*#__PURE__*/function (_Component) {
                 data = _this.state;
                 data.first_name = fname[0];
                 data.last_name = fullname;
-                _context.next = 24;
+                _context.next = 22;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://localhost:8000/api/register', data).then(function (res) {
                   // console.log('vssvvv',res.data.data.token);
                   if (res.data.status == 200) {
@@ -18567,10 +18010,11 @@ var Registration = /*#__PURE__*/function (_Component) {
                   console.log(error);
                 });
 
-              case 24:
+              case 22:
                 res = _context.sent;
+                (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Navigate)('/login');
 
-              case 25:
+              case 24:
               case "end":
                 return _context.stop();
             }
@@ -18654,177 +18098,177 @@ var Registration = /*#__PURE__*/function (_Component) {
           passwordErr = _this$state$formError.passwordErr,
           password_confirmationErr = _this$state$formError.password_confirmationErr,
           checkbox = _this$state$formError.checkbox;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "row",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "col s12",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "container",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               id: "register-page",
               className: "row",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "col s12 m6 l4 z-depth-4 card-panel border-radius-6 register-card bg-opacity-8",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
                   className: "login-form",
                   onSubmit: this.saveStudent,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h5", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
                         className: "ml-4",
                         children: "Register"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                         className: "ml-4",
                         children: "Join to our community now !"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row margin",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                         className: "material-icons prefix pt-2",
                         children: "person_outline"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                         id: "name",
                         type: "text",
                         name: "name",
                         value: this.state.name,
                         onChange: this.handleChange,
                         className: nameErr ? ' showError' : ''
-                      }), nameErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                      }), nameErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         style: {
                           color: "red",
                           paddingBottom: 10
                         },
                         children: nameErr
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                         htmlFor: "name",
                         className: "center-align",
                         children: "Name"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row margin",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                         className: "material-icons prefix pt-2",
                         children: "person_outline"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                         id: "artistname",
                         type: "text",
                         name: "artistname",
                         value: this.state.artistname,
                         onChange: this.handleChange,
                         className: artistnameErr ? ' showError' : ''
-                      }), artistnameErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                      }), artistnameErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         style: {
                           color: "red",
                           paddingBottom: 10
                         },
                         children: artistnameErr
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                         htmlFor: "artistname",
                         className: "center-align",
                         children: "Artist Name"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row margin",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                         className: "material-icons prefix pt-2",
                         children: "mail_outline"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                         id: "email",
                         type: "email",
                         name: "email",
                         value: this.state.email,
                         onChange: this.handleChange,
                         className: emailErr ? ' showError' : ''
-                      }), emailErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                      }), emailErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         style: {
                           color: "red",
                           paddingBottom: 10
                         },
                         children: emailErr
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                         htmlFor: "email",
                         children: "Email"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row margin",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                         className: "material-icons prefix pt-2",
                         children: "lock_outline"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                         id: "password",
                         type: "password",
                         name: "password",
                         value: this.state.password,
                         onChange: this.handleChange,
                         className: passwordErr ? ' showError' : ''
-                      }), passwordErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                      }), passwordErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         style: {
                           color: "red",
                           paddingBottom: 10
                         },
                         children: passwordErr
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                         htmlFor: "password",
                         children: "Password"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row margin",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       className: "input-field col s12",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                         className: "material-icons prefix pt-2",
                         children: "lock_outline"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                         id: "password_confirmation",
                         type: "password",
                         name: "password_confirmation",
                         value: this.state.password_confirmation,
                         onChange: this.handleChange,
                         className: password_confirmationErr ? ' showError' : ''
-                      }), password_confirmationErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                      }), password_confirmationErr && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         style: {
                           color: "red",
                           paddingBottom: 10
                         },
                         children: password_confirmationErr
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                         htmlFor: "password_confirmation",
                         children: " Password Confirm "
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "input-field col s12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                         type: "submit",
                         className: "btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12",
                         children: "Register"
                       })
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "row",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "input-field col s12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                         className: "margin medium-small",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-                          href: "/login",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+                          to: "/login",
                           children: "Already have an account? Login"
                         })
                       })
@@ -18833,7 +18277,7 @@ var Registration = /*#__PURE__*/function (_Component) {
                 })
               })
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "content-overlay"
           })]
         })
@@ -19345,10 +18789,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_Script__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout/Script */ "./resources/js/layout/Script.js");
 /* harmony import */ var _api_Index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../api/Index */ "./resources/js/api/Index.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Table.js");
-/* harmony import */ var _mui_material_Stack__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Stack */ "./node_modules/@mui/material/Stack/Stack.js");
 /* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_icons_material_Delete__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/icons-material/Delete */ "./node_modules/@mui/icons-material/Delete.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/IconButton/IconButton.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -19375,7 +18816,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function User() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -19383,11 +18823,23 @@ function User() {
       setAPIData = _useState2[1]; //  const [loading, setLoading] = useState(false);
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  var getUserData = function getUserData() {
     (0,_api_Index__WEBPACK_IMPORTED_MODULE_4__.Getuser)().then(function (response) {
       setAPIData(response.data);
     });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getUserData();
   }, []);
+
+  var Delete = function Delete(id) {
+    (0,_api_Index__WEBPACK_IMPORTED_MODULE_4__.DeleteUser)(id).then(function (res) {
+      console.log(res);
+      getUserData();
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "App",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("header", {
@@ -19494,21 +18946,21 @@ function User() {
                   variant: "contained",
                   children: "Edit"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_9__["default"], {
-                  direction: "row",
-                  spacing: 1,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], {
-                    "aria-label": "delete"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_icons_material_Delete__WEBPACK_IMPORTED_MODULE_11__["default"], {})]
-                }), ' ']
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                  variant: "contained",
+                  onClick: function onClick() {
+                    Delete(data.id);
+                  },
+                  children: "Delete"
+                })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
                 children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
                   variant: "contained",
                   children: " View "
                 })]
               })]
-            });
+            }, data.id);
           })
         })]
       })]

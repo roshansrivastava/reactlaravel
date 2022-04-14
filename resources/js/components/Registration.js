@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../../css/app.css';
 
 
@@ -94,13 +95,13 @@ export default class Registration extends Component {
 				}
 				// console.log('dfgv',fname);
 			}else {
-				e.preventDefault();
+				// e.preventDefault();
 
 				alert('Enter last name');
 				return;
 			}
 			// console.log('bbb',fname[1]);
-            e.preventDefault();
+            // e.preventDefault();
 			if (this.handleFormValidation()) {    
 				alert('You have been successfully registered.')    
 				this.setState(this.initialState)    
@@ -126,12 +127,12 @@ export default class Registration extends Component {
 						passwordagain: '',
 						checkbox:'',
 					});
-				
 				};
 			})
 			.catch(function(error) {
 				console.log(error);
 			});
+			Navigate('/login');
 		}
 	
      
@@ -256,7 +257,7 @@ export default class Registration extends Component {
 									<div className="row">
 										<div className="input-field col s12">
 											<p className="margin medium-small">
-												<a href="/login">Already have an account? Login</a>
+												<Link to="/login">Already have an account? Login</Link>
 											</p>
 										</div>
 									</div>

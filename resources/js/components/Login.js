@@ -4,6 +4,8 @@ import { UserLogin } from '../api/Index';
 import Api from '../api/Api';
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
 export default function Login() {
 	const shouldRedirect = true;
 	const navigate = useNavigate();
@@ -113,7 +115,7 @@ export default function Login() {
 											</div>
 											<div className="input-field col s6 m6 l6">
 												<p className="margin right-align medium-small">
-													<a href="/forget-password">Forgot password ?</a>
+													<Link to="/forget-password">Forgot password ?</Link>
 												</p>
 											</div>
 										</div>

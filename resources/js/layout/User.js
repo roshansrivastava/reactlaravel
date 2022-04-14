@@ -6,19 +6,31 @@ import { Getuser } from '../api/Index';
 import { Table } from 'react-bootstrap';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
 import { Link } from "react-router-dom";
+import { DeleteUser } from '../api/Index';
 
 
 export default function User() {
 	const [ APIData, setAPIData ] = useState([]);
 	//  const [loading, setLoading] = useState(false);
-	useEffect(() => {
+
+	const getUserData = () => {
 		Getuser().then((response) => {
 			setAPIData(response.data);
 		});
+	}
+
+	useEffect(() => {
+		getUserData();
 	}, []);
+	 
+	const Delete = (id) => {
+		DeleteUser(id).then((res) => {
+			console.log(res);
+			getUserData();
+		})
+	}
+
 	return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -79,7 +91,7 @@ export default function User() {
 					<tbody>
 						{APIData.map((data) => {
 							return (
-								<tr>
+								<tr key ={data.id}>
 									<tr>{}</tr>
 									<td>{data.id}</td>
 									<td>{data.name}</td>
@@ -95,14 +107,9 @@ export default function User() {
 										}
 									</td>
 									<td>{<Button variant="contained">Edit</Button>}</td>
-									<td>
-										{
-											<Stack direction="row" spacing={1}>
-												<IconButton aria-label="delete" />
-												<DeleteIcon />
-											</Stack>
-										}{' '}
-									</td>
+									<td>{<Button variant="contained" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
+									
+									
 									<td> {<Button variant="contained"> View </Button>}</td>
 								</tr>
 							);

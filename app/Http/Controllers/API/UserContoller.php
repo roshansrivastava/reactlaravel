@@ -54,12 +54,14 @@ public function User_login(Request $request)
     'email' => 'required|email',
     'password' => 'required|min:5'
   ]);
+
   if ($validator->fails()) {
     return response()->json(array(
-      'status' => 0,
+      'status' => 401,
       'errors' => $validator->getMessageBag()->toArray()
     ), 400);
-  }else if(Auth::attempt($credentials)){
+  }
+  else if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
         $user = Auth::User();
         if ($user->status == '0') {
           return response()->json([
@@ -117,6 +119,25 @@ public function User_login(Request $request)
         'Status' => 200,
         'data' => $user,
       ));
+    }
+
+    public function DeleteUser($id)
+    {
+      try{
+      $user = User::findOrFail($id);
+      $user->delete();
+      return response()->json([
+        'Message'=> 'Delete is successfully',
+        'status' => 200,
+      ]);
+    }
+    catch (\Exception $e)
+    {
+      return response()->json([
+        'status'=> false,
+        'message'=>$e->getMessage(),
+      ]);
+      }
     }
 }
 
