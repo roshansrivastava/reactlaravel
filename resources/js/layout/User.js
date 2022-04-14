@@ -6,9 +6,12 @@ import { Getuser } from '../api/Index';
 import { Table } from 'react-bootstrap';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
+import { Link , NavLink} from "react-router-dom";
 import { DeleteUser } from '../api/Index';
-
+import MenuItem from '@mui/material/MenuItem';
+import  ListItemIcon from '@mui/material/MenuItem';
+import  CreateIcon from '@mui/material/MenuItem';
+import  ListItemText from '@mui/material/MenuItem';
 
 export default function User() {
 	const [ APIData, setAPIData ] = useState([]);
@@ -106,7 +109,11 @@ export default function User() {
 							</Link>
 										}
 									</td>
-									<td>{<Button variant="contained">Edit</Button>}</td>
+									<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
+											<Button variant="contained" color="success">
+												Edit User
+											</Button>
+											</Link>}</td>
 									<td>{<Button variant="contained" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
 									
 									

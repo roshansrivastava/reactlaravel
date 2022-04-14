@@ -139,6 +139,60 @@ public function User_login(Request $request)
       ]);
       }
     }
+
+    public function AddUser(Request $request)
+    {
+      try{
+      // $this->validate($request,[
+      //   'name' => 'required|min:3|max:50',
+      //   'artistname'=>'required|min:5|max:20',
+      //   'email' => 'email',
+      //   'password' => 'required',
+      //   ]);
+        $add_user['name']=$request->input('firstName');
+        $add_user['fullname']=$request->input('lastName');
+        $add_user['email']=$request->input('email');
+        $add_user['password']=Hash::make($request->input('password'));
+        $user = User::create($add_user);
+        return response()->json([
+          'message'=>"User add successfully",
+          'status'=>200,
+          'data'=>$user,
+        ]);
+      }
+      catch(\Exception $e)
+      {
+        return response()->json([
+          'status'=>0,
+          'message'=>$e->getMessage(),
+        ]);
+      }
+    }
+    public function UpdateUser(Request $request,$id)
+    {
+      try {
+      $update = User::find($id);
+      $update['name']=$request->inpupt('firstName');
+      $update['fullname']=$request->input('lastName');
+      $update['email']=$request->input('email');
+      $update['password']=Hash::make($request->input('password'));
+      $update->save();
+      return response()->json([
+        'status'=>200,
+        'message'=>"updated is Successfully",
+        'data'=>$update,
+      ]);
+    }
+    catch (\Exception $e)
+    {
+      return response()->json([
+        'status'=> 0,
+        'message'=>$e-getMessage(),
+      ]);
+    }
+  }
+
+
 }
 
 

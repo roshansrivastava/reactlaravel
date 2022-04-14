@@ -27,4 +27,7 @@ Route::get('/dashboard',[UserContoller::class,'welcome']);
 Route::get('/navbar',[UserContoller::class,'welcome']);
 Route::get('/sidebar',[UserContoller::class,'welcome']);
 Route::get('/dashboard/User',[UserContoller::class,'welcome']);
+Route::get('/dashboard/adduser',[UserContoller::class,'welcome']);
+Route::get('/dashboard/updateuser/{id}',[UserContoller::class,'welcome']);
+Route::post('/dashboard/updateuser/{id}',[UserContoller::class,'welcome']);
 // Route::get('/logout',[UserContoller::class,'User']);
