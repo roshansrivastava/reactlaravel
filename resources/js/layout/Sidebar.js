@@ -26,10 +26,10 @@ console.log()
 							<i className="navigation-header-icon material-icons">more_horiz</i>
 						</li>
 						<li className="bold">
-							<a className="waves-effect waves-cyan " href="app-email.html">
+							<Link className="waves-effect waves-cyan " to="/dashboard/home">
 								{' '}
-								<HomeOutlinedIcon /> Home{' '}
-							</a>
+								<HomeOutlinedIcon /> Home
+							</Link>
 						</li>
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-chat.html">

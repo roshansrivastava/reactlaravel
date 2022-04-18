@@ -6,7 +6,8 @@ const Userlogout = (payload) => Api.post("/logout", payload);
 const Getuser = () => Api.get("/users");
 const DeleteUser = (id) => Api.get('/delete/'+id);
 const AddUsers = (formData) =>Api.post('/adduser',formData);
-const UpdateUsers = (formData, id) => Api.post('/updateuser/'+id,formData);
+const UpdateUsers = (payload) => Api.post('/updateuser',payload);
+const Getusers = (id) => Api.get('/getuser/'+id);
 export  {
     UserLogin,
     Userlogout,
@@ -14,4 +15,5 @@ export  {
     DeleteUser,
     AddUsers,
     UpdateUsers,
+    Getusers,
 }

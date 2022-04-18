@@ -115,11 +115,31 @@ public function User_login(Request $request)
     {
       $user = User::all();
       return response()->json(array(
-        'Success'=> 'Loading is Successfully',
+        'Success'=> 'Loging is Successfully',
         'Status' => 200,
         'data' => $user,
       ));
     }
+    
+    public function GetUser(Request $request,$id)
+    {
+      return['rjsdjh',$id];
+      try
+      {
+        $data = User::findOrFail($id);
+      return response()->json([
+        'status' => 200,
+        'data'=>$data,
+      ]);
+     }
+    catch(\Exception $e)
+    {
+      return response()->json(array(
+        'status'=> 0,
+        'message'=>$e->getMessage(),
+      ));
+    }
+  }
 
     public function DeleteUser($id)
     {
@@ -170,8 +190,9 @@ public function User_login(Request $request)
     }
     public function UpdateUser(Request $request,$id)
     {
+      return ['ee',$request];
       try {
-      $update = User::find($id);
+        $update = User::find($id);
       $update['name']=$request->inpupt('firstName');
       $update['fullname']=$request->input('lastName');
       $update['email']=$request->input('email');

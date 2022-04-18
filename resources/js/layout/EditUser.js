@@ -3,7 +3,7 @@ import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
 // import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link , useParams  } from 'react-router-dom';
 import {
 	Grid,
 	makeStyles,
@@ -19,23 +19,16 @@ import {
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
-import {Getuser} from '../api/Index';
+import {Getusers} from '../api/Index';
+import {UpdateUsers} from '../api/Index';
 
 
-export default function AddUser() {
+export default function EditUser() {
+	const [ Update , setUpdate ] = useState([]);
     const [ APIUser, setAPIUser ] = useState([]);
-	//  const [loading, setLoading] = useState(false);
-
-	const getUserData = () => {
-		Getuser().then((response) => {
-			setAPIUser(response.data);
-		});
-	}
-
-	useEffect(() => {
-		getUserData();
-	}, []);
-	// const classes = useStyle();
+	const { id } = useParams()
+	console.log('hhh',id);
+	
 	const initialValues = {
 		firstName: '',
 		lastName: '',
@@ -43,6 +36,10 @@ export default function AddUser() {
 		email: '',
 		password: ''
 	};
+
+	// const {
+
+	// } = EditUser;
 	let validationSchema = Yup.object().shape({
 		firstName: Yup.string().required('Full name is required'),
 		lastName: Yup.string().required('Last name is Required'),
@@ -52,6 +49,7 @@ export default function AddUser() {
 	});
 	const onSubmit = (values) => {
         let formData ={
+		id       : id,
 		firstName: values.firstName,
         lastName: values.lastName,
         artistName:values.artistName,
@@ -106,11 +104,11 @@ export default function AddUser() {
 				</a>
 			</aside>
 			<div id="main">
-				<h1> ADD User</h1>
+				<h1> Edit User</h1>
 				<Grid container justify="center" spacing={1}>
 					<Grid item md={6}>
 						<Card >
-							<CardHeader title=" Add Users" />
+							<CardHeader title=" Update Users" />
 							<Formik
 								initialValues={initialValues}
 								validationSchema={validationSchema}
@@ -182,7 +180,7 @@ export default function AddUser() {
 													type="Submit"
 													
 												>
-													ADD User
+													Edit User
 												</Button>
 											</CardActions>
 										</Form>

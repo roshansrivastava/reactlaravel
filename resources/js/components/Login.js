@@ -27,7 +27,7 @@ export default function Login() {
 		  .then(res => {
 			//   console.log('bb',res.name)
 			localStorage.setItem('token',res.token.token);
-			navigate('/dashboard');
+			navigate('/dashboard/home');
 
 		  })
 		  .catch(function(error) {

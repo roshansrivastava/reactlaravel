@@ -102,7 +102,7 @@ export default function AddUser() {
 			<div id="main">
 				<h1> ADD User</h1>
 				<Grid container justify="center" spacing={1}>
-					<Grid item md={6}>
+					<Grid item md={10}>
 						<Card >
 							<CardHeader title=" Add Users" />
 							<Formik
@@ -115,7 +115,7 @@ export default function AddUser() {
 										<Form>
 											<CardContent>
 												<Grid item container spacing={1} justify="center">
-													<Grid item xs={12} sm={6} md={6}>
+													<Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="First Name"
 															variant="outlined"
@@ -125,7 +125,7 @@ export default function AddUser() {
 															component={TextField}
 														/>
 													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
+													<Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="Artist Name"
 															variant="outlined"
@@ -135,7 +135,7 @@ export default function AddUser() {
 															component={TextField}
 														/>
 													</Grid>
-                                                    <Grid item xs={12} sm={6} md={6}>
+                                                    <Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="Last Name"
 															variant="outlined"
@@ -145,7 +145,7 @@ export default function AddUser() {
 															component={TextField}
 														/>
 													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
+													<Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="Email"
 															variant="outlined"
@@ -155,7 +155,7 @@ export default function AddUser() {
 															component={TextField}
 														/>
 													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
+													<Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="Password"
 															variant="outlined"
@@ -174,6 +174,7 @@ export default function AddUser() {
 													variant="contained"
 													color="primary"
 													type="Submit"
+													
 													
 												>
 													ADD User

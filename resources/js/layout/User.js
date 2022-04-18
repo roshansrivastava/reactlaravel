@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import  ListItemIcon from '@mui/material/MenuItem';
 import  CreateIcon from '@mui/material/MenuItem';
 import  ListItemText from '@mui/material/MenuItem';
+import EditUser from './EditUser';
 
 export default function User() {
 	const [ APIData, setAPIData ] = useState([]);
@@ -110,11 +111,11 @@ export default function User() {
 										}
 									</td>
 									<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-											<Button variant="contained" color="success">
+											<Button variant="contained" class="btn btn-danger">
 												Edit User
 											</Button>
 											</Link>}</td>
-									<td>{<Button variant="contained" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
+									<td>{<Button variant="contained" class="btn btn-secondary" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
 									
 									
 									<td> {<Button variant="contained"> View </Button>}</td>
