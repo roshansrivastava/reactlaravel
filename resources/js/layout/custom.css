@@ -15,3 +15,9 @@
 .card_area .MuiCard-root:last-child{
     margin-right: 0px;
 }
+.card_area .MuiButton-root{
+    text-align: center;
+    color: white;
+    font-size: 16px;
+}
+/* background-color: lightblue; */

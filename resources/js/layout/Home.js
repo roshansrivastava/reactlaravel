@@ -48,7 +48,7 @@ export default function Home() {
 								src="/css/images/logo/materialize-logo.png"
 								alt="materialize logo"
 							/>
-							<span className="logo-text hide-on-med-and-down">Materialize</span>
+							<span className="logo-text hide-on-med-and-down"> Singo </span>
 						</a>
 					</h1>
 				</div>
@@ -104,7 +104,7 @@ export default function Home() {
 					<Card>
 						<CardContent>
 							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0.00$
+								0.00<EuroIcon/>
 							</Typography>
 							<Typography variant="h7" component="div">
 								Balance
@@ -113,23 +113,32 @@ export default function Home() {
 					</Card>
 					<Card>
 						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+							<Typography sx={{ fontSize: 34 }} color="text.secondary" background-color= "lightblue" direction="row" gutterBottom>
 								Free
 							</Typography>
 							<Typography variant="h7" component="div">
+                            <br />
 								<CheckIcon /> 2 Releases Included
-                                <br />
+                                <br />  <br />
 								<CheckIcon /> Distribution within 14 days
+                                <br />  <br />
 								<CheckIcon /> Keep 80% of the earnings
+                                <br />  <br />
 								<CheckIcon /> 24/7 Live Support
+                                <br />  <br />
 								<CheckIcon /> No Content ID
+                                <br />  <br />  <br />
 							</Typography>
 							<Typography variant="body2">
-								 0 <EuroIcon/> Per year
+                            <br />
+								  0 <EuroIcon/> Per year
 								<br />
 							</Typography>
                             <Typography variant="body2">
-                            <Button variant="contained">Purchase Now</Button>
+                            <br />  <br />  <br /> 
+                            <Link to='/dashboard/purchase/free'>
+                            <Button size ="big" variant="contained">Purchase Now</Button>
+                            </Link>
 							</Typography>
 							
 						</CardContent>
@@ -137,21 +146,65 @@ export default function Home() {
 					<Card>
 						<CardContent>
 							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0.00$
+								PREMIUM
 							</Typography>
 							<Typography variant="h7" component="div">
-								Balance
+                            <br />
+								<CheckIcon /> Unlimited Releases Included
+                                <br />  <br />
+								<CheckIcon /> Distribution within 48h
+                                <br />  <br />
+								<CheckIcon /> Keep 100% of the earnings
+                                <br />  <br />
+								<CheckIcon /> 24/7 Live Support
+                                <br />  <br />
+								<CheckIcon /> Content ID
+                                <br />  <br />  <br />
 							</Typography>
+							<Typography variant="body2">
+                            <br />
+								  19.99 <EuroIcon/> Per year
+								<br />
+							</Typography>
+                            <Typography variant="body2">
+                            <br />  <br />  <br /> 
+							<Link to='/dashboard/purchase/premium'>
+                            <Button size ="big" variant="contained">Purchase Now</Button>
+                            </Link>
+							</Typography>
+							
 						</CardContent>
 					</Card>
 					<Card>
 						<CardContent>
 							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0.00$
+								Basic
 							</Typography>
 							<Typography variant="h7" component="div">
-								Balance
+                            <br />
+								<CheckIcon /> 6 Releases Included
+                                <br />  <br />
+								<CheckIcon /> Distribution within 14 days
+                                <br />  <br />
+								<CheckIcon /> Keep 85% of the earnings
+                                <br />  <br />
+								<CheckIcon /> 24/7 Live Support
+                                <br />  <br />
+								<CheckIcon /> No Content ID
+                                <br />  <br />  <br />
 							</Typography>
+							<Typography variant="body2">
+                            <br />
+								  9.99 4.99 <EuroIcon/> Per year
+								<br />
+							</Typography>
+                            <Typography variant="body2">
+                            <br />  <br />  <br /> 
+							<Link to='/dashboard/purchase/basic'>
+                            <Button size ="big" variant="contained">Purchase Now</Button>
+                            </Link>
+							</Typography>
+							
 						</CardContent>
 					</Card>
 				</div>

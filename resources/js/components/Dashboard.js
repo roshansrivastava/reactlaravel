@@ -19,7 +19,7 @@ class Dashboard extends Component {
 				<aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
 					<div className="brand-sidebar">
 						<h1 className="logo-wrapper">
-							<a className="brand-logo darken-1" href="index.html">
+							<a className="brand-logo darken-1" href="inddfddex.html">
 								<img
 									className="hide-on-med-and-down"
 									src="/css/images/logo/materialize-logo-color.png"
@@ -30,7 +30,7 @@ class Dashboard extends Component {
 									src="/css/images/logo/materialize-logo.png"
 									alt="materialize logo"
 								/>
-								<span className="logo-text hide-on-med-and-down">Materialize</span>
+								<span className="logo-text hide-on-med-and-down">Singo</span>
 							</a>
 						</h1>
 					</div>

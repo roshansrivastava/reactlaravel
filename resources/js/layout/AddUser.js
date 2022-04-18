@@ -78,7 +78,7 @@ export default function AddUser() {
 								src="/css/images/logo/materialize-logo.png"
 								alt="materialize logo"
 							/>
-							<span className="logo-text hide-on-med-and-down">Materialize</span>
+							<span className="logo-text hide-on-med-and-down">Singo</span>
 						</a>
 					</h1>
 				</div>

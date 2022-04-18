@@ -18,6 +18,9 @@ import Music from '../layout/Music';
 import AddUser from "../layout/AddUser";
 import EditUser from "../layout/EditUser";
 import Home from '../layout/Home';
+import PurchasePremium from "../layout/PurchasePremium";
+import PurchaseBasic from '../layout/PurchaseBasic';
+import PurchaseFree from '../layout/PurchaseFree';
 // import AuthService from 
 
 export default class AppComponent extends Component {
@@ -35,6 +38,9 @@ export default class AppComponent extends Component {
               <Route exact path='/dashboard/adduser'element={<AddUser/>}></Route>
               <Route exact path='/dashboard/updateuser/:id'element={<EditUser/>}></Route>
               <Route exact path='/dashboard/home'element={<Home/>}></Route>
+              <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
+              <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
+              <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route>
           </Routes> 
       </Router>
       
