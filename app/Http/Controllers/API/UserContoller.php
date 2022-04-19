@@ -188,16 +188,10 @@ public function User_login(Request $request)
         ]);
       }
     }
-    public function UpdateUser(Request $request,$id)
+    public function UpdateUser($id)
     {
-      return ['ee',$request];
       try {
         $update = User::find($id);
-      $update['name']=$request->inpupt('firstName');
-      $update['fullname']=$request->input('lastName');
-      $update['email']=$request->input('email');
-      $update['password']=Hash::make($request->input('password'));
-      $update->save();
       return response()->json([
         'status'=>200,
         'message'=>"updated is Successfully",

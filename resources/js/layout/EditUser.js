@@ -23,14 +23,14 @@ import {Getusers} from '../api/Index';
 import {UpdateUsers} from '../api/Index';
 
 
-export default function EditUser() {
+export default function EditUser(props) {
 	const [ Update , setUpdate ] = useState([]);
     const [ APIUser, setAPIUser ] = useState([]);
 	const { id } = useParams()
 	console.log('hhh',id);
 	
 	const initialValues = {
-		firstName: firstName ? firstName  "",
+		firstName: "",
 		lastName: '',
         artistName:'',
 		email: '',
@@ -56,10 +56,13 @@ export default function EditUser() {
         email:values.email,
         password:values.password,
         }
-        UpdateUsers(formData).then(res => {
-            console.log('response',res);
-        })
-		console.log('xxxx',values);
+        const res = await axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
+		.then(res => {
+			if(res.data.status==200)
+			{
+
+			}
+		});
 	};
 
 	return (

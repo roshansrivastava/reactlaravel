@@ -35,6 +35,11 @@ export default function User() {
 		})
 	}
 
+	const update = (id) => {
+		console.log('nnsfnn',id);
+		props.history.push('/dashboard/updateuser/'+id);
+	}
+
 	return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -111,7 +116,7 @@ export default function User() {
 										}
 									</td>
 									<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-											<Button variant="contained" class="btn btn-danger">
+											<Button variant="contained" class="btn btn-danger" onClick= {() => {update(data.id)}} >
 												Edit User
 											</Button>
 											</Link>}</td>
