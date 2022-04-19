@@ -40,7 +40,7 @@ class UserContoller extends Controller
             // if(count($success) > 0){
               $user['activation_token'] = $result['activation_token'];
              
-              $result->notify(new RegisterVerificationMail($user));
+              $result->notify(new RegisterVerificationMail());
               return $result; die;
                 
             // }

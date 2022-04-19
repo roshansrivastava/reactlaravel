@@ -6,11 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Notifiable;
 
 class RegisterVerificationMail extends Notification
 {
-    use Queueable, Notifiable;
+    use Queueable;
 
     /**
      * Create a new notification instance.
@@ -19,7 +18,7 @@ class RegisterVerificationMail extends Notification
      */
     public function __construct()
     {
-        return ['xxxx'];
+     
     }
 
     /**
@@ -41,11 +40,11 @@ class RegisterVerificationMail extends Notification
      */
     public function toMail($notifiable)
     {
-        return $notifiable;
-        // return (new MailMessage)
-        //             ->line('The introduction to the notification.')
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you for using our application!');
+
+        return (new MailMessage)
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/login'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
