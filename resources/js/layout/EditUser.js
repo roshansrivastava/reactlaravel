@@ -56,13 +56,13 @@ export default function EditUser(props) {
         email:values.email,
         password:values.password,
         }
-        const res = await axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
-		.then(res => {
-			if(res.data.status==200)
-			{
+        // const res = await axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
+		// .then(res => {
+		// 	if(res.data.status==200)
+		// 	{
 
-			}
-		});
+		// 	}
+		// });
 	};
 
 	return (

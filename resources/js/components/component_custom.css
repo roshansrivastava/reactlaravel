@@ -1,0 +1,35 @@
+.login-card{
+    max-width: 40%;
+    background-color: rgba(125, 63, 5, 0.8);
+}
+
+.login-card h5{
+    text-align: center;
+}
+
+.login-card input, .login-card .input-field, .login-card label{
+    color: #FFFFFF;
+}
+.container {
+    width: 100%;
+    background-color: lightblue;
+}
+/* left: 11px;
+    width: 20px;
+    height: 20px;
+    color: white;
+    margin-top: 3px;
+    margin-right: 28px; */
+.register-card {
+    max-width: 40%;
+    background-color: rgb(5 80 125 / 80%);
+}
+.register-card h5 {
+    text-align : center;
+}
+
+#agree {
+    left: 0px;
+    width: 22px;
+    height: 22px;
+}

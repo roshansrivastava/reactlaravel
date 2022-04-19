@@ -8,7 +8,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Notifications\Notifiable;
+use Notification;
+use Str;
+use App\Notifications\RegisterVerificationMail;
+use Mail;
 
 
 class UserContoller extends Controller
@@ -24,26 +28,34 @@ class UserContoller extends Controller
             'password' => 'min:4|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:4'
             ]);
-            $user['name'] = $request->input('first_name');
-            $user['fullname'] = $request->input('last_name');
-            $user['email'] = $request->input('email');
+            $user['name']       = $request->input('first_name');
+            $user['fullname']   = $request->input('last_name');
+            $user['email']      = $request->input('email');
             $user['artistname'] = $request->input('artistname');
-            $user['password']=  Hash::make($request->input('password'));
+            $user['password']   =  Hash::make($request->input('password'));
+            $user['activation_token'] = Str::random(60);
             $result = User::create($user);
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
             $success['data'] = $result;
-        return response()->json([
-            'status'=> 200,
-            'message'=> 'User Successfully Register ' ,
-            'data' => $success,
-        ]);
-    }
-    catch (\Exception $e) {
-        return response()->json([
-            'status'=> false,
-            'message' =>$e->getMessage(),
-        ]);
-    }
+            // if(count($success) > 0){
+              $user['activation_token'] = $result['activation_token'];
+             
+              $result->notify(new RegisterVerificationMail($user));
+              return $result; die;
+                
+            // }
+            
+            return response()->json([
+                'status'=> 200,
+                'message'=> 'User Successfully Register ' ,
+                'data' => $success,
+            ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status'=> false,
+                    'message' =>$e->getMessage(),
+                ]);
+            }
 }
 
 
@@ -113,7 +125,7 @@ public function User_login(Request $request)
 
     public function User()
     {
-      $user = User::all();
+      $user = User::whereNotIn('role_id', [1,2])->get();
       return response()->json(array(
         'Success'=> 'Loging is Successfully',
         'Status' => 200,
@@ -207,7 +219,9 @@ public function User_login(Request $request)
     }
   }
 
-
+  public function index(){
+    
+  }
 }
 
 

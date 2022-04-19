@@ -1,36 +1,41 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import '../../css/app.css';
 import { UserLogin } from '../api/Index';
 import Api from '../api/Api';
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import './component_custom.css';
 
 export default function Login() {
 	const shouldRedirect = true;
 	const navigate = useNavigate();
+	const [ email, setEmail ] = useState('');
+	const [ password, setPassword ] = useState('');
+	const [agree, setAgree] = useState(false);
+	const checkboxHandler = () => {
+		// if agree === true, it will be set to false
+		// if agree === false, it will be set to true
+		setAgree(!agree);
+		// Don't miss the exclamation mark
+	  }
+	function validateForm() {
+		return email.length > 0 && password.length > 0;
+	}
 
-	const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
-		
-	function saveStudent(e){
+	function saveStudent(e) {
 		e.preventDefault();
 		const payload = {
 			email: email,
-			password:password
-		  };
-		  UserLogin(payload)
-		  .then(res => {
-			//   console.log('bb',res.name)
-			localStorage.setItem('token',res.token.token);
-			navigate('/dashboard/home');
-
-		  })
-		  .catch(function(error) {
+			password: password
+		};
+		UserLogin(payload)
+			.then((res) => {
+				//   console.log('bb',res.name)
+				localStorage.setItem('token', res.token.token);
+				navigate('/dashboard/home');
+			})
+			.catch(function(error) {
 				console.log(error);
 			});
 		// axios.post('http://localhost:8000/api/login',this.state)
@@ -52,80 +57,89 @@ export default function Login() {
 		// });
 	}
 
-		return (
-			<div
-				className="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
-				data-open="click"
-				data-menu="vertical-modern-menu"
-				data-col="1-column"
-			>
-				<div className="row">
-					<div className="col s12">
-						<div className="container">
-							<div id="login-page" className="row">
-								<div className="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-									<form onSubmit={saveStudent}>
-										<div className="row">
-											<div className="input-field col s12">
-												<h5 className="ml-4">Sign in</h5>
-											</div>
-										</div>
-										<div className="row margin">
-											<div className="input-field col s12">
-												<i className="material-icons prefix pt-2">person_outline</i>
-												<input
-													id="email"
-													name ='email'
-													type="email"
-													value={email}
-													onChange={(e) => setEmail(e.target.value)}
-												/>
-												<label htmlFor="email" className="center-align">
-													Email
-												</label>
-											</div>
-										</div>
-										<div className="row margin">
-											<div className="input-field col s12">
-												<i className="material-icons prefix pt-2">lock_outline</i>
-												<input
-													id="password"
-													type="password"
-													name = 'password'
-													value={password}
-													onChange={(e) => setPassword(e.target.value)}
-												/>
-												<label htmlFor="password">Password</label>
-											</div>
-										</div>
-										<div className="row">
+	return (
+		<div
+			className="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
+			data-open="click"
+			data-menu="vertical-modern-menu"
+			data-col="1-column"
+		>
+			<div className="row">
+				<div className="col s12">
+					<div className="container">
+						<div id="login-page" className="row">
+							<div className="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+								<form onSubmit={saveStudent}>
+									<div className="row">
 										<div className="input-field col s12">
-										<Button block size="lg" type="submit" disabled={!validateForm()}>
-       											   Login
-      										  </Button>
+											<h5 className="ml-4">Sign in</h5>
+										</div>
+									</div>
+									<div className="row margin">
+										<div className="input-field col s12">
+											<i className="material-icons prefix pt-2">person_outline</i>
+											<input
+												id="email"
+												name="email"
+												type="email"
+												value={email}
+												onChange={(e) => setEmail(e.target.value)}
+											/>
+											<label htmlFor="email" className="center-align">
+												Email
+											</label>
+										</div>
+									</div>
+									<div className="row margin">
+										<div className="input-field col s12">
+											<i className="material-icons prefix pt-2">lock_outline</i>
+											<input 
+												id="password"
+												type="password"
+												name="password"
+												value={password}
+												onChange={(e) => setPassword(e.target.value)}
+											/>
+											<label htmlFor="password">Password</label>
+										</div>
+									</div>
+									<div class="row">
+                                <div class="col s12 m12 l12 ml-1 mt-1">
+                                    <p>
+                                        <label htmlFor='agree'>
+                                            <input type="checkbox"className = "checkboxed"  id="agree" onChange={checkboxHandler}/>
+                                            <span>I Agree to Term and Condition</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+									<div className="row">
+										<div className="input-field col s12">
+											<Button block size="lg" type="submit" disabled={ agree === true ? validateForm() == true ? false : false : true } >
+												Login
+											</Button>
 										</div>
 									</div>
 
-										
-										<div className="row">
-											<div className="input-field col s6 m6 l6">
-												<p className="margin medium-small">
-													<a href="/">Register Now!</a>
-												</p>
-											</div>
-											<div className="input-field col s6 m6 l6">
-												<p className="margin right-align medium-small">
-													<Link to="/forget-password">Forgot password ?</Link>
-												</p>
-											</div>
+									<div className="row">
+										<div className="input-field col s6 m6 l6">
+											<p className="margin medium-small">
+												<a href="/">Register Now!</a>
+											</p>
 										</div>
-									</form>
-								</div>
+										<div className="input-field col s6 m6 l6">
+											<p className="margin right-align medium-small">
+												<Link to="/forget-password">Forgot password ?</Link>
+											</p>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
-						<div className="content-overlay" />
 					</div>
+					<div className="content-overlay" />
 				</div>
 			</div>
-		);
-	}
+		</div>
+	);
+}
