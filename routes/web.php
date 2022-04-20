@@ -34,5 +34,7 @@ Route::post('/dashboard/updateuser',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/premium',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/basic',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/free',[UserContoller::class,'welcome']);
-Route::get('/sent',[UserContoller::class,'index']);
+Route::get('/user/{token}',[UserContoller::class,'welcome']);
+Route::get('/re',[UserContoller::class,'welcome']);
+
 // Route::get('/logout',[UserContoller::class,'User']);

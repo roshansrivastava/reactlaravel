@@ -40,11 +40,14 @@ class RegisterVerificationMail extends Notification
      */
     public function toMail($notifiable)
     {
+        $email = $notifiable->email;
+        $url = url('/') . '/api/user/' . $notifiable->activation_token;
 
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/login'))
-                    ->line('Thank you for using our application!');
+            ->subject('Confirm your account')
+            ->line('Thank you for registering with us. Your Email: '.$email)
+            ->action('Confirm Account', url($url))
+            ->line('Once again, Thank you for using our application!');
     }
 
     /**

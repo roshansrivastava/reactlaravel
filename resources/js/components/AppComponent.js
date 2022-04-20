@@ -21,8 +21,6 @@ import Home from '../layout/Home';
 import PurchasePremium from "../layout/PurchasePremium";
 import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
-// import AuthService from 
-
 export default class AppComponent extends Component {
   render() {
     return (
@@ -40,10 +38,9 @@ export default class AppComponent extends Component {
               <Route exact path='/dashboard/home'element={<Home/>}></Route>
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
-              <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route>
+              <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route> 
           </Routes> 
       </Router>
-      
       </>
     )
   }

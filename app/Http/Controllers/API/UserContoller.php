@@ -5,46 +5,30 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Notification;
 use Str;
+use Illuminate\Support\Facades\Hash;
 use App\Notifications\RegisterVerificationMail;
+use App\Http\Requests\Api\RegisterRequest;
 use Mail;
+use Carbon\Carbon;
 
 
 class UserContoller extends Controller
 {
     
-    public function Register(Request $request) 
+    public function Register(RegisterRequest $request) 
     { 
         try {
-        $this->validate($request, [
-            'name' => 'required|min:3|max:50',
-            'artistname'=>'required|min:5|max:20',
-            'email' => 'email',
-            'password' => 'min:4|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:4'
-            ]);
-            $user['name']       = $request->input('first_name');
-            $user['fullname']   = $request->input('last_name');
-            $user['email']      = $request->input('email');
-            $user['artistname'] = $request->input('artistname');
-            $user['password']   =  Hash::make($request->input('password'));
-            $user['activation_token'] = Str::random(60);
-            $result = User::create($user);
+            $result = User::create($request->authorize());
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
             $success['data'] = $result;
             // if(count($success) > 0){
-              $user['activation_token'] = $result['activation_token'];
-             
-              $result->notify(new RegisterVerificationMail());
-              return $result; die;
-                
-            // }
-            
+            $user['activation_token'] = $result['activation_token'];
+            $result->notify(new RegisterVerificationMail());
             return response()->json([
                 'status'=> 200,
                 'message'=> 'User Successfully Register ' ,
@@ -56,9 +40,7 @@ class UserContoller extends Controller
                     'message' =>$e->getMessage(),
                 ]);
             }
-}
-
-
+    }     
 public function User_login(Request $request)
 {
   $credentials = $request->only('email', 'password');
@@ -219,9 +201,17 @@ public function User_login(Request $request)
     }
   }
 
-  public function index(){
-    
+  public function activate_token($token)
+  {
+    $isUserActive = User::where('activation_token', $token)->first();
+    if ($isUserActive) {
+      $id = $isUserActive->id;
+      $current_date_time = Carbon::now()->toDateTimeString();
+      $updateStatus = User::find($id);
+      $updateStatus->update(['is_status' => 1 , 'email_verified_at'=> $current_date_time]);
+      return redirect()->to('login');
+    };
   }
-}
+}  
 
 

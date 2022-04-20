@@ -28,7 +28,8 @@ class User extends Authenticatable
         'role_id',
         'store_id',
         'activation_token',
-        'is_status'
+        'is_status',
+        'email_verified_at',
     ];
 
     /**

@@ -28,6 +28,7 @@ Route::post('/adduser',[UserContoller::class,'AddUser'])->middleware(['auth:api'
 Route::get('/updateuser/{id}',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::post('/updateuser',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::get('/getuser/{id}',[UserContoller::class,'GetUser'])->middleware(['auth:api']);
+Route::get('/user/{token}',[UserContoller::class,'activate_token']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
