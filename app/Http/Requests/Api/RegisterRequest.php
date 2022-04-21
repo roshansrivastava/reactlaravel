@@ -11,16 +11,17 @@ class RegisterRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+			
+     * @return bool 
      */
     public function authorize()
     {
         return [
-            'name'             => $this->input('first_name'),
-            'fullname'         => $this->input('last_name'),
-            'email'            => $this->input('email'),
-            'artistname'       => $this->input('artistname'),
-            'password'         =>  Hash::make($this->input('password')),
+            'name'             => $this->input('FullName'),
+            'fullname'         => $this->input('LastName'),
+            'email'            => $this->input('Email'),
+            'artistname'       => $this->input('ArtistName'),
+            'password'         =>  Hash::make($this->input('Password')),
             'activation_token' => Str::random(60),
         ];
     }
@@ -33,11 +34,12 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required|min:3|max:50',
-            'artistname'            =>'required|min:5|max:20',
-            'email'                 => 'email',
-            'password'              => 'min:4|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:4'
+            'FullName'              => 'required|min:3|max:50',
+            'LastName'              => 'required|min:3|max:50',
+            'ArtistName'            =>'required|min:5|max:20',
+            'Email'                 => 'required',
+            'Password'              => 'min:4|required_with:ConfirmPassword|same:ConfirmPassword',
+            'ConfirmPassword'       => 'min:4'
         ];
     }
 }

@@ -15,6 +15,7 @@ use App\Notifications\RegisterVerificationMail;
 use App\Http\Requests\Api\RegisterRequest;
 use Mail;
 use Carbon\Carbon;
+use Session;
 
 
 class UserContoller extends Controller
@@ -29,9 +30,10 @@ class UserContoller extends Controller
             // if(count($success) > 0){
             $user['activation_token'] = $result['activation_token'];
             $result->notify(new RegisterVerificationMail());
+            Session::flash('message', 'User Successfully Register '); 
             return response()->json([
                 'status'=> 200,
-                'message'=> 'User Successfully Register ' ,
+                'message'=> ' User Successfully Register ' ,
                 'data' => $success,
             ]);
             } catch (\Exception $e) {
