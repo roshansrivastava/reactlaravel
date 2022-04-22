@@ -30,6 +30,9 @@ class User extends Authenticatable
         'activation_token',
         'is_status',
         'email_verified_at',
+        'slug',
+        'slug_created_at',
+
     ];
 
     /**

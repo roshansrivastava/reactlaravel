@@ -15,7 +15,8 @@ use App\Notifications\RegisterVerificationMail;
 use App\Http\Requests\Api\RegisterRequest;
 use Mail;
 use Carbon\Carbon;
-use Session;
+use App\Notifications\ForgotPasswordMail;
+use App\Http\Requests\Api\ForgotPasswordMailRequest;
 
 
 class UserContoller extends Controller
@@ -25,15 +26,16 @@ class UserContoller extends Controller
     { 
         try {
             $result = User::create($request->authorize());
+            // return $result;
+            // return [$result];
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
             $success['data'] = $result;
             // if(count($success) > 0){
-            $user['activation_token'] = $result['activation_token'];
+            $Success['activation_token'] = $result['activation_token'];
             $result->notify(new RegisterVerificationMail());
-            Session::flash('message', 'User Successfully Register '); 
             return response()->json([
                 'status'=> 200,
-                'message'=> ' User Successfully Register ' ,
+                'message'=>'User Successfully Register',
                 'data' => $success,
             ]);
             } catch (\Exception $e) {
@@ -109,6 +111,7 @@ public function User_login(Request $request)
 
     public function User()
     {
+      // $user = Auth::user;
       $user = User::whereNotIn('role_id', [1,2])->get();
       return response()->json(array(
         'Success'=> 'Loging is Successfully',
@@ -214,6 +217,37 @@ public function User_login(Request $request)
       return redirect()->to('login');
     };
   }
+
+  public function forgetPassword(ForgotPasswordMailRequest $request)
+  {
+    try {
+        $email = $request->Email;
+        // return ['dfsjhsdfj',$email]; 
+        if($email){
+          $slug = Str::random(64);
+          $createSlug = User::where('email', $email)->update([
+              'slug' => $slug,
+              'slug_created_at' => Carbon::now()
+          ]);
+          $updatedSlug = User::where('email',$email)->first();
+          // $updatedSlug = array($updatedSlug);
+          // $updatedSlug = json_decode($updatedSlug);
+          // return $updatedSlug;
+          $updatedSlug->notify(new ForgotPasswordMail());
+          return response()->json([
+            'status'=> 200,
+            'message'=>'User Successfully Register',
+        ]);
+      }
+  } catch (\Exception $e) {
+      return response()->json([
+          'message' => 'Something went wrong. Please try again',
+          'status' => 'Error',
+      ]);
+  }
+}
+
+  
 }  
 
 

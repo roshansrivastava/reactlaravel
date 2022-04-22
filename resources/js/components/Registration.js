@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import '../../css/app.css';
 import ReCaptchaV2 from 'react-google-recaptcha';
 import { Register } from '../api/Index';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Registration() {
+	const navigate = useNavigate();
 	const [ FullName, setFullName ] = useState('');
 	const [ ArtistName, setArtistName ] = useState('');
 	const [ Email, setEmail ] = useState('');
@@ -20,14 +22,18 @@ export default function Registration() {
 	const [ emailError, setemailError ] = useState('');
 	const [ passwordError, setpasswordError ] = useState('');
 	const [ confirmpasswordError, setconfirmpasswordError ] = useState('');
+	const [ captcha, setcaptcha] = useState(null);
+	const [captchaError , setCaptchaError] = useState('');
 	var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 	
 	const checkboxHandler = () => {
 		setAgree(!agree);
 	};
 	const handleToken = (token) => {
-		setForm((currentForm) => {
-			// console.log('bb',currentForm);
+		setcaptcha((currentForm) => {
+			console.log('current',currentForm);
+			console.log('tk',token);
+			localStorage.setItem('captcha', token);
 		 return {...currentForm, token }
 		})
 	  }
@@ -38,8 +44,6 @@ export default function Registration() {
 	  }
 	  
 	 const handleValidation = ()=>{
-		 console.log('hhghg',FullName);
-		let errMsg ="";
 		if(ArtistName == ''){
 			setartistError('Please enter artist name ');
 		};
@@ -52,18 +56,11 @@ export default function Registration() {
 		if(ConfirmPassword == '' || Password !== ConfirmPassword){
 			setconfirmpasswordError('Please enter correct password ');
 		}
-		else {
-			errMsg ="";
+		if(token == null || captcha == null)
+		{
+			setCaptchaError('Please Varify Captcha');
 		}
-	}
-	const clearState = () => {
-		setState({
-			username: "",
-			email: "",
-			password: "",
-			passwordConfirmation: ""
-		});
-	  };	
+	}	
 
 	const saveStudent = async (e) => {
 		e.preventDefault();
@@ -73,15 +70,20 @@ export default function Registration() {
 		if (fname.length > 1) {
 			if (fname[1] == '') {
 				setlastnameError('Enter middle name');
+				handleValidation();
 				return;
 			} else {
 				if (fname[2] == '' || fname[2] == undefined) {
 					console.log('dsfdsf', fname[2]);
 					var fullname = fname[1];
 					console.log('name 1==>', fullname);
+					handleValidation();
 				} else if (fname[2] != '' || fname[2] != undefined)
+				{
 				var fullname = fname[1] + fname[2];
 				console.log('add two value 2 ', fullname);
+				handleValidation();
+				}
 			}
 		} else {
 			setfirstnameError(' Enter first name ');
@@ -100,14 +102,10 @@ export default function Registration() {
 		console.log('bbb', payload);
 		Register(payload)
 			.then((res) => {
-				// console.log('vssvvv',res.data.data.token);
-				if (res.data.status == 200) {
-					localStorage.setItem('token', res.data.data.token);
-					setToken(res.data.data.token);
-					// console.log('cc',token)
-					console.log(res.data.message);
-					clearState();
-					// console.log(res.data.data);
+				if (res.status == 200) {
+					localStorage.setItem('token', res.data.token);
+					setToken(res.data.token);
+					navigate('/login');
 				}
 			})
 			.catch(function(error) {
@@ -168,7 +166,7 @@ export default function Registration() {
 											<i className="material-icons prefix pt-2">mail_outline</i>
 											<input
 												id="Email"
-												type="email"
+												type="text"
 												name="Email"
 												value={Email}
 												onChange={(e) => setEmail(e.target.value)}
@@ -209,11 +207,15 @@ export default function Registration() {
 										</div>
 									</div>
 									<div className="captcha">
+										<div>
 									<ReCaptchaV2
 									  sitekey='6LdUdIwfAAAAAEZR4Wd9LoVwRr9VuiooS-OOKv1x'
 									  onChange={handleToken}
-									  onExpire={handleExpire}
+									  onExpire={handleExpire} 
 									/>
+									<span style={{color: "red"}}>
+                   					  {captchaError}</span></div>
+
 									</div>
 									<div class="row1">
 										<div class="col s12 m12 l12 ml-1 mt-2">

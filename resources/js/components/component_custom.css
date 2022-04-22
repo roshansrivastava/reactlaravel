@@ -1,15 +1,15 @@
 .login-card{
     max-width: 40%;
-    background-color: rgba(125, 63, 5, 0.8);
+    background-color: rgb(255 255 255 / 71%)
 }
 
 .login-card h5{
     text-align: center;
 }
 
-.login-card input, .login-card .input-field, .login-card label{
+/* .login-card input, .login-card .input-field, .login-card label{
     color: #FFFFFF;
-}
+} */
 .container {
     width: 100%;
     /* background-color: rgba(173, 216, 230, 0); */
@@ -41,6 +41,11 @@
    background-repeat: no-repeat;
    background-size: cover;
 }
+.bgchange{
+    background-image: url('/css/images/flat-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 #rc-anchor-container{
     width:25px;
 }
@@ -50,3 +55,6 @@
     justify-content: center;
     margin-top: 5%;
 }
+.forgot-card{
+    max-width: 35%;
+} 

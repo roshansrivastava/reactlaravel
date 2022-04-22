@@ -58,6 +58,7 @@ export default function Login() {
 	}
 
 	return (
+		<div className='bgchange'>
 		<div
 			className="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
 			data-open="click"
@@ -115,7 +116,8 @@ export default function Login() {
                             </div>
 									<div className="row">
 										<div className="input-field col s12">
-											<Button block size="lg" type="submit" disabled={ agree === true ? validateForm() == true ? false : false : true } >
+											<Button block size="lg" type="submit" disabled={ agree === true ? validateForm() == true ? false : false : true }
+											 className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12 mb-1" >
 												Login
 											</Button>
 										</div>
@@ -129,7 +131,7 @@ export default function Login() {
 										</div>
 										<div className="input-field col s6 m6 l6">
 											<p className="margin right-align medium-small">
-												<Link to="/forget-password">Forgot password ?</Link>
+												<Link to="/forget/password">Forgot password ?</Link>
 											</p>
 										</div>
 									</div>
@@ -140,6 +142,7 @@ export default function Login() {
 					<div className="content-overlay" />
 				</div>
 			</div>
+		</div>
 		</div>
 	);
 }

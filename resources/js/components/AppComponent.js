@@ -21,6 +21,7 @@ import Home from '../layout/Home';
 import PurchasePremium from "../layout/PurchasePremium";
 import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
+import ResetPassword from './ResetPassword'
 export default class AppComponent extends Component {
   render() {
     return (
@@ -29,7 +30,7 @@ export default class AppComponent extends Component {
           <Routes>
               <Route exact path='/'element={<Registration/>}></Route>
               <Route exact path='/login' element={<Login/>}></Route>
-              <Route exact path='/forget-password'element={<ForgetPassword/>}></Route>
+              <Route exact path='/forget/password'element={<ForgetPassword/>}></Route>
               <Route exact path='/dashboard'element={<Dashboard/>}></Route>
               <Route exact path='/dashboard/user'element={<User/>}></Route>
               <Route exact path='/dashboard/music'element={<Music/>}></Route>
@@ -39,6 +40,7 @@ export default class AppComponent extends Component {
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route> 
+              <Route exact path='/reset/password'element={<ResetPassword/>}></Route>
           </Routes> 
       </Router>
       </>

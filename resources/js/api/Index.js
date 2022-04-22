@@ -9,6 +9,7 @@ const AddUsers = (formData) =>Api.post('/adduser',formData);
 const UpdateUsers = (payload) => Api.post('/updateuser',payload);
 const Getusers = (id) => Api.get('/getuser/'+id);
 const Register = (payload) => Api.post('/register',payload);
+const Forget = (payload) => Api.post('/forget/password',payload);
 export  {
     UserLogin,
     Userlogout,
@@ -17,5 +18,6 @@ export  {
     AddUsers,
     UpdateUsers,
     Getusers,
-    Register
+    Register,
+    Forget,
 }

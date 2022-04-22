@@ -36,5 +36,6 @@ Route::get('/dashboard/purchase/basic',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/free',[UserContoller::class,'welcome']);
 Route::get('/user/{token}',[UserContoller::class,'welcome']);
 Route::get('/re',[UserContoller::class,'welcome']);
-
+Route::get('/forget/password',[UserContoller::class,'welcome']);
+Route::get('/reset/password/{token}',[UserContoller::class,'welcome']);
 // Route::get('/logout',[UserContoller::class,'User']);
