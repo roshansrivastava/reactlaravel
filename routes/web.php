@@ -30,7 +30,7 @@ Route::get('/sidebar',[UserContoller::class,'welcome']);
 Route::get('/dashboard/User',[UserContoller::class,'welcome']);
 Route::get('/dashboard/adduser',[UserContoller::class,'welcome']);
 Route::get('/dashboard/updateuser/{id}',[UserContoller::class,'welcome']);
-Route::post('/dashboard/updateuser',[UserContoller::class,'welcome']);
+// Route::post('/dashboard/updateuser',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/premium',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/basic',[UserContoller::class,'welcome']);
 Route::get('/dashboard/purchase/free',[UserContoller::class,'welcome']);

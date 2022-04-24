@@ -25,7 +25,7 @@ Route::post('logout',[UserContoller::class,'Logout'])->middleware(['auth:api']);
 Route::get('/users',[UserContoller::class,'User'])->middleware(['auth:api']);
 Route::get('/delete/{id}',[UserContoller::class,'DeleteUser'])->middleware(['auth:api']);
 Route::post('/adduser',[UserContoller::class,'AddUser'])->middleware(['auth:api']);
-Route::get('/updateuser/{id}',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
+Route::get('/dashboard/updateuser/{id}',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::post('/updateuser',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::get('/getuser/{id}',[UserContoller::class,'GetUser'])->middleware(['auth:api']);
 Route::get('/user/{token}',[UserContoller::class,'activate_token']);

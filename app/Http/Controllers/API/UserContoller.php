@@ -191,7 +191,7 @@ public function User_login(Request $request)
         $update = User::find($id);
       return response()->json([
         'status'=>200,
-        'message'=>"updated is Successfully",
+        'message'=>"Render edit is data ",
         'data'=>$update,
       ]);
     }

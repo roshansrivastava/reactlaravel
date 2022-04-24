@@ -4,58 +4,43 @@ import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
 // import Button from '@mui/material/Button';
 import { Link , useParams  } from 'react-router-dom';
-import {
-	Grid,
-	makeStyles,
-	Card,
-	CardContent,
-	MenuItem,
-	InputLabel,
-	CardActions,
-	Button,
-	CardHeader,
-	FormControl
-} from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import { TextField } from 'formik-material-ui';
-import {Getusers} from '../api/Index';
-import {UpdateUsers} from '../api/Index';
 
 
 export default function EditUser(props) {
+	const [ FirstName ,setFirstName] = useState('');
+	const [ LastName , setLastName ] =useState('');
+	const [ ArtistName, setArtistName ] = useState('');
+	const [ Email, setEmail ] = useState('');
+	const [ Password, setPassword ] = useState('');
 	const [ Update , setUpdate ] = useState([]);
     const [ APIUser, setAPIUser ] = useState([]);
 	const { id } = useParams()
 	console.log('hhh',id);
 	
-	const initialValues = {
-		firstName: "",
-		lastName: '',
-        artistName:'',
-		email: '',
-		password: ''
-	};
 
+	const getUser= () => {
+		axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
+		.then((response) => {
+			console.log('response',response);
+			if(response.Status== 200)
+			{
+				console.log('1111',response.data);
+			}
+		});
+	}
+
+	useEffect(() => {
+		getUser();
+	}, []);
+	
+
+	const updateSubmit  = async (e) => {
+		e.preventDefault();
+	}
 	// const {
 
 	// } = EditUser;
-	let validationSchema = Yup.object().shape({
-		firstName: Yup.string().required('Full name is required'),
-		lastName: Yup.string().required('Last name is Required'),
-        artistName:Yup.string().required('artist name is required'),
-		email: Yup.string().email('Invalid email').required('Required'),
-		password: Yup.string().required('Required!')
-	});
-	const onSubmit = (values) => {
-        let formData ={
-		id       : id,
-		firstName: values.firstName,
-        lastName: values.lastName,
-        artistName:values.artistName,
-        email:values.email,
-        password:values.password,
-        }
+	
         // const res = await axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
 		// .then(res => {
 		// 	if(res.data.status==200)
@@ -63,7 +48,6 @@ export default function EditUser(props) {
 
 		// 	}
 		// });
-	};
 
 	return (
 		<div className="App">
@@ -107,92 +91,93 @@ export default function EditUser(props) {
 				</a>
 			</aside>
 			<div id="main">
-				<h1> Edit User</h1>
-				<Grid container justify="center" spacing={1}>
-					<Grid item md={6}>
-						<Card >
-							<CardHeader title=" Update Users" />
-							<Formik
-								initialValues={initialValues}
-								validationSchema={validationSchema}
-								onSubmit={onSubmit}
-							>
-								{({ dirty, isValid, values, handleChange, handleBlur }) => {
-									return (
-										<Form>
-											<CardContent>
-												<Grid item container spacing={1} justify="center">
-													<Grid item xs={12} sm={6} md={6}>
-														<Field
-															label="First Name"
-															variant="outlined"
-															fullWidth
-															name="firstName"
-															value={values.firstName}
-															component={TextField}
-														/>
-													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
-														<Field
-															label="Artist Name"
-															variant="outlined"
-															fullWidth
-															name="artistName"
-															value={values.artistName}
-															component={TextField}
-														/>
-													</Grid>
-                                                    <Grid item xs={12} sm={6} md={6}>
-														<Field
-															label="Last Name"
-															variant="outlined"
-															fullWidth
-															name="lastName"
-															value={values.lastName}
-															component={TextField}
-														/>
-													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
-														<Field
-															label="Email"
-															variant="outlined"
-															fullWidth
-															name="email"
-															value={values.email}
-															component={TextField}
-														/>
-													</Grid>
-													<Grid item xs={12} sm={6} md={6}>
-														<Field
-															label="Password"
-															variant="outlined"
-															fullWidth
-															name="password"
-															value={values.password}
-															type="password"
-															component={TextField}
-														/>
-													</Grid>
-												</Grid>
-											</CardContent>
-											<CardActions>
-												<Button
-													disabled={!dirty || !isValid}
-													variant="contained"
-													color="primary"
-													type="Submit"
-													
-												>
-													Edit User
-												</Button>
-											</CardActions>
-										</Form>
-									);
-								}}
-							</Formik>
-						</Card>
-					</Grid>
-				</Grid>
+			<div className='container'>
+				<div className='row'>
+					<div className='col-md-6'>
+						<div className='card'>
+							<div className='card-header'>
+								<h4>Edit User
+									<Link to={'/'} className="btn btn-primary btn-sm float-end">Back</Link>
+								</h4>
+							</div>
+							<div className='card-body'>
+
+								<form onSubmit={updateSubmit}>
+
+									<div className='form-group mb-3'>
+									<label htmlFor="FirstName">
+											First Name
+										</label>
+										<input
+											id="FirstName"
+											type="text"
+											name="FirstName"
+											value={FirstName}
+											onChange={(e) => setFirstName(e.target.value)}
+										/>
+										
+									</div>
+									<div className='form-group mb-3'>
+									<label htmlFor="LastName" className="center-align">
+											Last Name
+										</label>
+										<input
+											id="LastName"
+											type="text"
+											name="LastName"
+											value={LastName}
+											onChange={(e) => setLastName(e.target.value)}
+										/>
+										
+									</div>
+									<div className='form-group mb-3'>
+									<label htmlFor="ArtistName">
+											Artist Name
+										</label>
+										<input
+											id="ArtistName"
+											type="text"
+											name="ArtistName"
+											value={ArtistName}
+											onChange={(e) => setArtistName(e.target.value)}
+										/>
+										
+									</div>
+									<div className='form-group mb-3'>
+										<input
+											id="Email"
+											type="text"
+											name="Email"
+											value={Email}
+											onChange={(e) => setEmail(e.target.value)}
+										/>
+										<label htmlFor="Email">
+											Email
+										</label>
+									</div>
+							<div className='form-group mb-3'>
+							<label htmlFor="Password" >
+									Password
+								</label>
+								<input
+									id="Password"
+									type="text"
+									name="Password"
+									value={Password}
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+								
+							</div>
+							<div className='form-group mb-3'>
+								<button type='submit' className='btn btn-primary'>Update User</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 			</div>
 			<Script />
 		</div>
