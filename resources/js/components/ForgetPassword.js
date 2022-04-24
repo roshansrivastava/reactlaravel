@@ -5,30 +5,40 @@ import Api from '../api/Api';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './component_custom.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function ForgetPassword() {
+	const navigate = useNavigate();
   // var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 	const [ Email, setEmail ] = useState('');
   const [EmailErr, setEmailError] = useState('');
-
+    const [slug , setSlug] = useState([]);
 	const handleValidation = () => {
 		if (Email == '') {
-			setEmailError('please enter Valid email');
+			setEmailError('please enter email');
 		}
 	};
 
-	const Save = async (e) => {
+	const Save = (e) => {
     e.preventDefault();
 		handleValidation();
 		let payload = {
 			Email: Email
 		};
+		console.log('vvv',payload);
 		Forget(payload)
 			.then((res) => {
 				if (res.status == 200) {
-
-					// navigate('/login');
+				console.log(res.slug);
+				console.log(setSlug('setslug',res.slug));
+				let num = res.slug;
+				console.log('num',typeof(num));
+				setSlug(num);
+				console.log(setSlug(num));
+				console.log('setslug =>',slug);
+				// navigate('/reset/password/')
 				}
 			})
 			.catch(function(error) {
@@ -63,7 +73,7 @@ export default function ForgetPassword() {
                       <span style={{color: "red"}}>
                         {EmailErr}
                         </span>
-											<label htmlfor="Email" className="center-align">
+											<label htmlFor="Email" className="center-align">
 												Email
 											</label>
 										</div>
