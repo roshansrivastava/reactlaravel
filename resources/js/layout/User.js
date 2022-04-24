@@ -3,26 +3,23 @@ import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
 import { Getuser } from '../api/Index';
-import { Table } from 'react-bootstrap';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
 import { DeleteUser } from '../api/Index';
-import MenuItem from '@mui/material/MenuItem';
-import  ListItemIcon from '@mui/material/MenuItem';
-import  CreateIcon from '@mui/material/MenuItem';
-import  ListItemText from '@mui/material/MenuItem';
+
 import EditUser from './EditUser';
 
 export default function User() {
 	const [APIData, setAPIData] = useState([]);
-	const [Loading , setLoading] =useState(false);
-	//  const [loading, setLoading] = useState(false);
+	const [Loading , setLoading] =useState(true);
 
 	const getUserData = () => {
 		Getuser().then((response) => {
 			setAPIData(response.data);
-			
+			if(response.Status== 200)
+			{
+			setLoading(false);
+			}
 		});
 	}
 
@@ -43,7 +40,7 @@ export default function User() {
 	}
 
 	var Table_Users = '';
-	if(Loading == true)
+	if(Loading)
 	{
 		Table_Users =<tr><td colSpan ='8'> <h2>Loading....</h2></td></tr>
 	}
