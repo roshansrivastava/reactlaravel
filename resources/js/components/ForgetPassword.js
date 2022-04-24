@@ -10,38 +10,38 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ForgetPassword() {
 	const navigate = useNavigate();
-  // var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-	const [ Email, setEmail ] = useState('');
-  const [EmailErr, setEmailError] = useState('');
-    const [slug , setSlug] = useState([]);
+	const [Email, setEmail] = useState('');
+	const [EmailErr, setEmailError] = useState('');
+	const [slug, setSlug] = useState([]);
 	const handleValidation = () => {
 		if (Email == '') {
 			setEmailError('please enter email');
 		}
 	};
-
+	var num = '';
 	const Save = (e) => {
-    e.preventDefault();
+		e.preventDefault();
 		handleValidation();
 		let payload = {
 			Email: Email
 		};
-		console.log('vvv',payload);
+		console.log('vvv', payload);
 		Forget(payload)
 			.then((res) => {
 				if (res.status == 200) {
-				console.log(res.slug);
-				console.log(setSlug('setslug',res.slug));
-				let num = res.slug;
-				console.log('num',typeof(num));
-				setSlug(num);
-				console.log(setSlug(num));
-				console.log('setslug =>',slug);
-				// navigate('/reset/password/')
+					console.log(res.slug);
+					console.log(setSlug('setslug', res.slug));
+					num = res.slug;
+					console.log('num', typeof (num));
+					setSlug(num);
+					console.log(setSlug(num));
+					console.log('setslug =>', slug);
+					// navigate('/reset/password/')
 				}
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
 	};
@@ -70,9 +70,9 @@ export default function ForgetPassword() {
 												value={Email}
 												onChange={(e) => setEmail(e.target.value)}
 											/>
-                      <span style={{color: "red"}}>
-                        {EmailErr}
-                        </span>
+											<span style={{ color: "red" }}>
+												{EmailErr}
+											</span>
 											<label htmlFor="Email" className="center-align">
 												Email
 											</label>
@@ -84,6 +84,7 @@ export default function ForgetPassword() {
 												block
 												size="lg"
 												type="submit"
+												// onClick={}
 												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12 mb-1"
 											>
 												Reset Password

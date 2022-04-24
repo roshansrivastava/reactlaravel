@@ -37,6 +37,6 @@ Route::get('/dashboard/purchase/free',[UserContoller::class,'welcome']);
 Route::get('/user/{token}',[UserContoller::class,'welcome']);
 Route::get('/re',[UserContoller::class,'welcome']);
 Route::get('/forget/password',[UserContoller::class,'welcome']);
-Route::get('/reset/password',[UserContoller::class,'welcome']);
+Route::get('/reset/password/{num}',[UserContoller::class,'welcome']);
 Route::post('/reset/password/{token}',[UserController::class, 'resetPassword']);
 // Route::get('/logout',[UserContoller::class,'User']);
