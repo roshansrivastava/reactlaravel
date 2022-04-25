@@ -26,8 +26,6 @@ class UserContoller extends Controller
     { 
         try {
             $result = User::create($request->authorize());
-            // return $result;
-            // return [$result];
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
             $success['data'] = $result;
             // if(count($success) > 0){
@@ -193,7 +191,7 @@ public function User_login(Request $request)
         $update = User::find($id);
       return response()->json([
         'status'=>200,
-        'message'=>"updated is Successfully",
+        'message'=>"Render edit is data ",
         'data'=>$update,
       ]);
     }
@@ -234,9 +232,11 @@ public function User_login(Request $request)
           // $updatedSlug = json_decode($updatedSlug);
           // return $updatedSlug;
           $updatedSlug->notify(new ForgotPasswordMail());
+          $slug1 =$updatedSlug->slug;
           return response()->json([
             'status'=> 200,
             'message'=>'User Successfully Register',
+            'slug'=> $slug1,
         ]);
       }
   } catch (\Exception $e) {
@@ -247,7 +247,37 @@ public function User_login(Request $request)
   }
 }
 
-  
+public function resetPassword(Request $request){
+  try{
+      $password = $request->password;
+      $confirmPassword = $request->confirm_password;
+      $email= $request->email;
+      $user = User::where('slug', $request->slug)->where('email', $email)->first();
+      if($password == $confirmPassword){
+          $changePassword = User::where('email', $email)->update([
+              'password' =>  bcrypt($request->password)
+          ]);
+          return response()->json([
+              'message' => "Password changed successfully",
+              'status' => 'success',
+          ]);
+      }
+      else{
+          return response()->json([
+              'message' => "password does not match",
+              'status' => 'fail',
+          ]);
+      }
+
+  }
+  catch (\Exception $e) {
+      return response()->json([
+          'message' => $e->getMessage(),
+          'status' => 'Error',
+      ]);
+  }
+}
+
 }  
 
 
