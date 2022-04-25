@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-// import Button from '@mui/material/Button';
+import {EditUser} from '../api/Index';
 import { Link , useParams  } from 'react-router-dom';
-
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 export default function EditUser(props) {
 	const [ FirstName ,setFirstName] = useState('');
@@ -21,10 +21,14 @@ export default function EditUser(props) {
 	const getUser= () => {
 		axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
 		.then((response) => {
-			console.log('response',response);
-			if(response.Status== 200)
+			console.log('response--',response.data.data.name);
+			setFirstName(response.data.data.name);
+			setLastName(response.data.data.fullname);
+			setArtistName(response.data.data.artistname);
+			setEmail(response.data.data.email);
+			if(response.data.status== 200)
 			{
-				console.log('1111',response.data);
+				console.log('Data is successfully');
 			}
 		});
 	}
@@ -36,18 +40,20 @@ export default function EditUser(props) {
 
 	const updateSubmit  = async (e) => {
 		e.preventDefault();
+
+		let payload = {
+			FirstName: FirstName,
+			LastName: LastName,
+			ArtistName: ArtistName,
+			Email: Email,
+			Password: Password
+		};
+		console.log('bbb', payload);
+		EditUser(payload)
+			.then((res) => {
+				i
+			})
 	}
-	// const {
-
-	// } = EditUser;
-	
-        // const res = await axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
-		// .then(res => {
-		// 	if(res.data.status==200)
-		// 	{
-
-		// 	}
-		// });
 
 	return (
 		<div className="App">
