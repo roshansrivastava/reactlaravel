@@ -59,30 +59,26 @@ public function User_login(Request $request)
   }
   else if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
         $user = Auth::User();
-        if ($user->status == '0') {
-          return response()->json([
-            'message'   => 'please registeration your account',
-            'status'    => 'Error',
-          ],403);
-        }
-         else { 
-          //\Auth::login($user);
-          $success['token'] = $user->createToken('LoginToken')->accessToken;
-          $success['data'] = $credentials;
-          return response()->json([
-               'message'   => Auth::user(),
-               'status'    => 200,
-               'token'     => $success,
-               'admin'     => $user->role_id ,
-               'name'      => $user->role->name,
-            ]);
-        }
-      }
-      else{
-        return response()->json([
-          'message'   => 'Please fill correct password',
-          'status'    => 'Error',
-        ],401);
+        if($user->is_status == 1)
+        {
+         $success['token'] = $user->createToken('LoginToken')->accessToken;
+         $success['data'] = $credentials;
+         return response()->json([
+             'user'      => Auth::user(),
+             'message'   => 'User Loging Successfully',
+             'status'    => 200,
+             'token'     => $success,
+             'admin'     => $user->role_id ,
+             'name'      => $user->role->name,
+           ]);
+         }
+       else 
+       {
+         return response()->json([
+           'message' =>'Please varify link',
+           'status' => 403,
+         ] );
+       }
       }
     }
     
@@ -112,7 +108,7 @@ public function User_login(Request $request)
       // $user = Auth::user;
       $user = User::whereNotIn('role_id', [1,2])->get();
       return response()->json(array(
-        'Success'=> 'Loging is Successfully',
+        'Success'=> 'Data Loading is Successfully',
         'Status' => 200,
         'data' => $user,
       ));
@@ -249,17 +245,17 @@ public function User_login(Request $request)
 
 public function resetPassword(Request $request){
   try{
-      $password = $request->password;
-      $confirmPassword = $request->confirm_password;
-      $email= $request->email;
-      $user = User::where('slug', $request->slug)->where('email', $email)->first();
-      if($password == $confirmPassword){
-          $changePassword = User::where('email', $email)->update([
-              'password' =>  bcrypt($request->password)
+      $Password = $request->Password;
+      $ConfirmPassword =$request->ConfirmPassword;
+      $slug =$request->slug;
+      $user = User::where('slug', $slug)->first();
+      if($Password == $ConfirmPassword){
+          $changePassword = User::where('slug', $slug)->update([
+              'password' =>  bcrypt($Password)
           ]);
           return response()->json([
               'message' => "Password changed successfully",
-              'status' => 'success',
+              'status' => 200,
           ]);
       }
       else{

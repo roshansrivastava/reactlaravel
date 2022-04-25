@@ -30,6 +30,7 @@ Route::post('/updateuser',[UserContoller::class,'UpdateUser'])->middleware(['aut
 Route::get('/getuser/{id}',[UserContoller::class,'GetUser'])->middleware(['auth:api']);
 Route::get('/user/{token}',[UserContoller::class,'activate_token']);
 Route::post('/forget/password',[UserContoller::class,'forgetPassword']);
+Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

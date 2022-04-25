@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React , { useEffect }from 'react'
 import { Dropdown } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import Api from '../api/Api';
@@ -7,11 +7,15 @@ import '../../css/app.css';
 import {Userlogout} from '../api/Index';
 
 export default function Navbar() {
+	let userData = JSON.parse(localStorage.getItem('user'));
+	// console.log(userData);
 	const shouldRedirect = true;
 	const navigate = useNavigate();
+	// let usertoken = localStorage.getItem('token');
+	// let userdata = localStorage.getItem('user');
     const logout = (e) => {
         e.preventDefault();
-		const token = localStorage.getItem('token');
+		
 		// console.log('ddff',token);
 		// let config = {
 		// 	headers: {
@@ -27,8 +31,16 @@ export default function Navbar() {
 
 		Userlogout().then(res => {
 			localStorage.removeItem('token');
+			localStorage.removeItem('user')
 			navigate('/login');
 		});
+		useEffect(() => {
+			console.log('props',userData.name);
+			console.log('dsfjklk')
+		//   console.log('userdata',userdata);
+		//   console.log('usertoken',usertoken);
+		}, [])
+		
     }
   return (
     <>
@@ -69,7 +81,7 @@ export default function Navbar() {
 									<li>
 									<Dropdown>
 										<Dropdown.Toggle variant="success" id="dropdown-basic">
-											Welcome
+											{userData.name}
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu>

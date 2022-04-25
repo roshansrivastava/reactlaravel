@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './custom.css';
 import CheckIcon from '@mui/icons-material/Check';
 import EuroIcon from '@mui/icons-material/Euro';
+import { Badge } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -111,7 +112,9 @@ export default function Home() {
 							</Typography>
 						</CardContent>
 					</Card>
-					<Card>
+					<Card className="pricingClass">
+					<Badge className='pricingBadge'> Selected</Badge>
+
 						<CardContent>
 							<Typography sx={{ fontSize: 34 }} color="text.secondary" background-color= "lightblue" direction="row" gutterBottom>
 								Free

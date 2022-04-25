@@ -14,7 +14,7 @@ export default function EditUser(props) {
 	const [ Password, setPassword ] = useState('');
 	const [ Update , setUpdate ] = useState([]);
     const [ APIUser, setAPIUser ] = useState([]);
-	const { id } = useParams()
+	const { id } = useParams();
 	console.log('hhh',id);
 	
 

@@ -21,3 +21,12 @@
     font-size: 16px;
 }
 /* background-color: lightblue; */
+.pricingBadge{
+  position: absolute;
+  left: -20px;
+  top: 5px;
+}
+.pricingClass{
+  position: relative;
+  overflow: visible !important;
+}

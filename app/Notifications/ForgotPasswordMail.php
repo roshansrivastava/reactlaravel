@@ -42,7 +42,7 @@ class ForgotPasswordMail extends Notification
     {
         $email = $notifiable->email;
         // dd($notifiable['slug']);die;
-        $url = url('/') . '/api/reset/password/' . $notifiable['slug'];
+        $url = url('/') . '/reset/password/' . $notifiable['slug'];
 
         return (new MailMessage)
             ->subject('Reset Password Mail')

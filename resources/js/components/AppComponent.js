@@ -40,7 +40,7 @@ export default class AppComponent extends Component {
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route> 
-              <Route exact path='/reset/password'element={<ResetPassword/>}></Route>
+              <Route exact path='/reset/password/:slug'element={<ResetPassword/>}></Route>
           </Routes> 
       </Router>
       </>

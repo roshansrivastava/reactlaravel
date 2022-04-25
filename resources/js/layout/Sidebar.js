@@ -10,15 +10,25 @@ import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Getuser } from '../api/Index';
 import { Link } from "react-router-dom";
+import User from './User';
 export default function sidebar() {
-	const [APIData, setAPIData] = useState(null);
-    useEffect(() => {
-        Getuser().then((response) => {
-                setAPIData(response.data);
-            })
-    }, []);
-
-console.log()
+	// const [APIData, setAPIData] = useState(null);
+    // useEffect(() => {
+	
+    // }, []);
+	// const getUserData = () => {
+	// 	Getuser().then((response) => {
+	// 		console.log
+	// 	});
+	// }
+	// const data = () =>{
+	// getUserData ();
+		
+	// }
+	let data = JSON.parse(localStorage.getItem('user'));
+	useEffect(()=>{
+		console.log('dsj',data.role_id);
+   });
   return (
     <>
     	<li className="navigation-header">
@@ -52,17 +62,21 @@ console.log()
 							</a>
 						</li>
 						{/* {APIData.name == 1 && APIData.role_id==2 ( */}
+						{ data.role_id == 1 || data.role_id == 2 ?
+						<>
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-contacts.html">
 								<PersonIcon /> Admin{' '}
 							</a>
 						</li>
-							{/* )} */}
+
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/User">
 								<PeopleAltIcon /> Users
 							</Link>
-						</li>
+						</li> </>
+						: ''
+						}
 
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">

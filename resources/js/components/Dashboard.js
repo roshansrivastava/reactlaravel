@@ -1,16 +1,27 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React,{ useState , useEffect } from 'react';
 import '../../css/app.css';
 import axios from 'axios';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-class Dashboard extends Component {
-	constructor(props) {
-		super(props);
-	}
+import { Link } from 'react-router-dom';
+
+export default function Dashboard() {
+	//  let userData = JSON.parse(localStorage.getItem('user'));
+	// const Logic = () => {
+	// 	console.log(usertoken);
+	// }
+	//  const fff = () =>
+	//  {
+	// 	 console.log('djhsd');
+		 
+	//  }
+	// useEffect(() => {
+	// 	// Logic();
+	// 	console.log(userData);
+	// }, []);
 	
-	render() {
+	
 		return (
 			<div className="App">
 				<header className="page-topbar" id="header">
@@ -58,6 +69,4 @@ class Dashboard extends Component {
 			</div>
 		);
 	}
-}
 
-export default Dashboard;

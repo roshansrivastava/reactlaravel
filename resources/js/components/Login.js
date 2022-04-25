@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './component_custom.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
 	const shouldRedirect = true;
@@ -13,6 +15,7 @@ export default function Login() {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [agree, setAgree] = useState(false);
+	const [emailErr ,setemailErr] = useState('');
 	const checkboxHandler = () => {
 		// if agree === true, it will be set to false
 		// if agree === false, it will be set to true
@@ -31,9 +34,16 @@ export default function Login() {
 		};
 		UserLogin(payload)
 			.then((res) => {
-				//   console.log('bb',res.name)
+				if(res.status == 200){
 				localStorage.setItem('token', res.token.token);
+				localStorage.setItem('user',JSON.stringify(res.user))
+				// localStorage.setItem('user',res.)
 				navigate('/dashboard/home');
+				} else {
+					toast.error(res.message, {
+						position: toast.POSITION.TOP_RIGHT
+					  });
+				}
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -59,6 +69,7 @@ export default function Login() {
 
 	return (
 		<div className='bgchange'>
+			<ToastContainer />
 		<div
 			className="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
 			data-open="click"

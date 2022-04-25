@@ -24,7 +24,7 @@ export default function Registration() {
 	const [ confirmpasswordError, setconfirmpasswordError ] = useState('');
 	const [ captcha, setcaptcha] = useState(null);
 	const [captchaError , setCaptchaError] = useState('');
-	var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 	
 	const checkboxHandler = () => {
 		setAgree(!agree);
@@ -47,7 +47,7 @@ export default function Registration() {
 		if(ArtistName == ''){
 			setartistError('Please enter artist name ');
 		};
-		if(Email == '' || Email.toLowerCase().match(regex)){
+		if(Email == ''){
 			setemailError('please enter Valid email');
 		};
 		if(Password == '' || Password.length < 7){

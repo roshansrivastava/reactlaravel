@@ -59,7 +59,15 @@
     max-width: 35%;
 } 
 
+.bgchangere{
+    background-image: url('/css/images/flat-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
 .reset-card {
     max-width: 35%;
+    margin: auto;
+    margin-top: 16%;
 }
 
