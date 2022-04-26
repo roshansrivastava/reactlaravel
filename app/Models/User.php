@@ -32,6 +32,8 @@ class User extends Authenticatable
         'email_verified_at',
         'slug',
         'slug_created_at',
+        'plan_id',
+        'release_id',
 
     ];
 

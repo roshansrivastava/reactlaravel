@@ -6,6 +6,7 @@ import { Getuser } from '../api/Index';
 import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
 import { DeleteUser } from '../api/Index';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import EditUser from './EditUser';
 
@@ -33,6 +34,7 @@ export default function User() {
 			getUserData();
 		})
 	}
+	let data = JSON.parse(localStorage.getItem('user'));
 
 	const update = (id) => {
 		console.log('nnsfnn',id);
@@ -51,7 +53,7 @@ export default function User() {
 		APIData.map((data) => {
 			return (
 				<tr key ={data.id}>
-					<tr>{}</tr>
+					<tr>{<AccountCircleIcon/>}</tr>
 					<td>{data.id}</td>
 					<td>{data.name}</td>
 					<td>{data.fullname}</td>
@@ -81,17 +83,8 @@ export default function User() {
 				<div className="brand-sidebar">
 					<h1 className="logo-wrapper">
 						<a className="brand-logo darken-1" href="index.html">
-							<img
-								className="hide-on-med-and-down"
-								src="/css/images/logo/materialize-logo-color.png"
-								alt="materialize logo"
-							/>
-							<img
-								className="show-on-medium-and-down hide-on-med-and-up"
-								src="/css/images/logo/materialize-logo.png"
-								alt="materialize logo"
-							/>
-							<span className="logo-text hide-on-med-and-down">Materialize</span>
+							<AccountCircleIcon/>
+							<span className="logo-text hide-on-med-and-down">{data.name}{data.fullname}</span>
 						</a>
 					</h1>
 				</div>

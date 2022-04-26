@@ -47,9 +47,12 @@ export default function Navbar() {
     	<div className="navbar navbar-fixed">
 						<nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
 							<div className="nav-wrapper">
+								<ul className='navbar-list left'>
+									<li ><img className='images' src='/css/images/logo/singo-logo.png' /></li>
+								</ul>
 								
 								<ul className="navbar-list right">
-									<li className="dropdown-language">
+									{/* <li className="dropdown-language">
 										<a
 											className="waves-effect waves-block waves-light translation-button"
 											href="#"
@@ -57,16 +60,16 @@ export default function Navbar() {
 										>
 											<span className="flag-icon flag-icon-gb" />
 										</a>
-									</li>
+									</li> */}
 								
-									<li className="hide-on-large-only search-input-wrapper">
+									{/* <li className="hide-on-large-only search-input-wrapper">
 										<a
 											className="waves-effect waves-block waves-light search-button"
 											href="javascript:void(0);"
 										>
 											<i className="material-icons">search</i>
 										</a>
-									</li>
+									</li> */}
 									<li>
 										<a
 											className="waves-effect waves-block waves-light notification-button"
@@ -81,7 +84,7 @@ export default function Navbar() {
 									<li>
 									<Dropdown>
 										<Dropdown.Toggle variant="success" id="dropdown-basic">
-											{userData.name}
+											Welcome {userData.name}{userData.fullname}
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu>

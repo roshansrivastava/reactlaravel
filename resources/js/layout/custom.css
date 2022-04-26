@@ -30,3 +30,24 @@
   position: relative;
   overflow: visible !important;
 }
+
+.pricingClass{
+  background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+}
+
+.MuiBadge-badge.MuiBadge-standard{
+  border-radius: 5px;
+  position: relative;
+  top: 15px;
+  left: -35px;
+}
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeLarge{
+  font-size: 4rem;
+}
+.images{
+  max-width: 13%;
+  margin-left: 10%;
+}
+.pricingBadge .MuiSvgIcon-fontSizeMedium{
+  color: white;
+}

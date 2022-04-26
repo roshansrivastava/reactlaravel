@@ -275,7 +275,14 @@ public function resetPassword(Request $request){
 }
   public function editUser(Request $request)
   {
-    return $request;
+    $id = $request->id;
+    $edit = User::find($id);
+    $edit->name =$request->FirstName;
+    $edit['fullname']=$request->LastName;
+    $edit['artistname']=$request->ArtistName;
+    $edit['email']=$request->Email;
+    $edit['password']=$request->Password;
+    $edit->save();
   }
 
 }  

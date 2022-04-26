@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-// import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -14,7 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import './custom.css';
 import CheckIcon from '@mui/icons-material/Check';
 import EuroIcon from '@mui/icons-material/Euro';
-import { Badge } from 'react-bootstrap';
+import Grid from '@mui/material/Grid';
+import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -28,6 +29,7 @@ const bull = (
 		•
 	</Box>
 );
+let data = JSON.parse(localStorage.getItem('user'));
 export default function Home() {
 	const classes = useStyles();
 	return (
@@ -39,17 +41,12 @@ export default function Home() {
 				<div className="brand-sidebar">
 					<h1 className="logo-wrapper">
 						<a className="brand-logo darken-1" href="index.html">
-							<img
-								className="hide-on-med-and-down"
-								src="/css/images/logo/materialize-logo-color.png"
-								alt="materialize logo"
-							/>
-							<img
-								className="show-on-medium-and-down hide-on-med-and-up"
-								src="/css/images/logo/materialize-logo.png"
-								alt="materialize logo"
-							/>
-							<span className="logo-text hide-on-med-and-down"> Singo </span>
+							<AccountCircleIcon fontSize="large" />
+							<span className="logo-text hide-on-med-and-down">
+								{' '}
+								{data.name}
+								{data.fullname}{' '}
+							</span>
 						</a>
 					</h1>
 				</div>
@@ -71,146 +68,321 @@ export default function Home() {
 				</a>
 			</aside>
 			<div id="main" className={classes.root}>
-				<div className="card_area">
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0
-							</Typography>
-							<Typography variant="h7" component="div">
-								Total Albums
-							</Typography>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0
-							</Typography>
-							<Typography variant="h7" component="div">
-								Distributed Albums
-							</Typography>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0
-							</Typography>
-							<Typography variant="h7" component="div">
-								Declined Albums
-							</Typography>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								0.00<EuroIcon/>
-							</Typography>
-							<Typography variant="h7" component="div">
-								Balance
-							</Typography>
-						</CardContent>
-					</Card>
-					<Card className="pricingClass">
-					<Badge className='pricingBadge'> Selected</Badge>
+				<Grid
+					container
+					spacing={4}
+					sx={{
+						'& .MuiCardContent-root': {
+							paddingTop: '50px',
+							'& .MuiTypography-h3': {
+								fontSize: '30px',
+								fontWeight: '600',
+								textTransform: 'uppercase'
+							}
+						}
+					}}
+				>
+					<Grid item xs={12} lg={3} xl={3}>
+						<Card>
+							<CardContent>
+								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+									0
+								</Typography>
+								<Typography variant="h7" component="div">
+									Total Albums
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={3} xl={3}>
+						<Card>
+							<CardContent>
+								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+									0
+								</Typography>
+								<Typography variant="h7" component="div">
+									Distributed Albums
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={3} xl={3}>
+						<Card>
+							<CardContent>
+								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+									0
+								</Typography>
+								<Typography variant="h7" component="div">
+									Declined Albums
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={3} xl={3}>
+						<Card>
+							<CardContent>
+								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+									0.00<EuroIcon />
+								</Typography>
+								<Typography variant="h7" component="div">
+									Balance
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={4} xl={4}>
+						<Card className="pricingClass" sx={{"& .MuiChip-root":{
+							borderRadius:"5px",
+							marginLeft: "5px",
+							"& .MuiSvgIcon-root":{
+								width:"16px",
+							}
+						}}}>
+							<Chip className="pricingBadge" color="primary" variant="contained" label={<div><CheckIcon /> Selected</div>} />
 
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" background-color= "lightblue" direction="row" gutterBottom>
-								Free
-							</Typography>
-							<Typography variant="h7" component="div">
-                            <br />
-								<CheckIcon /> 2 Releases Included
-                                <br />  <br />
-								<CheckIcon /> Distribution within 14 days
-                                <br />  <br />
-								<CheckIcon /> Keep 80% of the earnings
-                                <br />  <br />
-								<CheckIcon /> 24/7 Live Support
-                                <br />  <br />
-								<CheckIcon /> No Content ID
-                                <br />  <br />  <br />
-							</Typography>
-							<Typography variant="body2">
-                            <br />
-								  0 <EuroIcon/> Per year
-								<br />
-							</Typography>
-                            <Typography variant="body2">
-                            <br />  <br />  <br /> 
-                            <Link to='/dashboard/purchase/free'>
-                            <Button size ="big" variant="contained">Purchase Now</Button>
-                            </Link>
-							</Typography>
-							
-						</CardContent>
-					</Card>
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								PREMIUM
-							</Typography>
-							<Typography variant="h7" component="div">
-                            <br />
-								<CheckIcon /> Unlimited Releases Included
-                                <br />  <br />
-								<CheckIcon /> Distribution within 48h
-                                <br />  <br />
-								<CheckIcon /> Keep 100% of the earnings
-                                <br />  <br />
-								<CheckIcon /> 24/7 Live Support
-                                <br />  <br />
-								<CheckIcon /> Content ID
-                                <br />  <br />  <br />
-							</Typography>
-							<Typography variant="body2">
-                            <br />
-								  19.99 <EuroIcon/> Per year
-								<br />
-							</Typography>
-                            <Typography variant="body2">
-                            <br />  <br />  <br /> 
-							<Link to='/dashboard/purchase/premium'>
-                            <Button size ="big" variant="contained">Purchase Now</Button>
-                            </Link>
-							</Typography>
-							
-						</CardContent>
-					</Card>
-					<Card>
-						<CardContent>
-							<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
-								Basic
-							</Typography>
-							<Typography variant="h7" component="div">
-                            <br />
-								<CheckIcon /> 6 Releases Included
-                                <br />  <br />
-								<CheckIcon /> Distribution within 14 days
-                                <br />  <br />
-								<CheckIcon /> Keep 85% of the earnings
-                                <br />  <br />
-								<CheckIcon /> 24/7 Live Support
-                                <br />  <br />
-								<CheckIcon /> No Content ID
-                                <br />  <br />  <br />
-							</Typography>
-							<Typography variant="body2">
-                            <br />
-								  9.99 4.99 <EuroIcon/> Per year
-								<br />
-							</Typography>
-                            <Typography variant="body2">
-                            <br />  <br />  <br /> 
-							<Link to='/dashboard/purchase/basic'>
-                            <Button size ="big" variant="contained">Purchase Now</Button>
-                            </Link>
-							</Typography>
-							
-						</CardContent>
-					</Card>
-				</div>
+							<CardContent
+								sx={{
+									'& .MuiTypography-root': {
+										color: '#fff'
+									}
+								}}
+							>
+								<Typography
+									sx={{
+										fontSize: 34
+									}}
+									color="text.secondary"
+									background-color="lightblue"
+									direction="row"
+									gutterBottom
+									variant="h3"
+									component="div"
+								>
+									Free
+								</Typography>
+								<Typography variant="h7" component="div">
+									<List
+										sx={{
+											'& .MuiListItemIcon-root': {
+												minWidth: 'auto',
+												paddingRight: '10px',
+												"& .MuiSvgIcon-root":{
+													color: "#fff",
+												},
+											}
+										}}
+									>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary={<Typography variant="p" component="div"><Typography variant="strong" component="b">2</Typography> Releases Included</Typography>} />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary={<Typography variant="p" component="div">Distribution within <Typography variant="strong" component="b">14</Typography> days</Typography>} />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Keep 80% of the earnings" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="24/7 Live Support" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<div>
+														No <strong>Content</strong> ID
+													</div>
+												}
+											/>
+										</ListItem>
+									</List>
+								</Typography>
+								<Typography variant="body2">
+									<br />
+									0<sub><EuroIcon /> <br/>Per year</sub>
+									<br />
+								</Typography>
+								<Typography variant="body2">
+									<br /> <br /> <br />
+									<Link to="/dashboard/purchase/free">
+										<Button size="big" variant="contained">
+											Purchase Now
+										</Button>
+									</Link>
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={4} xl={4}>
+						<Card>
+							<CardContent>
+								<Typography
+									sx={{ fontSize: 34 }}
+									color="text.secondary"
+									direction="row"
+									gutterBottom
+									variant="h3"
+									component="div"
+								>
+									PREMIUM
+								</Typography>
+								<Typography variant="h7" component="div">
+									<List
+										sx={{
+											'& .MuiListItemIcon-root': {
+												minWidth: 'auto',
+												paddingRight: '10px'
+											},
+											
+										}}
+									>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Unlimited Releases Included" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Distribution within 48h" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Keep 100% of the earnings" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="24/7 Live Support" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<div>
+													 <strong>Content ID</strong>
+													</div>
+												}
+											/>
+										</ListItem>
+									</List>
+								</Typography>
+								<Typography variant="body2">
+									<br />
+									19.99 <EuroIcon /> Per year
+									<br />
+								</Typography>
+								<Typography variant="body2">
+									<br /> <br /> <br />
+									<Link to="/dashboard/purchase/premium">
+										<Button size="big" variant="contained">
+											Purchase Now
+										</Button>
+									</Link>
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12} lg={4} xl={4}>
+						<Card>
+							<CardContent>
+								<Typography
+									sx={{ fontSize: 34 }}
+									color="text.secondary"
+									direction="row"
+									gutterBottom
+									variant="h3"
+									component="div"
+								>
+									Basic
+								</Typography>
+								<Typography variant="h7" component="div">
+									<List
+										sx={{
+											'& .MuiListItemIcon-root': {
+												minWidth: 'auto',
+												paddingRight: '10px'
+											},
+											'& .MuiSvgIcon-fontSizeMedium' :{
+												color: 'unset'
+											},
+										}}
+									>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="6 Releases Included" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Distribution within 14 days" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="Keep 85% of the earnings" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText primary="24/7 Live Support" />
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<div>
+														No <strong>Content</strong> ID
+													</div>
+												}
+											/>
+										</ListItem>
+									</List>
+								</Typography>
+								<Typography variant="body2">
+									<br />
+									9.99 4.99 <EuroIcon /> Per year
+									<br />
+								</Typography>
+								<Typography variant="body2">
+									<br /> <br /> <br />
+									<Link to="/dashboard/purchase/basic">
+										<Button size="big" variant="contained">
+											Purchase Now
+										</Button>
+									</Link>
+								</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+				</Grid>
 			</div>
 			<Script />
 		</div>

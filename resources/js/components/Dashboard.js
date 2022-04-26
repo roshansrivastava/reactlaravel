@@ -7,19 +7,15 @@ import Script from '../layout/Script';
 import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
-	//  let userData = JSON.parse(localStorage.getItem('user'));
-	// const Logic = () => {
-	// 	console.log(usertoken);
-	// }
-	//  const fff = () =>
-	//  {
-	// 	 console.log('djhsd');
-		 
-	//  }
-	// useEffect(() => {
-	// 	// Logic();
-	// 	console.log(userData);
-	// }, []);
+	 let userData = JSON.parse(localStorage.getItem('user'));
+	const Logic = () => {
+		console.log(userData);
+	}
+	 
+	useEffect(() => {
+		Logic();
+		console.log('user',userData);
+	}, []);
 	
 	
 		return (
@@ -41,7 +37,7 @@ export default function Dashboard() {
 									src="/css/images/logo/materialize-logo.png"
 									alt="materialize logo"
 								/>
-								<span className="logo-text hide-on-med-and-down">Singo</span>
+								<span className="logo-text hide-on-med-and-down">{userData.name}{userData.fullname}</span>
 							</a>
 						</h1>
 					</div>

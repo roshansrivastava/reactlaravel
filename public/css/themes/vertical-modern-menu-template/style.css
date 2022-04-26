@@ -2798,7 +2798,12 @@ select
 {
     #main
     {
-        padding-left: 260px;
+       /*  padding-left: 260px; */
+       padding-left: 20px;
+        max-width: calc(100% - 260px);
+        margin-left: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
     #main.main-full
     {
@@ -8689,7 +8694,7 @@ span.badge.pill
 
 .navbar .navbar-dark ul a
 {
-    color: #000000;
+    color: #fff;
 }
 
 .navbar .navbar-dark .header-search-wrapper i
@@ -8747,9 +8752,9 @@ span.badge.pill
     width: calc(100% - 560px);
 }
 
-.navbar .navbar-main
-{
-    padding: 0 8px 0 15px;
+.navbar .navbar-main {
+    padding: 8px 8px 8px 15px;
+    height:80px;
 }
 
 .search-list
@@ -8940,7 +8945,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: fixed;
     z-index: 999;
-    top: 0;
+    top: 80px;
 
     width: 260px;
     height: 100%;
@@ -8958,12 +8963,12 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .brand-sidebar
 {
-    position: fixed;
+   /*  position: fixed; */
     top: 0;
     left: 0;
 
     width: inherit;
-    height: 64px;
+    height: auto;
 
     background: #fff;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .2);
@@ -9008,7 +9013,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .brand-sidebar span.logo-text
 {
-    font-size: 24px;
+    font-size: 18px;
 
     visibility: visible;
 
@@ -9023,9 +9028,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .brand-sidebar .brand-logo
 {
     font-size: 2.1rem;
-    line-height: 0;
+    /* line-height: 0; */
 
-    position: absolute;
+   /*  position: absolute; */
 
     display: inline-block;
 
@@ -9033,6 +9038,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     padding: 22px 12px 22px 22px;
 
     color: #333;
+    white-space: normal;
 }
 
 .brand-sidebar .brand-logo img
@@ -9098,7 +9104,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav
 {
-    top: 64px;
+    /* top: 64px; */
 
     overflow: hidden;
 

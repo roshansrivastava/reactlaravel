@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-import {EditUser} from '../api/Index';
+import {EditUsers} from '../api/Index';
 import { Link , useParams  } from 'react-router-dom';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
@@ -49,9 +49,9 @@ export default function EditUser(props) {
 			Password: Password
 		};
 		console.log('bbb', payload);
-		EditUser(payload)
+		EditUsers(payload)
 			.then((res) => {
-				i
+				console.log('response payload',res);
 			})
 	}
 
@@ -150,6 +150,9 @@ export default function EditUser(props) {
 										
 									</div>
 									<div className='form-group mb-3'>
+									<label htmlFor="Email">
+											Email
+										</label>
 										<input
 											id="Email"
 											type="text"
@@ -157,9 +160,7 @@ export default function EditUser(props) {
 											value={Email}
 											onChange={(e) => setEmail(e.target.value)}
 										/>
-										<label htmlFor="Email">
-											Email
-										</label>
+										
 									</div>
 							<div className='form-group mb-3'>
 							<label htmlFor="Password" >

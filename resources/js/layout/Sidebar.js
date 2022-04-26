@@ -27,23 +27,18 @@ export default function sidebar() {
 	// }
 	let data = JSON.parse(localStorage.getItem('user'));
 	useEffect(()=>{
-		console.log('dsj',data.role_id);
+		console.log('dsj',data.name);
    });
   return (
     <>
-    	<li className="navigation-header">
-							<a className="navigation-header-text">Applications</a>
-							<i className="navigation-header-icon material-icons">more_horiz</i>
-						</li>
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/home">
-								{' '}
 								<HomeOutlinedIcon /> Home
 							</Link>
 						</li>
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-chat.html">
-								<AnalyticsOutlinedIcon /> My Analytics{' '}
+								<AnalyticsOutlinedIcon /> My Analytics
 							</a>
 						</li>
 						<li className="bold">
@@ -64,12 +59,9 @@ export default function sidebar() {
 						{/* {APIData.name == 1 && APIData.role_id==2 ( */}
 						{ data.role_id == 1 || data.role_id == 2 ?
 						<>
-						<li className="bold">
-							<a className="waves-effect waves-cyan " href="app-contacts.html">
-								<PersonIcon /> Admin{' '}
-							</a>
+							<li className="navigation-header">
+							<a className="navigation-header-text">Admin</a>
 						</li>
-
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/User">
 								<PeopleAltIcon /> Users
@@ -85,7 +77,7 @@ export default function sidebar() {
 						</li>
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
-								<PeopleAltIcon /> Approved Album{' '}
+								<PeopleAltIcon /> Approved Album
 							</a>
 						</li>
 						<li className="bold">
@@ -101,7 +93,7 @@ export default function sidebar() {
 						{/* { APIData.role == 'admin' && ( */}
 							<li className="bold">
 								<a className="waves-effect waves-cyan " href="app-calendar.html">
-									<PeopleAltIcon /> Need Edit Albums{' '}
+									<PeopleAltIcon /> Need Edit Albums
 								</a>
 							</li>
 						
