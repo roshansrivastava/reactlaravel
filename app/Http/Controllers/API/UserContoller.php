@@ -273,6 +273,10 @@ public function resetPassword(Request $request){
       ]);
   }
 }
+  public function editUser(Request $request)
+  {
+    return $request;
+  }
 
 }  
 
