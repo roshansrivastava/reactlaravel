@@ -66,7 +66,9 @@ export default function Registration() {
 		e.preventDefault();
 		var fname = e.target.FullName.value;
 		var fname = fname.split(' ');
-		console.log('firstname', fname);
+		if(fname.length > 3) {
+			setfirstnameError(' Enter valid Firstname, Middlename and Lastname');
+		}
 		if (fname.length > 1) {
 			if (fname[1] == '') {
 				setlastnameError('Enter middle name');
