@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -293,6 +294,10 @@ public function resetPassword(Request $request){
       'message' => "edit is successfully",
       'status' => 200,
   ]);
+  }
+  public function planUser(){
+    $plan = Plan::get();
+    return $plan[1]['description'][2];
   }
 
 }  

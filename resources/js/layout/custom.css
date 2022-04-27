@@ -68,3 +68,6 @@
  .MuiButton-root.button {
    width: 100%;
  }
+ .navbar-list.right{
+  display: flex;
+ }

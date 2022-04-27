@@ -81,16 +81,8 @@ export default function Navbar() {
 											</i>
 										</a>
 									</li>
-									<li>
-									<Dropdown>
-										<Dropdown.Toggle variant="success" id="dropdown-basic">
-											Welcome {userData.name}{userData.fullname}
-										</Dropdown.Toggle>
-
-										<Dropdown.Menu>
-											<Dropdown.Item  onClick = {logout}>Logout</Dropdown.Item>
-										</Dropdown.Menu>
-										</Dropdown>	
+									<li className='bt'>
+									<h6 onClick = {logout}>Welcome {userData.name}{userData.fullname} </h6>
 									</li>
 								</ul>
 							</div>
@@ -99,6 +91,7 @@ export default function Navbar() {
 									<form id="navbarForm">
 										<div className="input-field search-input-sm">
 											<input
+											 
 												className="search-box-sm mb-0"
 												type="search"
 												required=""

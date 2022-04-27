@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Role;
 use App\Models\Store;
+use App\Models\Plan;
 
 class User extends Authenticatable
 {
