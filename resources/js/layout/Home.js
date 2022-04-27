@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,27 +16,38 @@ import EuroIcon from '@mui/icons-material/Euro';
 import Grid from '@mui/material/Grid';
 import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		padding: theme.spacing(2)
+	const navigate = useNavigate();
+	const useStyles = makeStyles((theme) => ({
+		root: {
+			flexGrow: 1,
+			padding: theme.spacing(2)
+		}
+	}));
+	const redirect = () => 
+	{
+		navigate('/dashboard/purchase/free');
 	}
-}));
-
-// const bull = (
-// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-// 		•
-// 	</Box>
-// );
-let data = JSON.parse(localStorage.getItem('user'));
-// console.log('fd',data);
-// // useEffect(()=>
-// // {
-// // 	console.log('now',data);
-// // });
+	const Premium = () =>
+	{
+		navigate('/dashboard/purchase/premium');
+	}
+	const Basic = () => {
+		navigate('/dashboard/purchase/basic');
+	}
+	// const bull = (
+	// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
+	// 		•
+	// 	</Box>
+	// );
+	let data = JSON.parse(localStorage.getItem('user'));
+	// console.log('fd',data);
+	// // useEffect(()=>
+	// // {
+	// // 	console.log('now',data);
+	// // });
 	const classes = useStyles();
 	return (
 		<div className="App">
@@ -50,7 +61,6 @@ let data = JSON.parse(localStorage.getItem('user'));
 							<AccountCircleIcon fontSize="large" />
 							<span className="logo-text hide-on-med-and-down">
 								{data.name} {data.fullname}
-								
 							</span>
 						</a>
 					</h1>
@@ -90,10 +100,10 @@ let data = JSON.parse(localStorage.getItem('user'));
 					<Grid item xs={12} lg={3} xl={3}>
 						<Card>
 							<CardContent>
-								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+								<Typography sx={{ fontSize: 48 ,color: 'black' }} color="text.secondary" direction="row" gutterBottom>
 									0
 								</Typography>
-								<Typography variant="h7" component="div">
+								<Typography variant="h6" component="div">
 									Total Albums
 								</Typography>
 							</CardContent>
@@ -102,10 +112,10 @@ let data = JSON.parse(localStorage.getItem('user'));
 					<Grid item xs={12} lg={3} xl={3}>
 						<Card>
 							<CardContent>
-								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+								<Typography sx={{ fontSize: 48 , color: 'black' }} color="text.secondary" direction="row" gutterBottom>
 									0
 								</Typography>
-								<Typography variant="h7" component="div">
+								<Typography variant="h6" component="div">
 									Distributed Albums
 								</Typography>
 							</CardContent>
@@ -114,10 +124,10 @@ let data = JSON.parse(localStorage.getItem('user'));
 					<Grid item xs={12} lg={3} xl={3}>
 						<Card>
 							<CardContent>
-								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+								<Typography sx={{ fontSize: 48 ,color: 'black'  }} color="text.secondary" direction="row" gutterBottom>
 									0
 								</Typography>
-								<Typography variant="h7" component="div">
+								<Typography variant="h6" component="div">
 									Declined Albums
 								</Typography>
 							</CardContent>
@@ -126,24 +136,38 @@ let data = JSON.parse(localStorage.getItem('user'));
 					<Grid item xs={12} lg={3} xl={3}>
 						<Card>
 							<CardContent>
-								<Typography sx={{ fontSize: 34 }} color="text.secondary" direction="row" gutterBottom>
+								<Typography sx={{ fontSize: 48 , color: 'black' }} color="text.secondary" direction="row" gutterBottom>
 									0.00<EuroIcon />
 								</Typography>
-								<Typography variant="h7" component="div">
+								<Typography variant="h6" component="div">
 									Balance
 								</Typography>
 							</CardContent>
 						</Card>
 					</Grid>
 					<Grid item xs={12} lg={4} xl={4}>
-						<Card className="pricingClass" sx={{"& .MuiChip-root":{
-							borderRadius:"5px",
-							marginLeft: "5px",
-							"& .MuiSvgIcon-root":{
-								width:"16px",
-							}
-						}}}>
-							<Chip className="pricingBadge" color="primary" variant="contained" label={<div><CheckIcon /> Selected</div>} />
+						<Card
+							className="pricingClass"
+							sx={{
+								'& .MuiChip-root': {
+									borderRadius: '5px',
+									marginLeft: '5px',
+									'& .MuiSvgIcon-root': {
+										width: '16px'
+									}
+								}
+							}}
+						>
+							<Chip
+								className="pricingBadge"
+								color="primary"
+								variant="contained"
+								label={
+									<div>
+										<CheckIcon /> Selected
+									</div>
+								}
+							/>
 
 							<CardContent
 								sx={{
@@ -171,9 +195,9 @@ let data = JSON.parse(localStorage.getItem('user'));
 											'& .MuiListItemIcon-root': {
 												minWidth: 'auto',
 												paddingRight: '10px',
-												"& .MuiSvgIcon-root":{
-													color: "#fff",
-												},
+												'& .MuiSvgIcon-root': {
+													color: '#fff'
+												}
 											}
 										}}
 									>
@@ -181,19 +205,43 @@ let data = JSON.parse(localStorage.getItem('user'));
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
-											<ListItemText primary={<Typography variant="p" component="div"><Typography variant="strong" component="b">2</Typography> Releases Included</Typography>} />
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															2
+														</Typography>{' '}
+														Releases Included
+													</Typography>
+												}
+											/>
 										</ListItem>
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
-											<ListItemText primary={<Typography variant="p" component="div">Distribution within <Typography variant="strong" component="b">14</Typography> days</Typography>} />
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														Distribution within{' '}
+														<Typography variant="strong" component="b">
+															14
+														</Typography>{' '}
+														days
+													</Typography>
+												}
+											/>
 										</ListItem>
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
-											<ListItemText primary="Keep 80% of the earnings" />
+											<ListItemText primary={<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															Keep 80%{' '}
+														</Typography>{' '}
+														of the earnings
+													</Typography>} />
 										</ListItem>
 										<ListItem>
 											<ListItemIcon>
@@ -207,26 +255,37 @@ let data = JSON.parse(localStorage.getItem('user'));
 											</ListItemIcon>
 											<ListItemText
 												primary={
-													<div>
-														No <strong>Content</strong> ID
-													</div>
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															No{' '}
+														</Typography>{' '}
+														Content ID
+													</Typography>
 												}
 											/>
 										</ListItem>
 									</List>
 								</Typography>
-								<Typography variant="body2">
-									<br />
-									0<sub><EuroIcon /> <br/>Per year</sub>
-									<br />
+								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
+									<Typography fontSize="50px" component="div">
+										{' '}
+										0{' '}
+									</Typography>
+									<Typography variant="p" component="div" id="euro">
+										{' '}
+										<Typography variant="p" component="div" fontSize="10px">
+											<EuroIcon />{' '}
+										</Typography>{' '}
+										<Typography component="div" variant="p" fontSize="14">
+											Per Year
+										</Typography>{' '}
+									</Typography>
 								</Typography>
 								<Typography variant="body2">
-									<br /> <br /> <br />
-									<Link to="/dashboard/purchase/free">
-										<Button size="big" variant="contained">
+										<Button size="big" variant="contained" className='button' onClick={redirect}>
 											Purchase Now
 										</Button>
-									</Link>
+									
 								</Typography>
 							</CardContent>
 						</Card>
@@ -250,33 +309,23 @@ let data = JSON.parse(localStorage.getItem('user'));
 											'& .MuiListItemIcon-root': {
 												minWidth: 'auto',
 												paddingRight: '10px'
-											},
-											
+											}
 										}}
 									>
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
-											<ListItemText primary="Unlimited Releases Included" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="Distribution within 48h" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="Keep 100% of the earnings" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="24/7 Live Support" />
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															Unlimited
+														</Typography>{' '}
+														Releases Included
+													</Typography>
+												}
+											/>
 										</ListItem>
 										<ListItem>
 											<ListItemIcon>
@@ -284,26 +333,81 @@ let data = JSON.parse(localStorage.getItem('user'));
 											</ListItemIcon>
 											<ListItemText
 												primary={
-													<div>
-													 <strong>Content ID</strong>
-													</div>
+													<Typography variant="p" component="div">
+														Distribution within{' '}
+														<Typography variant="strong" component="b">
+															48h
+														</Typography>
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															Keep 100%{' '}
+														</Typography>of the earnings
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															24 / 7
+														</Typography>Live Support{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															Content ID{' '}
+														</Typography>
+													</Typography>
 												}
 											/>
 										</ListItem>
 									</List>
 								</Typography>
-								<Typography variant="body2">
-									<br />
-									19.99 <EuroIcon /> Per year
-									<br />
+								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
+									<Typography fontSize="50px" component="div">
+										{' '}
+										19.99{' '}
+									</Typography>
+									<Typography variant="p" component="div" id="euro">
+										{' '}
+										<Typography variant="p" component="div" fontSize="10px">
+											<EuroIcon />{' '}
+										</Typography>{' '}
+										<Typography component="div" variant="p" fontSize="14">
+											Per Year
+										</Typography>{' '}
+									</Typography>
 								</Typography>
 								<Typography variant="body2">
-									<br /> <br /> <br />
-									<Link to="/dashboard/purchase/premium">
-										<Button size="big" variant="contained">
+							
+									
+										<Button size="big" variant="contained" className='button' onClick={Premium}>
 											Purchase Now
 										</Button>
-									</Link>
+									
 								</Typography>
 							</CardContent>
 						</Card>
@@ -328,34 +432,25 @@ let data = JSON.parse(localStorage.getItem('user'));
 												minWidth: 'auto',
 												paddingRight: '10px'
 											},
-											'& .MuiSvgIcon-fontSizeMedium' :{
+											'& .MuiSvgIcon-fontSizeMedium': {
 												color: 'unset'
-											},
+											}
 										}}
 									>
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
-											<ListItemText primary="6 Releases Included" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="Distribution within 14 days" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="Keep 85% of the earnings" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="24/7 Live Support" />
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															6
+														</Typography>{' '}
+														Releases Included
+													</Typography>
+												}
+											/>
 										</ListItem>
 										<ListItem>
 											<ListItemIcon>
@@ -363,26 +458,82 @@ let data = JSON.parse(localStorage.getItem('user'));
 											</ListItemIcon>
 											<ListItemText
 												primary={
-													<div>
-														No <strong>Content</strong> ID
-													</div>
+													<Typography variant="p" component="div">
+														Distribution within{' '}
+														<Typography variant="strong" component="b">
+															10days
+														</Typography>
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															Keep 85%{' '}
+														</Typography>{' '}
+														of the earnings
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b" /> 24 / 7 Live
+														Support{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															No
+														</Typography>{' '}
+														Content ID
+													</Typography>
 												}
 											/>
 										</ListItem>
 									</List>
 								</Typography>
-								<Typography variant="body2">
-									<br />
-									9.99 4.99 <EuroIcon /> Per year
-									<br />
+								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
+									<Typography fontSize="50px" component="div">
+										{' '}
+										4.99{' '}
+									</Typography>
+									<Typography variant="p" component="div" id="euro">
+										{' '}
+										<Typography variant="p" component="div" fontSize="10px">
+											<EuroIcon />{' '}
+										</Typography>{' '}
+										<Typography component="div" variant="p" fontSize="14">
+											Per Year
+										</Typography>{' '}
+									</Typography>
 								</Typography>
 								<Typography variant="body2">
-									<br /> <br /> <br />
-									<Link to="/dashboard/purchase/basic">
-										<Button size="big" variant="contained">
+								
+								
+										<Button size="big" variant="contained" className='button' onClick={Basic}>
 											Purchase Now
 										</Button>
-									</Link>
+									
 								</Typography>
 							</CardContent>
 						</Card>

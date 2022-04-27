@@ -30,7 +30,8 @@ import {AddUsers} from '../api/Index';
 // 	}
 // }));
 export default function AddUser() {
-	// const classes = useStyle();
+	
+	
 	const initialValues = {
 		firstName: '',
 		lastName: '',
@@ -56,8 +57,9 @@ export default function AddUser() {
         AddUsers(formData).then(res => {
             console.log('response',res);
         })
-		console.log('xxxx',values);
+		// console.log('xxxx',values);
 	};
+
 
 	return (
 		<div className="App">
@@ -101,10 +103,10 @@ export default function AddUser() {
 			</aside>
 			<div id="main">
 				<h1> ADD User</h1>
-				<Grid container justify="center" spacing={1}>
+				<Grid container justifyContent="center" spacing={1}>
 					<Grid item md={10}>
 						<Card >
-							<CardHeader title=" Add Users" />
+							<CardHeader/>
 							<Formik
 								initialValues={initialValues}
 								validationSchema={validationSchema}
@@ -112,10 +114,10 @@ export default function AddUser() {
 							>
 								{({ dirty, isValid, values, handleChange, handleBlur }) => {
 									return (
-										<Form>
+										<Form id='addUser'>
 											<CardContent>
-												<Grid item container spacing={1} justify="center">
-													<Grid item xs={12} sm={12} md={9}>
+												<Grid item container spacing={1} justifyContent="center"  >
+													<Grid item xs={12} sm={12} md={9} id = 'fileds'>
 														<Field
 															label="First Name"
 															variant="outlined"

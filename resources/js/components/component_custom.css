@@ -70,4 +70,8 @@
     margin: auto;
     margin-top: 16%;
 }
+#euro {
+  align-self: center;
+    margin-left: 7px;
+}
 
