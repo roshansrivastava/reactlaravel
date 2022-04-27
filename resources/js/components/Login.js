@@ -16,6 +16,7 @@ export default function Login() {
 	const [ password, setPassword ] = useState('');
 	const [agree, setAgree] = useState(false);
 	const [emailErr ,setemailErr] = useState('');
+	const [passwordErr ,setpasswordErr ] =useState('');
 	const checkboxHandler = () => {
 		// if agree === true, it will be set to false
 		// if agree === false, it will be set to true
@@ -23,10 +24,16 @@ export default function Login() {
 		// Don't miss the exclamation mark
 	  }
 	function validateForm() {
-		return email.length > 0 && password.length > 0;
+		if(email == ''){
+			setemailErr('please enter Valid email');
+		};
+		if(password == ''){
+			setpasswordErr('Please enter valid password');
+		};
 	}
 
 	function saveStudent(e) {
+		validateForm();
 		e.preventDefault();
 		const payload = {
 			email: email,
@@ -100,6 +107,9 @@ export default function Login() {
 											<label htmlFor="email" className="center-align">
 												Email
 											</label>
+											<span style={{color: "red"}}>
+											{emailErr}
+											</span>
 										</div>
 									</div>
 									<div className="row margin">
@@ -113,6 +123,9 @@ export default function Login() {
 												onChange={(e) => setPassword(e.target.value)}
 											/>
 											<label htmlFor="password">Password</label>
+											<span style={{color: "red"}}>
+											{ passwordErr}
+											</span>
 										</div>
 									</div>
 									<div class="row">
@@ -127,7 +140,7 @@ export default function Login() {
                             </div>
 									<div className="row">
 										<div className="input-field col s12">
-											<Button block size="lg" type="submit" disabled={ agree === true ? validateForm() == true ? false : false : true }
+											<Button block size="lg" type="submit" disabled={ agree === false}
 											 className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12 mb-1" >
 												Login
 											</Button>

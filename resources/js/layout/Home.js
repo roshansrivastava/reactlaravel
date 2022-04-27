@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -24,12 +25,17 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const bull = (
-	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-		•
-	</Box>
-);
-let data = JSON.parse(localStorage.getItem('user'));
+// const bull = (
+// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
+// 		•
+// 	</Box>
+// );
+// let data = localStorage.getItem('user');
+console.log('fd');
+// // useEffect(()=>
+// // {
+// // 	console.log('now',data);
+// // });
 export default function Home() {
 	const classes = useStyles();
 	return (
@@ -43,9 +49,8 @@ export default function Home() {
 						<a className="brand-logo darken-1" href="index.html">
 							<AccountCircleIcon fontSize="large" />
 							<span className="logo-text hide-on-med-and-down">
-								{' '}
-								{data.name}
-								{data.fullname}{' '}
+								
+								welcome{' '}
 							</span>
 						</a>
 					</h1>

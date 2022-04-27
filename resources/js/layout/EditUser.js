@@ -5,31 +5,31 @@ import Script from '../layout/Script';
 import {EditUsers} from '../api/Index';
 import { Link , useParams  } from 'react-router-dom';
 import SweetAlert from 'react-bootstrap-sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditUser(props) {
+	const navigate = useNavigate();
 	const [ FirstName ,setFirstName] = useState('');
 	const [ LastName , setLastName ] =useState('');
 	const [ ArtistName, setArtistName ] = useState('');
 	const [ Email, setEmail ] = useState('');
 	const [ Password, setPassword ] = useState('');
-	const [ Update , setUpdate ] = useState([]);
-    const [ APIUser, setAPIUser ] = useState([]);
 	const { id } = useParams();
-	console.log('hhh',id);
+	// console.log('hhh',id);
 	
 
 	const getUser= () => {
 		axios.get(`http://localhost:8000/api/dashboard/updateuser/${id}`)
 		.then((response) => {
-			console.log('response--',response.data.data.name);
+			// console.log('response--',response.data.data.name);
 			setFirstName(response.data.data.name);
 			setLastName(response.data.data.fullname);
 			setArtistName(response.data.data.artistname);
 			setEmail(response.data.data.email);
-			if(response.data.status== 200)
-			{
-				console.log('Data is successfully');
-			}
+			// if(response.data.status== 200)
+			// {
+			// 	console.log('Data is successfully');
+			// }
 		});
 	}
 
@@ -42,17 +42,19 @@ export default function EditUser(props) {
 		e.preventDefault();
 
 		let payload = {
+			id : id ,
 			FirstName: FirstName,
 			LastName: LastName,
 			ArtistName: ArtistName,
 			Email: Email,
 			Password: Password
 		};
-		console.log('bbb', payload);
+		// console.log('bbb', payload);
 		EditUsers(payload)
 			.then((res) => {
-				console.log('response payload',res);
-			})
+				if(res.status==200)
+				navigate('/dashboard/User');
+			});
 	}
 
 	return (
@@ -103,7 +105,7 @@ export default function EditUser(props) {
 						<div className='card'>
 							<div className='card-header'>
 								<h4>Edit User
-									<Link to={'/'} className="btn btn-primary btn-sm float-end">Back</Link>
+									<Link to={'/dashboard/User'} className="btn btn-primary btn-sm float-end">Back</Link>
 								</h4>
 							</div>
 							<div className='card-body'>

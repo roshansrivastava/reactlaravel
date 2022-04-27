@@ -276,13 +276,23 @@ public function resetPassword(Request $request){
   public function editUser(Request $request)
   {
     $id = $request->id;
-    $edit = User::find($id);
-    $edit->name =$request->FirstName;
-    $edit['fullname']=$request->LastName;
-    $edit['artistname']=$request->ArtistName;
-    $edit['email']=$request->Email;
-    $edit['password']=$request->Password;
-    $edit->save();
+    $name=$request->FirstName;
+    $fullname = $request->LastName;
+    $artistname =$request->ArtistName;
+    $email =$request->Email;
+    $password =  Hash::make($request->Password);
+    $edit = User::where('id',$id)->update([
+      'name'=>$name,
+      'fullname'=>$fullname,
+      'artistname'=>$artistname,
+      'email'=>$email,
+      'password'=>$password,
+      'is_status'=>1,
+    ]);
+    return response()->json([
+      'message' => "edit is successfully",
+      'status' => 200,
+  ]);
   }
 
 }  

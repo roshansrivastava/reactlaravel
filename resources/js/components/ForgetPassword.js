@@ -43,7 +43,7 @@ export default function ForgetPassword() {
 					  });
 					console.log(setSlug(num));
 					console.log('setslug =>', slug);
-					// navigate('/reset/password/')
+					// navigate('/reset/password/');
 				}
 			})
 			.catch(function (error) {

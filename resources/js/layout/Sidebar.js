@@ -29,7 +29,7 @@ export default function sidebar() {
 	useEffect(()=>{
 		console.log('dsj',data.name);
    });
-  return (
+	return (
     <>
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/home">
