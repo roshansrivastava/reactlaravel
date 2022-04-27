@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './component_custom.css';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function ForgetPassword() {
@@ -36,6 +38,9 @@ export default function ForgetPassword() {
 					num = res.slug;
 					console.log('num', typeof (num));
 					setSlug(num);
+					toast.success(res.message, {
+						position: toast.POSITION.TOP_RIGHT
+					  });
 					console.log(setSlug(num));
 					console.log('setslug =>', slug);
 					// navigate('/reset/password/')
@@ -48,6 +53,7 @@ export default function ForgetPassword() {
 
 	return (
 		<div className="bgchange">
+			<ToastContainer />
 			<div className="row">
 				<div className="col s12">
 					<div className="container">

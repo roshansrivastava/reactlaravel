@@ -5,6 +5,8 @@ import '../../css/app.css';
 import ReCaptchaV2 from 'react-google-recaptcha';
 import { Register } from '../api/Index';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Registration() {
@@ -105,6 +107,9 @@ export default function Registration() {
 		Register(payload)
 			.then((res) => {
 				if (res.status == 200) {
+					toast.success(res.message, {
+						position: toast.POSITION.TOP_RIGHT
+					  });
 					localStorage.setItem('token', res.data.token);
 					setToken(res.data.token);
 					navigate('/login');
@@ -117,6 +122,7 @@ export default function Registration() {
 	};
 	return (
 		<div className="flatbg-image">
+					<ToastContainer />
 			<div className="row">
 				<div className="col s12">
 					<div className="container">

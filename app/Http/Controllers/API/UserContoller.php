@@ -231,7 +231,7 @@ public function User_login(Request $request)
           $slug1 =$updatedSlug->slug;
           return response()->json([
             'status'=> 200,
-            'message'=>'User Successfully Register',
+            'message'=>'Please check Reset link sent in your mail ',
             'slug'=> $slug1,
         ]);
       }
