@@ -140,7 +140,7 @@ export default function Login() {
                             </div>
 									<div className="row">
 										<div className="input-field col s12">
-											<Button block size="lg" type="submit" disabled={ agree === false}
+											<Button size="lg" type="submit" disabled={ agree === false}
 											 className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12 mb-1" >
 												Login
 											</Button>

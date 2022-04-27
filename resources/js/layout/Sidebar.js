@@ -26,9 +26,7 @@ export default function sidebar() {
 		
 	// }
 	let data = JSON.parse(localStorage.getItem('user'));
-	useEffect(()=>{
-		console.log('dsj',data.name);
-   });
+	
 	return (
     <>
 						<li className="bold">

@@ -18,6 +18,7 @@ import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
+export default function Home() {
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -30,13 +31,12 @@ const useStyles = makeStyles((theme) => ({
 // 		•
 // 	</Box>
 // );
-// let data = localStorage.getItem('user');
-console.log('fd');
+let data = JSON.parse(localStorage.getItem('user'));
+// console.log('fd',data);
 // // useEffect(()=>
 // // {
 // // 	console.log('now',data);
 // // });
-export default function Home() {
 	const classes = useStyles();
 	return (
 		<div className="App">
@@ -49,8 +49,8 @@ export default function Home() {
 						<a className="brand-logo darken-1" href="index.html">
 							<AccountCircleIcon fontSize="large" />
 							<span className="logo-text hide-on-med-and-down">
+								{data.name} {data.fullname}
 								
-								welcome{' '}
 							</span>
 						</a>
 					</h1>
