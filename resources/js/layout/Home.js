@@ -17,8 +17,14 @@ import Grid from '@mui/material/Grid';
 import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import { Plan } from '../api/Index';
 
 export default function Home() {
+	const [Free ,setfree ] = useState('');
+	const [plans ,setPlan ] = useState([]);
+	var free='';
+	var premium ='';
+	var basic ='';
 	const navigate = useNavigate();
 	const useStyles = makeStyles((theme) => ({
 		root: {
@@ -30,13 +36,46 @@ export default function Home() {
 	{
 		navigate('/dashboard/purchase/free');
 	}
+
 	const Premium = () =>
 	{
 		navigate('/dashboard/purchase/premium');
 	}
+
 	const Basic = () => {
 		navigate('/dashboard/purchase/basic');
 	}
+	const getUserData = () => {
+		Plan().then((response) => {
+			setPlan(response.plan);
+			console.log(response);
+			console.log('1',plans);
+			
+			// setPlan(response.plan);
+		});
+	}
+	useEffect(()=>{
+		getUserData();
+		// 	Plan()
+		//    .then((response)=>{
+			// 	//    if(response.status == 200){
+				// 	//    console.log('1',response);
+				// 	//    console.log('1plan',response.plan[0]);
+				// 	//    console.log('1plandata',response.plan[0].name)
+				// 	// //    var free =JSON.parse( response.plan[0].name);
+				// 	// //    console.log('***',free);
+				// 	//    setPlan ( response.plan);
+				// 	// //    console.log('set',Plan);
+				// 	// //   var free = response.plan[0].name ;
+				// 	//    console.log('2plan',response.plan[1]);
+				// 	//    console.log('3plan',response.plan[2]);
+				
+				// 	// }
+				// });
+			},[]);
+			
+			console.log('newplan',plans);
+			console.log('id',plans[2]);
 	// const bull = (
 	// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
 	// 		•
@@ -144,10 +183,11 @@ export default function Home() {
 								</Typography>
 							</CardContent>
 						</Card>
-					</Grid>
+					</Grid>	 
+					{plans.map(data => (
 					<Grid item xs={12} lg={4} xl={4}>
 						<Card
-							className="pricingClass"
+							className={data.id ==1 ? "pricingClass" : 'pricingList'}
 							sx={{
 								'& .MuiChip-root': {
 									borderRadius: '5px',
@@ -157,7 +197,7 @@ export default function Home() {
 									}
 								}
 							}}
-						>
+							>
 							<Chip
 								className="pricingBadge"
 								color="primary"
@@ -169,13 +209,14 @@ export default function Home() {
 								}
 							/>
 
+								
 							<CardContent
 								sx={{
 									'& .MuiTypography-root': {
 										color: '#fff'
 									}
 								}}
-							>
+								>
 								<Typography
 									sx={{
 										fontSize: 34
@@ -186,8 +227,7 @@ export default function Home() {
 									gutterBottom
 									variant="h3"
 									component="div"
-								>
-									Free
+								> {data.name}
 								</Typography>
 								<Typography variant="h7" component="div">
 									<List
@@ -201,75 +241,33 @@ export default function Home() {
 											}
 										}}
 									>
+										{data.description.map(li => (
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
 											<ListItemText
 												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
+													<Typography variant="p" component="div" dangerouslySetInnerHTML={{
+														__html: li
+													  }}>
+														{/* <Typography variant="strong" component="b">
 															2
-														</Typography>{' '}
-														Releases Included
+														</Typography>{' '} */}
+													{/* {li} */}
 													</Typography>
 												}
 											/>
 										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														Distribution within{' '}
-														<Typography variant="strong" component="b">
-															14
-														</Typography>{' '}
-														days
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary={<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															Keep 80%{' '}
-														</Typography>{' '}
-														of the earnings
-													</Typography>} />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText primary="24/7 Live Support" />
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															No{' '}
-														</Typography>{' '}
-														Content ID
-													</Typography>
-												}
-											/>
-										</ListItem>
+										))
+											}
+									
 									</List>
 								</Typography>
 								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
 									<Typography fontSize="50px" component="div">
 										{' '}
-										0{' '}
+										{data.prices}{' '}
 									</Typography>
 									<Typography variant="p" component="div" id="euro">
 										{' '}
@@ -290,12 +288,14 @@ export default function Home() {
 							</CardContent>
 						</Card>
 					</Grid>
-					<Grid item xs={12} lg={4} xl={4}>
+					))
+				}
+					{/* <Grid item xs={12} lg={4} xl={4}>
 						<Card>
 							<CardContent>
 								<Typography
 									sx={{ fontSize: 34 }}
-									color="text.secondary"
+									color="revert"
 									direction="row"
 									gutterBottom
 									variant="h3"
@@ -417,7 +417,7 @@ export default function Home() {
 							<CardContent>
 								<Typography
 									sx={{ fontSize: 34 }}
-									color="text.secondary"
+									color="revert"
 									direction="row"
 									gutterBottom
 									variant="h3"
@@ -513,6 +513,9 @@ export default function Home() {
 									</List>
 								</Typography>
 								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
+									<Typography fontSize='30' component = 'div' color='revert'>
+										<strike>9.99</strike>
+										</Typography>
 									<Typography fontSize="50px" component="div">
 										{' '}
 										4.99{' '}
@@ -538,6 +541,7 @@ export default function Home() {
 							</CardContent>
 						</Card>
 					</Grid>
+					 */}
 				</Grid>
 			</div>
 			<Script />

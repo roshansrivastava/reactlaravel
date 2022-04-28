@@ -19,15 +19,15 @@ export default function User() {
 			setAPIData(response.data);
 			if(response.Status== 200)
 			{
-			setLoading(false);
+				setLoading(false);
 			}
 		});
 	}
-
+	
 	useEffect(() => {
 		getUserData();
 	}, []);
-	 
+	
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
 			console.log(res);
@@ -35,11 +35,13 @@ export default function User() {
 		})
 	}
 	let data = JSON.parse(localStorage.getItem('user'));
-
+	
+	console.log('setapi',APIData);
 	const update = (id) => {
 		console.log('nnsfnn',id);
 		props.history.push('/dashboard/updateuser/'+id);
 	}
+	// console.log('fdf',APIData);
 
 	var Table_Users = '';
 	if(Loading)

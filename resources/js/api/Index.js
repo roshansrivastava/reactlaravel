@@ -12,6 +12,7 @@ const Register = (payload) => Api.post('/register',payload);
 const Forget = (payload) => Api.post('/forget/password',payload);
 const Reset = (payload) =>Api.post('/reset/pasword',payload);
 const EditUsers = (payload) => Api.post('/edit/user',payload);
+const Plan = () => Api.get('/plan'); 
 export  {
     UserLogin,
     Userlogout,
@@ -24,4 +25,5 @@ export  {
     Forget,
     Reset,
     EditUsers,
+    Plan,
 }

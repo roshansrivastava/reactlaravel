@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React , { useEffect }from 'react'
 import { Dropdown } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 import Api from '../api/Api';
 import '../../css/app.css';
 import {Userlogout} from '../api/Index';
@@ -45,6 +45,7 @@ export default function Navbar() {
   return (
     <>
     	<div className="navbar navbar-fixed">
+	
 						<nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
 							<div className="nav-wrapper">
 								<ul className='navbar-list left'>
@@ -71,15 +72,15 @@ export default function Navbar() {
 										</a>
 									</li> */}
 									<li>
-										<a
+										<Link
 											className="waves-effect waves-block waves-light notification-button"
-											href="javascript:void(0);"
+											to="#"
 											data-target="notifications-dropdown"
 										>
 											<i className="material-icons">
 												notifications_none<small className="notification-badge">5</small>
 											</i>
-										</a>
+										</Link>
 									</li>
 									<li className='bt'>
 									<h6 onClick = {logout}>Welcome {userData.name}{userData.fullname} </h6>
@@ -99,7 +100,7 @@ export default function Navbar() {
 												placeholder="Explore Materialize"
 												data-search="template-list"
 											/>
-											<label className="label-icon" htmlfor="search">
+											<label className="label-icon" htmlFor="search">
 												<i className="material-icons search-sm-icon">search</i>
 											</label>
 											<i className="material-icons search-sm-close">close</i>

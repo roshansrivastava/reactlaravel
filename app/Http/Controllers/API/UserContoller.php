@@ -295,11 +295,5 @@ public function resetPassword(Request $request){
       'status' => 200,
   ]);
   }
-  public function planUser(){
-    $plan = Plan::get();
-    return $plan[1]['description'][2];
-  }
-
-}  
-
+}
 

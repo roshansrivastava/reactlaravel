@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\FileUpload;
+use App\Models\Plan;
 use App\Http\Controllers\API\FileUploadController;
 use App\Http\Controllers\API\UserContoller;
+use App\Http\Controllers\API\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,7 @@ Route::get('/user/{token}',[UserContoller::class,'activate_token']);
 Route::post('/forget/password',[UserContoller::class,'forgetPassword']);
 Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
 Route::post('/edit/user',[UserContoller::class,'editUser'])->middleware(['auth:api']);
-
+Route::get('/plan',[DashboardController::class,'planUser']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
