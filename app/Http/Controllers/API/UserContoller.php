@@ -40,22 +40,23 @@ class UserContoller extends Controller
             } catch (\Exception $e) {
                 return response()->json([
                     'status'=> 500,
-                    'message' =>$e->getMessage(),
+                    'message' =>'Duplicate Entry please enter another mail',
                 ]);
             }
     }     
 public function User_login(Request $request)
 {
+  try {
+    $validator = \Validator::make($request->all(), [
+      'email' => 'required|email|max:50|exists:users',
+      'password' => 'required|min:5|max:50'
+    ]);
   $credentials = $request->only('email', 'password');
-  $validator = \Validator::make($request->all(), [
-    'email' => 'required|email',
-    'password' => 'required|min:5'
-  ]);
 
   if ($validator->fails()) {
     return response()->json(array(
-      'status' => 401,
-      'errors' => $validator->getMessageBag()->toArray()
+      // 'status' => 401,
+      'errors' => 'Please enter valid email & Password',
     ), 400);
   }
   else if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
@@ -73,14 +74,14 @@ public function User_login(Request $request)
              'name'      => $user->role->name,
            ]);
          }
-       else 
-       {
-         return response()->json([
-           'message' =>'Please varify link',
-           'status' => 403,
-         ] );
-       }
+        }
       }
+      catch (\Exception $e) {
+        return response()->json([
+            'status'=> 500,
+            'message' =>'Please enter valid email & Password',
+        ]);
+     }
     }
     
     public function welcome()
@@ -239,7 +240,7 @@ public function User_login(Request $request)
   } catch (\Exception $e) {
       return response()->json([
           'message' => 'Something went wrong. Please try again',
-          'status' => 'Error',
+          'status' => 500,
       ]);
   }
 }

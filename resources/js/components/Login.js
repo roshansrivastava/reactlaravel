@@ -54,6 +54,10 @@ export default function Login() {
 			})
 			.catch(function(error) {
 				console.log(error);
+				console.log('ddd',error);
+				toast.error(error.data.errors, {
+					position: toast.POSITION.TOP_RIGHT
+				  });
 			});
 		// axios.post('http://localhost:8000/api/login',this.state)
 		// .then(res => {

@@ -23,14 +23,14 @@ export default function ForgetPassword() {
 		}
 	};
 	var num = '';
-	const Save = (e) => {
+	const Save = async (e) => {
 		e.preventDefault();
 		handleValidation();
 		let payload = {
 			Email: Email
 		};
-		console.log('vvv', payload);
-		Forget(payload)
+		// console.log('vvv', payload);
+	     await Forget(payload)
 			.then((res) => {
 				if (res.status == 200) {
 					console.log(res.slug);
@@ -46,9 +46,12 @@ export default function ForgetPassword() {
 					// navigate('/reset/password/');
 					setEmail('');
 				}
+				
 			})
 			.catch(function (error) {
-				console.log(error);
+				toast.error(error.data.message, {
+					position: toast.POSITION.TOP_RIGHT
+				});
 			});
 	};
 

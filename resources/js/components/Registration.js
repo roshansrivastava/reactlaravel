@@ -31,7 +31,7 @@ export default function Registration() {
 	const [ open, setOpen ] = useState(false);
 	const [ FullnameErr , setFullnameErr ] = useState('');
 	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 	const checkboxHandler = () => {
 		setAgree(!agree);
 	};
@@ -58,7 +58,7 @@ export default function Registration() {
 					setEmail('');
 					setPassword('');
 					setConfirmPassword('');
-					setAgree(false);
+					// setAgree(false);
 					setToken(null);
 	}
 
@@ -101,7 +101,7 @@ export default function Registration() {
 						errorcount++;
 			// return false
 		}
-		if (Email == '') {
+		if (Email == '' || !Email.match(mailformat)) {
 			setemailError('please enter Valid email');
 						errorcount++;
 						// return false;
@@ -167,6 +167,12 @@ export default function Registration() {
 					});
 					// navigate('/login');
 					Update();
+				}
+				else{
+					handleClose();
+					toast.error(res.message, {
+						position: toast.POSITION.TOP_RIGHT
+					});
 				}
 			})
 			.catch(function(error) {
