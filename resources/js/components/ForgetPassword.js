@@ -44,6 +44,7 @@ export default function ForgetPassword() {
 					console.log(setSlug(num));
 					console.log('setslug =>', slug);
 					// navigate('/reset/password/');
+					setEmail('');
 				}
 			})
 			.catch(function (error) {

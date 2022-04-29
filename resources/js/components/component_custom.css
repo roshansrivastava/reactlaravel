@@ -78,6 +78,7 @@
     align-self: center;
     cursor: pointer;
     display: flex;
+    color :white;
 }
 
 li.bt:after {

@@ -42,4 +42,5 @@ Route::get('/forget/password',[UserContoller::class,'welcome']);
 Route::get('/reset/password/{token}',[UserContoller::class,'welcome']);
 Route::post('/reset/password',[UserController::class, 'resetPassword']);
 Route::get('plan',[DashboardController::class,'planUser']);
+Route::get('addinguser',[UserContoller::class,'welcome']);
 // Route::get('/logout',[UserContoller::class,'User']);

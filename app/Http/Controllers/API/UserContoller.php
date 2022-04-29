@@ -34,12 +34,12 @@ class UserContoller extends Controller
             $result->notify(new RegisterVerificationMail());
             return response()->json([
                 'status'=> 200,
-                'message'=>'User Successfully Register',
+                'message'=>'Please Verify Mail Registration Successfully',
                 'data' => $success,
             ]);
             } catch (\Exception $e) {
                 return response()->json([
-                    'status'=> false,
+                    'status'=> 500,
                     'message' =>$e->getMessage(),
                 ]);
             }

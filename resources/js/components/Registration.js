@@ -29,15 +29,19 @@ export default function Registration() {
 	const [ captcha, setcaptcha ] = useState(null);
 	const [ captchaError, setCaptchaError ] = useState('');
 	const [ open, setOpen ] = useState(false);
+	const [ FullnameErr , setFullnameErr ] = useState('');
 	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 	const checkboxHandler = () => {
 		setAgree(!agree);
 	};
+	let errorcount = 0;
+	var fullname = '';
+	var fname ='';
 	const handleToken = (token) => {
 		setcaptcha((currentForm) => {
-			console.log('current', currentForm);
-			console.log('tk', token);
+			// console.log('current', currentForm);
+			// console.log('tk', token);
 			localStorage.setItem('captcha', token);
 			return { ...currentForm, token };
 		});
@@ -47,55 +51,86 @@ export default function Registration() {
 			return { ...currentForm, token: null };
 		});
 	};
+	
+	const Update = ()  => {
+					setFullName('');
+					setArtistName('');
+					setEmail('');
+					setPassword('');
+					setConfirmPassword('');
+					setAgree(false);
+	}
 
 	const handleValidation = () => {
+		if (FullName == '') {
+			setfirstnameError('please enter first name');
+			errorcount++;
+		} else {
+			 fname = FullName;
+			   fname = fname.split(' ');
+			if (fname.length > 3) {
+				setFullnameErr(' Enter valid Firstname, Middlename and Lastname');
+				errorcount++;
+			}
+			if (fname.length > 1) {
+				if (fname[1] == '') {
+					setlastnameError('Enter middle name');
+					errorcount++;
+				} else {
+					if (fname[2] == '' || fname[2] == undefined) {
+						console.log('dsfdsf', fname[2]);
+						fullname = fname[1];
+						console.log('name 1==>', fullname);
+						// errorcount++;
+					} else if (fname[2] != '' || fname[2] != undefined) {
+						fullname = fname[1] + fname[2];
+						console.log('add two value 2 ', fullname);
+						// errorcount++;
+					}
+				}
+			} 
+			
+			// else {
+			// 	setfirstnameError(' Enter first name ');
+			// 	return false;
+			// }
+		}
 		if (ArtistName == '') {
 			setartistError('Please enter artist name ');
+						errorcount++;
+			// return false
 		}
 		if (Email == '') {
 			setemailError('please enter Valid email');
+						errorcount++;
+						// return false;
 		}
 		if (Password == '' || Password.length < 7) {
 			setpasswordError('Password should be more than 7 characters');
+						errorcount++;
+						// return false;
 		}
 		if (ConfirmPassword == '' || Password !== ConfirmPassword) {
 			setconfirmpasswordError('Please enter correct password ');
+						errorcount++;
+						// return false;
 		}
 		if (token == null || captcha == null) {
 			setCaptchaError('Please Varify Captcha');
+						errorcount++;
+						// return false;
 		}
 	};
 
 	const saveStudent = async (e) => {
+		handleValidation();
 		e.preventDefault();
-		handleToggle();
-		var fname = e.target.FullName.value;
-		var fname = fname.split(' ');
-		if (fname.length > 3) {
-			setfirstnameError(' Enter valid Firstname, Middlename and Lastname');
-		}
-		if (fname.length > 1) {
-			if (fname[1] == '') {
-				setlastnameError('Enter middle name');
-				handleValidation();
-				return;
-			} else {
-				if (fname[2] == '' || fname[2] == undefined) {
-					console.log('dsfdsf', fname[2]);
-					var fullname = fname[1];
-					console.log('name 1==>', fullname);
-					handleValidation();
-				} else if (fname[2] != '' || fname[2] != undefined) {
-					var fullname = fname[1] + fname[2];
-					console.log('add two value 2 ', fullname);
-					handleValidation();
-				}
-			}
-		} else {
-			setfirstnameError(' Enter first name ');
-			handleValidation();
+		console.log('fgdfgdfgd',errorcount);
+		if (errorcount) {
+			errorcount = 0;
 			return;
 		}
+		handleToggle();
 		let payload = {
 			FullName: fname[0],
 			LastName: fullname,
@@ -105,16 +140,18 @@ export default function Registration() {
 			ConfirmPassword: ConfirmPassword
 		};
 		console.log('bbb', payload);
-		Register(payload)
-			.then((res) => {
-				if (res.status == 200) {
+		await Register(payload)
+		.then((res) => {
+			if (res.status == 200) {
+				localStorage.setItem('token', res.data.token);
+				setToken(res.data.token);
+				// handleClose();
 					handleClose();
 					toast.success(res.message, {
 						position: toast.POSITION.TOP_RIGHT
 					});
-					localStorage.setItem('token', res.data.token);
-					setToken(res.data.token);
-					navigate('/login');
+					// navigate('/login');
+					Update();
 				}
 			})
 			.catch(function(error) {
@@ -157,6 +194,7 @@ export default function Registration() {
 											<span style={{ color: 'red' }}>
 												{lastnameError}
 												{firstnameError}
+												{FullnameErr}
 											</span>
 										</div>
 									</div>
@@ -245,7 +283,6 @@ export default function Registration() {
 											<button
 												type="submit"
 												disabled={!agree}
-												onClick={handleToggle}
 												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
 											>
 												Register
