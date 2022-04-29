@@ -59,6 +59,7 @@ export default function Registration() {
 					setPassword('');
 					setConfirmPassword('');
 					setAgree(false);
+					setToken(null);
 	}
 
 	const handleValidation = () => {
@@ -122,7 +123,21 @@ export default function Registration() {
 		}
 	};
 
+	const resetErrors = () => {
+		setfirstnameError('');
+		setlastnameError('');
+		setFullnameErr('');
+		setemailError('');
+		setpasswordError('');
+		setconfirmpasswordError('');
+		setCaptchaError('');
+		setfirstnameError('');
+
+
+	}
+
 	const saveStudent = async (e) => {
+		resetErrors();
 		handleValidation();
 		e.preventDefault();
 		console.log('fgdfgdfgd',errorcount);
