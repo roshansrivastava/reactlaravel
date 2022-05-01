@@ -161,12 +161,21 @@ export default function Registration() {
 				localStorage.setItem('token', res.data.token);
 				setToken(res.data.token);
 				// handleClose();
-					handleClose();
-					toast.success(res.message, {
+				Update();
+				handleClose();
+				const event = new Date();
+					setTimeout(toast.success(res.message,{
 						position: toast.POSITION.TOP_RIGHT
-					});
-					// navigate('/login');
-					Update();
+					
+					}), 0);
+					event.setSeconds(20);
+					var i =event.getSeconds();
+					console.log('time',i);
+					if (i == 20 )
+					{
+						navigate('/login')
+					}
+					
 				}
 				else{
 					handleClose();
@@ -185,6 +194,10 @@ export default function Registration() {
 	const handleToggle = () => {
 		setOpen(true);
 	};
+	// const Toast = () =>
+	// {
+		
+	// };
 	return (
 		<div className="flatbg-image">
 			<ToastContainer />

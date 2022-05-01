@@ -31,7 +31,7 @@ import {AddUsers} from '../api/Index';
 // }));
 export default function AddUser() {
 	
-	
+
 	const initialValues = {
 		firstName: '',
 		lastName: '',
@@ -46,7 +46,7 @@ export default function AddUser() {
 		email: Yup.string().email('Invalid email').required('Required'),
 		password: Yup.string().required('Required!')
 	});
-	const onSubmit = (values) => {
+	const onSubmit = (values, { resetForm }) => {
         let formData ={
 		firstName: values.firstName,
         lastName: values.lastName,
@@ -56,6 +56,7 @@ export default function AddUser() {
         }
         AddUsers(formData).then(res => {
             console.log('response',res);
+			resetForm();
         })
 		// console.log('xxxx',values);
 	};
