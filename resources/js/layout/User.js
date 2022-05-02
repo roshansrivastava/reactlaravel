@@ -63,7 +63,7 @@ export default function User() {
 					<td>{data.email}</td>
 					<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
 							<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
-								Edit User
+								Edit
 							</Button>
 							</Link>}</td>
 					<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>

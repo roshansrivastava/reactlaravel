@@ -167,18 +167,10 @@ export default function Registration() {
 						position: toast.POSITION.TOP_RIGHT
 					
 					});
-				// const event = new Date();
 					 setTimeout(function() {
 						navigate('/login')
 					 },5000)
-						
-					// event.setSeconds(20);
-					// var i =event.getSeconds();
-					// console.log('time',i);
-					// if (i == 20 )
-					// {
-						
-					// }
+				
 					
 				}
 				else{
