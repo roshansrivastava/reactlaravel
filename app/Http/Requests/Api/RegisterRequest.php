@@ -34,9 +34,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'FullName'              => 'required|min:4|max:50',
-            'LastName'              => 'required|min:4|max:50',
-            'ArtistName'            =>'required|min:5|max:50',
+            'FullName'              => 'required|min:1|max:50',
+            'LastName'              => 'required|min:1|max:50',
+            'ArtistName'            =>'required|min:2|max:50',
             'Email'                 => 'required|max:100',
             'Password'              => 'min:7|max:50|required_with:ConfirmPassword|same:ConfirmPassword',
             'ConfirmPassword'       => 'min:7|max:50'
