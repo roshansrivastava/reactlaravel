@@ -23,19 +23,22 @@ Route::post('login',[UserContoller::class,'User_login']);
 Route::post('upload-file',[FileUploadController::class,'uploads']);
 Route::get('get-file/{id}',[FileUploadController::class,'getFile']);
 // Route::post('login',[AccessTokenController::class,'issueToken'])->middleware(['api-login','throttle']);
+
 Route::post('logout',[UserContoller::class,'Logout'])->middleware(['auth:api']);
-Route::get('/users',[UserContoller::class,'User'])->middleware(['auth:api']);
+Route::post('/users',[UserContoller::class,'User'])->middleware(['auth:api']);
 Route::get('/delete/{id}',[UserContoller::class,'DeleteUser'])->middleware(['auth:api']);
 Route::post('/adduser',[UserContoller::class,'AddUser'])->middleware(['auth:api']);
 Route::get('/dashboard/updateuser/{id}',[UserContoller::class,'UpdateUser']);
 Route::post('/updateuser',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::get('/getuser/{id}',[UserContoller::class,'GetUser'])->middleware(['auth:api']);
+
+Route::post('/edit/user',[UserContoller::class,'editUser'])->middleware(['auth:api']);
 Route::get('/user/{token}',[UserContoller::class,'activate_token']);
 Route::post('/forget/password',[UserContoller::class,'forgetPassword']);
 Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
-Route::post('/edit/user',[UserContoller::class,'editUser'])->middleware(['auth:api']);
 Route::get('/plan',[DashboardController::class,'planUser']);
-// Route::get('/users?page={number}',[UserContoller::class,'paginate']);
+Route::post('/search',[UserContoller::class,'Search'])->middleware(['auth:api']);
+Route::get('/getuser',[UserContoller::class,'Get']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

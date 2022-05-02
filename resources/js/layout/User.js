@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-import { Getuser } from '../api/Index';
+import { Search } from '../api/Index';
 import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
-import { DeleteUser } from '../api/Index';
+import { DeleteUser , Single} from '../api/Index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
 import EditUser from './EditUser';
@@ -16,7 +16,9 @@ export default function User() {
 	const [state, setData] = useState({
         users: ''
     });
-
+	const [searchs, setNewSearch] = useState("");
+	const [foundUsers, setFoundUsers] = useState([]);
+	let user ='';
 	const fetchData = async (pageNumber = 1) => {
         const api = await fetch(`/users?page=${pageNumber}`);
         setData({
@@ -27,18 +29,14 @@ export default function User() {
         fetchData();
     }, [])
 	// const getUserData = () => {
-	// 	Getuser().then((response) => {
-	// 		setAPIData(response.data);
-	// 		if(response.Status== 200)
-	// 		{
-	// 			setLoading(false);
+		// 	Getuser().then((response) => {
+			// 		setAPIData(response.data);
+			// 		if(response.Status== 200)
+			// 		{
+				// 			setLoading(false);
 	// 		}
 	// 	});
 	// }
-	
-	// useEffect(() => {
-	// 	getUserData();
-	// }, []);
 	
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
@@ -46,49 +44,71 @@ export default function User() {
 			getUserData();
 		})
 	}
+	// const User = () => {
+	// 	Search(search).then((res)=>{
+	// 		console.log('dd',search);
+	// 		// console.log('user2',user);
+	// 	});
+	// }
+	
 	let data = JSON.parse(localStorage.getItem('user'));
 	
+	const handleSearchChange = (e) => {
+		setNewSearch(e.target.value);
+		let payload = {
+			search:searchs
+		}
+		console.log("payload:::",payload)
+		Search(payload).then((res)=>{
+			console.log('dd',res);
+			// console.log('user2',user);
+		});
+		console.log('dd',searchs);
+	};	
+	// useEffect(() => {
+	// 	User();
+	// }, []);
 	// console.log('setapi',APIData);
 	// const update = (id) => {
 	// 	console.log('nnsfnn',id);
 	// 	props.history.push('/dashboard/updateuser/'+id);
 	// }
 	// console.log('fdf',APIData);
-
+	
 	// var Table_Users = '';
 	// if(Loading)
 	// {
-	// 	Table_Users =<tr><td colSpan ='8'> <h2>Loading....</h2></td></tr>
-	// }
-	// else
-	// {
-		
-	// var	Table_Users = 
-	// 	APIData.map((data) => {
-	// 		return (
-				// <tr key ={data.id}>
-				// 	<tr>{<AccountCircleIcon/>}</tr>
-				// 	<td>{data.id}</td>
-				// 	<td>{data.name}</td>
-				// 	<td>{data.fullname}</td>
-				// 	<td>{data.artistname}</td>
-				// 	<td>{data.email}</td>
-				// 	<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-				// 			<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
-				// 				Edit
-				// 			</Button>
-				// 			</Link>}</td>
-				// 	<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
+		// 	Table_Users =<tr><td colSpan ='8'> <h2>Loading....</h2></td></tr>
+		// }
+		// else
+		// {
+			
+			// var	Table_Users = 
+			// 	APIData.map((data) => {
+				// 		return (
+					// <tr key ={data.id}>
+					// 	<tr>{<AccountCircleIcon/>}</tr>
+					// 	<td>{data.id}</td>
+					// 	<td>{data.name}</td>
+					// 	<td>{data.fullname}</td>
+					// 	<td>{data.artistname}</td>
+					// 	<td>{data.email}</td>
+					// 	<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
+					// 			<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
+					// 				Edit
+					// 			</Button>
+					// 			</Link>}</td>
+					// 	<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
 					
 					
-				// 	<td> {<Button variant="contained"> View </Button>}</td>
-				// </tr>
-	// 		);
-	// 	})
-	// }
+					// 	<td> {<Button variant="contained"> View </Button>}</td>
+					// </tr>
+					// 		);
+					// 	})
+					// }
+									
 
-
-	return (
+					return (
 		<div className="App">
 			<header className="page-topbar" id="header">
 				<Navbar />
@@ -129,8 +149,12 @@ export default function User() {
 									<Link to={"/dashboard/adduser"} className = "btn btn-primary btn-sm float-end">
 										ADD User
 									</Link>
+									
 								</h4>
-								</div>
+							
+							 <input type="text" placeholder = 'Search here...' value={searchs} onChange={handleSearchChange} />
+						   </div>
+								
 								<div className='card-body'>
 									<table className='table table-bordered table-striped'>
 									<thead>

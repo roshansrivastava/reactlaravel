@@ -107,6 +107,7 @@ public function User_login(Request $request)
 
     public function User()
     {
+      
       // $user = Auth::user;
       $user = User::whereNotIn('role_id', [1,2])->paginate(10);
       return response()->json(array(
@@ -115,10 +116,19 @@ public function User_login(Request $request)
         'data' => $user,
       ));
     }
+
+    public function Get()
+    {
+      $user = User::all();
+      return response()->json(array(
+        'Status' => 200,
+        'data' => $user,
+      ));
+    }
+
     
     public function GetUser(Request $request,$id)
     {
-      return['rjsdjh',$id];
       try
       {
         $data = User::findOrFail($id);
@@ -295,6 +305,16 @@ public function resetPassword(Request $request){
       'message' => "edit is successfully",
       'status' => 200,
   ]);
+  }
+
+  public function Search(Request $request)
+  {
+      dd("1");
+      // $search = User::where('name','Like','%$key%')->get();
+      // return response()->json([
+      //     'status'=>200,
+      //     'plan'=>$search,
+      // ]);
   }
 }
 
