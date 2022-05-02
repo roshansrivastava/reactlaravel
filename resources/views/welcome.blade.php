@@ -29,6 +29,7 @@
     
     <!-- Registeration CSS --> 
     <link rel="stylesheet" type="text/css" href="/css/pages/register.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/css/js/plugins.js"></script>
     <script src="/css/js/search.js"></script>
     <script src="/css/js/custom/custom-script.js"></script>

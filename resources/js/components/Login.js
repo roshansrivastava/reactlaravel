@@ -154,7 +154,7 @@ export default function Login() {
 									<div className="row">
 										<div className="input-field col s6 m6 l6">
 											<p className="margin medium-small">
-												<a href="/">Register Now!</a>
+												<Link to="/">Register Now!</Link>
 											</p>
 										</div>
 										<div className="input-field col s6 m6 l6">

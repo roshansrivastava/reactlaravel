@@ -156,25 +156,29 @@ export default function Registration() {
 		};
 		console.log('bbb', payload);
 		await Register(payload)
-		.then((res) => {
+		.then( (res) => {
 			if (res.status == 200) {
 				localStorage.setItem('token', res.data.token);
 				setToken(res.data.token);
 				// handleClose();
 				Update();
 				handleClose();
-				const event = new Date();
-					setTimeout(toast.success(res.message,{
+				toast.success(res.message,{
 						position: toast.POSITION.TOP_RIGHT
 					
-					}), 0);
-					event.setSeconds(20);
-					var i =event.getSeconds();
-					console.log('time',i);
-					if (i == 20 )
-					{
+					});
+				// const event = new Date();
+					 setTimeout(function() {
 						navigate('/login')
-					}
+					 },5000)
+						
+					// event.setSeconds(20);
+					// var i =event.getSeconds();
+					// console.log('time',i);
+					// if (i == 20 )
+					// {
+						
+					// }
 					
 				}
 				else{
@@ -300,8 +304,8 @@ export default function Registration() {
 											<span style={{ color: 'red' }}>{captchaError}</span>
 										</div>
 									</div>
-									<div class="row1">
-										<div class="col s12 m12 l12 ml-1 mt-2">
+									<div className="row1">
+										<div className="col s12 m12 l12 ml-1 mt-2">
 											<p>
 												<label>
 													<input type="checkbox" id="agree" onChange={checkboxHandler} />

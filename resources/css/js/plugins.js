@@ -6,6 +6,7 @@
 ================================================================================*/
 
 // Globally variables
+
 var sidenavMain = $(".sidenav-main"),
    contentOverlay = $(".content-overlay"),
    navCollapsible = $(".navbar .nav-collapsible"),
