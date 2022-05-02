@@ -3,7 +3,7 @@ import File from './File';
 import Api from './Api';
 const UserLogin = (payload) => Api.post("/login", payload);
 const Userlogout = (payload) => Api.post("/logout", payload);
-const Getuser = () => Api.get("/users");
+const Getuser = (pageNumber) => Api.get("/users?page="+pageNumber);
 const DeleteUser = (id) => Api.get('/delete/'+id);
 const AddUsers = (formData) =>Api.post('/adduser',formData);
 const UpdateUsers = (payload) => Api.post('/updateuser',payload);

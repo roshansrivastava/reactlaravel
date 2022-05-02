@@ -108,7 +108,7 @@ public function User_login(Request $request)
     public function User()
     {
       // $user = Auth::user;
-      $user = User::whereNotIn('role_id', [1,2])->get();
+      $user = User::whereNotIn('role_id', [1,2])->paginate(10);
       return response()->json(array(
         'Success'=> 'Data Loading is Successfully',
         'Status' => 200,

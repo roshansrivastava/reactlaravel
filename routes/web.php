@@ -21,6 +21,7 @@ use App\Http\Controllers\API\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/',[UserContoller::class,'welcome']);
 Route::post('/',[UserContoller::class,'Register']);
 Route::get('/login',[UserContoller::class,'welcome']);
@@ -44,3 +45,8 @@ Route::post('/reset/password',[UserController::class, 'resetPassword']);
 Route::get('plan',[DashboardController::class,'planUser']);
 Route::get('addinguser',[UserContoller::class,'welcome']);
 // Route::get('/logout',[UserContoller::class,'User']);
+
+Route::get('/users', function (Request $request) {
+    $users = User::paginate(10);
+    return $users;
+});

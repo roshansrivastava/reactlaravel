@@ -35,6 +35,7 @@ Route::post('/forget/password',[UserContoller::class,'forgetPassword']);
 Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
 Route::post('/edit/user',[UserContoller::class,'editUser'])->middleware(['auth:api']);
 Route::get('/plan',[DashboardController::class,'planUser']);
+// Route::get('/users?page={number}',[UserContoller::class,'paginate']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
