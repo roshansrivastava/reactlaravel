@@ -31,14 +31,15 @@ Route::post('/adduser',[UserContoller::class,'AddUser'])->middleware(['auth:api'
 Route::get('/dashboard/updateuser/{id}',[UserContoller::class,'UpdateUser']);
 Route::post('/updateuser',[UserContoller::class,'UpdateUser'])->middleware(['auth:api']);
 Route::get('/getuser/{id}',[UserContoller::class,'GetUser'])->middleware(['auth:api']);
-
 Route::post('/edit/user',[UserContoller::class,'editUser'])->middleware(['auth:api']);
+//Route::post('/search',[UserContoller::class,'Search'])->middleware(['auth:api']);
+
 Route::get('/user/{token}',[UserContoller::class,'activate_token']);
 Route::post('/forget/password',[UserContoller::class,'forgetPassword']);
 Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
 Route::get('/plan',[DashboardController::class,'planUser']);
-Route::post('/search',[UserContoller::class,'Search'])->middleware(['auth:api']);
 Route::get('/getuser',[UserContoller::class,'Get']);
+Route::post('/search',[UserContoller::class,'Query']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -317,14 +317,16 @@ public function resetPassword(Request $request){
   ]);
   }
 
-  public function Search(Request $request)
+  public function Query(Request $request)
   {
-      dd("1");
-      // $search = User::where('name','Like','%$key%')->get();
-      // return response()->json([
-      //     'status'=>200,
-      //     'plan'=>$search,
-      // ]);
+   // return $request->all();
+     $search = User::Search($request->data)->get();
+     return response()->json([
+      'status'=> 200,
+      'message'=>'search is Done',
+      'data'=> $search,
+      ]);
+
   }
 }
 

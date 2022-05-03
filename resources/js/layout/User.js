@@ -9,6 +9,7 @@ import { DeleteUser , Single} from '../api/Index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
 import EditUser from './EditUser';
+import axios from 'axios';
 
 export default function User() {
 	const [APIData, setAPIData] = useState([]);
@@ -16,9 +17,10 @@ export default function User() {
 	const [state, setData] = useState({
         users: ''
     });
-	const [searchs, setNewSearch] = useState("");
+	const [query, setQuery] = useState("")
 	const [foundUsers, setFoundUsers] = useState([]);
 	let user ='';
+	let search = '';
 	const fetchData = async (pageNumber = 1) => {
         const api = await fetch(`/users?page=${pageNumber}`);
         setData({
@@ -28,21 +30,33 @@ export default function User() {
 	useEffect(() => {
         fetchData();
     }, [])
+	
+	const handleChange = (event) =>{
+		setQuery(event.target.value);
+		axios.post('/api/search', {
+			data: event.target.value
+		})
+		.then(res => {
+			setAPIData(res.data.data);
+			// fetchData();
+			console.log(res.data.data);
+			
+		})
+		.catch(err => {
+			console.log(err);
+		})
+	}
+
 	// const getUserData = () => {
-	// 		Getuser().then((response) => {
-	// 				setAPIData(response.data);
-	// 				if(response.Status== 200)
-	// 				{
-	// 						setLoading(false);
-	// 		}
+	// 	console.log('2',query);
+	// 	Search(query).then((response) => {
+	// 				console.log(response)
 	// 	});
 	// }
-	
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
 			fetchData();
 			console.log(res);
-			// getUserData();
 			
 		})
 	}
@@ -54,19 +68,6 @@ export default function User() {
 	// }
 	
 	let data = JSON.parse(localStorage.getItem('user'));
-	
-	const handleSearchChange = (e) => {
-		setNewSearch(e.target.value);
-		let payload = {
-			search:searchs
-		}
-		console.log("payload:::",payload)
-		Search(payload).then((res)=>{
-			console.log('dd',res);
-			// console.log('user2',user);
-		});
-		console.log('dd',searchs);
-	};	
 	// useEffect(() => {
 	// 	User();
 	// }, []);
@@ -77,37 +78,31 @@ export default function User() {
 	// }
 	// console.log('fdf',APIData);
 	
-	// var Table_Users = '';
-	// if(Loading)
-	// {
-		// 	Table_Users =<tr><td colSpan ='8'> <h2>Loading....</h2></td></tr>
-		// }
-		// else
-		// {
+	var Table_Users = '';
+	if(Loading)
+	{
+			Table_Users =APIData.map((data) => {
+				return (
+			<tr key ={data.id}>
+				<tr>{<AccountCircleIcon/>}</tr>
+				<td>{data.id}</td>
+				<td>{data.name}</td>
+				<td>{data.fullname}</td>
+				<td>{data.artistname}</td>
+				<td>{data.email}</td>
+				<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
+						<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
+							Edit
+						</Button>
+						</Link>}</td>
+				<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
 			
-			// var	Table_Users = 
-			// 	APIData.map((data) => {
-				// 		return (
-					// <tr key ={data.id}>
-					// 	<tr>{<AccountCircleIcon/>}</tr>
-					// 	<td>{data.id}</td>
-					// 	<td>{data.name}</td>
-					// 	<td>{data.fullname}</td>
-					// 	<td>{data.artistname}</td>
-					// 	<td>{data.email}</td>
-					// 	<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-					// 			<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
-					// 				Edit
-					// 			</Button>
-					// 			</Link>}</td>
-					// 	<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
-					
-					
-					// 	<td> {<Button variant="contained"> View </Button>}</td>
-					// </tr>
-					// 		);
-					// 	})
-					// }
+			
+				<td> {<Button variant="contained"> View </Button>}</td>
+			</tr>
+					);
+				})
+		}
 									
 
 					return (
@@ -154,7 +149,7 @@ export default function User() {
 									
 								</h4>
 							
-							 <input type="text" placeholder = 'Search here...' value={searchs} onChange={handleSearchChange} />
+							 <input type="text" placeholder = 'Search here...' onChange={handleChange} />
 						   </div>
 								
 								<div className='card-body'>
@@ -173,6 +168,7 @@ export default function User() {
 										</tr>
 									</thead>
 									<tbody>
+										{Table_Users}
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (

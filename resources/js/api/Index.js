@@ -15,7 +15,7 @@ const Reset = (payload) =>Api.post('/reset/pasword',payload);
 const EditUsers = (payload) => Api.post('/edit/user',payload);
 const Plan = () => Api.get('/plan'); 
 const Single = () => Api.get('/getuser');
-const Search = (payload) => Api.post('/sear',payload);
+const Search = (query) => Api.post('/search',query);
 export  {
     UserLogin,
     Userlogout,
