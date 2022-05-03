@@ -59,7 +59,8 @@ public function User_login(Request $request)
       'errors' => 'Please enter valid email & Password',
     ), 400);
   }
-  else if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+  if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+  //  return Auth::user();
         $user = Auth::User();
         if($user->is_status == 1)
         {
@@ -74,16 +75,23 @@ public function User_login(Request $request)
              'name'      => $user->role->name,
            ]);
          }
+         else {
+          return response()->json([
+            'user'      => Auth::user(),
+            'message'   => 'Please Verify Mail',
+            'status'    => 401,
+          ]);
+         }
         }
         else 
         {
           return response()->json([
-            'message'   => 'Please enter valid email & password',
+            'message'   => 'Please enter valid Password',
             'status'    => 401,
             
           ]);
-
         }
+       
       }
       catch (\Exception $e) {
         return response()->json([
