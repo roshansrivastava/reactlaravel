@@ -23,6 +23,7 @@ import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
 import ResetPassword from './ResetPassword'
 import AddingUser from '../layout/AddingUser';
+import Protected from './Protected';
 export default class AppComponent extends Component {
   render() {
     return (
@@ -37,7 +38,8 @@ export default class AppComponent extends Component {
               <Route exact path='/dashboard/music'element={<Music/>}></Route>
               <Route exact path='/dashboard/adduser'element={<AddUser/>}></Route>
               <Route exact path='/dashboard/updateuser/:id'element={<EditUser/>}></Route>
-              <Route exact path='/dashboard/home'element={<Home/>}></Route>
+              <Route exact path='/dashboard/home'>
+              <Protected Cmp = {Home}/></Route>
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route> 
