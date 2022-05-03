@@ -87,3 +87,14 @@
 .bt h6{
   color: white;
 }
+.inputss::placeholder{
+  color: #000;
+  font-weight:600;
+  padding-left: 5%;
+}
+
+#inputid {
+  max-width: 40%;
+  border:1px solid #000;
+  border-radius:30px;
+}

@@ -149,7 +149,7 @@ export default function User() {
 									
 								</h4>
 							
-							 <input type="text" placeholder = 'Search here...' onChange={handleChange} />
+							 <input type="text" id ="inputid" placeholder = 'Search here...' onChange={handleChange} className ='inputss' />
 						   </div>
 								
 								<div className='card-body'>
