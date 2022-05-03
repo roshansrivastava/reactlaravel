@@ -75,6 +75,15 @@ public function User_login(Request $request)
            ]);
          }
         }
+        else 
+        {
+          return response()->json([
+            'message'   => 'Please enter valid email & password',
+            'status'    => 401,
+            
+          ]);
+
+        }
       }
       catch (\Exception $e) {
         return response()->json([
@@ -109,7 +118,8 @@ public function User_login(Request $request)
     {
       
       // $user = Auth::user;
-      $user = User::whereNotIn('role_id', [1,2])->paginate(10);
+      $user = User::whereNotIn('role_id', [1,2])->get();
+      $user = $user->paginate(10);
       return response()->json(array(
         'Success'=> 'Data Loading is Successfully',
         'Status' => 200,

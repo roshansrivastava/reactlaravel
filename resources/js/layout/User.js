@@ -29,19 +29,21 @@ export default function User() {
         fetchData();
     }, [])
 	// const getUserData = () => {
-		// 	Getuser().then((response) => {
-			// 		setAPIData(response.data);
-			// 		if(response.Status== 200)
-			// 		{
-				// 			setLoading(false);
+	// 		Getuser().then((response) => {
+	// 				setAPIData(response.data);
+	// 				if(response.Status== 200)
+	// 				{
+	// 						setLoading(false);
 	// 		}
 	// 	});
 	// }
 	
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
+			fetchData();
 			console.log(res);
-			getUserData();
+			// getUserData();
+			
 		})
 	}
 	// const User = () => {
