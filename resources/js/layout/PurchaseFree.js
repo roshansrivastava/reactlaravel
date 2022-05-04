@@ -5,12 +5,26 @@ import Script from './Script';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import EuroIcon from '@mui/icons-material/Euro';
-import { PayPalButton } from 'react-paypal-button-v2';
-import RedeemIcon from '@mui/icons-material/Redeem';
-import { Link , NavLink} from "react-router-dom";
+// import { PayPalButton } from 'react-paypal-button-v2';
+// import RedeemIcon from '@mui/icons-material/Redeem';
+import StripeCheckout from 'react-stripe-checkout';
+import { Link, NavLink } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function PurchaseFree() {
+	const onToken = (token) => {
+	console.log(token);
+	// fetch('/save-stripe-token', {
+	// 	method: 'POST',
+	// 	body: JSON.stringify(token),
+	//   }).then(response => {
+	// 	response.json().then(data => {
+	// 	  alert(`We are in business, ${data.email}`);
+	// 	});
+	//   });
+	}
+	let data = JSON.parse(localStorage.getItem('user'));
 	return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -18,20 +32,13 @@ export default function PurchaseFree() {
 			</header>
 			<aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
 				<div className="brand-sidebar">
-					<h1 className="logo-wrapper">
-						<a className="brand-logo darken-1" href="index.html">
-							<img
-								className="hide-on-med-and-down"
-								src="/css/images/logo/materialize-logo-color.png"
-								alt="materialize logo"
-							/>
-							<img
-								className="show-on-medium-and-down hide-on-med-and-up"
-								src="/css/images/logo/materialize-logo.png"
-								alt="materialize logo"
-							/>
-							<span className="logo-text hide-on-med-and-down">Materialize</span>
-						</a>
+				<h1 className="logo-wrapper">
+						<Link className="brand-logo darken-1" to="#">
+							<AccountCircleIcon fontSize="large" />
+							<span className="logo-text hide-on-med-and-down">
+								{data.name} {data.fullname}
+							</span>
+						</Link>
 					</h1>
 				</div>
 				<ul
@@ -51,15 +58,15 @@ export default function PurchaseFree() {
 					<i className="material-icons">menu</i>
 				</a>
 			</aside>
-			<div id="main">
-				<div>
+			<div id="main" >
+				<div className='purchasefree'>
 					<Card className="text-center">
 						<Card.Header> Purchase Free</Card.Header>
 						<Card.Body>
 							{/* <Card.Title>Special title treatment</Card.Title> */}
 							<Card.Text>
 								You are about to buy our basic rank <br />
-								for 0.00<EuroIcon />. After Purchasing you will<br />
+								for 5.00<EuroIcon />. After Purchasing you will<br />
 								recieve your rank automatically.you <br />
 								can pay with credit card or with <br />
 								crypto . Please choose your payment <br />
@@ -67,7 +74,12 @@ export default function PurchaseFree() {
 								<br /> <br /> <br />
 							</Card.Text>
 							<div style={{ width: '200px', margin: '0 auto' }}>
-								<PayPalButton
+								<StripeCheckout token={onToken} 
+								name = "Roshan"
+								amount='3000'
+								stripeKey='pk_test_51KvbEeSHG1M3TNDJH3h9ihRTr4iXkqbWZyNaqYdns5NQ5fzvOLL6ugRFNnMGf8xDGxB52b6fNNACrwNIqdVDD94b00sbAvSxCS'
+								 />
+								{/* <PayPalButton
 									createOrder={(data, actions) => {
 										return actions.order.create({
 											purchase_units: [
@@ -95,11 +107,14 @@ export default function PurchaseFree() {
 											});
 										});
 									}}
-								/>
+								/> */}
 							</div>
-							<Link to='#'>
-                            <Button size ="big" variant="contained"> <RedeemIcon /> Have a Coupon ? </Button>
-                            </Link>
+							{/* <Link to="#">
+								<Button size="big" variant="contained">
+									{' '}
+									<RedeemIcon /> Have a Coupon ?{' '}
+								</Button>
+							</Link> */}
 						</Card.Body>
 					</Card>
 				</div>

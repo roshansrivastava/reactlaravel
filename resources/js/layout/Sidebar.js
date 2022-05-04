@@ -11,7 +11,10 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Getuser } from '../api/Index';
 import { Link } from "react-router-dom";
 import User from './User';
+// import { useNavigate } from 'react-router-dom';
+
 export default function sidebar() {
+	// const navigate = useNavigate();
 	// const [APIData, setAPIData] = useState(null);
     // useEffect(() => {
 	
@@ -26,6 +29,7 @@ export default function sidebar() {
 		
 	// }
 	let data = JSON.parse(localStorage.getItem('user'));
+	
 	
 	return (
     <>

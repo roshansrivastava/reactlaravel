@@ -98,3 +98,10 @@
   border:1px solid #000;
   border-radius:30px;
 }
+
+.purchasefree {
+  max-width:400px;
+  width:100%;
+  margin: auto;
+  margin-top: 105px;
+}

@@ -169,7 +169,7 @@ export default function Registration() {
 					});
 					 setTimeout(function() {
 						navigate('/login')
-					 },5000)
+					 },6000)
 				
 					
 				}

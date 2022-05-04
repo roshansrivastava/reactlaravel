@@ -35,7 +35,41 @@ class User extends Authenticatable
         'slug_created_at',
         'plan_id',
         'release_id',
-
+        'profile_picture',
+        'type',
+        'isPremium',
+        'plan',
+        'btcAddress',
+        'ltcAddress',
+        'ethAddress',
+        'paypalEmail',
+        'iban',
+        'balance',
+        'address_1',
+        'address_2',
+        'city',
+        'state',
+        'zip',
+        'f_name',
+        'l_name',
+        'otp',
+        'otp_created_at',
+        'otp_mail',
+        'welcome_alert',
+        'support_pin',
+        'fuga_artist_id',
+        'fuga_label_id',
+        'stripe_customer_id',
+        'stripe_subscription_id',
+        'stripe_subscription_status',
+        'stripe_start_date',
+        'stripe_end_date',
+        'banned_at',
+        'stripe_id',
+        'pm_type',
+        'pm_last_four',
+        'trial_ends_at',
+        'subscription_ends_at'
     ];
 
     /**
@@ -71,7 +105,6 @@ class User extends Authenticatable
             $query->where('name', 'like', "%" . $search . "%");
             $query->orWhere('fullname', 'like', "%" . $search . "%");
             $query->orWhere('email', 'like', "%" . $search . "%");
-        //     ->orWhere('email', 'like', "%" . $search . "%");
 
 
         }

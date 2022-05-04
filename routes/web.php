@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Plan;
 use App\Http\Controllers\API\UserContoller;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::post('/reset/password',[UserContoller::class, 'resetPassword']);
 Route::get('plan',[DashboardController::class,'planUser']);
 Route::get('addinguser',[UserContoller::class,'welcome']);
 // Route::get('/logout',[UserContoller::class,'User']);
+   
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost']);
 
 Route::get('/users', function (Request $request) {
     $users = User::paginate(10);

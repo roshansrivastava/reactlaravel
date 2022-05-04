@@ -96,12 +96,12 @@ export default function Home() {
 			<aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
 				<div className="brand-sidebar">
 					<h1 className="logo-wrapper">
-						<a className="brand-logo darken-1" href="index.html">
+						<Link className="brand-logo darken-1" to="#">
 							<AccountCircleIcon fontSize="large" />
 							<span className="logo-text hide-on-med-and-down">
 								{data.name} {data.fullname}
 							</span>
-						</a>
+						</Link>
 					</h1>
 				</div>
 				<ul
