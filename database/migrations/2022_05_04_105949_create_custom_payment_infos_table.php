@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('custom_payment_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('subscrption_price',100)->null();
-            $table->string('stripe_secret_key',255)->null();
-            $table->string('stripe_publish_key',255)->null();
-            $table->string('paypal_client_key',255)->null();
-            $table->string('paypal_secret_key',255)->null();
+            $table->string('subscrption_price',100)->nullable();
+            $table->string('stripe_secret_key',255)->nullable();
+            $table->string('stripe_publish_key',255)->nullable();
+            $table->string('paypal_client_key',255)->nullable();
+            $table->string('paypal_secret_key',255)->nullable();
             $table->timestamps();
         });
     }

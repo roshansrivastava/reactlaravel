@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('tbl_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->Integer('user_id')->null();
-            $table->Integer('plan_id')->null();
-            $table->string('stripe_customer_id',255)->null();
-            $table->string('stripe_subscription_id',255)->null();
-            $table->string('stripe_plan_start',255)->null();
-            $table->string('stripe_plan_end',255)->null();
+            $table->integer('user_id')->nullable();
+            $table->integer('plan_id')->nullable();
+            $table->string('stripe_customer_id',255)->nullable();
+            $table->string('stripe_subscription_id',255)->nullable();
+            $table->string('stripe_plan_start',255)->nullable();
+            $table->string('stripe_plan_end',255)->nullable();
             $table->timestamps();
         });
     }
