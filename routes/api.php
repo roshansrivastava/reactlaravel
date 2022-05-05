@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Http\Controllers\API\FileUploadController;
 use App\Http\Controllers\API\UserContoller;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::post('/reset/pasword',[UserContoller::class,'resetPassword']);
 Route::get('/plan',[DashboardController::class,'planUser']);
 Route::get('/getuser',[UserContoller::class,'Get']);
 Route::post('/search',[UserContoller::class,'Query']);
+
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -16,6 +16,7 @@ const EditUsers = (payload) => Api.post('/edit/user',payload);
 const Plan = () => Api.get('/plan'); 
 const Single = () => Api.get('/getuser');
 const Search = (query) => Api.post('/search',query);
+const PurchasePremium = (tokenization) => Api.post('stripe',tokenization);
 export  {
     UserLogin,
     Userlogout,
@@ -31,4 +32,5 @@ export  {
     Plan,
     Single,
     Search,
+    PurchasePremium,
 }

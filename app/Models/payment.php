@@ -16,6 +16,5 @@ class payment extends Model
         'amount',
         'method',
         'user_id',
-        
     ];
 }

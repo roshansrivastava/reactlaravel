@@ -17,7 +17,13 @@ import Grid from '@mui/material/Grid';
 import { List, ListItem, ListItemText, ListItemIcon, Chip } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import { Plan } from '../api/Index';
+import { Plan , PurchasePremium } from '../api/Index';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import StripeCheckout from 'react-stripe-checkout';
+
+
+const stripePromise = loadStripe('pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC');
 
 export default function Home() {
 	const [Free ,setfree ] = useState('');
@@ -26,6 +32,14 @@ export default function Home() {
 	var premium ='';
 	var basic ='';
 	const navigate = useNavigate();
+	console.log(stripePromise);
+	let tokenization = '';
+	const onToken = (tokenization) => {
+	console.log('1',tokenization);
+	PurchasePremium(tokenization).then((res)=>{
+		console.log(res);
+	});
+}
 	const useStyles = makeStyles((theme) => ({
 		root: {
 			flexGrow: 1,
@@ -54,6 +68,7 @@ export default function Home() {
 			// setPlan(response.plan);
 		});
 	}
+	
 	useEffect(()=>{
 		getUserData();
 		// 	Plan()
@@ -88,6 +103,7 @@ export default function Home() {
 	// // 	console.log('now',data);
 	// // });
 	const classes = useStyles();
+	
 	return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -280,9 +296,13 @@ export default function Home() {
 									</Typography>
 								</Typography>
 								<Typography variant="body2">
-										<Button size="big" variant="contained" className='button' onClick={redirect}>
-											Purchase Now
-										</Button>
+										{/* <Button size="big" variant="contained" className='button' > */}
+										<StripeCheckout token={onToken} 
+											name = "Roshan"
+											amount='10000'
+											stripeKey='pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC'
+											 />
+											{/* </Button> */}
 									
 								</Typography>
 							</CardContent>

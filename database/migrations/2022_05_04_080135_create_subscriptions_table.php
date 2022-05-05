@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('name',255);
             $table->string('stripe_id',255);
             $table->string('stripe_status',255);
-            $table->string('stripe_price',255)->null();
-            $table->Integer('quantity')->null();
-            $table->timestamps('trial_ends_at')->null();
-            $table->timestamps('ends_at')->null();
+            $table->string('stripe_price',255)->nullable();
+            $table->integer('quantity')->nullable();
+            $table->timestamp('trial_ends_at')->useCurrent();            
+            $table->timestamp('ends_at')->useCurrent();            
             $table->timestamps();
         });
     }

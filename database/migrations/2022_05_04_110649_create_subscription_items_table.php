@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('stripe_id',255);
             $table->string('stripe_product',255);
             $table->string('stripe_price',255);
-            $table->Integer('quantity')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
         });
     }

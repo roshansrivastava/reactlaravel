@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_picture',500)->nullable();
             $table->tinyInteger('type')->default(0);
-            $table->tinyInteger('isPremium')->default(0);
-            $table->int('plan')->default(6);
-            $table->string('btcAddress',255)->nullable();
-            $table->string('ltcAddress',255)->nullable();
-            $table->string('ethAddress',255)->nullable();
-            $table->string('paypalEmail',255)->nullable();
+            $table->tinyInteger('is_premium')->default(0);
+            $table->integer('plan')->default(6);
+            $table->string('btc_address',255)->nullable();
+            $table->string('ltc_address',255)->nullable();
+            $table->string('eth_address',255)->nullable();
+            $table->string('paypal_email',255)->nullable();
             $table->string('iban',255)->nullable();
             $table->decimal('balance')->default(0.00);
             $table->string('address_1',255)->nullable();
@@ -34,8 +34,8 @@ return new class extends Migration
             $table->string('otp',50)->nullable();
             $table->timestamp('otp_created_at')->nullable();
             $table->tinyInteger('otp_mail')->default(0);
-            $table->int('welcome_alert')->default(0);
-            $table->int('support_pin')->nullable();
+            $table->integer('welcome_alert')->default(0);
+            $table->integer('support_pin')->nullable();
             $table->bigInteger('fuga_artist_id')->nullable();
             $table->bigInteger('fuga_label_id')->nullable();
             $table->string('stripe_customer_id',255)->nullable();

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('stripe_publish_key',255)->null();
             $table->string('paypal_client_key',255)->null();
             $table->string('paypal_secret_key',255)->null();
-           
             $table->timestamps();
         });
     }

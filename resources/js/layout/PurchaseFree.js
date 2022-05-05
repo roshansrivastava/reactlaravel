@@ -10,11 +10,20 @@ import EuroIcon from '@mui/icons-material/Euro';
 import StripeCheckout from 'react-stripe-checkout';
 import { Link, NavLink } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {PurchasePremium} from '../api/Index';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
+const stripePromise = loadStripe('pk_test_51KvbEeSHG1M3TNDJH3h9ihRTr4iXkqbWZyNaqYdns5NQ5fzvOLL6ugRFNnMGf8xDGxB52b6fNNACrwNIqdVDD94b00sbAvSxCS');
 
 export default function PurchaseFree() {
-	const onToken = (token) => {
-	console.log(token);
+	console.log(stripePromise);
+	let tokenization = '';
+	const onToken = (tokenization) => {
+	console.log('1',tokenization);
+	PurchasePremium(tokenization).then((res)=>{
+		console.log(res);
+	});
 	// fetch('/save-stripe-token', {
 	// 	method: 'POST',
 	// 	body: JSON.stringify(token),
@@ -24,6 +33,7 @@ export default function PurchaseFree() {
 	// 	});
 	//   });
 	}
+	console.log('2',tokenization);
 	let data = JSON.parse(localStorage.getItem('user'));
 	return (
 		<div className="App">
@@ -76,7 +86,7 @@ export default function PurchaseFree() {
 							<div style={{ width: '200px', margin: '0 auto' }}>
 								<StripeCheckout token={onToken} 
 								name = "Roshan"
-								amount='3000'
+								amount='10000'
 								stripeKey='pk_test_51KvbEeSHG1M3TNDJH3h9ihRTr4iXkqbWZyNaqYdns5NQ5fzvOLL6ugRFNnMGf8xDGxB52b6fNNACrwNIqdVDD94b00sbAvSxCS'
 								 />
 								{/* <PayPalButton

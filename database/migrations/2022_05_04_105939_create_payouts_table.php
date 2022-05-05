@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('currency',3);
             $table->decimal('amount',8,2);
-            $table->string('payoutMethod',255);
+            $table->string('payout_method',255);
             $table->bigInteger('user_id');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

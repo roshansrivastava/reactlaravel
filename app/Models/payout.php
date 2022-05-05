@@ -14,7 +14,7 @@ class payout extends Model
         'id',
         'currency',
         'amount',
-        'payoutMethod',
+        'payout_method',
         'user_id',
         'status',
     ];

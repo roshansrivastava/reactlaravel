@@ -11,14 +11,30 @@ return new class extends Migration
      *
      * @return void
      */
+
+    //  database table name always small letter
     public function up()
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->json('description');
-            $table->decimal('prices');
+            $table->string('title',255);
+            $table->integer('release_amount')->nullable();
+            $table->float('amount');
+            $table->float('total_amount')->nullable();
+            $table->float("discount_percent")->nullable();
+            $table->float('discount_amount')->nullable();
+            $table->longText('content_1')->nullable();
+            $table->longText('content_2')->nullable();
+            $table->longText('content_3')->nullable();
+            $table->longText('content_4')->nullable();
+            $table->longText('content_5')->nullable();
+            $table->string('button',255)->nullable();
+            $table->string('show_button',255)->nullable(); 
+            $table->integer('created_by')->nullable();
             $table->timestamps();
+            $table->integer("updated_by")->nullable();
+            $table->integer("status")->default(0);
+            $table->string('stripe_plan_id',255)->nullable();
         });
     }
 
