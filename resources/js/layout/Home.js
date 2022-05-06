@@ -28,14 +28,19 @@ const stripePromise = loadStripe('pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFM
 export default function Home() {
 	const [Free ,setfree ] = useState('');
 	const [plans ,setPlan ] = useState([]);
+	// const [amount ,setAmount ] = useState();
+	const [planname ,setplanname ] = useState('');
 	var free='';
 	var premium ='';
-	var basic ='';
+	var amount ='';
 	const navigate = useNavigate();
 	console.log(stripePromise);
 	let tokenization = '';
 	const onToken = (tokenization) => {
 	console.log('1',tokenization);
+	// console.log('2',amount);
+	// console.log('3',planname);
+
 	PurchasePremium(tokenization).then((res)=>{
 		console.log(res);
 	});
@@ -62,9 +67,6 @@ export default function Home() {
 	const getUserData = () => {
 		Plan().then((response) => {
 			setPlan(response.plan);
-			console.log(response);
-			console.log('1',plans);
-			
 			// setPlan(response.plan);
 		});
 	}
@@ -200,10 +202,10 @@ export default function Home() {
 							</CardContent>
 						</Card>
 					</Grid>	 
-					{plans.map(data => (
+					{plans.map((data) => (
 					<Grid item xs={12} lg={4} xl={4}>
 						<Card
-							className={data.id ==1 ? "pricingClass" : 'pricingList'}
+							className={data.id ==2 ? "pricingClass" : 'pricingList'}
 							sx={{
 								'& .MuiChip-root': {
 									borderRadius: '5px',
@@ -243,7 +245,7 @@ export default function Home() {
 									gutterBottom
 									variant="h3"
 									component="div"
-								> {data.name}
+								> {data.title}
 								</Typography>
 								<Typography variant="h7" component="div">
 									<List
@@ -257,33 +259,102 @@ export default function Home() {
 											}
 										}}
 									>
-										{data.description.map(li => (
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
 											</ListItemIcon>
 											<ListItemText
 												primary={
-													<Typography variant="p" component="div" dangerouslySetInnerHTML={{
-														__html: li
-													  }}>
-														{/* <Typography variant="strong" component="b">
-															2
-														</Typography>{' '} */}
-													{/* {li} */}
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															{data.content_1}
+														</Typography>{' '}
 													</Typography>
 												}
 											/>
 										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															{data.content_2}
+														</Typography>{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															{data.content_3}
+														</Typography>{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															{data.content_4}
+														</Typography>{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													<Typography variant="p" component="div">
+														<Typography variant="strong" component="b">
+															{data.content_5}
+														</Typography>{' '}
+													</Typography>
+												}
+											/>
+										</ListItem>
+										{/* {data.map(li => (
+										<ListItem>
+											<ListItemIcon>
+												<CheckIcon />
+											</ListItemIcon>
+											<ListItemText
+												primary={
+													// <Typography variant="p" component="div" dangerouslySetInnerHTML={{
+													// 	__html: li
+													//   }}>
+													 <Typography variant="strong" component="b">
+															
+														 {li} 
+														</Typography>
+												}
+											/>
+										</ListItem>
 										))
-											}
+											} */}
 									
 									</List>
 								</Typography>
 								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
 									<Typography fontSize="50px" component="div">
 										{' '}
-										{data.prices}{' '}
+										{data.amount}{' '}
 									</Typography>
 									<Typography variant="p" component="div" id="euro">
 										{' '}
@@ -295,16 +366,31 @@ export default function Home() {
 										</Typography>{' '}
 									</Typography>
 								</Typography>
+								{data.id == 2 || data.id == 3 ?  
+								<>
 								<Typography variant="body2">
-										{/* <Button size="big" variant="contained" className='button' > */}
 										<StripeCheckout token={onToken} 
-											name = "Roshan"
-											amount='10000'
-											stripeKey='pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC'
-											 />
-											{/* </Button> */}
+										    //  opened={() => {
+											// 	setAmount(4000),
+											//  }}						 
+											 name = "Roshan"
+											 zipCode={true}
+											 currency="USD"
+											 amount={data.amount*100}
+											//  panelLabel="Give Money"
+											 stripeKey='pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC'
+											 >
+											  <Button size="medium" variant="contained" className='button' > 
+											  Purchase Now
+												</Button> 
+											</StripeCheckout>
 									
 								</Typography>
+								</> : 
+								<>
+								
+								</>
+                                               }
 							</CardContent>
 						</Card>
 					</Grid>

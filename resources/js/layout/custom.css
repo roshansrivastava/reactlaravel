@@ -105,3 +105,8 @@
   margin: auto;
   margin-top: 105px;
 }
+
+.MuiTypography-root.MuiTypography-body2.css-e784if-MuiTypography-root.StripeCheckout{
+  display: flex;
+  justify-content: center;
+} 

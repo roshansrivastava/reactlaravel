@@ -14,20 +14,29 @@ class PlanSeeder extends Seeder
      */
     public function run()
     {
-        Plan::create(['name'  => ' FREE' ,
-                    'description'=> ['2 Releases Included' , 'Distribution within 14 days', 'Keep 80% of the earnings','24/7 Live Support'
-                    ,'No Content ID'],
-                    'prices' => 0,
+        Plan::create(['title'=>' FREE',
+                    'amount'=> 0,
+                    'content_1'=>'2 Releases Included',
+                    'content_2'=>'Distribution within 14 days',
+                    'content_3'=>'Keep 80% of the earnings',
+                    'content_4'=>'24/7 Live Support',
+                    'content_5'=>'No Content ID',
                     ]);
-        Plan::create(['name'  => 'PREMIUM',
-        'description'=> ['Unlimited Releases Included' , 'Distribution within 48h', 'Keep 100% of the earnings','24/7 Live Support'
-        ,'Content ID'],  
-        'prices' => 19.99   ,    
-                     ]);
-        Plan::create(['name'  => 'BASIC',
-        'description'=> ['6 Releases Included' , 'Distribution within 10days', 'Keep 85% of the earnings','24/7 Live Support',
-        ' No Content ID'], 
-        'prices' => 4.99 ,
-                        ]);
+        Plan::create(['title'=>' PREMIUM',
+                    'amount'=> 19.99,
+                    'content_1'=>'Unlimited Releases Included',
+                    'content_2'=>'Distribution within 48h',
+                    'content_3'=>'Keep 100% of the earnings',
+                    'content_4'=>'24/7 Live Support',
+                    'content_5'=>'Content ID',
+                    ]);
+        Plan::create(['title'=>'BASIC',
+                    'amount'=> 4.99,
+                    'content_1'=>'6 Releases Included',
+                    'content_2'=>'Distribution within 10days',
+                    'content_3'=>'Keep 85% of the earnings',
+                    'content_4'=>'24/7 Live Support',
+                    'content_5'=>'No Content ID',
+                    ]);
     }
 }

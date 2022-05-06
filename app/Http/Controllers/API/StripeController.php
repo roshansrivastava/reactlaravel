@@ -12,7 +12,7 @@ class StripeController extends Controller
     public function stripePost(Request $request)
     {
         try {
-            $amounts = 100*100;
+            $amounts = 50*100;
             $token   = $request->id;
             // return $token;
             // return $request->all();
@@ -25,6 +25,7 @@ class StripeController extends Controller
                 'description' => 'Customer Payment',
                 'source' => $token,
                 ]);
+
           } catch(Stripe_CardError $e) {
             // Since it's a decline, Stripe_CardError will be caught
             $body = $e->getJsonBody();
