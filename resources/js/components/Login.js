@@ -163,6 +163,9 @@ export default function Login() {
 											</p>
 										</div>
 									</div>
+									<p className="margin medium-small">
+												<Link to="/resend">Resend Link</Link>
+											</p>
 								</form>
 							</div>
 						</div>

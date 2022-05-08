@@ -23,6 +23,7 @@ import PurchasePremium from "../layout/PurchasePremium";
 import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
 import ResetPassword from './ResetPassword'
+import Resend from './Resend';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
   let data = JSON.parse(localStorage.getItem('user'));
@@ -38,7 +39,7 @@ export default function AppComponent() {
               <Route exact path='/dashboard'element={<Dashboard/>}></Route>
               <Route exact path='/dashboard/user'element={<User/>}></Route>
               <Route exact path='/dashboard/music'element={<Music/>}></Route>
-              <Route exact path='/dashboard/adduser'element={<AddUser/>}></Route>
+              <Route exact path='/dashboard/adduser'element={<AddUser/>}></Route>={}
               <Route exact path='/dashboard/updateuser/:id'element={<EditUser/>}></Route>
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
@@ -50,6 +51,7 @@ export default function AppComponent() {
               <Route exact path='/forget/password'element={<ForgetPassword/>}></Route>
               <Route exact path='/login'element={<Login/>}></Route>
               <Route exact path='/reset/password/:slug'element={<ResetPassword/>}></Route>
+              <Route exact path='/resend'element={<Resend/>}></Route>
             {/* </>
           )} */}
           {/* <Route element={PageNotFound}/> */}

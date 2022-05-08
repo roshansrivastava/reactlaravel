@@ -17,6 +17,7 @@ const Plan = () => Api.get('/plan');
 const Single = () => Api.get('/getuser');
 const Search = (query) => Api.post('/search',query);
 const PurchasePremium = (tokenization) => Api.post('stripe',tokenization);
+const ResendMail = (payload) => Api.post('/resend',payload);
 export  {
     UserLogin,
     Userlogout,
@@ -33,4 +34,5 @@ export  {
     Single,
     Search,
     PurchasePremium,
+    ResendMail,
 }
