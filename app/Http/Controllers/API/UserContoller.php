@@ -18,7 +18,8 @@ use Mail;
 use Carbon\Carbon;
 use App\Notifications\ForgotPasswordMail;
 use App\Http\Requests\Api\ForgotPasswordMailRequest;
-
+use App\Mail\ResendVerificationMail;
+// use Illuminate\Support\Facades\Mail;
 
 class UserContoller extends Controller
 {
@@ -57,17 +58,34 @@ class UserContoller extends Controller
         // ->subject('Confirm your account')
         //     ->line('Thank you for registering with us. Your Email: '.$email)
         //     ->action('Confirm Account', url($url))
-        //     ->line('Once again, Thank you for using our application!');
-        $data = array('name'=>"Roshan");
-         Mail::raw($url, function($message) {
-          $message->from('fromemail@gmail.com', 'Social Team');
-          $message->to('randomemail@gmail.com');
-          $message->subject('App - Forget Password');
-          // $message->view('email.email');
-            // ->setBody('Hi, welcome user!');
-        //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
-        //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
-      });
+        //     ->line('Once again, Thank you for using our application!')ResendVerificationMail;
+        $details = [
+          'title' => 'Mail from ItSolutionStuff.com',
+          'body' => 'This is for testing email using smtp'
+      ];
+      
+      Mail::to($details)->send(new ResendVerificationMail($details));
+ return ['dd'];
+      if (Mail::failures()) {
+           return response()->Fail('Sorry! Please try again latter');
+      }else{
+           return response()->success('Great! Successfully send in your mail');
+         }
+    
+      // Mail::send('your_receiver_email@gmail.com')->send(new \App\Mail\ResendVerificationMail($details));
+      // return response()->Json([
+      //     'status'=>200,
+      //     'message'=>'mesg sent successfully',
+      // ]);
+      //    Mail::raw($url, function($message) {
+      //     $message->from('fromemail@gmail.com', 'Social Team');
+      //     $message->to('randomemail@gmail.com');
+      //     $message->subject('App - Forget Password');
+      //     // $message->view('email.email');
+      //       // ->setBody('Hi, welcome user!');
+      //   //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
+      //   //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
+      // });
         
 
       }
