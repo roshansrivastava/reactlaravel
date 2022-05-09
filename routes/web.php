@@ -45,7 +45,8 @@ Route::get('/reset/password/{token}',[UserContoller::class,'welcome']);
 Route::post('/reset/password',[UserContoller::class, 'resetPassword']);
 Route::get('plan',[DashboardController::class,'planUser']);
 Route::get('addinguser',[UserContoller::class,'welcome']);
-// Route::get('/logout',[UserContoller::class,'User']);
+Route::get('/resend',[UserContoller::class,'welcome']);
+Route::post('/resend',[UserContoller::class,'resend_Mail']);
    
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('/stripe/premium', [StripeController::class, 'stripePost']);

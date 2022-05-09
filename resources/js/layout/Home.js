@@ -36,12 +36,14 @@ export default function Home() {
 	const navigate = useNavigate();
 	console.log(stripePromise);
 	let tokenization = '';
+	let user_name = '';
+	let user_id = '';
 	const onToken = (tokenization) => {
 	console.log('1',tokenization);
 	// console.log('2',amount);
 	// console.log('3',planname);
 
-	PurchasePremium(tokenization).then((res)=>{
+PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 		console.log(res);
 	});
 }
@@ -99,7 +101,9 @@ export default function Home() {
 	// 	</Box>
 	// );
 	let data = JSON.parse(localStorage.getItem('user'));
-	// console.log('fd',data);
+	user_name = data.name;
+	user_id = data.id;
+	console.log('fd22',data);
 	// // useEffect(()=>
 	// // {
 	// // 	console.log('now',data);

@@ -44,6 +44,7 @@ Route::post('/search',[UserContoller::class,'Query']);
 
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost']);
+Route::post('/resend',[UserContoller::class,'resend_Mail']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

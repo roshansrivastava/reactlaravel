@@ -44,6 +44,39 @@ class UserContoller extends Controller
                 ]);
             }
     }     
+
+    public function resend_Mail(Request $request)
+    {
+      try{
+        $email = $request->Email;
+        $resend =User::where('email',$email)->first();
+        $email = $resend->email;
+        $activation_token = $resend->activation_token;
+        // return ['ee',$activation_token,$email];
+        $url = url('/') . '/api/user/' . $activation_token;
+        // ->subject('Confirm your account')
+        //     ->line('Thank you for registering with us. Your Email: '.$email)
+        //     ->action('Confirm Account', url($url))
+        //     ->line('Once again, Thank you for using our application!');
+        $data = array('name'=>"Roshan");
+         Mail::raw($url, function($message) {
+          $message->from('fromemail@gmail.com', 'Social Team');
+          $message->to('randomemail@gmail.com');
+          $message->subject('App - Forget Password');
+            // ->setBody('Hi, welcome user!');
+        //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
+        //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
+      });
+        
+
+      }
+      catch (\Exception $e) {
+        return response()->json([
+          'status'=> 500,
+          'message' =>'Duplicate Entry please enter another mail',
+      ]);
+      }
+    }
 public function User_login(Request $request)
 {
   try {
