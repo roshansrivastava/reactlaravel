@@ -167,9 +167,9 @@ export default function Registration() {
 						position: toast.POSITION.TOP_RIGHT
 					
 					});
-					 setTimeout(function() {
+					//  setTimeout(function() {
 						navigate('/login')
-					 },6000)
+					//  },6000)
 				
 					
 				}
@@ -196,7 +196,7 @@ export default function Registration() {
 	// };
 	return (
 		<div className="flatbg-image">
-			<ToastContainer />
+			
 			<div className="row">
 				<div className="col s12">
 					<div className="container">

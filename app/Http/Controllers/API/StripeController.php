@@ -152,7 +152,6 @@ class StripeController extends Controller
                   // $uid = auth()->user()->id;
                   // $user_info = User::findOrFail($uid);
                   // Mail::to($user_info->email)->queue(new PremiumPurchase_Success($user_info));
-
                   $payout = new payout;
                   $payout['currency'] ='usd';
                   $payout['amount'] =$charges->amount;
@@ -172,7 +171,6 @@ class StripeController extends Controller
                   $subscription_items['stripe_price'] = $charges->amount;
                   $subscription_items['quantity'] = 1;
                   $subscription_items->save();
-
                   $tbl_subscriptions = new tbl_subscription;
                   $tbl_subscriptions['user_id'] = $user_id;
                   $tbl_subscriptions['plan_id'] = 2;
@@ -181,6 +179,21 @@ class StripeController extends Controller
                   $tbl_subscriptions['stripe_plan_start'] =$subscription->trial_ends_at;
                   $tbl_subscriptions['stripe_plan_end'] = $subscription->ends_at;
                   $tbl_subscriptions->save();
+                  
+                  $users = User::where('id',$user_id)->update([
+                        'type' => 1 ,
+                        'is_premium'=>1,
+                        'zip'=>$charges->source->address_zip,
+                        'stripe_subscription_id'=>$subscription->id,
+                        'stripe_subscription_status'=>1,
+                        'stripe_start_date'=>$subscription->trial_ends_at,
+                        'stripe_end_date'=>$subscription->ends_at,
+                        'stripe_id'=>$charges->id,
+                        'trial_ends_at'=>$subscription->trial_ends_at,
+                        'subscription_ends_at'=> $subscription->ends_at,
+                  ]);
+
+
                   return response()->Json([
                     'data'=>$charges,
                   ]);

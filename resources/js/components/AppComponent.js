@@ -25,12 +25,14 @@ import PurchaseFree from '../layout/PurchaseFree';
 import ResetPassword from './ResetPassword'
 import Resend from './Resend';
 import Table from '../layout/Table';
+import { ToastContainer, toast } from 'react-toastify';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
   let data = JSON.parse(localStorage.getItem('user'));
  
   return (
     <>
+    <ToastContainer />
       <Router>
         <Routes>
           {/* {data ? (

@@ -116,3 +116,6 @@
   margin-top: 29px;
 
 }
+.navbar .navbar-dark ul a {
+  color: #0d6efd;
+}

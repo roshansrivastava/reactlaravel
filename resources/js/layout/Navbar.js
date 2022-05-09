@@ -82,8 +82,16 @@ export default function Navbar() {
 											</i>
 										</Link>
 									</li>
-									<li className='bt'>
-									<h6 onClick = {logout}>Welcome {userData.name}{userData.fullname} </h6>
+									<li>
+									<Dropdown>
+									<Dropdown.Toggle variant="success" id="dropdown-basic">
+									{userData.name}{userData.fullname}
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu>
+										<Dropdown.Item  onClick = {logout}>Logout</Dropdown.Item>
+									</Dropdown.Menu>
+									</Dropdown>
 									</li>
 								</ul>
 							</div>

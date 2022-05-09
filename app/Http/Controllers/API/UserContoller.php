@@ -63,6 +63,7 @@ class UserContoller extends Controller
           $message->from('fromemail@gmail.com', 'Social Team');
           $message->to('randomemail@gmail.com');
           $message->subject('App - Forget Password');
+          // $message->view('email.email');
             // ->setBody('Hi, welcome user!');
         //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
         //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');

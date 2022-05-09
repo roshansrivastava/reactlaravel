@@ -163,9 +163,10 @@ export default function Login() {
 											</p>
 										</div>
 									</div>
-									<div>									<p className="margin medium-small">
-												<Link to="/resend">Resend Varification Mail</Link>
-											</p>
+									<div>
+												<Link to="/resend">
+												<button type="button" class="btn waves-effect waves-light light-blue accent-3 animated infinite rubberBand mt-2 mb-2">
+                      								Resend Varification Mail  </button> </Link> 
 											</div>
 
 								</form>
