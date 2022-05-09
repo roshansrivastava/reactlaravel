@@ -47,6 +47,7 @@ Route::get('plan',[DashboardController::class,'planUser']);
 Route::get('addinguser',[UserContoller::class,'welcome']);
 Route::get('/resend',[UserContoller::class,'welcome']);
 Route::post('/resend',[UserContoller::class,'resend_Mail']);
+Route::get('/table',[UserContoller::class,'welcome']);
    
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('/stripe/premium', [StripeController::class, 'stripePost']);

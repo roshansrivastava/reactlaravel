@@ -205,7 +205,7 @@ export default function Registration() {
 								<form className="login-form" onSubmit={saveStudent}>
 									<div className="row">
 										<div className="input-field col s12">
-											<h5 className="ml-4"> Web </h5>
+											<h5 className="ml-4"> World Wide </h5>
 										</div>
 									</div>
 									<div className="row margin">

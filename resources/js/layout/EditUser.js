@@ -99,7 +99,7 @@ export default function EditUser(props) {
 				</a>
 			</aside>
 			<div id="main">
-			<div className='container'>
+			<div className='container' id='edit'>
 				<div className='row'>
 					<div className='col-md-6'>
 						<div className='card'>

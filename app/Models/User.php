@@ -99,9 +99,9 @@ class User extends Authenticatable
         return $this->hasMany('\App\Models\OauthAccessToken');
     }
     
-    public function scopeSearch($query, $searchTerm) {
-        if ($searchTerm) {
-            $search = $searchTerm;
+    public function scopeSearch($query, $data) {
+        if ($data->search) {
+            $search = $data->search;
             $query->where('name', 'like', "%" . $search . "%");
             $query->orWhere('fullname', 'like', "%" . $search . "%");
             $query->orWhere('email', 'like', "%" . $search . "%");

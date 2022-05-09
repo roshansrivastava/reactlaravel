@@ -21,9 +21,12 @@
     <link rel="stylesheet" type="text/css" href="/css/pages/dashboard-modern.css">
     <link rel="stylesheet" type="text/css" href="/css/pages/intro.css">
     <link rel="stylesheet" type="text/css" href="/css/pages/forgot.css">
+    <link rel="stylesheet" type="text/css" href="/css/pages/page-users.css">
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="/css/custom/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
     
     <!-- END: Custom CSS-->
     
@@ -34,6 +37,11 @@
     <script src="/css/js/search.js"></script>
     <script src="/css/js/custom/custom-script.js"></script>
     <script src="/css/js/vendors.min.js"></script>
+    <script src="/css/js/scripts/page-users.js"></script>
+    <script src="/css/js/scripts/customizer.js"></script>
+        <!-- BEGIN PAGE VENDOR JS-->
+        <script src="/css/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="/css/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
     <!-- Login CSS -->
     <link rel="stylesheet" type="text/css" href="css/pages/login.css">
 

@@ -24,6 +24,7 @@ import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
 import ResetPassword from './ResetPassword'
 import Resend from './Resend';
+import Table from '../layout/Table';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
   let data = JSON.parse(localStorage.getItem('user'));
@@ -52,6 +53,7 @@ export default function AppComponent() {
               <Route exact path='/login'element={<Login/>}></Route>
               <Route exact path='/reset/password/:slug'element={<ResetPassword/>}></Route>
               <Route exact path='/resend'element={<Resend/>}></Route>
+              <Route exact path='/table'element={<Table/>}></Route>
             {/* </>
           )} */}
           {/* <Route element={PageNotFound}/> */}

@@ -5,11 +5,14 @@ import Script from '../layout/Script';
 import { Search } from '../api/Index';
 import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
-import { DeleteUser , Single} from '../api/Index';
+import { DeleteUser , Single, searchusers} from '../api/Index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
 import EditUser from './EditUser';
 import axios from 'axios';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function User() {
 	const [APIData, setAPIData] = useState([]);
@@ -21,30 +24,57 @@ export default function User() {
 	const [foundUsers, setFoundUsers] = useState([]);
 	let user ='';
 	let search = '';
-	const fetchData = async (pageNumber = 1) => {
-        const api = await fetch(`/users?page=${pageNumber}`);
-        setData({
-            users: await api.json()
-        });
-    };
-	useEffect(() => {
-        fetchData();
-    }, [])
 	
-	const handleChange = (event) =>{
-		setQuery(event.target.value);
-		axios.post('/api/search', {
-			data: event.target.value
+	const fetchData = async (pageNumber = 1) => {
+        // const api = await axios.post(`/api/users?page=${}&search=${query}`)
+		// .then((res)=>{
+		// 	// console.log('reszzz',res.data.data);
+		// 	setData({
+		// 		users : res.data.data,
+		// 	});
+		// })
+		// // ,{
+		// 	// method: 'POST',
+		// 	// headers: {
+		// 	//   'Accept': 'application/json',
+		// 	//   'Content-Type': 'application/json'
+		// 	// },
+		// // }
+		searchusers({
+			pageNumber,
+			query
 		})
 		.then(res => {
-			setAPIData(res.data.data);
-			// fetchData();
-			console.log(res.data.data);
-			
+			setData({
+						users : res.data,
+					});
+			console.log(res);
 		})
 		.catch(err => {
 			console.log(err);
 		})
+		
+    };
+	useEffect(() => {
+        fetchData();
+		console.log('dd',state);
+    }, [])
+	
+	const handleChange = (event) =>{
+		setQuery(event.target.value);
+		fetchData();
+		// axios.post('/api/search', {
+		// 	data: event.target.value
+		// })
+		// .then(res => {
+		// 	setAPIData(res.data.data);
+		// 	// fetchData();
+		// 	console.log(res.data.data);
+			
+		// })
+		// .catch(err => {
+		// 	console.log(err);
+		// })
 	}
 
 	// const getUserData = () => {
@@ -78,31 +108,31 @@ export default function User() {
 	// }
 	// console.log('fdf',APIData);
 	
-	var Table_Users = '';
-	if(Loading)
-	{
-			Table_Users =APIData.map((data) => {
-				return (
-			<tr key ={data.id}>
-				<tr>{<AccountCircleIcon/>}</tr>
-				<td>{data.id}</td>
-				<td>{data.name}</td>
-				<td>{data.fullname}</td>
-				<td>{data.artistname}</td>
-				<td>{data.email}</td>
-				<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-						<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
-							Edit
-						</Button>
-						</Link>}</td>
-				<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
+	// var Table_Users = '';
+	// if(Loading)
+	// {
+	// 		Table_Users =APIData.map((data) => {
+	// 			return (
+	// 		<tr key ={data.id}>
+	// 			<tr>{<AccountCircleIcon/>}</tr>
+	// 			<td>{data.id}</td>
+	// 			<td>{data.name}</td>
+	// 			<td>{data.fullname}</td>
+	// 			<td>{data.artistname}</td>
+	// 			<td>{data.email}</td>
+	// 			<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
+	// 					<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
+	// 						Edit
+	// 					</Button>
+	// 					</Link>}</td>
+	// 			<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
 			
 			
-				<td> {<Button variant="contained"> View </Button>}</td>
-			</tr>
-					);
-				})
-		}
+	// 			<td> {<Button variant="contained"> View </Button>}</td>
+	// 		</tr>
+	// 				);
+	// 			})
+	// 	}
 									
 
 					return (
@@ -168,7 +198,7 @@ export default function User() {
 										</tr>
 									</thead>
 									<tbody>
-										{Table_Users}
+										{/* {Table_Users} */}
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (
@@ -180,14 +210,17 @@ export default function User() {
 										<td>{user.artistname}</td>
 										<td>{user.email}</td>
 										<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
-												<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(user.id)}} >
+											<ModeEditIcon onClick= {() => {update(user.id)}}/>
+												{/* <Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(user.id)}} >
 													Edit
-												</Button>
+												</Button> */}
 												</Link>}</td>
-										<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(user.id)}}>Delete</Button>}</td>
+										<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
+
+											}</td>
 										
 										
-										<td> {<Button variant="contained"> View </Button>}</td>
+										<td> {<VisibilityIcon className="waves-effect waves-cyan " />}</td>
 									</tr>
                                     )) : "Loading..."
                               }
