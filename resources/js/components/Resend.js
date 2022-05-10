@@ -10,20 +10,28 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Resend() {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 		const [Email, setEmail] = useState('');
 	const [EmailErr, setEmailError] = useState('');
 	// const [slug, setSlug] = useState([]);
 	const handleValidation = () => {
 		if (Email == '' || !Email.match(mailformat)) {
+			console.log('val');
 			setEmailError('please enter Valid email');
+			return true
 		}
 	};
 	var num = '';
 	const Save = async (e) => {
 		e.preventDefault();
-		handleValidation();
+		if(handleValidation()) {
+			return false
+		}
+		console.log('val tru');
+		setEmailError('')
+
+		
 		let payload = {
 			Email: Email
 		};
