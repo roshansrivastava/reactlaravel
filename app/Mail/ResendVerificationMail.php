@@ -16,9 +16,9 @@ class ResendVerificationMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -28,6 +28,8 @@ class ResendVerificationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+       
+        return $this->subject('Mail from ItSolutionStuff.com')
+                    ->view('email.email');
     }
 }
