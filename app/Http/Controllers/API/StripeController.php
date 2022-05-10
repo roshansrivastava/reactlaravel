@@ -104,12 +104,15 @@ class StripeController extends Controller
 
 
         try {
-            $amounts = 50*100;
+            $user_amount= $request->amount;
+            $user_plan  = $request->description;
+            $user_plan_id = $request->plan_id;
+            $amounts =  $user_amount;
             $token   = $request->tokenization['id'];
             // return $token;
             $user_id =  Auth::User()->id;
             $user_name =  Auth::User()->name;
-            $plan = 'premium';
+            $plan = $user_plan;
             $user_discount = '0';
             // return $token;
             // return $request->all();
@@ -125,7 +128,7 @@ class StripeController extends Controller
           //     ],
           // ]);
                 $charges = \Stripe\Charge::create([
-                'amount' =>  $amounts ,
+                'amount' =>  (float)$amounts ,
                 'currency' => 'usd',
                 'description' => 'Customer Payment',
                 'source' => $token,
@@ -174,7 +177,7 @@ class StripeController extends Controller
 
                   $tbl_subscriptions = new tbl_subscription;
                   $tbl_subscriptions['user_id'] = $user_id;
-                  $tbl_subscriptions['plan_id'] = 2;
+                  $tbl_subscriptions['plan_id'] = $user_plan_id;
                   $tbl_subscriptions['stripe_customer_id'] = null;
                   $tbl_subscriptions['stripe_subscription_id'] = $subscription->id;
                   $tbl_subscriptions['stripe_plan_start'] =$subscription->trial_ends_at;
@@ -184,7 +187,7 @@ class StripeController extends Controller
                   $users = User::where('id',$user_id)->update([
                         'type' => 1 ,
                         'is_premium'=>1,
-                        'plan'=>2,
+                        'plan'=>$user_plan_id,
                         'zip'=>$charges->source->address_zip,
                         'stripe_subscription_id'=>$subscription->id,
                         'stripe_subscription_status'=>1,

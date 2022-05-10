@@ -40,17 +40,17 @@ export default function Home() {
 	let tokenization = '';
 	let user_name = '';
 	let user_id = '';
-	const onToken = (description , addresses , amount) => tokenization => {
+	const onToken = (description , plan_id , amount) => tokenization => {
 	console.log('1',description);
-	console.log('2',addresses);
+	console.log('2',plan_id);
 	console.log('3',amount);
 	console.log('4',tokenization);
 
-	// 	PurchasePremium({tokenization,user_name,user_id})
-	// 	.then((res)=>{
-	// 	console.log('RES',res.data);
-	// 	setuser_data(res.data)
-	// });
+		PurchasePremium({tokenization,description,amount,plan_id})
+		.then((res)=>{
+		console.log('RES',res.data);
+		setuser_data(res.data)
+	});
 }
 	const useStyles = makeStyles((theme) => ({
 		root: {
@@ -384,13 +384,13 @@ export default function Home() {
 								</>:
 								<>
 								<Typography variant="body2">
-										<StripeCheckout token={onToken(plan.title, 'dhsa', plan.amount)} 
+										<StripeCheckout token={onToken(plan.title, plan.id, plan.amount*100)} 
 										    //  opened={() => {
 											// 	setAmount(4000),
 											//  }}				
 											// billingAddress={true}
 											description={plan.title}
-											 name = 'RoshaN'
+											 name = 'Roshan'
 											 zipCode={true}
 											 currency="USD"
 											 amount={plan.amount*100}
