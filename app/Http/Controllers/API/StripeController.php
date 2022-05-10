@@ -107,8 +107,8 @@ class StripeController extends Controller
             $amounts = 50*100;
             $token   = $request->tokenization['id'];
             // return $token;
-            $user_id = $request->user_id;
-            $user_name = $request->user_name;
+            $user_id =  Auth::User()->id;
+            $user_name =  Auth::User()->name;
             $plan = 'premium';
             $user_discount = '0';
             // return $token;
@@ -171,6 +171,7 @@ class StripeController extends Controller
                   $subscription_items['stripe_price'] = $charges->amount;
                   $subscription_items['quantity'] = 1;
                   $subscription_items->save();
+
                   $tbl_subscriptions = new tbl_subscription;
                   $tbl_subscriptions['user_id'] = $user_id;
                   $tbl_subscriptions['plan_id'] = 2;
@@ -193,13 +194,17 @@ class StripeController extends Controller
                         'trial_ends_at'=>$subscription->trial_ends_at,
                         'subscription_ends_at'=> $subscription->ends_at,
                   ]);
-
-
+                  
+                  $user_latest = User::where('id',$user_id)->first();
                   return response()->Json([
-                    'data'=>$charges,
+                    'status'=>200,
+                    'data'=> $user_latest,
+                    // [ 'charges' => $charges ,
+                    //   'User' => Auth::user(),
+                    // ],
                   ]);
                 }
-                return view('payments.success');
+                // return view('payments.success');
           }
 
         catch (CardException $e) {

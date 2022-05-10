@@ -28,24 +28,29 @@ const stripePromise = loadStripe('pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFM
 export default function Home() {
 	const [Free ,setfree ] = useState('');
 	const [plans ,setPlan ] = useState([]);
-	// const [amount ,setAmount ] = useState();
-	const [planname ,setplanname ] = useState('');
+	const [user_data ,setuser_data ] = useState([]);
+	// const [user_plan ,setuserplan ] = useState(1);
 	var free='';
 	var premium ='';
 	var amount ='';
+	var  User_plan = 1;
+	let description = '';
 	const navigate = useNavigate();
 	console.log(stripePromise);
 	let tokenization = '';
 	let user_name = '';
 	let user_id = '';
-	const onToken = (tokenization) => {
-	console.log('1',tokenization);
-	// console.log('2',amount);
-	// console.log('3',planname);
+	const onToken = (description , addresses , amount) => tokenization => {
+	console.log('1',description);
+	console.log('2',addresses);
+	console.log('3',amount);
+	console.log('4',tokenization);
 
-PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
-		console.log(res);
-	});
+	// 	PurchasePremium({tokenization,user_name,user_id})
+	// 	.then((res)=>{
+	// 	console.log('RES',res.data);
+	// 	setuser_data(res.data)
+	// });
 }
 	const useStyles = makeStyles((theme) => ({
 		root: {
@@ -57,7 +62,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 	{
 		navigate('/dashboard/purchase/free');
 	}
-
+	
 	const Premium = () =>
 	{
 		navigate('/dashboard/purchase/premium');
@@ -66,7 +71,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 	const Basic = () => {
 		navigate('/dashboard/purchase/basic');
 	}
-	const getUserData = () => {
+	const getPlanData = () => {
 		Plan().then((response) => {
 			setPlan(response.plan);
 			// setPlan(response.plan);
@@ -74,7 +79,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 	}
 	
 	useEffect(()=>{
-		getUserData();
+		getPlanData();
 		// 	Plan()
 		//    .then((response)=>{
 			// 	//    if(response.status == 200){
@@ -92,18 +97,21 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 				// 	// }
 				// });
 			},[]);
-			
-			console.log('newplan',plans);
-			console.log('id',plans[2]);
 	// const bull = (
 	// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
 	// 		•
 	// 	</Box>
 	// );
 	let data = JSON.parse(localStorage.getItem('user'));
+	// setuserplan(user_data.plan);
+	// console.log('set',user_data.plan)
+	// setuser_data(data);
 	user_name = data.name;
 	user_id = data.id;
-	console.log('fd22',data);
+	var de = data.plan;
+	User_plan =user_data.plan == null ? de : user_data.plan;
+	// setplanname() user_data.plan;
+	// console.log('fd22',data);
 	// // useEffect(()=>
 	// // {
 	// // 	console.log('now',data);
@@ -209,7 +217,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 					{plans.map((plan) => (
 					<Grid item xs={12} lg={4} xl={4}>
 						<Card
-							className={plan.id == data.plan ? "pricingClass" : 'pricingList' }
+							className={plan.id == User_plan ? "pricingClass" : 'pricingList' }
 							sx={{
 								'& .MuiChip-root': {
 									borderRadius: '5px',
@@ -370,17 +378,22 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 										</Typography>{' '}
 									</Typography>
 								</Typography>
-								{plan.id == 2 || plan.id == 3 ?  
+								{plan.id == User_plan || plan.id == 1? 
+								<>
+								
+								</>:
 								<>
 								<Typography variant="body2">
-										<StripeCheckout token={onToken} 
+										<StripeCheckout token={onToken(plan.title, 'dhsa', plan.amount)} 
 										    //  opened={() => {
 											// 	setAmount(4000),
-											//  }}						 
-											 name = "Roshan"
+											//  }}				
+											// billingAddress={true}
+											description={plan.title}
+											 name = 'RoshaN'
 											 zipCode={true}
 											 currency="USD"
-											 amount={data.amount*100}
+											 amount={plan.amount*100}
 											//  panelLabel="Give Money"
 											 stripeKey='pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC'
 											 >
@@ -390,9 +403,6 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 											</StripeCheckout>
 									
 								</Typography>
-								</> : 
-								<>
-								
 								</>
                                                }
 							</CardContent>
