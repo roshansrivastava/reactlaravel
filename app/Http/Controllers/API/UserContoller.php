@@ -51,6 +51,7 @@ class UserContoller extends Controller
       try{
         $email = $request->Email;
         $resend =User::where('email',$email)->first();
+        if($resend) {
         $email = $resend->email;
         $activation_token = $resend->activation_token;
         // return ['ee',$activation_token,$email];
@@ -60,17 +61,18 @@ class UserContoller extends Controller
         //     ->action('Confirm Account', url($url))
         //     ->line('Once again, Thank you for using our application!')ResendVerificationMail;
         $details = [
-          'title' => 'Mail from ItSolutionStuff.com',
-          'body' => 'This is for testing email using smtp'
+          'title' => 'Varify your Account',
+          'body' => 'Thank you for registering with us.'. $email,
+          'url' =>$url,
+          'body_1'=>'Once again, Thank you for using our application!'
       ];
       
-      Mail::to($details)->send(new ResendVerificationMail($details));
- return ['dd'];
-      if (Mail::failures()) {
-           return response()->Fail('Sorry! Please try again latter');
-      }else{
-           return response()->success('Great! Successfully send in your mail');
-         }
+      Mail::to($email)->send(new ResendVerificationMail($details));
+           return response()->json([
+            'status'=> 200,
+            'message'=>'Great! Successfully send in your mail',
+           ]);
+         
     
       // Mail::send('your_receiver_email@gmail.com')->send(new \App\Mail\ResendVerificationMail($details));
       // return response()->Json([
@@ -86,13 +88,18 @@ class UserContoller extends Controller
       //   //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
       //   //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
       // });
-        
+      } else {
+        return response()->json([
+          'status'=> 201,
+          'message' =>'Email Not found',
+      ]);
+      }
 
       }
       catch (\Exception $e) {
         return response()->json([
           'status'=> 500,
-          'message' =>'Duplicate Entry please enter another mail',
+          'message' =>'Please enter valid mail',
       ]);
       }
     }

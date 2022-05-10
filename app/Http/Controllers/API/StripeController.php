@@ -183,6 +183,7 @@ class StripeController extends Controller
                   $users = User::where('id',$user_id)->update([
                         'type' => 1 ,
                         'is_premium'=>1,
+                        'plan'=>2,
                         'zip'=>$charges->source->address_zip,
                         'stripe_subscription_id'=>$subscription->id,
                         'stripe_subscription_status'=>1,

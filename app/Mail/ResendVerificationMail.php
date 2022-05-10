@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class ResendVerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $details;
     /**
      * Create a new message instance.
      *
@@ -28,8 +28,7 @@ class ResendVerificationMail extends Mailable
      */
     public function build()
     {
-       
         return $this->subject('Mail from ItSolutionStuff.com')
-                    ->view('email.email');
+                    ->view('email.email')->with(['details' => $this->details]);
     }
 }

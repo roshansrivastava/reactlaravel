@@ -206,10 +206,10 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 							</CardContent>
 						</Card>
 					</Grid>	 
-					{plans.map((data) => (
+					{plans.map((plan) => (
 					<Grid item xs={12} lg={4} xl={4}>
 						<Card
-							className={data.id ==2 ? "pricingClass" : 'pricingList'}
+							className={plan.id == data.plan ? "pricingClass" : 'pricingList' }
 							sx={{
 								'& .MuiChip-root': {
 									borderRadius: '5px',
@@ -249,7 +249,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 									gutterBottom
 									variant="h3"
 									component="div"
-								> {data.title}
+								> {plan.title}
 								</Typography>
 								<Typography variant="h7" component="div">
 									<List
@@ -271,7 +271,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 												primary={
 													<Typography variant="p" component="div">
 														<Typography variant="strong" component="b">
-															{data.content_1}
+															{plan.content_1}
 														</Typography>{' '}
 													</Typography>
 												}
@@ -285,7 +285,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 												primary={
 													<Typography variant="p" component="div">
 														<Typography variant="strong" component="b">
-															{data.content_2}
+															{plan.content_2}
 														</Typography>{' '}
 													</Typography>
 												}
@@ -299,7 +299,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 												primary={
 													<Typography variant="p" component="div">
 														<Typography variant="strong" component="b">
-															{data.content_3}
+															{plan.content_3}
 														</Typography>{' '}
 													</Typography>
 												}
@@ -313,7 +313,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 												primary={
 													<Typography variant="p" component="div">
 														<Typography variant="strong" component="b">
-															{data.content_4}
+															{plan.content_4}
 														</Typography>{' '}
 													</Typography>
 												}
@@ -327,13 +327,13 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 												primary={
 													<Typography variant="p" component="div">
 														<Typography variant="strong" component="b">
-															{data.content_5}
+															{plan.content_5}
 														</Typography>{' '}
 													</Typography>
 												}
 											/>
 										</ListItem>
-										{/* {data.map(li => (
+										{/* {plan.map(li => (
 										<ListItem>
 											<ListItemIcon>
 												<CheckIcon />
@@ -358,7 +358,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
 									<Typography fontSize="50px" component="div">
 										{' '}
-										{data.amount}{' '}
+										{plan.amount}{' '}
 									</Typography>
 									<Typography variant="p" component="div" id="euro">
 										{' '}
@@ -370,7 +370,7 @@ PurchasePremium({tokenization,user_name,user_id}).then((res)=>{
 										</Typography>{' '}
 									</Typography>
 								</Typography>
-								{data.id == 2 || data.id == 3 ?  
+								{plan.id == 2 || plan.id == 3 ?  
 								<>
 								<Typography variant="body2">
 										<StripeCheckout token={onToken} 

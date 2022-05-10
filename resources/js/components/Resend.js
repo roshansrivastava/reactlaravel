@@ -11,14 +11,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Resend() {
 	const navigate = useNavigate();
-	var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-	const [Email, setEmail] = useState('');
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+		const [Email, setEmail] = useState('');
 	const [EmailErr, setEmailError] = useState('');
 	// const [slug, setSlug] = useState([]);
 	const handleValidation = () => {
-		if (Email == '' || Email== regex) {
-			setEmailError('please enter email');
+		if (Email == '' || !Email.match(mailformat)) {
+			setEmailError('please enter Valid email');
 		}
 	};
 	var num = '';
@@ -28,22 +27,18 @@ export default function Resend() {
 		let payload = {
 			Email: Email
 		};
-		console.log('vvv', payload);
        await  ResendMail(payload)
 			.then((res) => {
 				if (res.status == 200) {
-					console.log(res.slug);
-					console.log(setSlug('setslug', res.slug));
-					num = res.slug;
-					console.log('num', typeof (num));
-					setSlug(num);
 					toast.success(res.message, {
 						position: toast.POSITION.TOP_RIGHT
 					  });
-					console.log(setSlug(num));
-					console.log('setslug =>', slug);
-					// navigate('/reset/password/');
 					setEmail('');
+				}
+				else {
+					toast.error(res.message, {
+						position: toast.POSITION.TOP_RIGHT
+					});
 				}
 				
 			})
@@ -56,7 +51,7 @@ export default function Resend() {
 
 	return (
 		<div className="bgchange">
-			<ToastContainer />
+			{/* <ToastContainer /> */}
 			<div className="row">
 				<div className="col s12">
 					<div className="container">

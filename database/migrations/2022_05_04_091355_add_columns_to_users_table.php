@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('profile_picture',500)->nullable();
             $table->tinyInteger('type')->default(0);
             $table->tinyInteger('is_premium')->default(0);
-            $table->integer('plan')->default(6);
+            $table->integer('plan')->default(1);
             $table->string('btc_address',255)->nullable();
             $table->string('ltc_address',255)->nullable();
             $table->string('eth_address',255)->nullable();
