@@ -21,17 +21,21 @@ import { Plan , PurchasePremium } from '../api/Index';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import StripeCheckout from 'react-stripe-checkout';
+import { ToastContainer, toast } from 'react-toastify';
+import Backdrop from '@mui/material/Backdrop';
 
 
-const stripePromise = loadStripe('pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC');
+
 
 export default function Home() {
+	const stripePromise = loadStripe('pk_test_51Kw2OzKZWaZUmBN46j8Peym3HQ0rAi2HASCFMwYBOGOEm5iHEukDHqmuGIrCEhfyb0VIfyvj6BrcCGyA8Lrvgcd800XNCLdEKC');
+	const [ open, setOpen ] = useState(false);
 	const [Free ,setfree ] = useState('');
 	const [plans ,setPlan ] = useState([]);
 	const [user_data ,setuser_data ] = useState([]);
 	// const [user_plan ,setuserplan ] = useState(1);
-	var free='';
-	var premium ='';
+	var toast_success='';
+	var toast_error ='';
 	var amount ='';
 	var  User_plan = 1;
 	let description = '';
@@ -41,15 +45,43 @@ export default function Home() {
 	let user_name = '';
 	let user_id = '';
 	const onToken = (description , plan_id , amount) => tokenization => {
-	console.log('1',description);
-	console.log('2',plan_id);
-	console.log('3',amount);
-	console.log('4',tokenization);
-
+	// console.log('1',description);
+	// console.log('2',plan_id);
+	// console.log('3',amount);
+	// console.log('4',tokenization);
+	// const resolveAfter4Sec = new Promise(resolve => setTimeout(resolve, 4000));
+	// toast.promise(
+	// 	resolveAfter4Sec,
+	// 	{
+	// 	  pending: ' Please  Wait ',
+	// 	//   success: toast_success,
+	// 	//   error: toast_error,
+	// 	}
+	// )
+	handleToggle();
 		PurchasePremium({tokenization,description,amount,plan_id})
 		.then((res)=>{
 		console.log('RES',res.data);
+		handleClose();
+		if (res.status == 200) {
+			toast.success(res.message , {
+				position: toast.POSITION.TOP_CENTER,
+			}
+			);
+		}
+		else {
+			toast.error(res.message, {
+				position: toast.POSITION.TOP_RIGHT
+			});
+		}
 		setuser_data(res.data)
+	})
+	.catch(function(error) {
+		console.log(error);
+		console.log('ddd',error);
+		toast.error(error.data.errors, {
+			position: toast.POSITION.TOP_RIGHT
+		  });
 	});
 }
 	const useStyles = makeStyles((theme) => ({
@@ -58,26 +90,31 @@ export default function Home() {
 			padding: theme.spacing(2)
 		}
 	}));
-	const redirect = () => 
-	{
-		navigate('/dashboard/purchase/free');
-	}
+	// const redirect = () => 
+	// {
+	// 	navigate('/dashboard/purchase/free');
+	// }
 	
-	const Premium = () =>
-	{
-		navigate('/dashboard/purchase/premium');
-	}
+	// const Premium = () =>
+	// {
+	// 	navigate('/dashboard/purchase/premium');
+	// }
 
-	const Basic = () => {
-		navigate('/dashboard/purchase/basic');
-	}
+	// const Basic = () => {
+	// 	navigate('/dashboard/purchase/basic');
+	// }
 	const getPlanData = () => {
 		Plan().then((response) => {
 			setPlan(response.plan);
 			// setPlan(response.plan);
 		});
 	}
-	
+	const handleClose = () => {
+		setOpen(false);
+	};
+	const handleToggle = () => {
+		setOpen(true);
+	};
 	useEffect(()=>{
 		getPlanData();
 		// 	Plan()
@@ -389,8 +426,7 @@ export default function Home() {
 											// 	setAmount(4000),
 											//  }}				
 											// billingAddress={true}
-											description={plan.title}
-											 name = 'Roshan'
+											name = {plan.title}
 											 zipCode={true}
 											 currency="USD"
 											 amount={plan.amount*100}
@@ -401,6 +437,13 @@ export default function Home() {
 											  Purchase Now
 												</Button> 
 											</StripeCheckout>
+											<Backdrop
+												sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+												open={open}
+												onClick={handleClose}
+											>
+												<CircularProgress color="inherit" />
+											</Backdrop>
 									
 								</Typography>
 								</>

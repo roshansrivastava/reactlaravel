@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 use Stripe;
+use Mail;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\payment;
@@ -16,6 +17,7 @@ use App\Models\payout;
 use App\Models\custom_payment_info;
 use App\Models\subscription_item;
 use App\Models\tbl_subscription;
+use App\Mail\SubscriptionMail;
 class StripeController extends Controller
 {
   public function __construct()
@@ -108,6 +110,8 @@ class StripeController extends Controller
             $user_plan  = $request->description;
             $user_plan_id = $request->plan_id;
             $amounts =  $user_amount;
+            $email = Auth::User()->email;
+            // return $email;
             $token   = $request->tokenization['id'];
             // return $token;
             $user_id =  Auth::User()->id;
@@ -197,25 +201,27 @@ class StripeController extends Controller
                         'trial_ends_at'=>$subscription->trial_ends_at,
                         'subscription_ends_at'=> $subscription->ends_at,
                   ]);
-                  
+
+                  $subscription_data = [
+                    'title' => 'Subscriptions',
+                    'body' => 'congratulations for Subscriptions'."  ".$email,
+                    'body_1'=>'Once again, Thank you for using our application!',
+                   ];
+                
+                Mail::to($email)->send(new SubscriptionMail($subscription_data));
                   $user_latest = User::where('id',$user_id)->first();
                   return response()->Json([
                     'status'=>200,
                     'data'=> $user_latest,
-                    // [ 'charges' => $charges ,
-                    //   'User' => Auth::user(),
-                    // ],
+                    'message'=>'congratulation your Payment is Successfully',
                   ]);
                 }
                 // return view('payments.success');
-          }
-
-        catch (CardException $e) {
-            $error = "Your card's security code is incorrect.";
-        } catch (Exception $e) {
-            $error = "Sorry, we weren't able to authorize your card. You have not been charged.";
-        }
-
-        return view('payments.cancel');
+          }catch (\CardException $e) {
+          return response()->json([
+              'status'=> 500,
+              'message' =>"Your card's security code is incorrect.",
+          ]);
+      }
     }
 }
