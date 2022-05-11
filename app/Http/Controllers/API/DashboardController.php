@@ -5,11 +5,14 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plan;
+use App\Models\Genre;
+use App\Models\Store;
 
 class DashboardController extends Controller
 {
     public function planUser()
     {
+        try{
         $plan = Plan::all();
         // // $plam
         // for ($plan = 0; $plan < max(3); $plan++) {
@@ -25,7 +28,44 @@ class DashboardController extends Controller
             'status'=>200,
             'plan'=>$plan,
         ]);
+        }catch (\Exception $e) {
+                return response()->json([
+                'status'=> 500,
+                'message' =>'Please enter valid mail',
+            ]);
+        }
+
     }
 
-   
+    public function Store()
+    {
+        try{
+        $store = Store::all();
+        return response()->Json([
+            'status'=>200,
+            'store'=>$store
+        ]);
+        }catch(\Exception $e){
+            return response()->Json([
+                'status'=>500,
+                'Messages'=>'Something Went Wrong',
+            ]);
+        }
+    }
+
+   public function Genre()
+    {
+        try{
+        $genre = Genre::all();
+        return response()->Json([
+            'status'=>200,
+            'genre'=>$genre
+        ]);
+        }catch(\Exception $e){
+            return response()->Json([
+                'status'=>500,
+                'Messages'=>'Something Went Wrong',
+            ]);
+        }
+    }
 }

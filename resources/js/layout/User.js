@@ -26,20 +26,7 @@ export default function User() {
 	let search = '';
 	
 	const fetchData = async (pageNumber = 1) => {
-        // const api = await axios.post(`/api/users?page=${}&search=${query}`)
-		// .then((res)=>{
-		// 	// console.log('reszzz',res.data.data);
-		// 	setData({
-		// 		users : res.data.data,
-		// 	});
-		// })
-		// // ,{
-		// 	// method: 'POST',
-		// 	// headers: {
-		// 	//   'Accept': 'application/json',
-		// 	//   'Content-Type': 'application/json'
-		// 	// },
-		// // }
+
 		searchusers({
 			pageNumber,
 			query
@@ -63,26 +50,10 @@ export default function User() {
 	const handleChange = (event) =>{
 		setQuery(event.target.value);
 		fetchData();
-		// axios.post('/api/search', {
-		// 	data: event.target.value
-		// })
-		// .then(res => {
-		// 	setAPIData(res.data.data);
-		// 	// fetchData();
-		// 	console.log(res.data.data);
-			
-		// })
-		// .catch(err => {
-		// 	console.log(err);
-		// })
+		
 	}
 
-	// const getUserData = () => {
-	// 	console.log('2',query);
-	// 	Search(query).then((response) => {
-	// 				console.log(response)
-	// 	});
-	// }
+	
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
 			fetchData();
@@ -90,50 +61,10 @@ export default function User() {
 			
 		})
 	}
-	// const User = () => {
-	// 	Search(search).then((res)=>{
-	// 		console.log('dd',search);
-	// 		// console.log('user2',user);
-	// 	});
-	// }
+	
 	
 	let data = JSON.parse(localStorage.getItem('user'));
-	// useEffect(() => {
-	// 	User();
-	// }, []);
-	// console.log('setapi',APIData);
-	// const update = (id) => {
-	// 	console.log('nnsfnn',id);
-	// 	props.history.push('/dashboard/updateuser/'+id);
-	// }
-	// console.log('fdf',APIData);
-	
-	// var Table_Users = '';
-	// if(Loading)
-	// {
-	// 		Table_Users =APIData.map((data) => {
-	// 			return (
-	// 		<tr key ={data.id}>
-	// 			<tr>{<AccountCircleIcon/>}</tr>
-	// 			<td>{data.id}</td>
-	// 			<td>{data.name}</td>
-	// 			<td>{data.fullname}</td>
-	// 			<td>{data.artistname}</td>
-	// 			<td>{data.email}</td>
-	// 			<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-	// 					<Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(data.id)}} >
-	// 						Edit
-	// 					</Button>
-	// 					</Link>}</td>
-	// 			<td>{<Button variant="contained" focusVisibleClassName="btn btn-warning" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
-			
-			
-	// 			<td> {<Button variant="contained"> View </Button>}</td>
-	// 		</tr>
-	// 				);
-	// 			})
-	// 	}
-									
+								
 
 					return (
 		<div className="App">
@@ -246,53 +177,6 @@ export default function User() {
 						</div>
 					</div>
 				</div>
-				{/* <Table striped bordered hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>ID</th>
-							<th>Name</th>
-							<th>Full Name</th>
-							<th>Artist Name</th>
-							<th>Email</th>
-							<th>ADD </th>
-							<th>Edit</th>
-							<th>Delete</th>
-							<th>View</th>
-						</tr>
-					</thead>
-					<tbody>
-						{APIData.map((data) => {
-							return (
-								<tr key ={data.id}>
-									<tr>{}</tr>
-									<td>{data.id}</td>
-									<td>{data.name}</td>
-									<td>{data.fullname}</td>
-									<td>{data.artistname}</td>
-									<td>{data.email}</td>
-									<td>
-										{<Link className="waves-effect waves-cyan " to="/dashboard/adduser">
-											<Button variant="contained" color="success">
-												ADD User
-											</Button>
-							</Link>
-										}
-									</td>
-									<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${data.id}`}>
-											<Button variant="contained" class="btn btn-danger" onClick= {() => {update(data.id)}} >
-												Edit User
-											</Button>
-											</Link>}</td>
-									<td>{<Button variant="contained" class="btn btn-secondary" onClick= {() => {Delete(data.id)}}>Delete</Button>}</td>
-									
-									
-									<td> {<Button variant="contained"> View </Button>}</td>
-								</tr>
-							);
-						})}
-					</tbody>
-				</Table> */}
 			</div>
 			<Script />
 		</div>

@@ -428,7 +428,7 @@ export default function Home() {
 										    //  opened={() => {
 											// 	setAmount(4000),
 											//  }}				
-											// billingAddress={true}
+											billingAddress={true}
 											name = {plan.title}
 											 zipCode={true}
 											 currency="USD"

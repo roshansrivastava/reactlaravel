@@ -11,23 +11,10 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Getuser } from '../api/Index';
 import { Link } from "react-router-dom";
 import User from './User';
-// import { useNavigate } from 'react-router-dom';
+
 
 export default function sidebar() {
-	// const navigate = useNavigate();
-	// const [APIData, setAPIData] = useState(null);
-    // useEffect(() => {
 	
-    // }, []);
-	// const getUserData = () => {
-	// 	Getuser().then((response) => {
-	// 		console.log
-	// 	});
-	// }
-	// const data = () =>{
-	// getUserData ();
-		
-	// }
 	let data = JSON.parse(localStorage.getItem('user'));
 	
 	
@@ -44,9 +31,9 @@ export default function sidebar() {
 							</a>
 						</li>
 						<li className="bold">
-							<a className="waves-effect waves-cyan " href="app-todo.html">
-								<AlbumOutlinedIcon /> Release Album
-							</a>
+							<Link className="waves-effect waves-cyan " to='/dashboard/release/newalbum'>
+								<AlbumOutlinedIcon /> Release New Album
+							</Link>
 						</li>
 						<li className="bold">
 							<Link className="waves-effect waves-cyan " to="/dashboard/Music">

@@ -18,7 +18,9 @@ const Single = () => Api.get('/getuser');
 const Search = (query) => Api.post('/search',query);
 const PurchasePremium = (tokenization) => Api.post('stripe',tokenization);
 const ResendMail = (payload) => Api.post('/resend',payload);
-const searchusers = (data) => Api.post(`/users?page=${data.pageNumber}&search=${data.query}`)
+const searchusers = (data) => Api.post(`/users?page=${data.pageNumber}&search=${data.query}`);
+const Store = () => Api.get('/stores');
+const Genre = () => Api.get('/genres');
 export  {
     UserLogin,
     Userlogout,
@@ -37,4 +39,6 @@ export  {
     PurchasePremium,
     ResendMail,
     searchusers,
+    Store,
+    Genre,
 }
