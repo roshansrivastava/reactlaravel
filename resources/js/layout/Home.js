@@ -63,6 +63,8 @@ export default function Home() {
 		PurchasePremium({tokenization,description,amount,plan_id})
 		.then((res)=>{
 		console.log('RES',res.data);
+		localStorage.setItem('user', JSON.stringify(res.data));
+		// console.log('update', JSON.parse(localStorage.getItem('user')));
 		handleClose();
 		if (res.status == 200) {
 			toast.success(res.message , {
