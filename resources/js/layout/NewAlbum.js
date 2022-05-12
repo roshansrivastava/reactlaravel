@@ -6,11 +6,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Store , Genre} from '../api/Index';
 import './custom.css';
 import { WithContext as ReactTags } from 'react-tag-input';
-export default function NewAlbum() {
+import Example from '../components/Example';
+export default function NewAlbum(props) {
     const [ storevalue , setstorevalue ] = useState([]);
     const [ genreValue , setgenreValue ] = useState([]);
     const [ tags, setTags ] = useState([]);
-
     const GetStore = async () => {
        await Store()
         .then((res)=>{
@@ -119,12 +119,9 @@ const handleDelete = (i) => {
 								<div className="card-header">
 									<h5> Release new album</h5>
 								</div>
-
-								{/* <div className="card-body"> */}
-								{/* <h4>General Information</h4> */}
 								<div class="col s12 m12 l12">
 									<div id="Form-advance" class="card card card-default scrollspy">
-										<div class="card-content">
+										<div class="card-body">
 											<h4 class="card-title">General Information</h4>
 											<form>
 												<div class="row">
@@ -133,16 +130,16 @@ const handleDelete = (i) => {
 														<label for="first_name01">Album Name</label>
 													</div>
 
+													
+
 													<div class="input-field col m6 s12">
-														<select>
-															<option value="" disabled selected>
-																--- Select Genre ---
-															</option>
-															<option value="1">Manager</option>
-															<option value="2">Developer</option>
-															<option value="3">Business</option>
-                                                            {/* { genreValue.map((data)=>())} */}
-                                                            <option value='4'>hee</option>
+
+														
+
+														<select name = 'genre'  >
+														{genreValue.map(data => (
+															<option>{data.name}</option>
+														))}
 														</select>
 														<label>Genre</label>
 													</div>
@@ -161,6 +158,9 @@ const handleDelete = (i) => {
 														editable
 													/>
 												</div>
+												<div class="row">
+												<Example token={props.token}/>
+												</div>						
 
 												<div class="row">
 													<div class="row">

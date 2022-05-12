@@ -133,6 +133,7 @@ export default function User() {
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (
+										// console.log('**',user),
 										<tr key ={user.id}>
 										<tr>{<AccountCircleIcon/>}</tr>
 										<td>{user.id}</td>

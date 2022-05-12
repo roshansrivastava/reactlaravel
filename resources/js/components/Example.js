@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import '../../css/app.css';
 import axios from 'axios';
 import Vapor from 'laravel-vapor'
+import { Upload } from '../api/Index';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 class Example extends Component {
@@ -25,8 +26,9 @@ render() {
   return (
       <div className="App">
       
-          <h1>File Uploads </h1>
+          {/* <h1>File Uploads </h1> */}
           <FilePond
+
             files={this.state.files}
             onupdatefiles={(e) => {
                 this.setState({
@@ -40,7 +42,8 @@ render() {
                     const formData = new FormData();
                     formData.append(fieldName, file, file.name);
                 console.log('fff',file);
-                axios.post(`http://localhost:8000/api/upload-file`, formData)
+                // axios.post('http://localhost:8000/api/upload-file', formData)
+                Upload(formData)
                 .then(res => {
                     console.log('response',res);
                     load('test');

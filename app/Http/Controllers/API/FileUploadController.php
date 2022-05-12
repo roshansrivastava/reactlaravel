@@ -15,20 +15,37 @@ class FileUploadController extends Controller
     try {
         $file     = $request->file('files');
         $fileName = $file->getClientOriginalName();
-        $FilePath = 'roshantest/uploads'; 
-        $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
-        Storage::copy(
-            $request->input('key'),
-            str_replace('tmp/', '', $request->input('key'))
-        );
-        $upload['name'] = $fileName;
-        $upload['path'] = $FilePath;
-        FileUpload::create($upload);
+        $file_extention = $file->getClientOriginalExtension();
+        // Storage::disk('local')->putFileAs(
+            //     'files/'.$fileName,
+            //     $file,
+            //     $fileName
+            //   );
+            //   $path = $file->getPath();
+            $FilePath = 'roshantest/uploads'; 
+            $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
+            $Path = Storage::disk('s3')->url($File);
+            $fileupload = new FileUpload;
+            $fileupload['name']=$fileName;
+            $fileupload['path']=$Path;
+            $fileupload->save();
+            return response()->json([
+                  'status'=> 200,
+                  'message'=> 'Success' ,
+              ]);
+           
+            // return ['22',$All];
+            // Storage::copy(
+            //     $request->input('key'),
+            //     str_replace('tmp/', '', $request->input('key'))
+            // );
+            // return ['dd',$request];
+            // $upload['name'] = $fileName;
+            // $upload['path'] = $FilePath;
 
         return "success";
         // $isFileExist = Storage::disk('s3')->exists($File);
         if ($isFileExist) {
-            // $Path = Storage::disk('s3')->url($File);
             // $upload['name'] = $File->getClientOriginalName();
             // $upload['path'] = $Path;
             // FileUpload::create($upload);

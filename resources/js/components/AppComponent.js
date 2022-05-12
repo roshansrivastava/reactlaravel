@@ -29,8 +29,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import NewAlbum from '../layout/NewAlbum';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
-  let data = JSON.parse(localStorage.getItem('user'));
- 
   return (
     <>
     <ToastContainer />
@@ -48,7 +46,7 @@ export default function AppComponent() {
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route>
-              <Route exact path='/dashboard/release/newalbum'element={<NewAlbum/>}></Route>
+              <Route exact path='/dashboard/release/newalbum'element={<NewAlbum token={data}/>}></Route>
             {/* </>
           ) : (
             <>             */}
