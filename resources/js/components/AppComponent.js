@@ -29,6 +29,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import NewAlbum from '../layout/NewAlbum';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
+  let data =localStorage.getItem('token');
+
   return (
     <>
     <ToastContainer />

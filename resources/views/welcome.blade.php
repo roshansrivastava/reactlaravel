@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="/css/vendors/chartist-js/chartist.min.css">
     <link rel="stylesheet" type="text/css" href="/css/vendors/chartist-js/chartist-plugin-tooltip.css">
 
-    <link rel="stylesheet" href="/css/vendors/select2/select2.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/vendors/select2/select2-materialize.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/css/vendors/select2/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/vendors/select2/select2-materialize.css" type="text/css"> -->
 
     <!-- END: VENDOR CSS-->
     <!-- BEGIN: Page Level CSS-->
@@ -44,8 +44,8 @@
     <script src="/css/js/vendors.min.js"></script>
     <script src="/css/js/scripts/page-users.js"></script>
     <script src="/css/js/scripts/customizer.js"></script>
-    <script src="/css/js/scripts/form-select2.js"></script>
-    <script src="/css/vendors/select2/select2.full.min.js"></script>
+    <!-- <script src="/css/js/scripts/form-select2.js"></script>
+    <script src="/css/vendors/select2/select2.full.min.js"></script> -->
         <!-- BEGIN PAGE VENDOR JS-->
         <script src="/css/vendors/data-tables/js/jquery.dataTables.min.js"></script>
     <script src="/css/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>

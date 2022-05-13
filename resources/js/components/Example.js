@@ -50,12 +50,14 @@ render() {
                   }).catch (e => {
                       console.error('failure',e);
                   });
+                //   console.log('33',file.name);
                   Vapor.store(file, {
-                      
-                    progress: progress => {
-                        this.uploadProgress = Math.round(progress * 100);
+                      progress: progress => {
+                          this.uploadProgress = Math.round(progress * 100);
+                         this.visibility='public-read';
                     }
                 }).then(response => {
+                    console.log('99',response);
                     axios.post('/api/upload-file', {
                         uuid: response.uuid,
                         key: response.key,

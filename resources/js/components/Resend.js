@@ -7,6 +7,8 @@ import './component_custom.css';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function Resend() {
@@ -14,6 +16,7 @@ export default function Resend() {
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 		const [Email, setEmail] = useState('');
 	const [EmailErr, setEmailError] = useState('');
+	const [ open, setOpen ] = useState(false);
 	// const [slug, setSlug] = useState([]);
 	const handleValidation = () => {
 		if (Email == '' || !Email.match(mailformat)) {
@@ -30,7 +33,7 @@ export default function Resend() {
 		}
 		console.log('val tru');
 		setEmailError('')
-
+		handleToggle();
 		
 		let payload = {
 			Email: Email
@@ -42,20 +45,28 @@ export default function Resend() {
 						position: toast.POSITION.TOP_RIGHT
 					  });
 					setEmail('');
+					handleClose();
 				}
 				else {
 					toast.error(res.message, {
 						position: toast.POSITION.TOP_RIGHT
 					});
+					handleClose();
 				}
-				
 			})
 			.catch(function (error) {
 				toast.error(error.data.message, {
 					position: toast.POSITION.TOP_RIGHT
 				});
+				handleClose();
 			});
-	};
+		};
+		const handleClose = () => {
+			setOpen(false);
+		};
+		const handleToggle = () => {
+			setOpen(true);
+		};
 
 	return (
 		<div className="bgchange">
@@ -99,6 +110,13 @@ export default function Resend() {
 											>
 												Resend
 											</Button>
+											<Backdrop
+												sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+												open={open}
+												onClick={handleClose}
+											>
+												<CircularProgress color="inherit" />
+											</Backdrop>
 										</div>
 									</div>
 									<div className="row">

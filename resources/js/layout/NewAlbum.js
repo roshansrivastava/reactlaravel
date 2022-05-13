@@ -7,6 +7,9 @@ import { Store , Genre} from '../api/Index';
 import './custom.css';
 import { WithContext as ReactTags } from 'react-tag-input';
 import Example from '../components/Example';
+
+import Select from 'react-select';
+
 export default function NewAlbum(props) {
     const [ storevalue , setstorevalue ] = useState([]);
     const [ genreValue , setgenreValue ] = useState([]);
@@ -26,7 +29,13 @@ export default function NewAlbum(props) {
         await Genre()
         .then((res)=>{
             console.log('genre',res.genre);
-            setgenreValue(res.genre);
+			let sss = res.genre.map(data => {
+				return {
+					label:data.name,
+					value:data.id
+				}
+			});
+            setgenreValue(sss);
         })
         .catch(err => {
 			console.log(err);
@@ -111,6 +120,12 @@ const handleDelete = (i) => {
 					<i className="material-icons">menu</i>
 				</a>
 			</aside>
+			<select>
+				<option>kldfjgdfgj</option>
+				{genreValue.map(data => (
+					<option  value={data.id}>{data.name}</option>
+				))}
+			</select>
 			<div id="main">
 				<div className="container">
 					<div className="row">
@@ -135,13 +150,15 @@ const handleDelete = (i) => {
 													<div class="input-field col m6 s12">
 
 														
+													<Select
+														className="basic-single"
+														classNamePrefix="select"
+																									
+														name="color"
+														options={genreValue}
+														/>
 
-														<select name = 'genre'  >
-														{genreValue.map(data => (
-															<option>{data.name}</option>
-														))}
-														</select>
-														<label>Genre</label>
+														
 													</div>
 												</div>
 												<div class="row">
