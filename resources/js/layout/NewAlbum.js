@@ -18,7 +18,13 @@ export default function NewAlbum(props) {
        await Store()
         .then((res)=>{
             console.log('stores',res.store);
-            setstorevalue(res.store);
+			let suggestions = res.store.map(data=>{
+				return {
+					text:data.name,
+					id:data.id
+				}
+			});
+            setstorevalue(suggestions);
         })
         .catch(err => {
 			console.log(err);
@@ -29,13 +35,13 @@ export default function NewAlbum(props) {
         await Genre()
         .then((res)=>{
             console.log('genre',res.genre);
-			let sss = res.genre.map(data => {
+			let geners = res.genre.map(data => {
 				return {
 					label:data.name,
 					value:data.id
 				}
 			});
-            setgenreValue(sss);
+            setgenreValue(geners);
         })
         .catch(err => {
 			console.log(err);
@@ -164,7 +170,7 @@ const handleDelete = (i) => {
 												<div class="row">
 													<ReactTags
 														tags={tags}
-														// suggestions={suggestions}
+														suggestions={storevalue}
 														delimiters={delimiters}
 														handleDelete={handleDelete}
 														handleAddition={handleAddition}
