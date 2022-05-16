@@ -37,8 +37,10 @@ render() {
             }}
             allowMultiple={true}
             maxFiles={3}
+            
             server={{
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) =>{
+                    
                     const formData = new FormData();
                     formData.append(fieldName, file, file.name);
                 console.log('fff',file);

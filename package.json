@@ -42,6 +42,7 @@
         "formik-material-ui": "^4.0.0-alpha.2",
         "react-bootstrap": "^2.2.3",
         "react-bootstrap-sweetalert": "^5.2.0",
+        "react-calendar": "^3.7.0",
         "react-filepond": "^7.1.1",
         "react-google-recaptcha": "^2.1.0",
         "react-hook-form": "^7.30.0",

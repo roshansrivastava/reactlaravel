@@ -49,7 +49,7 @@ Route::get('addinguser',[UserController::class,'welcome']);
 Route::get('/resend',[UserController::class,'welcome']);
 Route::post('/resend',[UserController::class,'resend_Mail']);
 Route::get('/table',[UserController::class,'welcome']);
-   
+Route::post('upload-file',[FileUploadController::class,'uploads']);
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('/stripe/premium', [StripeController::class, 'stripePost']);
 

@@ -21,7 +21,8 @@ const ResendMail = (payload) => Api.post('/resend',payload);
 const searchusers = (data) => Api.post(`/users?page=${data.pageNumber}&search=${data.query}`);
 const Store = () => Api.get('/stores');
 const Genre = () => Api.get('/genres');
-const Upload = (formData,payload) => Api.post('/upload-file',formData,payload)
+const Upload = (formData,payload) => Api.post('/upload-file',formData,payload);
+const Countri = () =>Api.get('/country');
 export  {
     UserLogin,
     Userlogout,
@@ -43,4 +44,5 @@ export  {
     Store,
     Genre,
     Upload,
+    Countri,
 }

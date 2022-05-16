@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Genre;
 use App\Models\Store;
+use App\Models\Country;
 
 class DashboardController extends Controller
 {
@@ -61,6 +62,22 @@ class DashboardController extends Controller
             'status'=>200,
             'genre'=>$genre
         ]);
+        }catch(\Exception $e){
+            return response()->Json([
+                'status'=>500,
+                'Messages'=>'Something Went Wrong',
+            ]);
+        }
+    }
+    public function Country()
+    {
+        try{
+            $country = Country::all();
+            // return ['hell0',$country];
+            return response()->Json([
+                'status'=>200,
+                'country'=>$country
+            ]);
         }catch(\Exception $e){
             return response()->Json([
                 'status'=>500,
