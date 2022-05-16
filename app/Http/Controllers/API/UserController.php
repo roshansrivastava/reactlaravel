@@ -36,15 +36,12 @@ class UserController extends Controller
             $Success['activation_token'] = $result['activation_token'];
             $result->notify(new RegisterVerificationMail());
             return response()->json([
-                'status'=> 200,
+                'status'=> $this->successCode,
                 'message'=>'Please Verify Mail Registration Successfully',
                 'data' => $success,
             ]);
             } catch (\Exception $e) {
-                return response()->json([
-                    'status'=> 500,
-                    'message' =>'Duplicate Entry please enter another mail',
-                ]);
+              return $this->getExceptionResponse($e);
             }
     }     
 
@@ -71,7 +68,7 @@ class UserController extends Controller
       
       Mail::to($email)->send(new ResendVerificationMail($details));
            return response()->json([
-            'status'=> 200,
+            'status'=> $this->successCode,
             'message'=>'Great! Successfully send in your mail',
            ]);
          
@@ -91,18 +88,12 @@ class UserController extends Controller
       //   //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
       // });
       } else {
-        return response()->json([
-          'status'=> 201,
-          'message' =>'Email Not found',
-      ]);
+        return $this->recordNotFound();   
       }
 
       }
       catch (\Exception $e) {
-        return response()->json([
-          'status'=> 500,
-          'message' =>'Please enter valid mail',
-      ]);
+        return $this->getExceptionResponse($e);
       }
     }
 public function User_login(Request $request)
