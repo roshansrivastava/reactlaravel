@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Genre;
 use App\Models\Store;
-use App\Models\Country;
+use App\Models\Language;
 
 class DashboardController extends Controller
 {
@@ -64,10 +64,10 @@ class DashboardController extends Controller
     public function Country()
     {
         try{
-            $country = Country::all();
+            $Language = Language::all();
             return response()->Json([
                 'status'=>$this->successCode,
-                'country'=>$country
+                'Language'=>$Language
             ]);
         }catch(\Exception $e){
         return $this->getExceptionResponse($e);

@@ -40,8 +40,6 @@ export default function Registration() {
 	var fname ='';
 	const handleToken = (token) => {
 		setcaptcha((currentForm) => {
-			// console.log('current', currentForm);
-			// console.log('tk', token);
 			localStorage.setItem('captcha', token);
 			return { ...currentForm, token };
 		});

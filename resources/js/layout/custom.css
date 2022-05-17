@@ -222,3 +222,6 @@ react tags
   color: red;
   font-weight: bold;
 }
+.radiobutton .radio Input {
+  /* opacity: 1; */
+}

@@ -11,29 +11,64 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import Select from 'react-select';
 import Calendar from 'react-calendar';
 import {Countri} from '../api/Index';
+import { Link } from 'react-router-dom';
 
 export default function NewAlbum(props) {
+	const [albumname ,setalbumname]=useState('');
+	const [genername ,setgenerename]=useState('');
+	const [datename ,setdatename]=useState('');
+	const [upcname ,setupcname]=useState('');
+	const [languagename ,setlanguagename]=useState('');
+	const [spotifyname ,setspotifyname]=useState('');
+	const [applyname ,setapplyname]=useState('');
+	const [Song , setSong]=useState('');
+	const [ComposerSong , setComposerSong]=useState('');
+	const [Radioname , setRadioname] = useState('');
+	const [languagename1 ,setlanguagename1]=useState('');
+	const [checkdata ,setcheckdata]=useState([]);
+
+
 	const [ storevalue , setstorevalue ] = useState([]);
     const [ genreValue , setgenreValue ] = useState([]);
-	const [tags, setTags] = useState([
-	  { id: 'Thailand', text: 'Thailand' },
-	  { id: 'India', text: 'India' },
-	  { id: 'Vietnam', text: 'Vietnam' },
-	  { id: 'Turkey', text: 'Turkey' },
-	]);
-	const [value, onChange] = useState(new Date());
+	const [tags, setTags] = useState([]);
+	const [additionForm , setadditionForm] = useState(false);
 
+	const [serviceList ,setServiceList] = useState([
+		{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}
+	]);
+	const handleServiceAdd = () => {
+		setServiceList([...serviceList,{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}]);
+	};
+	const Remove = () => {
+		setadditionForm(false)
+	}
+	const Saveform = (e) => {
+		e.preventDefault();
+		let payload = {
+			AlbumName:albumname,
+			GenerName:genername,
+			StoreName:tags,
+			DateName:datename,
+			UpcName:upcname,
+			Languagename:languagename,
+			SpotifyName:spotifyname,
+			ApplyName:applyname,
+		}
+		setcheckdata(payload);
+	}
+	// let  var = [...checkdata,'xxxxxxxxxxx'];
+	console.log('###save',checkdata);
 	const GetCountry = async () => {
 		await Countri()
 		.then((res)=>{
-			var contrydata = res.country.map(value=>{
+			var Languagedata = res.Language.map(value=>{
 				// console.log('5',data.id);
 				return {
-					label:value.country,
+					label:value.name,
 					value:value.id
 				}
 			});
-            setstorevalue(contrydata);
+            setstorevalue(Languagedata);
 		})
 	}
     const GetStore = async () => {
@@ -76,6 +111,10 @@ export default function NewAlbum(props) {
 		GetCountry();
     },[0]);
     
+	const Addition = ()=>{
+		setadditionForm(true);
+	}
+	console.log('23',additionForm);
 
 	// const suggestions = COUNTRIES.map((country) => {
 	// 	return {
@@ -114,6 +153,10 @@ export default function NewAlbum(props) {
 		console.log('The tag at index ' + index + ' was clicked');
 	  };
 	let data = JSON.parse(localStorage.getItem('user'));
+
+	const onChangeValue = () => {
+		
+	}
 
 	return (
 		<div className="App">
@@ -161,10 +204,12 @@ export default function NewAlbum(props) {
 									<div id="Form-advance" className="card card card-default scrollspy">
 										<div className="card-body">
 											<h5 className="card-title">General Information</h5>
-											<form>
+											<form autocomplete="on" onSubmit={Saveform}>
 												<div className="row">
 													<div className="input-field col m6 s12">
-														<input id="first_name01" type="text" />
+														<input id="first_name01" type="text" 
+														onChange={(e) => setalbumname(e.target.value)}
+														/>
 														<label htmlFor="first_name01">Album Name</label>
 													</div>
 													<div className="input-field col m6 s12">
@@ -172,6 +217,7 @@ export default function NewAlbum(props) {
 														className="basic-single"
 														classNamePrefix="select"									
 														name="color"
+														onChange={(e) => setgenerename(e.label)}
 														options={genreValue}
 														/>
 													</div>
@@ -181,7 +227,6 @@ export default function NewAlbum(props) {
 												<div className="app">
 												<ReactTags
 												tags={tags}
-												// suggestions={suggestions}
 												delimiters={delimiters}
 												handleDelete={handleDelete}
 												handleAddition={handleAddition}
@@ -190,6 +235,7 @@ export default function NewAlbum(props) {
 												inputFieldPosition="bottom"
 												autocomplete
 												editable
+												// onChange={(e) => setstorename(e.text)}
 												/>
 												</div>
 												</div>
@@ -212,6 +258,8 @@ export default function NewAlbum(props) {
 														type="date"
 														className="form-control"
 														id ='unique'
+														onChange={(e) => setdatename(e.target.value)}
+
 													/>
 													 
 													</div>
@@ -220,6 +268,8 @@ export default function NewAlbum(props) {
 														<h6>UPC</h6>
 														<input id="first_name02" type="text"
 														placeholder="If you don't have one leave this blank"
+														onChange={(e) => setupcname(e.target.value)}
+
 														/>
 													</div>
 													</div>
@@ -230,6 +280,8 @@ export default function NewAlbum(props) {
 														classNamePrefix="select"								
 														name="color"
 														options={storevalue}
+														onChange={(e) => setlanguagename(e.label)}
+
 														/>
 													</div>
 												</div>
@@ -244,6 +296,8 @@ export default function NewAlbum(props) {
 													<div className='col-sm-9'>
 												<input id="first_name04" type="text"
 													placeholder="If you don't have one leave this blank"
+													onChange={(e) => setspotifyname(e.target.value)}
+													
 													/></div>
 													
 													<div className='col-sm-3'><span>
@@ -263,6 +317,8 @@ export default function NewAlbum(props) {
 													<div className='col-sm-9'>
 												<input id="first_name04" type="text"
 													placeholder="If you don't have one leave this blank"
+													onChange={(e) => setapplyname(e.target.value)}
+
 													/></div>
 													
 													<div className='col-sm-3'><span>
@@ -273,20 +329,128 @@ export default function NewAlbum(props) {
 													</div>
 												</div>
 												</div>					
-
 												<div className='row'>
 												<div class="input-field col m6 s12">
 													<h5>Songs</h5>
-													<button className='btn btn-primary'>+ Add Song</button>
+													<button type= 'button'className='btn btn-primary' onClick={Addition}>+ Add Song</button>
 													</div>
 													</div>
+													{ additionForm == true ?
+													<div className="row">
+													<div className="col-md-12">
+														<div className="card">
+															<div className="card-header">
+																<h5> Song-1</h5><button type="button" onClick={Remove}>delete</button>
+															</div>
+															<div className="col s12 m12 l12">
+																<div id="Form-advance" className="card card card-default scrollspy">
+																	<div className="card-body">
+																		<h5 className="card-title"></h5>
+																			{ serviceList.map((singleService,index)=>(
+																		<form key = {index}>
+																		
+																			<div  className="row">
+																				<div className="input-field col m6 s12">
+																					<input id="first_name10" type="text" name='songname' 
+																					onChange={(e)=>onChangeValue(e,index)}
+																					/>
+																					<label htmlFor="first_name10">Song Name</label>
+																				</div>
+																			</div>
+																			<div className="row">
+																				<div className="input-field col m6 s12">
+																					<input id="first_name11" type="text" name='composername'
+																					onChange={(e)=>onChangeValue(e,index)}
+																					 />
+																					<label htmlFor="first_name11">Composer ( Song )</label>
+																				</div>
+																			</div>
+																			<div className="row">
+																				<div className="input-field col m6 s12">
+																				<h6>Languages</h6>
+																					<Select
+																						className="single"
+																						classNamePrefix="select"								
+																						name="selectname"
+																						options={storevalue}
+																						/>
+																				</div>
+																				<div className="input-field col m6 s12">
+																				<h6>ISRC</h6>
+																				<input id="first_name04" type="text"
+																				name='isrcname'
+																				placeholder="If you don't have one leave this blank"
+																				onChange={(e)=>onChangeValue(e,index)}
+																				/></div>
+																			</div>
+
+																			<div className='radiobutton'>
+																			<div className="radio">
+																				<label>
+																					<input
+																					type="radio"
+																					value="Male"
+																					name='radio'
+																					onChange={(e)=>onChangeValue(e,index)}
+																					/>
+																					<span class="check"></span>  
+																					Male
+																				</label>
+																				</div>
+																				<div className="radio">
+																				<label>
+																					<input
+																					type="radio"
+																					value="Female"
+																					name='radio'
+																					onChange={(e)=>onChangeValue(e,index)}
+																					/>
+																					<span class="check"></span>  
+																					Female
+																				</label>
+																				</div>
+																				<div className="radio">
+																				<label>
+																					<input
+																					type="radio"
+																					value="Other"
+																					name='radio'
+																					onChange={(e)=>onChangeValue(e,index)}
+																					/>
+																					<span class="check"></span>
+																					Other
+																				</label>
+																				</div>
+																				</div>
+																			<div className="row">
+																				<h6>Upload Song</h6>
+																			<Example token={props.token}/>
+																			<p>Allowed formats: flac.Wav</p><br/>
+																			<p>If your files in other format, go to this website Convert to wav <Link className="color:red" to='https://www.freeconvert.com/'>freeconvert.com</Link>.</p>
+																			</div>
+																			{serviceList.length-1 === index && serviceList.length<4 && (
+																			<div className='row'>
+																			<div class="input-field col m6 s12">
+																			<h5>Songs</h5>
+																			<button type= 'button'className='btn btn-primary' onClick={handleServiceAdd}> + Add Song</button>
+																			</div>
+																			</div>
+																			)}
+																		</form>
+																		))}
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											: ''	}
 												<div className="row">
 													<div className="row">
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
 																type="submit"
-																name="action"
 															>
 																Submit
 																<i className="material-icons right">send</i>
@@ -298,7 +462,6 @@ export default function NewAlbum(props) {
 										</div>
 									</div>
 								</div>
-								{/* </div> */}
 							</div>
 						</div>
 					</div>

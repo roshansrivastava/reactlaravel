@@ -16,6 +16,7 @@ use App\Notifications\RegisterVerificationMail;
 use App\Http\Requests\Api\RegisterRequest;
 use Mail;
 use Carbon\Carbon;
+use App\Http\Resources\Api\UserDataResource;
 use App\Notifications\ForgotPasswordMail;
 use App\Http\Requests\Api\ForgotPasswordMailRequest;
 use App\Mail\ResendVerificationMail;
@@ -42,7 +43,7 @@ class UserController extends Controller
             return response()->json([
                 'status'=> $this->successCode,
                 'message'=>'Please Verify Mail Registration Successfully',
-                'data' => $success,
+                'data' => new UserDataResource($Success),
             ]);
             } catch (\Exception $e) {
               return $this->getExceptionResponse($e);
