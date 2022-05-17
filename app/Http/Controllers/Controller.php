@@ -32,8 +32,9 @@ class Controller extends BaseController
         'Sorry! Record not found',
         'Oops! something went wrong.',
         'Sorry! Record already exist.',
-        'Sorry! File not found in folder.',
+        'Sorry! Please enter valid emali & password .',
         'Sorry! Email not found',
+        'Please Enter valid password .'
         
         ],
         'validation'=>[
@@ -65,6 +66,19 @@ class Controller extends BaseController
             'message'   => $e->getMessage(),
             'status'    => $e->getCode(),
         ]);
+    }
+    public function recordNotFoundEmail(){
+        return response()->json([
+            'message'   => $this->responseMsg['error'][3],
+            'status'    => $this->recodeNotFoundCode,
+        ]); 
+    }
+
+    public function enterValidPassword(){
+        return response()->json([
+            'message'   => $this->responseMsg['error'][5],
+            'status'    => $this->invalidPassword,
+        ]); 
     }
     public function recordNotFound(){
         return response()->json([
