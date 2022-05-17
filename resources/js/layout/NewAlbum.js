@@ -39,7 +39,13 @@ export default function NewAlbum(props) {
 	]);
 	const handleServiceAdd = () => {
 		setServiceList([...serviceList,{songname:'',composername:'',selectname:'',radio:'',isrcname:''}]);
+		console.log('//',serviceList);
 	};
+	const handleremove = (index) => {
+		const list = [...serviceList];
+		list.splice(index,1);
+		setServiceList(list);
+	}
 	const Remove = () => {
 		setadditionForm(false)
 	}
@@ -155,8 +161,11 @@ export default function NewAlbum(props) {
 	  };
 	let data = JSON.parse(localStorage.getItem('user'));
 
-	const onChangeValue = () => {
-		
+	const onChangeValue = (e , index) => {
+		const {name , value } = e.target;
+		const list = [...serviceList];
+		list[index][name]=value;
+		setServiceList(list);
 	}
 
 	return (
@@ -429,14 +438,20 @@ export default function NewAlbum(props) {
 																			<p>Allowed formats: flac.Wav</p><br/>
 																			<p>If your files in other format, go to this website Convert to wav <Link className="color:red" to='https://www.freeconvert.com/'>freeconvert.com</Link>.</p>
 																			</div>
-																			{serviceList.length-1 === index && serviceList.length<4 && (
 																			<div className='row'>
+																			{serviceList.length-1 === index && serviceList.length<4 && (
 																			<div class="input-field col m6 s12">
 																			<h5>Songs</h5>
 																			<button type= 'button'className='btn btn-primary' onClick={handleServiceAdd}> + Add Song</button>
 																			</div>
+																			)}
+																			{serviceList.length > 1 && (
+																			<div class="input-field col m6 s12">
+																			<h5>Songs</h5>
+																			<button type= 'button'className='btn btn-primary' onClick={()=>{handleremove(index)}}> Remove Button</button>
 																			</div>
 																			)}
+																			</div>
 																		</form>
 																	</div>
 																</div>
