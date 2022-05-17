@@ -32,13 +32,12 @@ export default function NewAlbum(props) {
     const [ genreValue , setgenreValue ] = useState([]);
 	const [tags, setTags] = useState([]);
 	const [additionForm , setadditionForm] = useState(false);
-
+	let payloading = {};
 	const [serviceList ,setServiceList] = useState([
-		{songname:'',composername:'',selectname:'',radio:'',isrcname:''}
-		// {songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}
+		{songname:'',composername:'',selectname:[],radio:'',isrcname:''}
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([...serviceList,{songname:'',composername:'',selectname:'',radio:'',isrcname:''}]);
+		setServiceList([...serviceList,{songname:'',composername:'',selectname:[],radio:'',isrcname:''}]);
 		console.log('//',serviceList);
 	};
 	const handleremove = (index) => {
