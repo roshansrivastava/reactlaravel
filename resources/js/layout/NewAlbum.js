@@ -34,10 +34,11 @@ export default function NewAlbum(props) {
 	const [additionForm , setadditionForm] = useState(false);
 
 	const [serviceList ,setServiceList] = useState([
-		{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}
+		{songname:'',composername:'',selectname:'',radio:'',isrcname:''}
+		// {songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([...serviceList,{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}]);
+		setServiceList([...serviceList,{songname:'',composername:'',selectname:'',radio:'',isrcname:''}]);
 	};
 	const Remove = () => {
 		setadditionForm(false)
@@ -338,16 +339,16 @@ export default function NewAlbum(props) {
 													{ additionForm == true ?
 													<div className="row">
 													<div className="col-md-12">
+													{ serviceList.map((singleService,index)=>(
 														<div className="card">
 															<div className="card-header">
-																<h5> Song-1</h5><button type="button" onClick={Remove}>delete</button>
+																<h5> Song-{index+1}</h5><button type="button" onClick={Remove}>delete</button>
 															</div>
 															<div className="col s12 m12 l12">
 																<div id="Form-advance" className="card card card-default scrollspy">
 																	<div className="card-body">
 																		<h5 className="card-title"></h5>
-																			{ serviceList.map((singleService,index)=>(
-																		<form key = {index}>
+																		<form>
 																		
 																			<div  className="row">
 																				<div className="input-field col m6 s12">
@@ -437,11 +438,11 @@ export default function NewAlbum(props) {
 																			</div>
 																			)}
 																		</form>
-																		))}
 																	</div>
 																</div>
 															</div>
 														</div>
+																))}
 													</div>
 												</div>
 											: ''	}
