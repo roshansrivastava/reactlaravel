@@ -14,10 +14,9 @@ class DashboardController extends Controller
     public function planUser()
     {
         try{
-        $plan = Plan::all();
-        // // $plam
-        // for ($plan = 0; $plan < max(3); $plan++) {
-        //     return['2',$plan];
+            // // $plam
+            // for ($plan = 0; $plan < max(3); $plan++) {
+                //     return['2',$plan];
         // }
         // // $description = $plan[0]['content_1'];
         // // $description = $plan[0]['content_2'];
@@ -25,15 +24,14 @@ class DashboardController extends Controller
         // // $description = $plan[0]['content_4'];
         // // $description = $plan[0]['content_5'];
         // // return $description;
+        
+        $plan = Plan::all();
         return response()->json([
-            'status'=>200,
+            'status'=>$this->successCode,
             'plan'=>$plan,
         ]);
         }catch (\Exception $e) {
-                return response()->json([
-                'status'=> 500,
-                'message' =>'Please enter valid mail',
-            ]);
+                return $this->getExceptionResponse($e);
         }
 
     }
@@ -43,14 +41,11 @@ class DashboardController extends Controller
         try{
         $store = Store::all();
         return response()->Json([
-            'status'=>200,
+            'status'=>$this->successCode,
             'store'=>$store
         ]);
         }catch(\Exception $e){
-            return response()->Json([
-                'status'=>500,
-                'Messages'=>'Something Went Wrong',
-            ]);
+            return $this->getExceptionResponse($e);
         }
     }
 
@@ -59,30 +54,23 @@ class DashboardController extends Controller
         try{
         $genre = Genre::all();
         return response()->Json([
-            'status'=>200,
+            'status'=>$this->successCode,
             'genre'=>$genre
         ]);
         }catch(\Exception $e){
-            return response()->Json([
-                'status'=>500,
-                'Messages'=>'Something Went Wrong',
-            ]);
+            return $this->getExceptionResponse($e);
         }
     }
     public function Country()
     {
         try{
             $country = Country::all();
-            // return ['hell0',$country];
             return response()->Json([
-                'status'=>200,
+                'status'=>$this->successCode,
                 'country'=>$country
             ]);
         }catch(\Exception $e){
-            return response()->Json([
-                'status'=>500,
-                'Messages'=>'Something Went Wrong',
-            ]);
+        return $this->getExceptionResponse($e);
         }
     }
 }
