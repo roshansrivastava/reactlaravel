@@ -23,6 +23,10 @@ use App\Mail\ResendVerificationMail;
 
 class UserController extends Controller
 {
+        public function welcome()
+        {
+            return view('welcome');
+        }
     
     public function Register(RegisterRequest $request) 
     { 
@@ -36,15 +40,12 @@ class UserController extends Controller
             $Success['activation_token'] = $result['activation_token'];
             $result->notify(new RegisterVerificationMail());
             return response()->json([
-                'status'=> 200,
+                'status'=> $this->successCode,
                 'message'=>'Please Verify Mail Registration Successfully',
                 'data' => $success,
             ]);
             } catch (\Exception $e) {
-                return response()->json([
-                    'status'=> 500,
-                    'message' =>'Duplicate Entry please enter another mail',
-                ]);
+              return $this->getExceptionResponse($e);
             }
     }     
 
@@ -71,7 +72,7 @@ class UserController extends Controller
       
       Mail::to($email)->send(new ResendVerificationMail($details));
            return response()->json([
-            'status'=> 200,
+            'status'=> $this->successCode,
             'message'=>'Great! Successfully send in your mail',
            ]);
          
@@ -91,18 +92,12 @@ class UserController extends Controller
       //   //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
       // });
       } else {
-        return response()->json([
-          'status'=> 201,
-          'message' =>'Email Not found',
-      ]);
+        return $this->recordNotFound();   
       }
 
       }
       catch (\Exception $e) {
-        return response()->json([
-          'status'=> 500,
-          'message' =>'Please enter valid mail',
-      ]);
+        return $this->getExceptionResponse($e);
       }
     }
 public function User_login(Request $request)
@@ -115,10 +110,7 @@ public function User_login(Request $request)
   $credentials = $request->only('email', 'password');
 
   if ($validator->fails()) {
-    return response()->json(array(
-      // 'status' => 401,
-      'errors' => 'Please enter valid email & Password',
-    ), 400);
+    return $this->recordNotFoundEmail();
   }
   if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
   //  return Auth::user();
@@ -130,7 +122,7 @@ public function User_login(Request $request)
          return response()->json([
              'user'      => Auth::user(),
              'message'   => 'User Loging Successfully',
-             'status'    => 200,
+             'status'    => $this->successCode,
              'token'     => $success,
              'admin'     => $user->role_id ,
              'name'      => $user->role->name,
@@ -146,26 +138,15 @@ public function User_login(Request $request)
         }
         else 
         {
-          return response()->json([
-            'message'   => 'Please enter valid Password',
-            'status'    => 401,
-            
-          ]);
+          return $this->enterValidPassword();
         }
        
       }
       catch (\Exception $e) {
-        return response()->json([
-            'status'=> 500,
-            'message' =>'Please enter valid email & Password',
-        ]);
+        return $this->getExceptionResponse();
      }
     }
     
-    public function welcome()
-    {
-        return view('welcome');
-    }
 
     Public function Logout()
     {
