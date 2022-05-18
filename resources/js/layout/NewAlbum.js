@@ -32,13 +32,19 @@ export default function NewAlbum(props) {
     const [ genreValue , setgenreValue ] = useState([]);
 	const [tags, setTags] = useState([]);
 	const [additionForm , setadditionForm] = useState(false);
-
+	let payloading = {};
 	const [serviceList ,setServiceList] = useState([
-		{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}
+		{songname:'',composername:'',selectname:[],radio:'',isrcname:''}
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([...serviceList,{songname:''},{composername:''},{selectname:''},{radio:''},{isrcname:''}]);
+		setServiceList([...serviceList,{songname:'',composername:'',selectname:[],radio:'',isrcname:''}]);
+		console.log('//',serviceList);
 	};
+	const handleremove = (index) => {
+		const list = [...serviceList];
+		list.splice(index,1);
+		setServiceList(list);
+	}
 	const Remove = () => {
 		setadditionForm(false)
 	}
@@ -154,8 +160,11 @@ export default function NewAlbum(props) {
 	  };
 	let data = JSON.parse(localStorage.getItem('user'));
 
-	const onChangeValue = () => {
-		
+	const onChangeValue = (e , index) => {
+		const {name , value } = e.target;
+		const list = [...serviceList];
+		list[index][name]=value;
+		setServiceList(list);
 	}
 
 	return (
@@ -338,16 +347,16 @@ export default function NewAlbum(props) {
 													{ additionForm == true ?
 													<div className="row">
 													<div className="col-md-12">
+													{ serviceList.map((singleService,index)=>(
 														<div className="card">
 															<div className="card-header">
-																<h5> Song-1</h5><button type="button" onClick={Remove}>delete</button>
+																<h5> Song-{index+1}</h5><button type="button" onClick={Remove}>delete</button>
 															</div>
 															<div className="col s12 m12 l12">
 																<div id="Form-advance" className="card card card-default scrollspy">
 																	<div className="card-body">
 																		<h5 className="card-title"></h5>
-																			{ serviceList.map((singleService,index)=>(
-																		<form key = {index}>
+																		<form>
 																		
 																			<div  className="row">
 																				<div className="input-field col m6 s12">
@@ -428,20 +437,26 @@ export default function NewAlbum(props) {
 																			<p>Allowed formats: flac.Wav</p><br/>
 																			<p>If your files in other format, go to this website Convert to wav <Link className="color:red" to='https://www.freeconvert.com/'>freeconvert.com</Link>.</p>
 																			</div>
-																			{serviceList.length-1 === index && serviceList.length<4 && (
 																			<div className='row'>
+																			{serviceList.length-1 === index && serviceList.length<4 && (
 																			<div class="input-field col m6 s12">
 																			<h5>Songs</h5>
 																			<button type= 'button'className='btn btn-primary' onClick={handleServiceAdd}> + Add Song</button>
 																			</div>
+																			)}
+																			{serviceList.length > 1 && (
+																			<div class="input-field col m6 s12">
+																			<h5>Songs</h5>
+																			<button type= 'button'className='btn btn-primary' onClick={()=>{handleremove(index)}}> Remove Button</button>
 																			</div>
 																			)}
+																			</div>
 																		</form>
-																		))}
 																	</div>
 																</div>
 															</div>
 														</div>
+																))}
 													</div>
 												</div>
 											: ''	}
