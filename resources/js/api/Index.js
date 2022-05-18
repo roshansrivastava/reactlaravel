@@ -23,6 +23,7 @@ const Store = () => Api.get('/stores');
 const Genre = () => Api.get('/genres');
 const Upload = (formData,payload) => Api.post('/upload-file',formData,payload);
 const Countri = () =>Api.get('/country');
+const ReleaseAlbum = (payload) =>Api.post('/release/albums',payload);
 export  {
     UserLogin,
     Userlogout,
@@ -45,4 +46,5 @@ export  {
     Genre,
     Upload,
     Countri,
+    ReleaseAlbum,
 }

@@ -10,8 +10,9 @@ import Example from '../components/Example';
 import { WithContext as ReactTags } from 'react-tag-input';
 import Select from 'react-select';
 import Calendar from 'react-calendar';
-import {Countri} from '../api/Index';
+import {Countri,ReleaseAlbum} from '../api/Index';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 
 export default function NewAlbum(props) {
 	const [albumname ,setalbumname]=useState('');
@@ -32,7 +33,7 @@ export default function NewAlbum(props) {
     const [ genreValue , setgenreValue ] = useState([]);
 	const [tags, setTags] = useState([]);
 	const [additionForm , setadditionForm] = useState(false);
-	
+	const [modalIsOpen, setIsOpen] = useState(false);
 	const [serviceList ,setServiceList] = useState([
 		{songname:'',composername:'',selectname:'',radio:'',isrcname:''}
 	]);
@@ -56,11 +57,27 @@ export default function NewAlbum(props) {
 			Languagename:languagename,
 			SpotifyName:spotifyname,
 			ApplyName:applyname,
+			users:serviceList,
 		}
-		let cooo = [...serviceList,payload];
-		console.log('###123',cooo);
+		// console.log('!!!!');
+		ReleaseAlbum(payload)
+		.then((response)=>{
+		});
 		
 	}
+	const openModal = () => {
+		setIsOpen(true);
+	}
+	const customStyles = {
+		content: {
+		  top: '50%',
+		  left: '50%',
+		  right: 'auto',
+		  bottom: 'auto',
+		  marginRight: '-50%',
+		  transform: 'translate(-50%, -50%)',
+		},
+	  };
 	
 	const GetCountry = async () => {
 		await Countri()
@@ -118,7 +135,7 @@ export default function NewAlbum(props) {
 	const Addition = ()=>{
 		setadditionForm(true);
 	}
-	console.log('23',additionForm);
+
 
 	  
 	const KeyCodes = {
@@ -201,6 +218,30 @@ export default function NewAlbum(props) {
 				</a>
 			</aside>
 			<div id="main">
+			<Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        // onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+		  
+		  <div className='row'>
+		  <h5>Copyright Status </h5> </div>
+		  <div className='row'>
+		  <div className="check">
+			<label>
+				<input
+				type="check"
+				value="selected"
+				name='check'
+				/>
+				red
+			</label>
+			</div>
+			</div>
+		
+		  </Modal>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
@@ -225,7 +266,7 @@ export default function NewAlbum(props) {
 														className="basic-single"
 														classNamePrefix="select"									
 														name="color"
-														onChange={(e) => setgenerename(e.label)}
+														onChange={(e) => setgenerename(e.value)}
 														options={genreValue}
 														/>
 													</div>
@@ -288,7 +329,7 @@ export default function NewAlbum(props) {
 														classNamePrefix="select"								
 														name="color"
 														options={storevalue}
-														onChange={(e) => setlanguagename(e.label)}
+														onChange={(e) => setlanguagename(e.value)}
 
 														/>
 													</div>
@@ -397,36 +438,36 @@ export default function NewAlbum(props) {
 																				<label>
 																					<input
 																					type="radio"
-																					value="Male"
+																					value="Explicit Content"
 																					name='radio'
 																					onChange={(e)=>onChangeValue(e,index)}
 																					/>
 																					<span class="check"></span>  
-																					Male
+																					No Explicit Content
 																				</label>
 																				</div>
 																				<div className="radio">
 																				<label>
 																					<input
 																					type="radio"
-																					value="Female"
+																					value="Explicit Content"
 																					name='radio'
 																					onChange={(e)=>onChangeValue(e,index)}
 																					/>
 																					<span class="check"></span>  
-																					Female
+																					Explicit Content
 																				</label>
 																				</div>
 																				<div className="radio">
 																				<label>
 																					<input
 																					type="radio"
-																					value="Other"
+																					value="Instrumental"
 																					name='radio'
 																					onChange={(e)=>onChangeValue(e,index)}
 																					/>
 																					<span class="check"></span>
-																					Other
+																					Instrumental
 																				</label>
 																				</div>
 																				</div>
@@ -464,6 +505,7 @@ export default function NewAlbum(props) {
 															<button
 																className="btn cyan waves-effect waves-light right"
 																type="submit"
+																onClick={openModal}
 															>
 																Submit
 																<i className="material-icons right">send</i>

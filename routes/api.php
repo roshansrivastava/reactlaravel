@@ -44,6 +44,7 @@ Route::get('/getuser/{id}',[UserController::class,'GetUser'])->middleware(['auth
 Route::post('/edit/user',[UserController::class,'editUser'])->middleware(['auth:api']);
 Route::get('/stores',[DashboardController::class,'Store'])->middleware(['auth:api']);
 Route::get('/genres',[DashboardController::class,'Genre'])->middleware(['auth:api']);
+Route::post('/release/albums',[DashboardController::class,'Albums']);
 Route::get('/country',[DashboardController::class,'Country']);
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost']);

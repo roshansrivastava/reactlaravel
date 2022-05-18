@@ -43,7 +43,7 @@ class UserController extends Controller
             return response()->json([
                 'status'=> $this->successCode,
                 'message'=>'Please Verify Mail Registration Successfully',
-                'data' => new UserDataResource($Success),
+                'data' => $Success,
             ]);
             } catch (\Exception $e) {
               return $this->getExceptionResponse($e);

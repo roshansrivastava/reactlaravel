@@ -8,9 +8,18 @@ use App\Models\Plan;
 use App\Models\Genre;
 use App\Models\Store;
 use App\Models\Language;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Album;
+use App\Models\Song;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth:api');
+    }
+
     public function planUser()
     {
         try{
@@ -73,4 +82,51 @@ class DashboardController extends Controller
         return $this->getExceptionResponse($e);
         }
     }
+
+    public function Albums(Request $request)
+    {
+        try {
+           $data = $request->all();
+           $user = $data['users'];
+           $album['user_id']=Auth::user()->id;
+           $album['title']= $data['AlbumName'];
+           $album['release']=$data['DateName'];
+           $album['genre_id']=$data['GenerName'];
+           $album['language_id']=$data['Languagename'];
+           $album['spotify_url']=$data['SpotifyName'];
+           $album['apple_music_url']=$data['ApplyName'];
+           $album['upc']=$data['UpcName'];
+           $album['status']=1;
+           $album['cover']='no defined';
+           $albumdata= Album::create($album);
+           if($albumdata){
+               foreach($user as $data){
+                   $song['title']=$data['songname'];
+                   $song['composer']=$data['composername'];
+                   $song['isrc']=$data['isrcname'];
+                   $song['language']=$data['selectname'];
+                   $song['isExplicit']=0;
+                   $song['isInstrumental']=1;
+                   // $song['songFile']=;
+                   $song['album_id']=$albumdata->id;
+                   $song['language']=$data['selectname'];
+                   $songdata=Song::create($song);
+                };
+            }
+            return response()->json([
+            'status'=> $this->successCode,
+            'message'=>'data send successfully',
+            'data' => $songdata,
+            ]);
+            // else{
+            //     return response()->json([
+            //         'status'=> $this->successCode,
+            //         'message'=>'please fill data',
+            //         'data' => $
+            //         ]);
+            // }
+            } catch(\Exception $e){
+            return $this->getExceptionResponse($e);
+            }
+    } 
 }
