@@ -3,185 +3,180 @@ import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Store , Genre} from '../api/Index';
+import { Store, Genre } from '../api/Index';
 import './custom.css';
 import 'react-calendar/dist/Calendar.css';
 import Example from '../components/Example';
 import { WithContext as ReactTags } from 'react-tag-input';
 import Select from 'react-select';
 import Calendar from 'react-calendar';
-import {Countri,ReleaseAlbum} from '../api/Index';
+import { Countri, ReleaseAlbum } from '../api/Index';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 export default function NewAlbum(props) {
-	const [albumname ,setalbumname]=useState('');
-	const [genername ,setgenerename]=useState('');
-	const [datename ,setdatename]=useState('');
-	const [upcname ,setupcname]=useState('');
-	const [languagename ,setlanguagename]=useState('');
-	const [spotifyname ,setspotifyname]=useState('');
-	const [applyname ,setapplyname]=useState('');
-	const [Songselect , setsongselect]=useState('');
-	const [ComposerSong , setComposerSong]=useState('');
-	const [Radioname , setRadioname] = useState('');
-	const [languagename1 ,setlanguagename1]=useState('');
-	const [checkdata ,setcheckdata]=useState([]);
+	const [ albumname, setalbumname ] = useState('');
+	const [ genername, setgenerename ] = useState('');
+	const [ datename, setdatename ] = useState('');
+	const [ upcname, setupcname ] = useState('');
+	const [ languagename, setlanguagename ] = useState('');
+	const [ spotifyname, setspotifyname ] = useState('');
+	const [ applyname, setapplyname ] = useState('');
+	const [ Songselect, setsongselect ] = useState('');
+	const [ ComposerSong, setComposerSong ] = useState('');
+	const [ Radioname, setRadioname ] = useState('');
+	const [ languagename1, setlanguagename1 ] = useState('');
+	const [ checkdata, setcheckdata ] = useState([]);
 
-
-	const [ storevalue , setstorevalue ] = useState([]);
-    const [ genreValue , setgenreValue ] = useState([]);
-	const [tags, setTags] = useState([]);
-	const [additionForm , setadditionForm] = useState(false);
-	const [modalIsOpen, setIsOpen] = useState(false);
-	const [serviceList ,setServiceList] = useState([
-		{songname:'',composername:'',selectname:'',radio:'',isrcname:''}
+	const [ storevalue, setstorevalue ] = useState([]);
+	const [ genreValue, setgenreValue ] = useState([]);
+	const [ tags, setTags ] = useState([]);
+	const [ additionForm, setadditionForm ] = useState(false);
+	const [ modalIsOpen, setIsOpen ] = useState(false);
+	const [ serviceList, setServiceList ] = useState([
+		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '' }
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([...serviceList,{songname:'',composername:'',selectname:'',radio:'',isrcname:''}]);
+		setServiceList([ ...serviceList, { songname: '', composername: '', selectname: '', radio: '', isrcname: '' } ]);
 	};
 	const handleremove = (index) => {
-		const list = [...serviceList];
-		list.splice(index,1);
+		const list = [ ...serviceList ];
+		list.splice(index, 1);
 		setServiceList(list);
-	}
-	
+	};
+
 	const Saveform = (e) => {
 		e.preventDefault();
 		let payload = {
-			AlbumName:albumname,
-			GenerName:genername,
-			StoreName:tags,
-			DateName:datename,
-			UpcName:upcname,
-			Languagename:languagename,
-			SpotifyName:spotifyname,
-			ApplyName:applyname,
-			users:serviceList,
-		}
+			AlbumName: albumname,
+			GenerName: genername,
+			StoreName: tags,
+			DateName: datename,
+			UpcName: upcname,
+			Languagename: languagename,
+			SpotifyName: spotifyname,
+			ApplyName: applyname,
+			users: serviceList
+		};
 		// console.log('!!!!');
-		ReleaseAlbum(payload)
-		.then((response)=>{
-		});
-		
-	}
+		ReleaseAlbum(payload).then((response) => {});
+	};
 	const openModal = () => {
 		setIsOpen(true);
-	}
+	};
 	const customStyles = {
 		content: {
-		  top: '50%',
-		  left: '50%',
-		  right: 'auto',
-		  bottom: 'auto',
-		  marginRight: '-50%',
-		  transform: 'translate(-50%, -50%)',
-		},
-	  };
-	
+			top: '50%',
+			left: '50%',
+			right: 'auto',
+			bottom: 'auto',
+			marginRight: '-50%',
+			transform: 'translate(-50%, -50%)'
+		}
+	};
+
 	const GetCountry = async () => {
-		await Countri()
-		.then((res)=>{
-			var Languagedata = res.Language.map(value=>{
-				
+		await Countri().then((res) => {
+			var Languagedata = res.Language.map((value) => {
 				return {
-					label:value.name,
-					value:value.id
-				}
+					label: value.name,
+					value: value.id
+				};
 			});
-            setstorevalue(Languagedata);
-		})
-	}
-    const GetStore = async () => {
+			setstorevalue(Languagedata);
+		});
+	};
+	const GetStore = async () => {
 		await Store()
-		.then((res)=>{
-            console.log('stores',res.store);
-			var suggestions = res.store.map(value=>{
-		
-				return {
-					id:value.id,
-					text:value.store,
-				}
+			.then((res) => {
+				console.log('stores', res.store);
+				var suggestions = res.store.map((value) => {
+					return {
+						id: value.id,
+						text: value.store
+					};
+				});
+				setTags(suggestions);
+			})
+			.catch((err) => {
+				console.log(err);
 			});
-            setTags(suggestions);
-        })
-        .catch(err => {
-			console.log(err);
-		})
-    }
+	};
 
-    const GetGenre = async () => {
+	const GetGenre = async () => {
 		await Genre()
-        .then((res)=>{
-			console.log('genre',res.genre);
-			let geners = res.genre.map(data => {
-				return {
-					label:data.name,
-					value:data.id
-				}
+			.then((res) => {
+				console.log('genre', res.genre);
+				let geners = res.genre.map((data) => {
+					return {
+						label: data.name,
+						value: data.id
+					};
+				});
+				setgenreValue(geners);
+			})
+			.catch((err) => {
+				console.log(err);
 			});
-            setgenreValue(geners);
-        })
-        .catch(err => {
-			console.log(err);
-		})
-    }
-    useEffect(()=>{
-        GetStore();
-        GetGenre();
-		GetCountry();
-    },[0]);
-    
-	const Addition = ()=>{
+	};
+	useEffect(
+		() => {
+			GetStore();
+			GetGenre();
+			GetCountry();
+		},
+		[ 0 ]
+	);
+
+	const Addition = () => {
 		setadditionForm(true);
-	}
+	};
 
-
-	  
 	const KeyCodes = {
 		comma: 188,
-		enter: 13,
-	  };
-	  
-	  const delimiters = [KeyCodes.comma, KeyCodes.enter];
-	  const handleDelete = (i) => {
+		enter: 13
+	};
+
+	const delimiters = [ KeyCodes.comma, KeyCodes.enter ];
+	const handleDelete = (i) => {
 		setTags(tags.filter((tag, index) => index !== i));
-		console.log('33',i);
+		console.log('33', i);
 	};
-	
+
 	const handleAddition = (tag) => {
-		setTags([...tags, tag]);
+		setTags([ ...tags, tag ]);
 	};
-	
+
 	const handleDrag = (tag, currPos, newPos) => {
 		const newTags = tags.slice();
-	
+
 		newTags.splice(currPos, 1);
 		newTags.splice(newPos, 0, tag);
-		
+
 		setTags(newTags);
-	  };
-	
-	  const handleTagClick = (index) => {
-		  console.log('44',index);
+	};
+
+	const handleTagClick = (index) => {
+		console.log('44', index);
 		console.log('The tag at index ' + index + ' was clicked');
-	  };
+	};
 	let data = JSON.parse(localStorage.getItem('user'));
 
-	const onChangeValue = (e , index) => {
-		const {name , value } = e.target;
-		const list = [...serviceList];
-		list[index][name]=value;
+	const onChangeValue = (e, index) => {
+		const { name, value } = e.target;
+		const list = [ ...serviceList ];
+		list[index][name] = value;
 		setServiceList(list);
-	}
-	const onChangeselect = (e , index)=>{
+	};
+	const onChangeselect = (e, index) => {
 		// const{name,value}=e.target
 		// console.log('@@',name);
-		const {label} = e;
-		const listing = [...serviceList];
-		listing[index]['selectname']=label;
+		const { label } = e;
+		const listing = [ ...serviceList ];
+		listing[index]['selectname'] = label;
 		setServiceList(listing);
-	}
+	};
 
 	return (
 		<div className="App">
@@ -218,30 +213,91 @@ export default function NewAlbum(props) {
 				</a>
 			</aside>
 			<div id="main">
-			<Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-		  
-		  <div className='row'>
-		  <h5>Copyright Status </h5> </div>
-		  <div className='row'>
-		  <div className="check">
-			<label>
-				<input
-				type="check"
-				value="selected"
-				name='check'
-				/>
-				red
-			</label>
-			</div>
-			</div>
-		
-		  </Modal>
+				<Modal
+					isOpen={modalIsOpen}
+					// onAfterOpen={afterOpenModal}
+					// onRequestClose={closeModal}
+					style={customStyles}
+					contentLabel="Example Modal"
+				>
+					<div class="row">
+						<div class="col s12">
+							<div id="checkboxes" class="card card-tabs">
+								<div class="card-content">
+									<div class="card-title">
+										<div class="row">
+											<div class="col s12 m6 l10">
+												<h4 class="card-title">Copyright Status</h4>
+											</div>
+											<div class="col s12 m6 l2">
+												<ul class="tabs">
+													<li class="tab col s6 p-0">
+														<a class="active p-0" href="#view-checkboxes">
+															Delete
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div id="view-checkboxes">
+										<div className="row">
+											<p class="mb-1">
+												<label>
+													<input type="checkbox" class="filled-in" />
+													<span>
+														<pre>
+															{' '}
+															I Confirm that this release is 100% Mine or that I have{' '}
+															<br />
+															100% right to publish this music with all samples <br />
+															and Instrumental included{' '}
+														</pre>
+													</span>
+												</label>
+											</p>
+										</div>
+										<div className="row">
+											<p class="mb-1">
+												<label>
+													<input type="checkbox" class="filled-in" />
+													<span>
+														I am aware that it is forbidden to publish music to <br />
+														which i do not have the rights
+													</span>
+												</label>
+											</p>
+										</div>
+										<div className="row">
+											<p class="mb-1">
+												<label>
+													<input type="checkbox" class="filled-in" />
+													<span>I confirm that i have read the terms and service </span>
+												</label>
+											</p>
+										</div>
+										<div className="row">
+											<button
+												type="submit"
+												// disabled={!agree}
+												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
+											>
+												<CloudUploadIcon />Release Album
+											</button>
+										</div>
+										<div className='row'>
+										<div class="col">
+										<button type='button'>
+											Close
+										</button>
+											</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</Modal>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
@@ -256,249 +312,317 @@ export default function NewAlbum(props) {
 											<form autocomplete="on" onSubmit={Saveform}>
 												<div className="row">
 													<div className="input-field col m6 s12">
-														<input id="first_name01" type="text" 
-														onChange={(e) => setalbumname(e.target.value)}
+														<input
+															id="first_name01"
+															type="text"
+															onChange={(e) => setalbumname(e.target.value)}
 														/>
 														<label htmlFor="first_name01">Album Name</label>
 													</div>
 													<div className="input-field col m6 s12">
-													<Select
-														className="basic-single"
-														classNamePrefix="select"									
-														name="color"
-														onChange={(e) => setgenerename(e.value)}
-														options={genreValue}
+														<Select
+															className="basic-single"
+															classNamePrefix="select"
+															name="color"
+															onChange={(e) => setgenerename(e.value)}
+															options={genreValue}
 														/>
 													</div>
 												</div>
-												<div className='row'>
-												<h6>Stores</h6>
-												<div className="app">
-												<ReactTags
-												tags={tags}
-												delimiters={delimiters}
-												handleDelete={handleDelete}
-												handleAddition={handleAddition}
-												handleDrag={handleDrag}
-												handleTagClick={handleTagClick}
-												inputFieldPosition="bottom"
-												autocomplete
-												editable
-												// onChange={(e) => setstorename(e.text)}
-												/>
+												<div className="row">
+													<h6>Stores</h6>
+													<div className="app">
+														<ReactTags
+															tags={tags}
+															delimiters={delimiters}
+															handleDelete={handleDelete}
+															handleAddition={handleAddition}
+															handleDrag={handleDrag}
+															handleTagClick={handleTagClick}
+															inputFieldPosition="bottom"
+															autocomplete
+															editable
+															// onChange={(e) => setstorename(e.text)}
+														/>
+													</div>
 												</div>
-												</div>
-												<div className='row'>
-												<div class="input-field col m6 s12">
-													<div className='release'>
-														<h6>Release Date
-															</h6><span className='mt-4'>
-															<pre>
-													(The date must be date after today)</pre>	
-													</span></div>
-													{/* <Calendar 
+												<div className="row">
+													<div class="input-field col m6 s12">
+														<div className="release">
+															<h6>Release Date</h6>
+															<span className="mt-4">
+																<pre>(The date must be date after today)</pre>
+															</span>
+														</div>
+														{/* <Calendar 
 													  onChange={onChange} 
 													  value={value}
 													  formatDay ={(locale, date) => formatDate(date, 'd')}
 													  maxDate={new Date()}
 													/> */}
-													 <input
-														name="dt_contracting"
-														type="date"
-														className="form-control"
-														id ='unique'
-														onChange={(e) => setdatename(e.target.value)}
-
-													/>
-													 
-													</div>
-													<div class="input-field col m6 s12">
-													<div className="input-field col m6 s12">
-														<h6>UPC</h6>
-														<input id="first_name02" type="text"
-														placeholder="If you don't have one leave this blank"
-														onChange={(e) => setupcname(e.target.value)}
-
+														<input
+															name="dt_contracting"
+															type="date"
+															className="form-control"
+															id="unique"
+															onChange={(e) => setdatename(e.target.value)}
 														/>
 													</div>
+													<div class="input-field col m6 s12">
+														<div className="input-field col m6 s12">
+															<h6>UPC</h6>
+															<input
+																id="first_name02"
+																type="text"
+																placeholder="If you don't have one leave this blank"
+																onChange={(e) => setupcname(e.target.value)}
+															/>
+														</div>
 													</div>
 													<div class="input-field col m6 s12">
 														<h6>Languages</h6>
-													<Select
-														className="single"
-														classNamePrefix="select"								
-														name="color"
-														options={storevalue}
-														onChange={(e) => setlanguagename(e.value)}
-
+														<Select
+															className="single"
+															classNamePrefix="select"
+															name="color"
+															options={storevalue}
+															onChange={(e) => setlanguagename(e.value)}
 														/>
 													</div>
 												</div>
 												<div className="row">
-													<h6>Upload Cover <span className='question'>?</span></h6>
-												<Example token={props.token}/>
-												</div>	
-												<div className='row'>
-												<h6>Spotify Artist URL <span className='question'>?</span></h6>
-												<div class="input-field col m6 s12">
-												<div className='row'>
-													<div className='col-sm-9'>
-												<input id="first_name04" type="text"
-													placeholder="If you don't have one leave this blank"
-													onChange={(e) => setspotifyname(e.target.value)}
-													
-													/></div>
-													
-													<div className='col-sm-3'><span>
-													<button className='btn btn-primary'>
-														Check URL
-													</button></span>
-													</div>
-													</div>
+													<h6>
+														Upload Cover <span className="question">?</span>
+													</h6>
+													<Example token={props.token} />
 												</div>
-												</div>					
-
-
-												<div className='row'>
-												<h6>Apply Artist URL <span className='question'>?</span></h6>
-												<div class="input-field col m6 s12">
-												<div className='row'>
-													<div className='col-sm-9'>
-												<input id="first_name04" type="text"
-													placeholder="If you don't have one leave this blank"
-													onChange={(e) => setapplyname(e.target.value)}
-
-													/></div>
-													
-													<div className='col-sm-3'><span>
-													<button className='btn btn-primary'>
-														Check URL
-													</button></span>
-													</div>
-													</div>
-												</div>
-												</div>					
-												<div className='row'>
-												<div class="input-field col m6 s12">
-													<h5>Songs</h5>
-													<button type= 'button'className='btn btn-primary' onClick={Addition}>+ Add Song</button>
-													</div>
-													</div>
-													{ additionForm == true ?
-													<div className="row">
-													<div className="col-md-12">
-													{ serviceList.map((singleService,index)=>(
-														<div key={index}className="card">
-															<div className="card-header">
-																<h5> Song-{index+1}</h5>
+												<div className="row">
+													<h6>
+														Spotify Artist URL <span className="question">?</span>
+													</h6>
+													<div class="input-field col m6 s12">
+														<div className="row">
+															<div className="col-sm-9">
+																<input
+																	id="first_name04"
+																	type="text"
+																	placeholder="If you don't have one leave this blank"
+																	onChange={(e) => setspotifyname(e.target.value)}
+																/>
 															</div>
-															<div className="col s12 m12 l12">
-																{/* <div id="Form-advance" className="card card card-default scrollspy"> */}
-																	<div className="card-body">
-																		<h5 className="card-title"></h5>
-																		
-																			<div  className="row">
-																				<div className="input-field col m6 s12">
-																					<input id="first_name10" type="text" name='songname' 
-																					onChange={(e)=>onChangeValue(e,index)}
-																					/>
-																					<label htmlFor="first_name10">Song Name</label>
-																				</div>
-																			</div>
-																			<div className="row">
-																				<div className="input-field col m6 s12">
-																					<input id="first_name11" type="text" name='composername'
-																					onChange={(e)=>onChangeValue(e,index)}
-																					 />
-																					<label htmlFor="first_name11">Composer ( Song )</label>
-																				</div>
-																			</div>
-																			<div className="row">
-																				<div className="input-field col m6 s12">
-																				<h6>Languages</h6>
-																					<Select
-																						className="single"
-																						classNamePrefix="select"								
-																						name="selectname"
-																						options={storevalue}
-																						onChange={(e)=>onChangeselect(e,index)}
-																						/>
-																				</div>
-																				<div className="input-field col m6 s12">
-																				<h6>ISRC</h6>
-																				<input id="first_name04" type="text"
-																				name='isrcname'
-																				placeholder="If you don't have one leave this blank"
-																				onChange={(e)=>onChangeValue(e,index)}
-																				/></div>
-																			</div>
 
-																			<div className='radiobutton'>
-																			<div className="radio">
-																				<label>
-																					<input
-																					type="radio"
-																					value="Explicit Content"
-																					name='radio'
-																					onChange={(e)=>onChangeValue(e,index)}
-																					/>
-																					<span class="check"></span>  
-																					No Explicit Content
-																				</label>
-																				</div>
-																				<div className="radio">
-																				<label>
-																					<input
-																					type="radio"
-																					value="Explicit Content"
-																					name='radio'
-																					onChange={(e)=>onChangeValue(e,index)}
-																					/>
-																					<span class="check"></span>  
-																					Explicit Content
-																				</label>
-																				</div>
-																				<div className="radio">
-																				<label>
-																					<input
-																					type="radio"
-																					value="Instrumental"
-																					name='radio'
-																					onChange={(e)=>onChangeValue(e,index)}
-																					/>
-																					<span class="check"></span>
-																					Instrumental
-																				</label>
-																				</div>
-																				</div>
-																			<div className="row">
-																				<h6>Upload Song</h6>
-																			<Example token={props.token}/>
-																			<p>Allowed formats: flac.Wav</p><br/>
-																			<p>If your files in other format, go to this website Convert to wav <Link className="color:red" to='https://www.freeconvert.com/'>freeconvert.com</Link>.</p>
-																			</div>
-																			<div className='row'>
-																			{serviceList.length-1 === index && serviceList.length<4 && (
-																			<div class="input-field col m6 s12">
-																			<h5>Songs</h5>
-																			<button type= 'button'className='btn btn-primary' onClick={handleServiceAdd}> + Add Song</button>
-																			</div>
-																			)}
-																			{serviceList.length > 1 && (
-																			<div class="input-field col m6 s12">
-																			<h5>Songs</h5>
-																			<button type= 'button'className='btn btn-primary' onClick={()=>{handleremove(index)}}> Remove Button</button>
-																			</div>
-																			)}
-																			</div>
-																	{/* </div> */}
-																</div>
+															<div className="col-sm-3">
+																<span>
+																	<button className="btn btn-primary">
+																		Check URL
+																	</button>
+																</span>
 															</div>
 														</div>
-																))}
 													</div>
 												</div>
-											: ''	}
+
+												<div className="row">
+													<h6>
+														Apply Artist URL <span className="question">?</span>
+													</h6>
+													<div class="input-field col m6 s12">
+														<div className="row">
+															<div className="col-sm-9">
+																<input
+																	id="first_name04"
+																	type="text"
+																	placeholder="If you don't have one leave this blank"
+																	onChange={(e) => setapplyname(e.target.value)}
+																/>
+															</div>
+
+															<div className="col-sm-3">
+																<span>
+																	<button className="btn btn-primary">
+																		Check URL
+																	</button>
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div className="row">
+													<div class="input-field col m6 s12">
+														<h5>Songs</h5>
+														<button
+															type="button"
+															className="btn btn-primary"
+															onClick={Addition}
+														>
+															+ Add Song
+														</button>
+													</div>
+												</div>
+												{additionForm == true ? (
+													<div className="row">
+														<div className="col-md-12">
+															{serviceList.map((singleService, index) => (
+																<div key={index} className="card">
+																	<div className="card-header">
+																		<h5> Song-{index + 1}</h5>
+																	</div>
+																	<div className="col s12 m12 l12">
+																		{/* <div id="Form-advance" className="card card card-default scrollspy"> */}
+																		<div className="card-body">
+																			<h5 className="card-title" />
+
+																			<div className="row">
+																				<div className="input-field col m6 s12">
+																					<input
+																						id="first_name10"
+																						type="text"
+																						name="songname"
+																						onChange={(e) =>
+																							onChangeValue(e, index)}
+																					/>
+																					<label htmlFor="first_name10">
+																						Song Name
+																					</label>
+																				</div>
+																			</div>
+																			<div className="row">
+																				<div className="input-field col m6 s12">
+																					<input
+																						id="first_name11"
+																						type="text"
+																						name="composername"
+																						onChange={(e) =>
+																							onChangeValue(e, index)}
+																					/>
+																					<label htmlFor="first_name11">
+																						Composer ( Song )
+																					</label>
+																				</div>
+																			</div>
+																			<div className="row">
+																				<div className="input-field col m6 s12">
+																					<h6>Languages</h6>
+																					<Select
+																						className="single"
+																						classNamePrefix="select"
+																						name="selectname"
+																						options={storevalue}
+																						onChange={(e) =>
+																							onChangeselect(e, index)}
+																					/>
+																				</div>
+																				<div className="input-field col m6 s12">
+																					<h6>ISRC</h6>
+																					<input
+																						id="first_name04"
+																						type="text"
+																						name="isrcname"
+																						placeholder="If you don't have one leave this blank"
+																						onChange={(e) =>
+																							onChangeValue(e, index)}
+																					/>
+																				</div>
+																			</div>
+
+																			<div className="radiobutton">
+																				<div className="radio">
+																					<label>
+																						<input
+																							type="radio"
+																							value="Explicit Content"
+																							name="radio"
+																							onChange={(e) =>
+																								onChangeValue(e, index)}
+																						/>
+																						<span class="check" />
+																						No Explicit Content
+																					</label>
+																				</div>
+																				<div className="radio">
+																					<label>
+																						<input
+																							type="radio"
+																							value="Explicit Content"
+																							name="radio"
+																							onChange={(e) =>
+																								onChangeValue(e, index)}
+																						/>
+																						<span class="check" />
+																						Explicit Content
+																					</label>
+																				</div>
+																				<div className="radio">
+																					<label>
+																						<input
+																							type="radio"
+																							value="Instrumental"
+																							name="radio"
+																							onChange={(e) =>
+																								onChangeValue(e, index)}
+																						/>
+																						<span class="check" />
+																						Instrumental
+																					</label>
+																				</div>
+																			</div>
+																			<div className="row">
+																				<h6>Upload Song</h6>
+																				<Example token={props.token} />
+																				<p>Allowed formats: flac.Wav</p>
+																				<br />
+																				<p>
+																					If your files in other format, go to
+																					this website Convert to wav{' '}
+																					<Link
+																						className="color:red"
+																						to="https://www.freeconvert.com/"
+																					>
+																						freeconvert.com
+																					</Link>.
+																				</p>
+																			</div>
+																			<div className="row">
+																				{serviceList.length - 1 === index &&
+																				serviceList.length < 4 && (
+																					<div class="input-field col m6 s12">
+																						<h5>Songs</h5>
+																						<button
+																							type="button"
+																							className="btn btn-primary"
+																							onClick={handleServiceAdd}
+																						>
+																							{' '}
+																							+ Add Song
+																						</button>
+																					</div>
+																				)}
+																				{serviceList.length > 1 && (
+																					<div class="input-field col m6 s12">
+																						<h5>Songs</h5>
+																						<button
+																							type="button"
+																							className="btn btn-primary"
+																							onClick={() => {
+																								handleremove(index);
+																							}}
+																						>
+																							{' '}
+																							Remove Button
+																						</button>
+																					</div>
+																				)}
+																			</div>
+																			{/* </div> */}
+																		</div>
+																	</div>
+																</div>
+															))}
+														</div>
+													</div>
+												) : (
+													''
+												)}
 												<div className="row">
 													<div className="row">
 														<div className="input-field col s12">
