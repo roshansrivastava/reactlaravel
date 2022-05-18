@@ -21,7 +21,7 @@ export default function NewAlbum(props) {
 	const [languagename ,setlanguagename]=useState('');
 	const [spotifyname ,setspotifyname]=useState('');
 	const [applyname ,setapplyname]=useState('');
-	const [Song , setSong]=useState('');
+	const [Songselect , setsongselect]=useState('');
 	const [ComposerSong , setComposerSong]=useState('');
 	const [Radioname , setRadioname] = useState('');
 	const [languagename1 ,setlanguagename1]=useState('');
@@ -32,22 +32,19 @@ export default function NewAlbum(props) {
     const [ genreValue , setgenreValue ] = useState([]);
 	const [tags, setTags] = useState([]);
 	const [additionForm , setadditionForm] = useState(false);
-	let payloading = {};
+	
 	const [serviceList ,setServiceList] = useState([
-		{songname:'',composername:'',selectname:[],radio:'',isrcname:''}
+		{songname:'',composername:'',selectname:'',radio:'',isrcname:''}
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([...serviceList,{songname:'',composername:'',selectname:[],radio:'',isrcname:''}]);
-		console.log('//',serviceList);
+		setServiceList([...serviceList,{songname:'',composername:'',selectname:'',radio:'',isrcname:''}]);
 	};
 	const handleremove = (index) => {
 		const list = [...serviceList];
 		list.splice(index,1);
 		setServiceList(list);
 	}
-	const Remove = () => {
-		setadditionForm(false)
-	}
+	
 	const Saveform = (e) => {
 		e.preventDefault();
 		let payload = {
@@ -60,15 +57,16 @@ export default function NewAlbum(props) {
 			SpotifyName:spotifyname,
 			ApplyName:applyname,
 		}
-		setcheckdata(payload);
+		let cooo = [...serviceList,payload];
+		console.log('###123',cooo);
+		
 	}
-	// let  var = [...checkdata,'xxxxxxxxxxx'];
-	console.log('###save',checkdata);
+	
 	const GetCountry = async () => {
 		await Countri()
 		.then((res)=>{
 			var Languagedata = res.Language.map(value=>{
-				// console.log('5',data.id);
+				
 				return {
 					label:value.name,
 					value:value.id
@@ -78,11 +76,11 @@ export default function NewAlbum(props) {
 		})
 	}
     const GetStore = async () => {
-       await Store()
-        .then((res)=>{
+		await Store()
+		.then((res)=>{
             console.log('stores',res.store);
 			var suggestions = res.store.map(value=>{
-				// console.log('5',value.store);
+		
 				return {
 					id:value.id,
 					text:value.store,
@@ -96,9 +94,9 @@ export default function NewAlbum(props) {
     }
 
     const GetGenre = async () => {
-        await Genre()
+		await Genre()
         .then((res)=>{
-            console.log('genre',res.genre);
+			console.log('genre',res.genre);
 			let geners = res.genre.map(data => {
 				return {
 					label:data.name,
@@ -122,14 +120,8 @@ export default function NewAlbum(props) {
 	}
 	console.log('23',additionForm);
 
-	// const suggestions = COUNTRIES.map((country) => {
-	// 	return {
-	// 	  id: country,
-	// 	  text: country,
-	// 	};
-	//   });
 	  
-	  const KeyCodes = {
+	const KeyCodes = {
 		comma: 188,
 		enter: 13,
 	  };
@@ -138,19 +130,18 @@ export default function NewAlbum(props) {
 	  const handleDelete = (i) => {
 		setTags(tags.filter((tag, index) => index !== i));
 		console.log('33',i);
-	  };
+	};
 	
-	  const handleAddition = (tag) => {
+	const handleAddition = (tag) => {
 		setTags([...tags, tag]);
-	  };
+	};
 	
-	  const handleDrag = (tag, currPos, newPos) => {
+	const handleDrag = (tag, currPos, newPos) => {
 		const newTags = tags.slice();
 	
 		newTags.splice(currPos, 1);
 		newTags.splice(newPos, 0, tag);
-	
-		// re-render
+		
 		setTags(newTags);
 	  };
 	
@@ -165,6 +156,14 @@ export default function NewAlbum(props) {
 		const list = [...serviceList];
 		list[index][name]=value;
 		setServiceList(list);
+	}
+	const onChangeselect = (e , index)=>{
+		// const{name,value}=e.target
+		// console.log('@@',name);
+		const {label} = e;
+		const listing = [...serviceList];
+		listing[index]['selectname']=label;
+		setServiceList(listing);
 	}
 
 	return (
@@ -348,15 +347,14 @@ export default function NewAlbum(props) {
 													<div className="row">
 													<div className="col-md-12">
 													{ serviceList.map((singleService,index)=>(
-														<div className="card">
+														<div key={index}className="card">
 															<div className="card-header">
-																<h5> Song-{index+1}</h5><button type="button" onClick={Remove}>delete</button>
+																<h5> Song-{index+1}</h5>
 															</div>
 															<div className="col s12 m12 l12">
-																<div id="Form-advance" className="card card card-default scrollspy">
+																{/* <div id="Form-advance" className="card card card-default scrollspy"> */}
 																	<div className="card-body">
 																		<h5 className="card-title"></h5>
-																		<form>
 																		
 																			<div  className="row">
 																				<div className="input-field col m6 s12">
@@ -382,6 +380,7 @@ export default function NewAlbum(props) {
 																						classNamePrefix="select"								
 																						name="selectname"
 																						options={storevalue}
+																						onChange={(e)=>onChangeselect(e,index)}
 																						/>
 																				</div>
 																				<div className="input-field col m6 s12">
@@ -451,8 +450,7 @@ export default function NewAlbum(props) {
 																			</div>
 																			)}
 																			</div>
-																		</form>
-																	</div>
+																	{/* </div> */}
 																</div>
 															</div>
 														</div>
