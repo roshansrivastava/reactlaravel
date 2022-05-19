@@ -28,6 +28,7 @@ export default function NewAlbum(props) {
 	const [ Radioname, setRadioname ] = useState('');
 	const [ languagename1, setlanguagename1 ] = useState('');
 	const [ checkdata, setcheckdata ] = useState([]);
+	const [ uploadFileData, setUploadFile ] = useState(null);
 
 	const [ storevalue, setstorevalue ] = useState([]);
 	const [ genreValue, setgenreValue ] = useState([]);
@@ -311,7 +312,7 @@ export default function NewAlbum(props) {
 									<div id="Form-advance" className="card card card-default scrollspy">
 										<div className="card-body">
 											<h5 className="card-title">General Information</h5>
-											<form autocomplete="on" onSubmit={Saveform}>
+											<form autocomplete="on" >
 												<div className="row">
 													<div className="input-field col m6 s12">
 														<input
@@ -396,7 +397,9 @@ export default function NewAlbum(props) {
 													<h6>
 														Upload Cover <span className="question">?</span>
 													</h6>
-													<Example token={props.token} />
+													<Example token={props.token} setValues={(data) => {
+														setUploadFile(data)
+													}} />
 												</div>
 												<div className="row">
 													<h6>
@@ -631,7 +634,7 @@ export default function NewAlbum(props) {
 															<button
 																className="btn cyan waves-effect waves-light right"
 																type="submit"
-																onClick={openModal}
+																onClick={Saveform}
 															>
 																Submit
 																<i className="material-icons right">send</i>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('genre_id');
             $table->date('release');
             $table->tinyInteger('status')->default(0);
-            $table->string('note',10000)->nullable();
+            $table->json('store')->nullable();
             $table->string('cover',255);
             $table->string('spotify_url',555)->nullable();
             $table->string('apple_music_url',555)->nullable();

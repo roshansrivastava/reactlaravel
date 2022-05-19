@@ -87,6 +87,7 @@ class DashboardController extends Controller
     {
         try {
            $data = $request->all();
+           $storevalue=json_encode($data['StoreName']);
            $user = $data['users'];
            $album['user_id']=Auth::user()->id;
            $album['title']= $data['AlbumName'];
@@ -95,6 +96,7 @@ class DashboardController extends Controller
            $album['language_id']=$data['Languagename'];
            $album['spotify_url']=$data['SpotifyName'];
            $album['apple_music_url']=$data['ApplyName'];
+           $album['store']=$storevalue;
            $album['upc']=$data['UpcName'];
            $album['status']=1;
            $album['cover']='no defined';

@@ -37,21 +37,29 @@ render() {
             }}
             allowMultiple={true}
             maxFiles={3}
+            allowRevert={true}
+            allowProcess={false}
+            maxParallelUploads={2}
+            // labelFileLoading={'Loading'}
             
             server={{
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) =>{
                     
                     const formData = new FormData();
                     formData.append(fieldName, file, file.name);
-                console.log('fff',file);
-                // axios.post('http://localhost:8000/api/upload-file', formData)
-                Upload(formData)
-                .then(res => {
-                    console.log('response',res);
-                    load('test');
+
+                    console.log('fff',file);
+                    // axios.post('http://localhost:8000/api/upload-file', formData)
+                    
+                    Upload(formData)
+                    .then(res => {
+                        console.log('response',res);
+                            this.props.setValues(res)
+                            load('test');
                   }).catch (e => {
                       console.error('failure',e);
                   });
+                  return;
                 //   console.log('33',file.name);
                   Vapor.store(file, {
                       progress: progress => {

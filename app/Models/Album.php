@@ -14,7 +14,7 @@ class Album extends Model
         'genre_id',
         'release',
         'status',
-        'note',
+        'store',
         'cover',
         'note',
         'spotify_url',

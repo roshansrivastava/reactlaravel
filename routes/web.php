@@ -35,7 +35,7 @@ Route::get('/dashboard/User',[UserController::class,'welcome']);
 Route::get('/dashboard/adduser',[UserController::class,'welcome']);
 Route::get('/dashboard/updateuser/{id}',[UserController::class,'welcome']);
 Route::get('/dashboard/release/newalbum',[UserController::class,'welcome']);
-// Route::post('/dashboard/updateuser',[UserController::class,'welcome']);
+Route::get('/dashboard/Music',[UserController::class,'welcome']);
 Route::get('/dashboard/purchase/premium',[UserController::class,'welcome']);
 Route::get('/dashboard/purchase/basic',[UserController::class,'welcome']);
 Route::get('/dashboard/purchase/free',[UserController::class,'welcome']);
