@@ -226,10 +226,10 @@ export default function NewAlbum(props) {
 								<div class="card-content">
 									<div class="card-title">
 										<div class="row">
-											<div class="col s12 m6 l10">
+											<div class="col s12 m6 l2">
 												<h4 class="card-title">Copyright Status</h4>
 											</div>
-											<div class="col s12 m6 l2">
+											<div class="col s12 m6 l2 " id='modaldelete'>
 												<ul class="tabs">
 													<li class="tab col s6 p-0">
 														<a class="active p-0" href="#view-checkboxes">
@@ -277,6 +277,7 @@ export default function NewAlbum(props) {
 											</p>
 										</div>
 										<div className="row">
+											
 											<button
 												type="submit"
 												// disabled={!agree}
@@ -284,9 +285,10 @@ export default function NewAlbum(props) {
 											>
 												<CloudUploadIcon />Release Album
 											</button>
+
 										</div>
 										<div className='row'>
-										<div class="col">
+										<div className='typeclosebutton'>
 										<button type='button'>
 											Close
 										</button>
