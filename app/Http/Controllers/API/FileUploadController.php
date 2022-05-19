@@ -32,6 +32,7 @@ class FileUploadController extends Controller
             return response()->json([
                   'status'=> 200,
                   'message'=> 'Success' ,
+                  'data'=>$fileupload,
               ]);
            
             // return ['22',$All];

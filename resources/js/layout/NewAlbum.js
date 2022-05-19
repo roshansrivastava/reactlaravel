@@ -7,6 +7,7 @@ import { Store, Genre } from '../api/Index';
 import './custom.css';
 import 'react-calendar/dist/Calendar.css';
 import Example from '../components/Example';
+import FileuploadMusic from '../components/FileuploadMusic';
 import { WithContext as ReactTags } from 'react-tag-input';
 import Select from 'react-select';
 import Calendar from 'react-calendar';
@@ -29,7 +30,7 @@ export default function NewAlbum(props) {
 	const [ languagename1, setlanguagename1 ] = useState('');
 	const [ checkdata, setcheckdata ] = useState([]);
 	const [ uploadFileData, setUploadFile ] = useState(null);
-
+	const [uploadmusicData , setuploadmusicData]= useState('');
 	const [ storevalue, setstorevalue ] = useState([]);
 	const [ genreValue, setgenreValue ] = useState([]);
 	const [ tags, setTags ] = useState([]);
@@ -46,7 +47,6 @@ export default function NewAlbum(props) {
 		list.splice(index, 1);
 		setServiceList(list);
 	};
-
 	const Saveform = (e) => {
 		e.preventDefault();
 		let payload = {
@@ -55,12 +55,15 @@ export default function NewAlbum(props) {
 			StoreName: tags,
 			DateName: datename,
 			UpcName: upcname,
+			uploadFileId:uploadFileData.data.id,
+			uploadFilePath:uploadFileData.data.path,
 			Languagename: languagename,
 			SpotifyName: spotifyname,
 			ApplyName: applyname,
 			users: serviceList
 		};
-		// console.log('!!!!');
+
+		console.log('!!!!',uploadmusicData);
 		ReleaseAlbum(payload).then((response) => {});
 	};
 	const openModal = () => {
@@ -397,7 +400,7 @@ export default function NewAlbum(props) {
 													<h6>
 														Upload Cover <span className="question">?</span>
 													</h6>
-													<Example token={props.token} setValues={(data) => {
+													<Example setValues={(data) => {
 														setUploadFile(data)
 													}} />
 												</div>
@@ -573,7 +576,9 @@ export default function NewAlbum(props) {
 																			</div>
 																			<div className="row">
 																				<h6>Upload Song</h6>
-																				<Example token={props.token} />
+																				<FileuploadMusic setMusicValues={(music) => {
+																					console.log('music',music)
+																					setuploadmusicData(music) } }/>
 																				<p>Allowed formats: flac.Wav</p>
 																				<br />
 																				<p>

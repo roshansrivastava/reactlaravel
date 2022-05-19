@@ -22,6 +22,9 @@ use App\Http\Controllers\API\StripeController;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('phinfo', function () {
+//     return phpinfo();
+// });
 
 Route::get('/',[UserController::class,'welcome']);
 Route::post('/',[UserController::class,'Register']);

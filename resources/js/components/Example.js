@@ -4,12 +4,13 @@ import 'filepond/dist/filepond.min.css';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import ReactDOM from 'react-dom';
 import '../../css/app.css';
 import axios from 'axios';
 import Vapor from 'laravel-vapor'
 import { Upload } from '../api/Index';
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview ,FilePondPluginFileValidateType);
 
 class Example extends Component {
   constructor(props) {
@@ -25,8 +26,6 @@ class Example extends Component {
 render() {
   return (
       <div className="App">
-      
-          {/* <h1>File Uploads </h1> */}
           <FilePond
 
             files={this.state.files}
@@ -39,9 +38,8 @@ render() {
             maxFiles={3}
             allowRevert={true}
             allowProcess={false}
-            maxParallelUploads={2}
-            // labelFileLoading={'Loading'}
-            
+            // maxParallelUploads={2}
+            acceptedFileTypes={['image/png', 'image/jpeg' ]}
             server={{
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) =>{
                     
@@ -53,8 +51,8 @@ render() {
                     
                     Upload(formData)
                     .then(res => {
+                        this.props.setValues(res)
                         console.log('response',res);
-                            this.props.setValues(res)
                             load('test');
                   }).catch (e => {
                       console.error('failure',e);
