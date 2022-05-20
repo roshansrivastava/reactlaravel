@@ -133,13 +133,6 @@ class DashboardController extends Controller
             'message'=>'data send successfully',
             'data' => $songdata,
             ]);
-            // else{
-            //     return response()->json([
-            //         'status'=> $this->successCode,
-            //         'message'=>'please fill data',
-            //         'data' => $
-            //         ]);
-            // }
             } catch(\Exception $e){
             return $this->getExceptionResponse($e);
             }

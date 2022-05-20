@@ -29,10 +29,9 @@ class FileUploadController extends Controller
             $fileupload['name']=$fileName;
             $fileupload['path']=$Path;
             $fileupload->save();
-            // return ['dd$',$FilePath];
             return response()->json([
-                  'status'=> 200,
-                  'message'=> 'Success' ,
+                  'status'=>$this->successCode,
+                  'message'=> $this->responseMsg['success'][0] ,
                   'data'=>$fileupload,
               ]);
            
@@ -44,31 +43,11 @@ class FileUploadController extends Controller
             // return ['dd',$request];
             // $upload['name'] = $fileName;
             // $upload['path'] = $FilePath;
-
-        return "success";
         // $isFileExist = Storage::disk('s3')->exists($File);
-        if ($isFileExist) {
-            // $upload['name'] = $File->getClientOriginalName();
-            // $upload['path'] = $Path;
-            // FileUpload::create($upload);
-            // unset($upload['path']);
-            // $uploadedFiles[] = $upload;
-            // $response['status'] = true;
-            // $response['data'] = $uploadedFiles;
-        }
-            else {
-                return response()->json([
-                    'status'=> false,
-                    'message'=> ' Sorry! file not upload. Please try again' ,
-                ]);
+            }
+            catch (\Exception $e) {
+                return $this->getExceptionResponse($e);
               }
-            }
-               catch (\Exception $e) {
-                return response()->json([
-                    'status'=> false,
-                    'message' => $e->getMessage() . $e->getLine(),
-                ]);
-            }
     }
 
     public function getFile(Request $request, $id){

@@ -58,12 +58,7 @@ class UserController extends Controller
         if($resend) {
         $email = $resend->email;
         $activation_token = $resend->activation_token;
-        // return ['ee',$activation_token,$email];
         $url = url('/') . '/api/user/' . $activation_token;
-        // ->subject('Confirm your account')
-        //     ->line('Thank you for registering with us. Your Email: '.$email)
-        //     ->action('Confirm Account', url($url))
-        //     ->line('Once again, Thank you for using our application!')ResendVerificationMail;
         $details = [
           'title' => 'Varify your Account',
           'body' => 'Thank you for registering with us.'. $email,
@@ -76,22 +71,6 @@ class UserController extends Controller
             'status'=> $this->successCode,
             'message'=>'Great! Successfully send in your mail',
            ]);
-         
-    
-      // Mail::send('your_receiver_email@gmail.com')->send(new \App\Mail\ResendVerificationMail($details));
-      // return response()->Json([
-      //     'status'=>200,
-      //     'message'=>'mesg sent successfully',
-      // ]);
-      //    Mail::raw($url, function($message) {
-      //     $message->from('fromemail@gmail.com', 'Social Team');
-      //     $message->to('randomemail@gmail.com');
-      //     $message->subject('App - Forget Password');
-      //     // $message->view('email.email');
-      //       // ->setBody('Hi, welcome user!');
-      //   //  $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
-      //   //  $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
-      // });
       } else {
         return $this->recordNotFound();   
       }
@@ -133,7 +112,7 @@ public function User_login(Request $request)
           return response()->json([
             'user'      => Auth::user(),
             'message'   => 'Please Verify Mail',
-            'status'    => 401,
+            'status'    => $this->validationCode,
           ]);
          }
         }
@@ -157,7 +136,7 @@ public function User_login(Request $request)
         Auth::User()->AauthAcessToken()->delete();
         return response()->json(array(
         'success' => 'you are logged out',
-        'status' => 200,
+        'status' => $this->successCode,
         ));
       }
       else{
@@ -172,7 +151,7 @@ public function User_login(Request $request)
       //$user = $user->paginate(10);
       return response()->json(array(
         'Success'=> 'Data Loading is Successfully',
-        'Status' => 200,
+        'Status' => $this->successCode,
         'data' => $user,
       ));
     }
@@ -181,7 +160,7 @@ public function User_login(Request $request)
     {
       $user = User::all();
       return response()->json(array(
-        'Status' => 200,
+        'Status' => $this->successCode,
         'data' => $user,
       ));
     }
@@ -193,16 +172,12 @@ public function User_login(Request $request)
       {
         $data = User::findOrFail($id);
       return response()->json([
-        'status' => 200,
+        'status' => $this->successCode,
         'data'=>$data,
       ]);
      }
-    catch(\Exception $e)
-    {
-      return response()->json(array(
-        'status'=> 0,
-        'message'=>$e->getMessage(),
-      ));
+     catch (\Exception $e) {
+      return $this->getExceptionResponse($e);
     }
   }
 
@@ -213,16 +188,12 @@ public function User_login(Request $request)
       $user->delete();
       return response()->json([
         'Message'=> 'Delete is successfully',
-        'status' => 200,
+        'status' => $this->successCode,
       ]);
     }
-    catch (\Exception $e)
-    {
-      return response()->json([
-        'status'=> false,
-        'message'=>$e->getMessage(),
-      ]);
-      }
+    catch (\Exception $e) {
+      return $this->getExceptionResponse($e);
+    }
     }
 
     public function AddUser(Request $request)
@@ -241,16 +212,12 @@ public function User_login(Request $request)
         $user = User::create($add_user);
         return response()->json([
           'message'=>"User add successfully",
-          'status'=>200,
+          'status'=>$this->successCode,
           'data'=>$user,
         ]);
       }
-      catch(\Exception $e)
-      {
-        return response()->json([
-          'status'=>0,
-          'message'=>$e->getMessage(),
-        ]);
+      catch (\Exception $e) {
+        return $this->getExceptionResponse($e);
       }
     }
     public function UpdateUser($id)
@@ -258,22 +225,19 @@ public function User_login(Request $request)
       try {
         $update = User::find($id);
       return response()->json([
-        'status'=>200,
+        'status'=>$this->successCode,
         'message'=>"Render edit is data ",
         'data'=>$update,
       ]);
     }
-    catch (\Exception $e)
-    {
-      return response()->json([
-        'status'=> 0,
-        'message'=>$e-getMessage(),
-      ]);
+    catch (\Exception $e) {
+      return $this->getExceptionResponse($e);
     }
   }
 
   public function activate_token($token)
   {
+    try {
     $isUserActive = User::where('activation_token', $token)->first();
     if ($isUserActive) {
       $id = $isUserActive->id;
@@ -283,12 +247,14 @@ public function User_login(Request $request)
       return redirect()->to('login');
     };
   }
-
+   catch (\Exception $e) {
+   return $this->getExceptionResponse($e);
+   }
+     }
   public function forgetPassword(ForgotPasswordMailRequest $request)
   {
     try {
         $email = $request->Email;
-        // return ['dfsjhsdfj',$email]; 
         if($email){
           $slug = Str::random(64);
           $createSlug = User::where('email', $email)->update([
@@ -296,22 +262,17 @@ public function User_login(Request $request)
               'slug_created_at' => Carbon::now()
           ]);
           $updatedSlug = User::where('email',$email)->first();
-          // $updatedSlug = array($updatedSlug);
-          // $updatedSlug = json_decode($updatedSlug);
-          // return $updatedSlug;
           $updatedSlug->notify(new ForgotPasswordMail());
           $slug1 =$updatedSlug->slug;
           return response()->json([
-            'status'=> 200,
+            'status'=> $this->successCode,
             'message'=>'Please check Reset link sent in your mail ',
             'slug'=> $slug1,
         ]);
       }
-  } catch (\Exception $e) {
-      return response()->json([
-          'message' => 'Something went wrong. Please try again',
-          'status' => 500,
-      ]);
+  }
+  catch (\Exception $e) {
+    return $this->getExceptionResponse($e);
   }
 }
 
@@ -327,26 +288,24 @@ public function resetPassword(Request $request){
           ]);
           return response()->json([
               'message' => "Password changed successfully",
-              'status' => 200,
+              'status' => $this->successCode,
           ]);
       }
       else{
           return response()->json([
               'message' => "password does not match",
-              'status' => 'fail',
+              'status' => 0,
           ]);
       }
 
   }
   catch (\Exception $e) {
-      return response()->json([
-          'message' => $e->getMessage(),
-          'status' => 'Error',
-      ]);
+    return $this->getExceptionResponse($e);
   }
 }
   public function editUser(Request $request)
   {
+    try{
     $id = $request->id;
     $name=$request->FirstName;
     $fullname = $request->LastName;
@@ -363,17 +322,20 @@ public function resetPassword(Request $request){
     ]);
     return response()->json([
       'message' => "edit is successfully",
-      'status' => 200,
+      'status' => $this->successCode,
   ]);
   }
+catch (\Exception $e) {
+  return $this->getExceptionResponse($e);
+}
+}
 
   public function Query(Request $request)
   {
    // return $request->all();
      $search = User::Search($request->data)->get();
      return response()->json([
-      'status'=> 200,
-      'message'=>'search is Done',
+      'status'=> $this->successCode,
       'data'=> $search,
       ]);
 

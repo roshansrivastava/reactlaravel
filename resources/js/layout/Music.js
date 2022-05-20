@@ -6,7 +6,7 @@ import DataTable from 'react-data-table-component';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Checkbox from '@material-ui/core/Checkbox';
-import Movies from './Movies';
+// import Movies from './Movies';
 import Paper from "@mui/material/Paper";
 import './Data-table.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,22 +38,34 @@ export default function Music() {
     const columns = [
         {
             id: 'title',
-            name: 'Title',
+            name: 'Name',
             selector: row => row.title,
             sortable: true,
         },
         {
-            id: 'year',
-            name: 'Year',
+            id: 'genre',
+            name: 'Genre',
             selector: row => row.year,
             sortable: true,
         },
         {
-            id: 'music',
-            name: 'Music',
+            id: 'albumstatus',
+            name: 'Album Status',
             selector: row => row.year,
             sortable:true,
-        }
+        },
+        {
+            id: 'request',
+            name: 'Request Status',
+            selector: row => row.year,
+            sortable:true,
+        },
+        {
+            id: 'action',
+            name: 'Action',
+            selector: row => row.year,
+            sortable:true,
+        },
     ];
   
     const handleChange = ({ selectedRows }) => {
@@ -115,7 +127,7 @@ export default function Music() {
         <DataTable
             title="Desserts"
             columns={columns}
-            data={Movies}
+            // data={Movies}
             sortIcon={sortIcon}
             selectableRows
             pagination

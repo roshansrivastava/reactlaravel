@@ -57,6 +57,6 @@ Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('/stripe/premium', [StripeController::class, 'stripePost']);
 
 Route::get('/users', function (Request $request) {
-    $users = User::paginate(10);
+    // $users = User::paginate(10);
     return $users;
 });

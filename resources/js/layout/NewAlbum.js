@@ -31,21 +31,23 @@ export default function NewAlbum(props) {
 	const [ tags, setTags ] = useState([]);
 	const [ additionForm, setadditionForm ] = useState(false);
 	const [ modalIsOpen, setIsOpen ] = useState(false);
-	const [ albumnameError ,setalbumnameError ] = useState('');
-	const [ genernameError ,setgenernameError ] = useState('');
-	const [ datenameError ,setdatenameError ] = useState('');
-	const [ upcnameError ,setupcnameError ] = useState('');
-	const [ languagenameError ,setlanguagenameError ] = useState('');
-	const [ applynameError ,setapplynameError ] = useState('');
-	const [ spotifynameError ,setspotifynameError ] = useState('');
-	const [ uploadFileError ,setuploadFileError ] = useState(null);
-
+	const [ albumnameError, setalbumnameError ] = useState('');
+	const [ genernameError, setgenernameError ] = useState('');
+	const [ datenameError, setdatenameError ] = useState('');
+	const [ upcnameError, setupcnameError ] = useState('');
+	const [ languagenameError, setlanguagenameError ] = useState('');
+	const [ applynameError, setapplynameError ] = useState('');
+	const [ spotifynameError, setspotifynameError ] = useState('');
+	const [ uploadFileError, setuploadFileError ] = useState(null);
 
 	const [ serviceList, setServiceList ] = useState([
-		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '' }
+		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
 	]);
 	const handleServiceAdd = () => {
-		setServiceList([ ...serviceList, { songname: '', composername: '', selectname: '', radio: '', isrcname: '' } ]);
+		setServiceList([
+			...serviceList,
+			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
+		]);
 	};
 	const handleremove = (index) => {
 		const list = [ ...serviceList ];
@@ -57,41 +59,34 @@ export default function NewAlbum(props) {
 		if (albumname == '') {
 			setalbumnameError('please enter album name');
 			errorcount++;
-		} 
+		}
 		if (genername == '') {
 			setgenernameError('Please enter gener name ');
-						errorcount++;
-			// return false
+			errorcount++;
 		}
 		if (datename == '') {
 			setdatenameError('please enter date');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (upcname == '') {
 			setupcnameError('Please enter upc name');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (languagename == '') {
 			setlanguagenameError('Please Select language');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (applyname == '') {
 			setapplynameError('Please enter apply name');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (spotifyname == '') {
 			setspotifynameError('Please enter spotify name');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (uploadFileData == null) {
 			setuploadFileError('Please Upload image file');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 	};
 	const resetErrors = () => {
@@ -103,40 +98,51 @@ export default function NewAlbum(props) {
 		setapplynameError('');
 		setspotifynameError('');
 		setuploadFileError(null);
-	}
+	};
 	const Saveform = (e) => {
+		e.preventDefault();
 		resetErrors();
 		handleValidation();
-		e.preventDefault();
-		console.log('23',errorcount);
+		console.log('23', errorcount);
 		if (errorcount) {
 			errorcount = 0;
 			return;
 		}
-		console.log('@@',uploadFileData);
-		console.log('1', uploadFileData.data.id);
-		console.log('2', uploadFileData.data.path);
-		console.log('!!!!',uploadMusicData);
-		return;
+		console.log('!!!!', uploadMusicData.data.path);
 		let payload = {
 			AlbumName: albumname,
 			GenerName: genername,
 			StoreName: tags,
 			DateName: datename,
 			UpcName: upcname,
-			uploadFileId:uploadFileData.data.id,
-			uploadFilePath:uploadFileData.data.path,
+			uploadFileId: uploadFileData.data.id,
+			uploadFilePath: uploadFileData.data.path,
 			Languagename: languagename,
 			SpotifyName: spotifyname,
 			ApplyName: applyname,
 			users: serviceList
 		};
-		
-		ReleaseAlbum(payload).then((response) => {});
+
+		ReleaseAlbum(payload).then((response) => {
+			console.log('12332', response);
+		});
 	};
-	const openModal = () => {
+
+	const openModal = (e) => {
+		e.preventDefault()
 		setIsOpen(true);
+		// resetErrors();
+		// handleValidation();
+		// if (errorcount) {
+		// 	errorcount = 0;
+		// 	return;
+		// }
 	};
+
+	const closeModal = () => {
+		setIsOpen(false);
+	}
+
 	const customStyles = {
 		content: {
 			top: '50%',
@@ -201,6 +207,7 @@ export default function NewAlbum(props) {
 		[ 0 ]
 	);
 
+
 	const Addition = () => {
 		setadditionForm(true);
 	};
@@ -242,8 +249,6 @@ export default function NewAlbum(props) {
 		setServiceList(list);
 	};
 	const onChangeselect = (e, index) => {
-		// const{name,value}=e.target
-		// console.log('@@',name);
 		const { label } = e;
 		const listing = [ ...serviceList ];
 		listing[index]['selectname'] = label;
@@ -288,25 +293,26 @@ export default function NewAlbum(props) {
 				<Modal
 					isOpen={modalIsOpen}
 					// onAfterOpen={afterOpenModal}
-					// onRequestClose={closeModal}
+					onRequestClose={closeModal}
 					style={customStyles}
-					contentLabel="Example Modal"
+					// contentLabel="Example Modal"
 				>
+					<form>
 					<div class="row">
 						<div class="col s12">
-							<div id="checkboxes" class="card card-tabs">
+							<div id="checkboxes" >
 								<div class="card-content">
 									<div class="card-title">
 										<div class="row">
 											<div class="col s12 m6 l2">
 												<h4 class="card-title">Copyright Status</h4>
 											</div>
-											<div class="col s12 m6 l2 " id='modaldelete'>
+											<div class="col s12 m6 l2 " id="modaldelete">
 												<ul class="tabs">
 													<li class="tab col s6 p-0">
-														<a class="active p-0" href="#view-checkboxes">
+													<button type='button' onClick={closeModal}>
 															Delete
-														</a>
+													</button>
 													</li>
 												</ul>
 											</div>
@@ -349,28 +355,26 @@ export default function NewAlbum(props) {
 											</p>
 										</div>
 										<div className="row">
-											
 											<button
 												type="submit"
+												// onClick={Saveform}
 												// disabled={!agree}
 												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
 											>
 												<CloudUploadIcon />Release Album
 											</button>
-
 										</div>
-										<div className='row'>
-										<div className='typeclosebutton'>
-										<button type='button'>
-											Close
-										</button>
+										<div className="row">
+											<div className="typeclosebutton">
+												<button type="button">Close</button>
 											</div>
-									</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					</form>
 				</Modal>
 				<div className="container">
 					<div className="row">
@@ -383,7 +387,7 @@ export default function NewAlbum(props) {
 									<div id="Form-advance" className="card card card-default scrollspy">
 										<div className="card-body">
 											<h5 className="card-title">General Information</h5>
-											<form autocomplete="on" >
+											<form autocomplete="on">
 												<div className="row">
 													<div className="input-field col m6 s12">
 														<input
@@ -392,9 +396,7 @@ export default function NewAlbum(props) {
 															onChange={(e) => setalbumname(e.target.value)}
 														/>
 														<label htmlFor="first_name01">Album Name</label>
-														<span style={{ color: 'red' }}>
-												{albumnameError}
-											</span>
+														<span style={{ color: 'red' }}>{albumnameError}</span>
 													</div>
 													<div className="input-field col m6 s12">
 														<Select
@@ -404,9 +406,7 @@ export default function NewAlbum(props) {
 															onChange={(e) => setgenerename(e.value)}
 															options={genreValue}
 														/>
-														<span style={{ color: 'red' }}>
-												{genernameError}
-											</span>
+														<span style={{ color: 'red' }}>{genernameError}</span>
 													</div>
 												</div>
 												<div className="row">
@@ -422,7 +422,6 @@ export default function NewAlbum(props) {
 															inputFieldPosition="bottom"
 															autocomplete
 															editable
-															// onChange={(e) => setstorename(e.text)}
 														/>
 													</div>
 												</div>
@@ -434,12 +433,6 @@ export default function NewAlbum(props) {
 																<pre>(The date must be date after today)</pre>
 															</span>
 														</div>
-														{/* <Calendar 
-													  onChange={onChange} 
-													  value={value}
-													  formatDay ={(locale, date) => formatDate(date, 'd')}
-													  maxDate={new Date()}
-													/> */}
 														<input
 															name="dt_contracting"
 															type="date"
@@ -447,9 +440,7 @@ export default function NewAlbum(props) {
 															id="unique"
 															onChange={(e) => setdatename(e.target.value)}
 														/>
-														<span style={{ color: 'red' }}>
-												{datenameError}
-											</span>
+														<span style={{ color: 'red' }}>{datenameError}</span>
 													</div>
 													<div class="input-field col m6 s12">
 														<div className="input-field col m6 s12">
@@ -460,9 +451,7 @@ export default function NewAlbum(props) {
 																placeholder="If you don't have one leave this blank"
 																onChange={(e) => setupcname(e.target.value)}
 															/>
-															<span style={{ color: 'red' }}>
-												{upcnameError}
-											</span>
+															<span style={{ color: 'red' }}>{upcnameError}</span>
 														</div>
 													</div>
 													<div class="input-field col m6 s12">
@@ -474,21 +463,19 @@ export default function NewAlbum(props) {
 															options={storevalue}
 															onChange={(e) => setlanguagename(e.value)}
 														/>
-														<span style={{ color: 'red' }}>
-												{languagenameError}
-											</span>
+														<span style={{ color: 'red' }}>{languagenameError}</span>
 													</div>
 												</div>
 												<div className="row">
 													<h6>
 														Upload Cover <span className="question">?</span>
 													</h6>
-													<Example setValues={(data) => {
-														setUploadFile(data)
-													}} />
-													<span style={{ color: 'red' }}>
-												{uploadFileError}
-											</span>
+													<Example
+														setValues={(data) => {
+															setUploadFile(data);
+														}}
+													/>
+													<span style={{ color: 'red' }}>{uploadFileError}</span>
 												</div>
 												<div className="row">
 													<h6>
@@ -503,9 +490,7 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setspotifyname(e.target.value)}
 																/>
-																<span style={{ color: 'red' }}>
-												{spotifynameError}
-											</span>
+																<span style={{ color: 'red' }}>{spotifynameError}</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -532,9 +517,7 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setapplyname(e.target.value)}
 																/>
-																<span style={{ color: 'red' }}>
-												{applynameError}
-											</span>
+																<span style={{ color: 'red' }}>{applynameError}</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -668,10 +651,13 @@ export default function NewAlbum(props) {
 																			</div>
 																			<div className="row">
 																				<h6>Upload Song</h6>
-																				<FileuploadMusic setMusicValues={(data) => {
-																					console.log('1111',data)
-																					setUploadMusic(data)
-																					}}/>
+																				<FileuploadMusic
+																					setMusicValues={(data) => {
+																						console.log('1111', data);
+																						console.log('1212',data.data)
+																						setUploadMusic(data);
+																					}}
+																				/>
 																				<p>Allowed formats: flac.Wav</p>
 																				<br />
 																				<p>
@@ -716,7 +702,6 @@ export default function NewAlbum(props) {
 																					</div>
 																				)}
 																			</div>
-																			{/* </div> */}
 																		</div>
 																	</div>
 																</div>
@@ -731,10 +716,10 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																type="submit"
-																onClick={Saveform}
+																onClick={openModal}
+																type="buttton"
 															>
-																Submit
+																Next
 																<i className="material-icons right">send</i>
 															</button>
 														</div>
