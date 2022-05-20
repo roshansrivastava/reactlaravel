@@ -22,7 +22,7 @@ use App\Http\Controllers\API\StripeController;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('phinfo', function () {
+// Route::get('/phinfo', function () {
 //     return phpinfo();
 // });
 

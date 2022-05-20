@@ -24,18 +24,23 @@ export default function NewAlbum(props) {
 	const [ languagename, setlanguagename ] = useState('');
 	const [ spotifyname, setspotifyname ] = useState('');
 	const [ applyname, setapplyname ] = useState('');
-	const [ Songselect, setsongselect ] = useState('');
-	const [ ComposerSong, setComposerSong ] = useState('');
-	const [ Radioname, setRadioname ] = useState('');
-	const [ languagename1, setlanguagename1 ] = useState('');
-	const [ checkdata, setcheckdata ] = useState([]);
 	const [ uploadFileData, setUploadFile ] = useState(null);
-	const [uploadmusicData , setuploadmusicData]= useState('');
+	const [ uploadMusicData, setUploadMusic ] = useState(null);
 	const [ storevalue, setstorevalue ] = useState([]);
 	const [ genreValue, setgenreValue ] = useState([]);
 	const [ tags, setTags ] = useState([]);
 	const [ additionForm, setadditionForm ] = useState(false);
 	const [ modalIsOpen, setIsOpen ] = useState(false);
+	const [ albumnameError ,setalbumnameError ] = useState('');
+	const [ genernameError ,setgenernameError ] = useState('');
+	const [ datenameError ,setdatenameError ] = useState('');
+	const [ upcnameError ,setupcnameError ] = useState('');
+	const [ languagenameError ,setlanguagenameError ] = useState('');
+	const [ applynameError ,setapplynameError ] = useState('');
+	const [ spotifynameError ,setspotifynameError ] = useState('');
+	const [ uploadFileError ,setuploadFileError ] = useState(null);
+
+
 	const [ serviceList, setServiceList ] = useState([
 		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '' }
 	]);
@@ -47,8 +52,72 @@ export default function NewAlbum(props) {
 		list.splice(index, 1);
 		setServiceList(list);
 	};
+	let errorcount = 0;
+	const handleValidation = () => {
+		if (albumname == '') {
+			setalbumnameError('please enter album name');
+			errorcount++;
+		} 
+		if (genername == '') {
+			setgenernameError('Please enter gener name ');
+						errorcount++;
+			// return false
+		}
+		if (datename == '') {
+			setdatenameError('please enter date');
+						errorcount++;
+						// return false;
+		}
+		if (upcname == '') {
+			setupcnameError('Please enter upc name');
+						errorcount++;
+						// return false;
+		}
+		if (languagename == '') {
+			setlanguagenameError('Please Select language');
+						errorcount++;
+						// return false;
+		}
+		if (applyname == '') {
+			setapplynameError('Please enter apply name');
+						errorcount++;
+						// return false;
+		}
+		if (spotifyname == '') {
+			setspotifynameError('Please enter spotify name');
+						errorcount++;
+						// return false;
+		}
+		if (uploadFileData == null) {
+			setuploadFileError('Please Upload image file');
+						errorcount++;
+						// return false;
+		}
+	};
+	const resetErrors = () => {
+		setalbumnameError('');
+		setgenernameError('');
+		setdatenameError('');
+		setupcnameError('');
+		setlanguagenameError('');
+		setapplynameError('');
+		setspotifynameError('');
+		setuploadFileError(null);
+	}
 	const Saveform = (e) => {
+		resetErrors();
+		handleValidation();
 		e.preventDefault();
+		console.log('23',errorcount);
+		if (errorcount) {
+			errorcount = 0;
+			return;
+		}
+		console.log('@@',uploadFileData);
+		console.log('1', uploadFileData.data.id);
+		console.log('2', uploadFileData.data.path);
+		console.log('!!!!',uploadMusicData);
+		return;
 		let payload = {
 			AlbumName: albumname,
 			GenerName: genername,
@@ -62,8 +131,7 @@ export default function NewAlbum(props) {
 			ApplyName: applyname,
 			users: serviceList
 		};
-
-		console.log('!!!!',uploadmusicData);
+		
 		ReleaseAlbum(payload).then((response) => {});
 	};
 	const openModal = () => {
@@ -324,6 +392,9 @@ export default function NewAlbum(props) {
 															onChange={(e) => setalbumname(e.target.value)}
 														/>
 														<label htmlFor="first_name01">Album Name</label>
+														<span style={{ color: 'red' }}>
+												{albumnameError}
+											</span>
 													</div>
 													<div className="input-field col m6 s12">
 														<Select
@@ -333,6 +404,9 @@ export default function NewAlbum(props) {
 															onChange={(e) => setgenerename(e.value)}
 															options={genreValue}
 														/>
+														<span style={{ color: 'red' }}>
+												{genernameError}
+											</span>
 													</div>
 												</div>
 												<div className="row">
@@ -373,6 +447,9 @@ export default function NewAlbum(props) {
 															id="unique"
 															onChange={(e) => setdatename(e.target.value)}
 														/>
+														<span style={{ color: 'red' }}>
+												{datenameError}
+											</span>
 													</div>
 													<div class="input-field col m6 s12">
 														<div className="input-field col m6 s12">
@@ -383,6 +460,9 @@ export default function NewAlbum(props) {
 																placeholder="If you don't have one leave this blank"
 																onChange={(e) => setupcname(e.target.value)}
 															/>
+															<span style={{ color: 'red' }}>
+												{upcnameError}
+											</span>
 														</div>
 													</div>
 													<div class="input-field col m6 s12">
@@ -394,6 +474,9 @@ export default function NewAlbum(props) {
 															options={storevalue}
 															onChange={(e) => setlanguagename(e.value)}
 														/>
+														<span style={{ color: 'red' }}>
+												{languagenameError}
+											</span>
 													</div>
 												</div>
 												<div className="row">
@@ -403,6 +486,9 @@ export default function NewAlbum(props) {
 													<Example setValues={(data) => {
 														setUploadFile(data)
 													}} />
+													<span style={{ color: 'red' }}>
+												{uploadFileError}
+											</span>
 												</div>
 												<div className="row">
 													<h6>
@@ -417,6 +503,9 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setspotifyname(e.target.value)}
 																/>
+																<span style={{ color: 'red' }}>
+												{spotifynameError}
+											</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -443,6 +532,9 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setapplyname(e.target.value)}
 																/>
+																<span style={{ color: 'red' }}>
+												{applynameError}
+											</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -538,7 +630,7 @@ export default function NewAlbum(props) {
 																					<label>
 																						<input
 																							type="radio"
-																							value="Explicit Content"
+																							value="No Explicit Content"
 																							name="radio"
 																							onChange={(e) =>
 																								onChangeValue(e, index)}
@@ -576,9 +668,10 @@ export default function NewAlbum(props) {
 																			</div>
 																			<div className="row">
 																				<h6>Upload Song</h6>
-																				<FileuploadMusic setMusicValues={(music) => {
-																					console.log('music',music)
-																					setuploadmusicData(music) } }/>
+																				<FileuploadMusic setMusicValues={(data) => {
+																					console.log('1111',data)
+																					setUploadMusic(data)
+																					}}/>
 																				<p>Allowed formats: flac.Wav</p>
 																				<br />
 																				<p>

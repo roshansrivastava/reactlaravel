@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import './Data-table.css';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ReactAudioPlayer from 'react-audio-player';
 export default function Music() {
     const [selectedRows, setSelectedRows] = useState(false);
     const [toggledClearRows, setToggleClearRows] =useState(false);
@@ -42,11 +43,17 @@ export default function Music() {
             sortable: true,
         },
         {
-            id: 'title',
+            id: 'year',
             name: 'Year',
             selector: row => row.year,
             sortable: true,
         },
+        {
+            id: 'music',
+            name: 'Music',
+            selector: row => row.year,
+            sortable:true,
+        }
     ];
   
     const handleChange = ({ selectedRows }) => {
@@ -58,6 +65,7 @@ export default function Music() {
       setToggleClearRows(!toggledClearRows);
     }
     const sortIcon = <ArrowDownward />;
+     
     // const isIndeterminate = (indeterminate) => indeterminate;
     // const selectableRowsComponentProps = { indeterminate: isIndeterminate };
 	let user = JSON.parse(localStorage.getItem('user'));
@@ -115,10 +123,12 @@ export default function Music() {
             clearSelectedRows={toggledClearRows}
             selectableRowsComponent={Checkbox}
             selectableRowsComponentProps={selectableRowsComponentProps}
+            
             // onSelectedRowsChange={this.updateState}
             // progressPending
             // progressComponent={<LinearIndeterminate />}
         />
+        
         </Paper>
         </div>
     </div>

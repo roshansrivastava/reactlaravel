@@ -41,6 +41,7 @@
         "filepond-plugin-image-preview": "^4.6.11",
         "formik": "^2.2.9",
         "formik-material-ui": "^4.0.0-alpha.2",
+        "react-audio-player": "^0.17.0",
         "react-bootstrap": "^2.2.3",
         "react-bootstrap-sweetalert": "^5.2.0",
         "react-calendar": "^3.7.0",

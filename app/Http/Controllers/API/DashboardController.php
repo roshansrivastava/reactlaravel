@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Album;
 use App\Models\Song;
+use App\Models\Album_Submission;
 
 class DashboardController extends Controller
 {
@@ -100,6 +101,7 @@ class DashboardController extends Controller
            $album['upc']=$data['UpcName'];
            $album['status']=1;
            $album['cover']='no defined';
+           $album['fuga_cover_image_id']=$data['uploadFileId'];
            $albumdata= Album::create($album);
            if($albumdata){
                foreach($user as $data){
@@ -107,13 +109,24 @@ class DashboardController extends Controller
                    $song['composer']=$data['composername'];
                    $song['isrc']=$data['isrcname'];
                    $song['language']=$data['selectname'];
-                   $song['isExplicit']=0;
-                   $song['isInstrumental']=1;
-                   // $song['songFile']=;
+                   if($data['radio']=='Explicit Content')
+                   {
+                       $song['isExplicit'] = 1;
+                   }
+                   elseif($data['radio']=='No Explicit Content')
+                   {
+                       $song['isExplicit'] = 0;
+                   }
+                   else
+                   {
+                       $song['isInstrumental'] = 1;
+                   }
                    $song['album_id']=$albumdata->id;
                    $song['language']=$data['selectname'];
                    $songdata=Song::create($song);
                 };
+            $album_submisson['album_id']=$albumdata->id;
+            return $album_submisson;
             }
             return response()->json([
             'status'=> $this->successCode,

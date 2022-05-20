@@ -29,6 +29,7 @@ class FileUploadController extends Controller
             $fileupload['name']=$fileName;
             $fileupload['path']=$Path;
             $fileupload->save();
+            // return ['dd$',$FilePath];
             return response()->json([
                   'status'=> 200,
                   'message'=> 'Success' ,

@@ -38,7 +38,6 @@ render() {
             maxFiles={3}
             allowRevert={true}
             allowProcess={false}
-            // maxParallelUploads={2}
             acceptedFileTypes={['image/png', 'image/jpeg' ]}
             server={{
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) =>{
@@ -52,7 +51,7 @@ render() {
                     Upload(formData)
                     .then(res => {
                         this.props.setValues(res)
-                        console.log('response',res);
+                        console.log('responseff',res);
                             load('test');
                   }).catch (e => {
                       console.error('failure',e);
