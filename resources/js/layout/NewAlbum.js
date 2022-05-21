@@ -39,6 +39,10 @@ export default function NewAlbum(props) {
 	const [ applynameError, setapplynameError ] = useState('');
 	const [ spotifynameError, setspotifynameError ] = useState('');
 	const [ uploadFileError, setuploadFileError ] = useState(null);
+	const [ agree , setagree ] = useState(false);
+	const [ checkconfirm , setcheckconfirm ] = useState('');
+	const [ checkaware , setcheckaware ] = useState('');
+	const [ checkconfirmall , setconfirmall ] = useState('');
 
 	const [ serviceList, setServiceList ] = useState([
 		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
@@ -54,6 +58,12 @@ export default function NewAlbum(props) {
 		list.splice(index, 1);
 		setServiceList(list);
 	};
+
+	const Checkchange = (e) => {
+		// const {  value } = e.target;
+		// console.log('##',value);
+		setagree(!agree)
+	}
 	let errorcount = 0;
 	const handleValidation = () => {
 		if (albumname == '') {
@@ -289,6 +299,7 @@ export default function NewAlbum(props) {
 				</a>
 			</aside>
 			<div id="main">
+				<div id='class-modal'>
 				<Modal
 					isOpen={modalIsOpen}
 					// onAfterOpen={afterOpenModal}
@@ -306,22 +317,20 @@ export default function NewAlbum(props) {
 												<div class="col s12 m6 l2">
 													<h4 class="card-title">Copyright Status</h4>
 												</div>
-												<div class="col s12 m6 l2 " id="modaldelete">
-													<ul class="tabs">
-														<li class="tab col s6 p-0">
-															<button type="button" onClick={closeModal}>
-																Delete
-															</button>
-														</li>
-													</ul>
-												</div>
+												{/* <div className="row"> */}
+												<div className="typeclosebutton">
+													<button type="button" id='close' onClick={closeModal}>Close</button>
+												{/* </div> */}
+											</div>
 											</div>
 										</div>
 										<div id="view-checkboxes">
 											<div className="row">
 												<p class="mb-1">
 													<label>
-														<input type="checkbox" class="filled-in" />
+														<input type="checkbox" class="filled-in" value='confirm' onChange={(e)=>
+															setcheckconfirm(e.target.value)
+														}/>
 														<span>
 															<pre>
 																{' '}
@@ -337,7 +346,7 @@ export default function NewAlbum(props) {
 											<div className="row">
 												<p class="mb-1">
 													<label>
-														<input type="checkbox" class="filled-in" />
+														<input type="checkbox" class="filled-in" value="aware" onChange={ (e) => setcheckaware(e.target.value)}/>
 														<span>
 															I am aware that it is forbidden to publish music to <br />
 															which i do not have the rights
@@ -348,7 +357,7 @@ export default function NewAlbum(props) {
 											<div className="row">
 												<p class="mb-1">
 													<label>
-														<input type="checkbox" class="filled-in" />
+														<input type="checkbox" class="filled-in" value="confirmall" onChange={(e)=> setconfirmall(e.target.value)}/>
 														<span>I confirm that i have read the terms and service </span>
 													</label>
 												</p>
@@ -357,7 +366,7 @@ export default function NewAlbum(props) {
 												<button
 													type="submit"
 													// onClick={Saveform}
-													// disabled={!agree}
+													disabled={!agree}
 													className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
 												>
 													<CloudUploadIcon />Release Album
@@ -365,7 +374,7 @@ export default function NewAlbum(props) {
 											</div>
 											<div className="row">
 												<div className="typeclosebutton">
-													<button type="button">Close</button>
+													<button type="button" id='close' onClick={closeModal}>Close</button>
 												</div>
 											</div>
 										</div>
@@ -375,6 +384,7 @@ export default function NewAlbum(props) {
 						</div>
 					</form>
 				</Modal>
+				</div>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
