@@ -46,12 +46,12 @@ export default function NewAlbum(props) {
 	const [ validationcheck , setvalidationcheck ] = useState('');
 
 	const [ serviceList, setServiceList ] = useState([
-		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
+		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:'' }
 	]);
 	const handleServiceAdd = () => {
 		setServiceList([
 			...serviceList,
-			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
+			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:''}
 		]);
 	};
 	const handleremove = (index) => {
@@ -124,13 +124,13 @@ export default function NewAlbum(props) {
 	};
 	const Saveform = (e) => {
 		e.preventDefault();
-		CheckValidation();
-		console.log('23', error);
-		if (error) {
-			setvalidationcheck(' Please  Fill checkbox ');
-			error = 0;
-			return;
-		}
+		// CheckValidation();
+		// console.log('23', error);
+		// if (error) {
+		// 	setvalidationcheck(' Please  Fill checkbox ');
+		// 	error = 0;
+		// 	return;
+		// }
 	
 
 		let payload = {
@@ -146,6 +146,8 @@ export default function NewAlbum(props) {
 			ApplyName: applyname,
 			users: serviceList
 		};
+		console.log('musiclist',payload);
+		return;
 		ReleaseAlbum(payload).then((response) => {
 			console.log('12332', response);
 		});
@@ -153,20 +155,14 @@ export default function NewAlbum(props) {
 
 	const openModal = (e) => {
 		e.preventDefault();
-		// resetErrors();
-		// handleValidation();
-		// console.log('23', errorcount);
-		// if (errorcount) {
-		// 	errorcount = 0;
-		// 	return;
-		// }
+		resetErrors();
+		handleValidation();
+		console.log('23', errorcount);
+		if (errorcount) {
+			errorcount = 0;
+			return;
+		}
 		setIsOpen(true);
-		// resetErrors();
-		// handleValidation();
-		// if (errorcount) {
-		// 	errorcount = 0;
-		// 	return;
-		// }
 	};
 
 	const closeModal = () => {
@@ -683,9 +679,12 @@ export default function NewAlbum(props) {
 																				<h6>Upload Song</h6>
 																				<FileuploadMusic
 																					setMusicValues={(data) => {
-																						console.log('1111', data);
-																						console.log('1212', data.data);
-																						setUploadMusic(data);
+																						setUploadMusic(data.data.path);
+																						setServiceList([
+																							...serviceList,
+																							{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:data.data.path}
+																						]);
+																						console.log('after',serviceList);
 																					}}
 																				/>
 																				<p>Allowed formats: flac.Wav</p>
@@ -746,7 +745,7 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																onClick={openModal}
+																onClick={Saveform}
 																type="buttton"
 															>
 																Next
