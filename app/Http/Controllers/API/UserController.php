@@ -21,6 +21,7 @@ use App\Notifications\ForgotPasswordMail;
 use App\Http\Requests\Api\ForgotPasswordMailRequest;
 use App\Mail\ResendVerificationMail;
 // use Illuminate\Support\Facades\Mail;
+use App\Jobs\RegistrationsendNotification;
 
 class UserController extends Controller
 {
@@ -39,7 +40,9 @@ class UserController extends Controller
             $success['data'] = $result;
             // if(count($success) > 0){
             $Success['activation_token'] = $result['activation_token'];
-            $result->notify(new RegisterVerificationMail());
+            // $result->notify(new RegisterVerificationMail());
+            RegistrationsendNotification::dispatch($result)
+            ->delay(now()->addMinutes(10));
             return response()->json([
                 'status'=> $this->successCode,
                 'message'=>'Please Verify Mail Registration Successfully',
@@ -148,7 +151,6 @@ public function User_login(Request $request)
     {
       // $user = Auth::user;
       $user = User::Search($request)->paginate(10);
-      //$user = $user->paginate(10);
       return response()->json(array(
         'Success'=> 'Data Loading is Successfully',
         'Status' => $this->successCode,
