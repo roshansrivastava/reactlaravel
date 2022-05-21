@@ -43,6 +43,7 @@ export default function NewAlbum(props) {
 	const [ checkconfirm , setcheckconfirm ] = useState('');
 	const [ checkaware , setcheckaware ] = useState('');
 	const [ checkconfirmall , setconfirmall ] = useState('');
+	const [ validationcheck , setvalidationcheck ] = useState('');
 
 	const [ serviceList, setServiceList ] = useState([
 		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music: '' }
@@ -99,6 +100,18 @@ export default function NewAlbum(props) {
 			errorcount++;
 		}
 	};
+	let error = 0;
+	const CheckValidation = () => {
+		if (checkconfirm == '') {
+			error++;
+		}
+		if (checkaware == ''){
+			error++;
+		}
+		if ( checkconfirmall == ''){
+			error++;
+		}
+	}
 	const resetErrors = () => {
 		setalbumnameError('');
 		setgenernameError('');
@@ -111,14 +124,15 @@ export default function NewAlbum(props) {
 	};
 	const Saveform = (e) => {
 		e.preventDefault();
-		resetErrors();
-		handleValidation();
-		console.log('23', errorcount);
-		if (errorcount) {
-			errorcount = 0;
+		CheckValidation();
+		console.log('23', error);
+		if (error) {
+			setvalidationcheck(' Please  Fill checkbox ');
+			error = 0;
 			return;
 		}
-		console.log('!!!!', uploadMusicData.data.path);
+	
+
 		let payload = {
 			AlbumName: albumname,
 			GenerName: genername,
@@ -132,7 +146,6 @@ export default function NewAlbum(props) {
 			ApplyName: applyname,
 			users: serviceList
 		};
-
 		ReleaseAlbum(payload).then((response) => {
 			console.log('12332', response);
 		});
@@ -140,6 +153,13 @@ export default function NewAlbum(props) {
 
 	const openModal = (e) => {
 		e.preventDefault();
+		// resetErrors();
+		// handleValidation();
+		// console.log('23', errorcount);
+		// if (errorcount) {
+		// 	errorcount = 0;
+		// 	return;
+		// }
 		setIsOpen(true);
 		// resetErrors();
 		// handleValidation();
@@ -150,6 +170,7 @@ export default function NewAlbum(props) {
 	};
 
 	const closeModal = () => {
+		
 		setIsOpen(false);
 	};
 
@@ -318,10 +339,10 @@ export default function NewAlbum(props) {
 													<h4 class="card-title">Copyright Status</h4>
 												</div>
 												{/* <div className="row"> */}
-												<div className="typeclosebutton">
-													<button type="button" id='close' onClick={closeModal}>Close</button>
+												{/* <div className="typeclosebutton">
+													<button type="button" id='close' onClick={closeModal}>Close</button> */}
 												{/* </div> */}
-											</div>
+											{/* </div> */}
 											</div>
 										</div>
 										<div id="view-checkboxes">
@@ -363,10 +384,10 @@ export default function NewAlbum(props) {
 												</p>
 											</div>
 											<div className="row">
+											<span style={{ color: 'red' }}>{validationcheck}</span>
 												<button
 													type="submit"
-													// onClick={Saveform}
-													disabled={!agree}
+													onClick={Saveform}
 													className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
 												>
 													<CloudUploadIcon />Release Album
