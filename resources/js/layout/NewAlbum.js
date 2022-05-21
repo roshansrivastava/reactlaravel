@@ -129,7 +129,7 @@ export default function NewAlbum(props) {
 	};
 
 	const openModal = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		setIsOpen(true);
 		// resetErrors();
 		// handleValidation();
@@ -141,7 +141,7 @@ export default function NewAlbum(props) {
 
 	const closeModal = () => {
 		setIsOpen(false);
-	}
+	};
 
 	const customStyles = {
 		content: {
@@ -206,7 +206,6 @@ export default function NewAlbum(props) {
 		},
 		[ 0 ]
 	);
-
 
 	const Addition = () => {
 		setadditionForm(true);
@@ -298,82 +297,82 @@ export default function NewAlbum(props) {
 					// contentLabel="Example Modal"
 				>
 					<form>
-					<div class="row">
-						<div class="col s12">
-							<div id="checkboxes" >
-								<div class="card-content">
-									<div class="card-title">
-										<div class="row">
-											<div class="col s12 m6 l2">
-												<h4 class="card-title">Copyright Status</h4>
+						<div class="row">
+							<div class="col s12">
+								<div id="checkboxes">
+									<div class="card-content">
+										<div class="card-title">
+											<div class="row">
+												<div class="col s12 m6 l2">
+													<h4 class="card-title">Copyright Status</h4>
+												</div>
+												<div class="col s12 m6 l2 " id="modaldelete">
+													<ul class="tabs">
+														<li class="tab col s6 p-0">
+															<button type="button" onClick={closeModal}>
+																Delete
+															</button>
+														</li>
+													</ul>
+												</div>
 											</div>
-											<div class="col s12 m6 l2 " id="modaldelete">
-												<ul class="tabs">
-													<li class="tab col s6 p-0">
-													<button type='button' onClick={closeModal}>
-															Delete
-													</button>
-													</li>
-												</ul>
+										</div>
+										<div id="view-checkboxes">
+											<div className="row">
+												<p class="mb-1">
+													<label>
+														<input type="checkbox" class="filled-in" />
+														<span>
+															<pre>
+																{' '}
+																I Confirm that this release is 100% Mine or that I have{' '}
+																<br />
+																100% right to publish this music with all samples <br />
+																and Instrumental included{' '}
+															</pre>
+														</span>
+													</label>
+												</p>
 											</div>
-										</div>
-									</div>
-									<div id="view-checkboxes">
-										<div className="row">
-											<p class="mb-1">
-												<label>
-													<input type="checkbox" class="filled-in" />
-													<span>
-														<pre>
-															{' '}
-															I Confirm that this release is 100% Mine or that I have{' '}
-															<br />
-															100% right to publish this music with all samples <br />
-															and Instrumental included{' '}
-														</pre>
-													</span>
-												</label>
-											</p>
-										</div>
-										<div className="row">
-											<p class="mb-1">
-												<label>
-													<input type="checkbox" class="filled-in" />
-													<span>
-														I am aware that it is forbidden to publish music to <br />
-														which i do not have the rights
-													</span>
-												</label>
-											</p>
-										</div>
-										<div className="row">
-											<p class="mb-1">
-												<label>
-													<input type="checkbox" class="filled-in" />
-													<span>I confirm that i have read the terms and service </span>
-												</label>
-											</p>
-										</div>
-										<div className="row">
-											<button
-												type="submit"
-												// onClick={Saveform}
-												// disabled={!agree}
-												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
-											>
-												<CloudUploadIcon />Release Album
-											</button>
-										</div>
-										<div className="row">
-											<div className="typeclosebutton">
-												<button type="button">Close</button>
+											<div className="row">
+												<p class="mb-1">
+													<label>
+														<input type="checkbox" class="filled-in" />
+														<span>
+															I am aware that it is forbidden to publish music to <br />
+															which i do not have the rights
+														</span>
+													</label>
+												</p>
+											</div>
+											<div className="row">
+												<p class="mb-1">
+													<label>
+														<input type="checkbox" class="filled-in" />
+														<span>I confirm that i have read the terms and service </span>
+													</label>
+												</p>
+											</div>
+											<div className="row">
+												<button
+													type="submit"
+													// onClick={Saveform}
+													// disabled={!agree}
+													className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
+												>
+													<CloudUploadIcon />Release Album
+												</button>
+											</div>
+											<div className="row">
+												<div className="typeclosebutton">
+													<button type="button">Close</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</form>
 				</Modal>
 				<div className="container">
@@ -654,7 +653,7 @@ export default function NewAlbum(props) {
 																				<FileuploadMusic
 																					setMusicValues={(data) => {
 																						console.log('1111', data);
-																						console.log('1212',data.data)
+																						console.log('1212', data.data);
 																						setUploadMusic(data);
 																					}}
 																				/>
