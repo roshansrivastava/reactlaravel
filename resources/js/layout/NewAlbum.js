@@ -155,13 +155,13 @@ export default function NewAlbum(props) {
 
 	const openModal = (e) => {
 		e.preventDefault();
-		resetErrors();
-		handleValidation();
-		console.log('23', errorcount);
-		if (errorcount) {
-			errorcount = 0;
-			return;
-		}
+		// resetErrors();
+		// handleValidation();
+		// console.log('23', errorcount);
+		// if (errorcount) {
+		// 	errorcount = 0;
+		// 	return;
+		// }
 		setIsOpen(true);
 	};
 
@@ -198,7 +198,7 @@ export default function NewAlbum(props) {
 				console.log('stores', res.store);
 				var suggestions = res.store.map((value) => {
 					return {
-						id: value.id,
+						id: value.id.toString(),
 						text: value.store
 					};
 				});
@@ -249,8 +249,11 @@ export default function NewAlbum(props) {
 		console.log('33', i);
 	};
 
-	const handleAddition = (tag) => {
-		setTags([ ...tags, tag ]);
+	const handleAddition = (tag,index)=> {
+		console.log('1',index);
+		console.log('2',tag);
+		return;
+		setTags([ ...tags,]);
 	};
 
 	const handleDrag = (tag, currPos, newPos) => {
@@ -745,7 +748,7 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																onClick={Saveform}
+																onClick={openModal}
 																type="buttton"
 															>
 																Next
