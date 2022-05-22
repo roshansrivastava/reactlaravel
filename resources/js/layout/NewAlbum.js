@@ -124,6 +124,7 @@ export default function NewAlbum(props) {
 	};
 	const Saveform = (e) => {
 		e.preventDefault();
+
 		// CheckValidation();
 		// console.log('23', error);
 		// if (error) {
@@ -249,11 +250,8 @@ export default function NewAlbum(props) {
 		console.log('33', i);
 	};
 
-	const handleAddition = (tag,index)=> {
-		console.log('1',index);
-		console.log('2',tag);
-		return;
-		setTags([ ...tags,]);
+	const handleAddition =(tag)=> {
+		setTags([ ...tags,tag]);
 	};
 
 	const handleDrag = (tag, currPos, newPos) => {
@@ -748,7 +746,7 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																onClick={openModal}
+																onClick={Saveform}
 																type="buttton"
 															>
 																Next
