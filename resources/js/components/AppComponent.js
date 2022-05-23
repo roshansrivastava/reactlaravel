@@ -27,6 +27,7 @@ import Resend from './Resend';
 import Table from '../layout/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import NewAlbum from '../layout/NewAlbum';
+import AlbumView from '../layout/AlbumView';
 // import PageNotFound from './PageNotFound';
 export default function AppComponent() {
   let data =localStorage.getItem('token');
@@ -49,6 +50,7 @@ export default function AppComponent() {
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route>
               <Route exact path='/dashboard/release/newalbum'element={<NewAlbum token={data}/>}></Route>
+              <Route exact path='/dashboard/released/album/1'element={<AlbumView/>}></Route>
             {/* </>
           ) : (
             <>             */}

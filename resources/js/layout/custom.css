@@ -258,3 +258,7 @@ react tags
   margin-top: 18px;
   padding: 10px;
 }
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium
+{
+  font-size: 30px;
+}

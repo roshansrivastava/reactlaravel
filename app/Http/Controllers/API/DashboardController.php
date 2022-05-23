@@ -127,7 +127,6 @@ class DashboardController extends Controller
                    $songdata=Song::create($song);
                 };
             $album_submisson['album_id']=$albumdata->id;
-            return $album_submisson;
             }
             return response()->json([
             'status'=> $this->successCode,
@@ -139,15 +138,29 @@ class DashboardController extends Controller
             }
     } 
 
-    public function releasedMusic()
+    public function releasedMusic(Request $request)
     {
         try {
-            $name = User::all();
+            // $name = User::select('name')->get();
+            $album_genre = Album::with('user','genre','fileupload')->paginate(10);
             return response()->json([
                 'status'=> $this->successCode,
                 'message'=>'Music data loaded',
-                'data' => $name,
+                'data'=> $album_genre,
                 ]);
+        } catch(\Exception $e){
+            return $this->getExceptionResponse($e);
+            }
+    }
+
+    public function album_Music(){
+        try {
+        $song = Song::with('song')->get();
+        return response()->json([
+            'status'=> $this->successCode,
+            'message'=>'Song data loaded',
+            'data'=> $song,
+            ]);
         } catch(\Exception $e){
             return $this->getExceptionResponse($e);
             }

@@ -3,8 +3,6 @@ import File from './File';
 import Api from './Api';
 const UserLogin = (payload) => Api.post("/login", payload);
 const Userlogout = (payload) => Api.post("/logout", payload);
-// const Getuser = (pageNumber) => Api.get("/users?page="+pageNumber);
-// const Getuser = (pageNumber) => Api.post("/users?page="+pageNumber);
 const DeleteUser = (id) => Api.get('/delete/'+id);
 const AddUsers = (formData) =>Api.post('/adduser',formData);
 const UpdateUsers = (payload) => Api.post('/updateuser',payload);
@@ -24,7 +22,8 @@ const Genre = () => Api.get('/genres');
 const Upload = (formData,payload) => Api.post('/upload-file',formData,payload);
 const Countri = () =>Api.get('/country');
 const ReleaseAlbum = (payload) =>Api.post('/release/albums',payload);
-const ReleaseMusic = () => Api.get('/released/music');
+const ReleaseMusic = (data) => Api.post(`/released/music?page=${data.pageNumber}`);
+const Song_Album = () => Api.get('/released/music/album');
 export  {
     UserLogin,
     Userlogout,
@@ -49,4 +48,5 @@ export  {
     Countri,
     ReleaseAlbum,
     ReleaseMusic,
+    Song_Album,
 }

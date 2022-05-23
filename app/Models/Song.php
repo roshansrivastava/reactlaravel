@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Album;
 
 class Song extends Model
 {
@@ -21,4 +22,11 @@ class Song extends Model
         'fuga_link_release_track_id',
         'audio_locale_id'
     ];
+
+    public function song()
+    {
+        return $this->belongsTo('App\Models\Album','id');
+    }
+    
+
 }

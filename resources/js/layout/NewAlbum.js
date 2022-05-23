@@ -15,6 +15,8 @@ import { Countri, ReleaseAlbum } from '../api/Index';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function NewAlbum(props) {
 	const [ albumname, setalbumname ] = useState('');
@@ -130,18 +132,15 @@ export default function NewAlbum(props) {
 		setspotifynameError('');
 		setuploadFileError(null);
 	};
-	console.log('after1',uploadMusicData);
+
 	const Saveform = (e) => {
 		e.preventDefault();
-		console.log('after2',serviceList);
-		// CheckValidation();
-		// console.log('23', error);
-		// if (error) {
-		// 	setvalidationcheck(' Please  Fill checkbox ');
-		// 	error = 0;
-		// 	return;
-		// }
-	
+		CheckValidation();
+		if (error) {
+			setvalidationcheck(' Please  Fill checkbox ');
+			error = 0;
+			return;
+		}
 
 		let payload = {
 			AlbumName: albumname,
@@ -157,20 +156,25 @@ export default function NewAlbum(props) {
 			users: serviceList
 		};
 		console.log('musiclist',payload);
-		ReleaseAlbum(payload).then((response) => {
+		ReleaseAlbum(payload).
+		then((response) => {
 			console.log('12332', response);
+			toast.success(res.message,{
+				position: toast.POSITION.TOP_RIGHT
+			
+			});
+				navigate('/login')
 		});
 	};
 
 	const openModal = (e) => {
 		e.preventDefault();
-		// resetErrors();
-		// handleValidation();
-		// console.log('23', errorcount);
-		// if (errorcount) {
-		// 	errorcount = 0;
-		// 	return;
-		// }
+		resetErrors();
+		handleValidation();
+		if (errorcount) {
+			errorcount = 0;
+			return;
+		}
 		setIsOpen(true);
 	};
 
@@ -750,7 +754,7 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																onClick={Saveform}
+																onClick={openModal}
 																type="buttton"
 															>
 																Next

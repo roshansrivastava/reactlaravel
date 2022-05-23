@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-import { ReleaseMusic } from '../api/Index';
+import { Song_Album } from '../api/Index';
+import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
 import { DeleteUser , Single, searchusers} from '../api/Index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
+import EditUser from './EditUser';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-export default function Music() {
+export default function AlbumView() {
 	const [APIData, setAPIData] = useState([]);
 	const [Loading , setLoading] =useState(true);
 	const [state, setData] = useState({
@@ -22,17 +24,15 @@ export default function Music() {
 	let user ='';
 	let search = '';
 	
-	const fetchData = async (pageNumber = 1) => {
+	const fetchData = async () => {
 
-		ReleaseMusic({
-			pageNumber,
-		})
+		Song_Album()
 		.then(res => {
             // console.log('album',res);
             // return;
-			setData({
-						users : res.data,
-					});
+			// setData({
+			// 			users : res.data,
+			// 		});
 			console.log(res);
 		})
 		.catch(err => {
@@ -129,7 +129,7 @@ export default function Music() {
 										<td>{user.genre.name}</td>
 										<td><h6>Pending</h6></td>
 										<td><h6>Not-Requested</h6></td>
-										<td> {<Link  to={'/dashboard/released/album/1'}> <VisibilityIcon className="waves-effect waves-cyan " />View</Link> }</td>
+										<td> {<VisibilityIcon className="waves-effect waves-cyan " />}View</td>
 										<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
 											<ModeEditIcon onClick= {() => {update(user.id)}}/>
 												{/* <Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(user.id)}} >

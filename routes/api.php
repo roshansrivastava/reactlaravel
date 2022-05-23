@@ -27,6 +27,7 @@ Route::post('/forget/password',[UserController::class,'forgetPassword']);
 Route::post('/reset/pasword',[UserController::class,'resetPassword']);
 Route::post('/resend',[UserController::class,'resend_Mail']);
 
+
 // Dashvboard //
 Route::group(['middleware' => 'auth:api'], function()
 {
@@ -49,7 +50,9 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('/country',[DashboardController::class,'Country']);
     Route::get('stripe', [StripeController::class, 'stripe']);
     Route::post('stripe', [StripeController::class, 'stripePost']);
-    Route::get('/released/music',[DashboardController::class,'releasedMusic']);
+    Route::get('/released/music/album',[DashboardController::class,'album_Music']);
+    Route::post('/released/music',[DashboardController::class,'releasedMusic']);
+    
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
