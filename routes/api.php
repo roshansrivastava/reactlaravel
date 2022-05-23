@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('/country',[DashboardController::class,'Country']);
     Route::get('stripe', [StripeController::class, 'stripe']);
     Route::post('stripe', [StripeController::class, 'stripePost']);
+    Route::get('/released/music',[DashboardController::class,'releasedMusic']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

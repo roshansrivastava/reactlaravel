@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
@@ -12,6 +12,7 @@ import './Data-table.css';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import ReactAudioPlayer from 'react-audio-player';
+import {ReleaseMusic} from '../api/Index';
 export default function Music() {
     const [selectedRows, setSelectedRows] = useState(false);
     const [toggledClearRows, setToggleClearRows] =useState(false);
@@ -25,6 +26,13 @@ export default function Music() {
             },
         },
     }));
+    
+    useEffect(() => {
+        ReleaseMusic()
+        .then(response =>{
+            console.log('music',response);
+        })
+    }, [])
     
     const LinearIndeterminate = () => {
         const classes = useStyles();

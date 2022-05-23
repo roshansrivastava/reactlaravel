@@ -42,7 +42,7 @@ export default function AppComponent() {
               <Route exact path='/dashboard/home'element={<Home/>}></Route>
               <Route exact path='/dashboard'element={<Dashboard/>}></Route>
               <Route exact path='/dashboard/user'element={<User/>}></Route>
-              {/* <Route exact path='/dashboard/music'element={<Music/>}></Route> */}
+              <Route exact path='/dashboard/music'element={<Music/>}></Route>
               <Route exact path='/dashboard/adduser'element={<AddUser/>}></Route>={}
               <Route exact path='/dashboard/updateuser/:id'element={<EditUser/>}></Route>
               <Route exact path="/dashboard/purchase/premium"element={<PurchasePremium/>}></Route>

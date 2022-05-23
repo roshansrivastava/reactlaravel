@@ -9,11 +9,11 @@ use Stripe;
 use Mail;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\payment;
+use App\Models\Payment;
 use Stripe\Customer;
 use App\Models\Subscription;
 use App\Models\User;
-use App\Models\payout;
+use App\Models\Payout;
 use App\Models\custom_payment_info;
 use App\Models\subscription_item;
 use App\Models\tbl_subscription;
@@ -49,7 +49,7 @@ class StripeController extends Controller
                 'source' => $token,
                 ]);
                 if($charges){
-                  $payments = payment::create([
+                  $payments = Payment::create([
                     'user_id' => $user_id,
                     'payment_id'=>$charges->id,
                     'plan'  => $plan,
@@ -66,7 +66,7 @@ class StripeController extends Controller
                   $subscription['trial_ends_at'] = date('Y-m-d h:i:s');
                   $subscription['ends_at'] = date('Y-m-d h:i:s', strtotime('+1 years'));
                   $subscription->save();
-                  $payout = new payout;
+                  $payout = new Payout;
                   $payout['currency'] ='usd';
                   $payout['amount'] =$charges->amount;
                   $payout['payout_method'] ='Stripe';

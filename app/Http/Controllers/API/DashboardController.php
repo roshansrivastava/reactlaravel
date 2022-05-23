@@ -111,18 +111,19 @@ class DashboardController extends Controller
                    $song['language']=$data['selectname'];
                    if($data['radio']=='Explicit Content')
                    {
-                       $song['isExplicit'] = 1;
+                       $song['is_explicit'] = 1;
                    }
                    elseif($data['radio']=='No Explicit Content')
                    {
-                       $song['isExplicit'] = 0;
+                       $song['is_explicit'] = 0;
                    }
                    else
                    {
-                       $song['isInstrumental'] = 1;
+                       $song['is_instrumental'] = 1;
                    }
                    $song['album_id']=$albumdata->id;
                    $song['language']=$data['selectname'];
+                   $song['song_file'] = $data['music'];
                    $songdata=Song::create($song);
                 };
             $album_submisson['album_id']=$albumdata->id;
@@ -137,4 +138,18 @@ class DashboardController extends Controller
             return $this->getExceptionResponse($e);
             }
     } 
+
+    public function releasedMusic()
+    {
+        try {
+            $name = User::all();
+            return response()->json([
+                'status'=> $this->successCode,
+                'message'=>'Music data loaded',
+                'data' => $name,
+                ]);
+        } catch(\Exception $e){
+            return $this->getExceptionResponse($e);
+            }
+    }
 }

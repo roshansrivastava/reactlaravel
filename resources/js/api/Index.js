@@ -24,6 +24,7 @@ const Genre = () => Api.get('/genres');
 const Upload = (formData,payload) => Api.post('/upload-file',formData,payload);
 const Countri = () =>Api.get('/country');
 const ReleaseAlbum = (payload) =>Api.post('/release/albums',payload);
+const ReleaseMusic = () => Api.get('/released/music');
 export  {
     UserLogin,
     Userlogout,
@@ -47,4 +48,5 @@ export  {
     Upload,
     Countri,
     ReleaseAlbum,
+    ReleaseMusic,
 }

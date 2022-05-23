@@ -132,10 +132,6 @@ export default function NewAlbum(props) {
 	};
 	console.log('after1',uploadMusicData);
 	const Saveform = (e) => {
-		// setServiceList([
-		// 	...serviceList,
-		// 	{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData}
-		// ]);
 		e.preventDefault();
 		console.log('after2',serviceList);
 		// CheckValidation();
@@ -153,15 +149,14 @@ export default function NewAlbum(props) {
 			StoreName: tags,
 			DateName: datename,
 			UpcName: upcname,
-			// uploadFileId: uploadFileData.data.id,
-			// uploadFilePath: uploadFileData.data.path,
+			uploadFileId: uploadFileData.data.id,
+			uploadFilePath: uploadFileData.data.path,
 			Languagename: languagename,
 			SpotifyName: spotifyname,
 			ApplyName: applyname,
 			users: serviceList
 		};
 		console.log('musiclist',payload);
-		return;
 		ReleaseAlbum(payload).then((response) => {
 			console.log('12332', response);
 		});
