@@ -16,23 +16,23 @@ class FileUploadController extends Controller
         $file     = $request->file('files');
         $fileName = $file->getClientOriginalName();
         $file_extention = $file->getClientOriginalExtension();
-        Storage::disk('local')->putFileAs(
-                'files/'.$fileName,
-                $file,
-                $fileName
-              );
+        // Storage::disk('local')->putFileAs(
+        //         'files/'.$fileName,
+        //         $file,
+        //         $fileName
+        //       );
             //   $path = $file->getPath();
-            // $FilePath = 'roshantest/uploads'; 
-            // $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
-            // $Path = Storage::disk('s3')->url($File);
-            // $fileupload = new FileUpload;
-            // $fileupload['name']=$fileName;
-            // $fileupload['path']=$Path;
-            // $fileupload->save();
+            $FilePath = 'roshantest/uploads'; 
+            $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
+            $Path = Storage::disk('s3')->url($File);
+            $fileupload = new FileUpload;
+            $fileupload['name']=$fileName;
+            $fileupload['path']=$Path;
+            $fileupload->save();
             return response()->json([
                   'status'=>$this->successCode,
                   'message'=> $this->responseMsg['success'][0] ,
-                //   'data'=>$fileupload,
+                  'data'=>$fileupload,
               ]);
            
             // return ['22',$All];

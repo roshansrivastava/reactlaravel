@@ -46,14 +46,22 @@ export default function NewAlbum(props) {
 	const [ validationcheck , setvalidationcheck ] = useState('');
 
 	const [ serviceList, setServiceList ] = useState([
-		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:'' }
+		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData }
 	]);
 	const handleServiceAdd = () => {
 		setServiceList([
 			...serviceList,
-			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:''}
+			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData}
 		]);
 	};
+
+	const UploadMusic = (musicData, index) => {
+		// setServiceList();
+		console.log('DOne',musicData);
+		console.log('121',serviceList);
+		const list = [ ...serviceList ];
+		list[index]['music'] = musicData;
+	}
 	const handleremove = (index) => {
 		const list = [ ...serviceList ];
 		list.splice(index, 1);
@@ -122,9 +130,14 @@ export default function NewAlbum(props) {
 		setspotifynameError('');
 		setuploadFileError(null);
 	};
+	console.log('after1',uploadMusicData);
 	const Saveform = (e) => {
+		// setServiceList([
+		// 	...serviceList,
+		// 	{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData}
+		// ]);
 		e.preventDefault();
-
+		console.log('after2',serviceList);
 		// CheckValidation();
 		// console.log('23', error);
 		// if (error) {
@@ -140,8 +153,8 @@ export default function NewAlbum(props) {
 			StoreName: tags,
 			DateName: datename,
 			UpcName: upcname,
-			uploadFileId: uploadFileData.data.id,
-			uploadFilePath: uploadFileData.data.path,
+			// uploadFileId: uploadFileData.data.id,
+			// uploadFilePath: uploadFileData.data.path,
 			Languagename: languagename,
 			SpotifyName: spotifyname,
 			ApplyName: applyname,
@@ -680,12 +693,8 @@ export default function NewAlbum(props) {
 																				<h6>Upload Song</h6>
 																				<FileuploadMusic
 																					setMusicValues={(data) => {
-																						setUploadMusic(data.data.path);
-																						setServiceList([
-																							...serviceList,
-																							{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:data.data.path}
-																						]);
-																						console.log('after',serviceList);
+																						UploadMusic(data.data.path, index);
+																						
 																					}}
 																				/>
 																				<p>Allowed formats: flac.Wav</p>
