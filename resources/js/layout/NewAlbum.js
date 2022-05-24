@@ -43,26 +43,40 @@ export default function NewAlbum(props) {
 	const [ applynameError, setapplynameError ] = useState('');
 	const [ spotifynameError, setspotifynameError ] = useState('');
 	const [ uploadFileError, setuploadFileError ] = useState(null);
-	const [ agree , setagree ] = useState(false);
-	const [ checkconfirm , setcheckconfirm ] = useState('');
-	const [ checkaware , setcheckaware ] = useState('');
-	const [ checkconfirmall , setconfirmall ] = useState('');
-	const [ validationcheck , setvalidationcheck ] = useState('');
+	const [ agree, setagree ] = useState(false);
+	const [ checkconfirm, setcheckconfirm ] = useState('');
+	const [ checkaware, setcheckaware ] = useState('');
+	const [ checkconfirmall, setconfirmall ] = useState('');
+	const [ validationcheck, setvalidationcheck ] = useState('');
 
 	const [ serviceList, setServiceList ] = useState([
-		{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData }
+		{
+			songname: '',
+			composername: '',
+			selectname: '',
+			radio: '',
+			isrcname: '',
+			music: uploadMusicData
+		}
 	]);
 	const handleServiceAdd = () => {
 		setServiceList([
 			...serviceList,
-			{ songname: '', composername: '', selectname: '', radio: '', isrcname: '', music:uploadMusicData}
+			{
+				songname: '',
+				composername: '',
+				selectname: '',
+				radio: '',
+				isrcname: '',
+				music: uploadMusicData
+			}
 		]);
 	};
 
 	const UploadMusic = (musicData, index) => {
 		const list = [ ...serviceList ];
 		list[index]['music'] = musicData;
-	}
+	};
 	const handleremove = (index) => {
 		const list = [ ...serviceList ];
 		list.splice(index, 1);
@@ -109,13 +123,13 @@ export default function NewAlbum(props) {
 		if (checkconfirm == '') {
 			error++;
 		}
-		if (checkaware == ''){
+		if (checkaware == '') {
 			error++;
 		}
-		if ( checkconfirmall == ''){
+		if (checkconfirmall == '') {
 			error++;
 		}
-	}
+	};
 	const resetErrors = () => {
 		setalbumnameError('');
 		setgenernameError('');
@@ -149,17 +163,14 @@ export default function NewAlbum(props) {
 			ApplyName: applyname,
 			users: serviceList
 		};
-		ReleaseAlbum(payload).
-		then((response) => {
+		ReleaseAlbum(payload).then((response) => {
 			setIsOpen(false);
-			if(response.status == 200){
-				toast.success(response.message,{
+			if (response.status == 200) {
+				toast.success(response.message, {
 					position: toast.POSITION.TOP_RIGHT
-				
 				});
-
 			}
-				navigate('/dashboard/music');
+			navigate('/dashboard/music');
 		});
 	};
 
@@ -175,7 +186,6 @@ export default function NewAlbum(props) {
 	};
 
 	const closeModal = () => {
-		
 		setIsOpen(false);
 	};
 
@@ -258,8 +268,8 @@ export default function NewAlbum(props) {
 		console.log('33', i);
 	};
 
-	const handleAddition =(tag)=> {
-		setTags([ ...tags,tag]);
+	const handleAddition = (tag) => {
+		setTags([ ...tags, tag ]);
 	};
 
 	const handleDrag = (tag, currPos, newPos) => {
@@ -291,7 +301,6 @@ export default function NewAlbum(props) {
 	};
 
 	return (
-		
 		<div className="App">
 			<header className="page-topbar" id="header">
 				<Navbar />
@@ -326,92 +335,106 @@ export default function NewAlbum(props) {
 				</a>
 			</aside>
 			<div id="main">
-			
-				<div id='class-modal'>
-				<Modal
-					isOpen={modalIsOpen}
-					// onAfterOpen={afterOpenModal}
-					onRequestClose={closeModal}
-					style={customStyles}
-					// contentLabel="Example Modal"
-				>
-					<form>
-						<div class="row">
-							<div class="col s12">
-								<div id="checkboxes">
-									<div class="card-content">
-										<div class="card-title">
-											<div class="row">
-												<div class="col s12 m6 l2">
-													<h4 class="card-title">Copyright Status</h4>
+				<div id="class-modal">
+					<Modal
+						isOpen={modalIsOpen}
+						// onAfterOpen={afterOpenModal}
+						onRequestClose={closeModal}
+						style={customStyles}
+						// contentLabel="Example Modal"
+					>
+						<form>
+							<div class="row">
+								<div class="col s12">
+									<div id="checkboxes">
+										<div class="card-content">
+											<div class="card-title">
+												<div class="row">
+													<div class="col s12 m6 l2">
+														<h4 class="card-title">Copyright Status</h4>
+													</div>
 												</div>
-												{/* <div className="row"> */}
-												{/* <div className="typeclosebutton">
-													<button type="button" id='close' onClick={closeModal}>Close</button> */}
-												{/* </div> */}
-											{/* </div> */}
 											</div>
-										</div>
-										<div id="view-checkboxes">
-											<div className="row">
-												<p class="mb-1">
-													<label>
-														<input type="checkbox" class="filled-in" value='confirm' onChange={(e)=>
-															setcheckconfirm(e.target.value)
-														}/>
-														<span>
-															<pre>
-																{' '}
-																I Confirm that this release is 100% Mine or that I have{' '}
+											<div id="view-checkboxes">
+												<div className="row">
+													<p class="mb-1">
+														<label>
+															<input
+																type="checkbox"
+																class="filled-in"
+																value="confirm"
+																onChange={(e) => setcheckconfirm(e.target.value)}
+															/>
+															<span>
+																<pre>
+																	{' '}
+																	I Confirm that this release is 100% Mine or that I
+																	have <br />
+																	100% right to publish this music with all samples{' '}
+																	<br />
+																	and Instrumental included{' '}
+																</pre>
+															</span>
+														</label>
+													</p>
+												</div>
+												<div className="row">
+													<p class="mb-1">
+														<label>
+															<input
+																type="checkbox"
+																class="filled-in"
+																value="aware"
+																onChange={(e) => setcheckaware(e.target.value)}
+															/>
+															<span>
+																I am aware that it is forbidden to publish music to{' '}
 																<br />
-																100% right to publish this music with all samples <br />
-																and Instrumental included{' '}
-															</pre>
-														</span>
-													</label>
-												</p>
-											</div>
-											<div className="row">
-												<p class="mb-1">
-													<label>
-														<input type="checkbox" class="filled-in" value="aware" onChange={ (e) => setcheckaware(e.target.value)}/>
-														<span>
-															I am aware that it is forbidden to publish music to <br />
-															which i do not have the rights
-														</span>
-													</label>
-												</p>
-											</div>
-											<div className="row">
-												<p class="mb-1">
-													<label>
-														<input type="checkbox" class="filled-in" value="confirmall" onChange={(e)=> setconfirmall(e.target.value)}/>
-														<span>I confirm that i have read the terms and service </span>
-													</label>
-												</p>
-											</div>
-											<div className="row">
-											<span style={{ color: 'red' }}>{validationcheck}</span>
-												<button
-													type="submit"
-													onClick={Saveform}
-													className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
-												>
-													<CloudUploadIcon />Release Album
-												</button>
-											</div>
-											<div className="row">
-												<div className="typeclosebutton">
-													<button type="button" id='close' onClick={closeModal}>Close</button>
+																which i do not have the rights
+															</span>
+														</label>
+													</p>
+												</div>
+												<div className="row">
+													<p class="mb-1">
+														<label>
+															<input
+																type="checkbox"
+																class="filled-in"
+																value="confirmall"
+																onChange={(e) => setconfirmall(e.target.value)}
+															/>
+															<span>
+																I confirm that i have read the terms and service{' '}
+															</span>
+														</label>
+													</p>
+												</div>
+												<div className="row">
+													<span style={{ color: 'red' }}>{validationcheck}</span>
+													<button
+														type="submit"
+														onClick={Saveform}
+														className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12"
+													>
+														<CloudUploadIcon />
+														Release Album
+													</button>
+												</div>
+												<div className="row">
+													<div className="typeclosebutton">
+														<button type="button" id="close" onClick={closeModal}>
+															Close
+														</button>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</Modal>
+						</form>
+					</Modal>
 				</div>
 				<div className="container">
 					<div className="row">
@@ -433,7 +456,13 @@ export default function NewAlbum(props) {
 															onChange={(e) => setalbumname(e.target.value)}
 														/>
 														<label htmlFor="first_name01">Album Name</label>
-														<span style={{ color: 'red' }}>{albumnameError}</span>
+														<span
+															style={{
+																color: 'red'
+															}}
+														>
+															{albumnameError}
+														</span>
 													</div>
 													<div className="input-field col m6 s12">
 														<Select
@@ -443,7 +472,13 @@ export default function NewAlbum(props) {
 															onChange={(e) => setgenerename(e.value)}
 															options={genreValue}
 														/>
-														<span style={{ color: 'red' }}>{genernameError}</span>
+														<span
+															style={{
+																color: 'red'
+															}}
+														>
+															{genernameError}
+														</span>
 													</div>
 												</div>
 												<div className="row">
@@ -477,7 +512,13 @@ export default function NewAlbum(props) {
 															id="unique"
 															onChange={(e) => setdatename(e.target.value)}
 														/>
-														<span style={{ color: 'red' }}>{datenameError}</span>
+														<span
+															style={{
+																color: 'red'
+															}}
+														>
+															{datenameError}
+														</span>
 													</div>
 													<div class="input-field col m6 s12">
 														<div className="input-field col m6 s12">
@@ -488,7 +529,13 @@ export default function NewAlbum(props) {
 																placeholder="If you don't have one leave this blank"
 																onChange={(e) => setupcname(e.target.value)}
 															/>
-															<span style={{ color: 'red' }}>{upcnameError}</span>
+															<span
+																style={{
+																	color: 'red'
+																}}
+															>
+																{upcnameError}
+															</span>
 														</div>
 													</div>
 													<div class="input-field col m6 s12">
@@ -500,7 +547,13 @@ export default function NewAlbum(props) {
 															options={storevalue}
 															onChange={(e) => setlanguagename(e.value)}
 														/>
-														<span style={{ color: 'red' }}>{languagenameError}</span>
+														<span
+															style={{
+																color: 'red'
+															}}
+														>
+															{languagenameError}
+														</span>
 													</div>
 												</div>
 												<div className="row">
@@ -527,7 +580,13 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setspotifyname(e.target.value)}
 																/>
-																<span style={{ color: 'red' }}>{spotifynameError}</span>
+																<span
+																	style={{
+																		color: 'red'
+																	}}
+																>
+																	{spotifynameError}
+																</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -554,7 +613,13 @@ export default function NewAlbum(props) {
 																	placeholder="If you don't have one leave this blank"
 																	onChange={(e) => setapplyname(e.target.value)}
 																/>
-																<span style={{ color: 'red' }}>{applynameError}</span>
+																<span
+																	style={{
+																		color: 'red'
+																	}}
+																>
+																	{applynameError}
+																</span>
 															</div>
 
 															<div className="col-sm-3">
@@ -585,7 +650,11 @@ export default function NewAlbum(props) {
 															{serviceList.map((singleService, index) => (
 																<div key={index} className="card">
 																	<div className="card-header">
-																		<h5> Song-{index + 1}</h5>
+																		<h5>
+																			{' '}
+																			Song-
+																			{index + 1}
+																		</h5>
 																	</div>
 																	<div className="col s12 m12 l12">
 																		{/* <div id="Form-advance" className="card card card-default scrollspy"> */}
@@ -690,8 +759,10 @@ export default function NewAlbum(props) {
 																				<h6>Upload Song</h6>
 																				<FileuploadMusic
 																					setMusicValues={(data) => {
-																						UploadMusic(data.data.path, index);
-																						
+																						UploadMusic(
+																							data.data.path,
+																							index
+																						);
 																					}}
 																				/>
 																				<p>Allowed formats: flac.Wav</p>
@@ -704,7 +775,8 @@ export default function NewAlbum(props) {
 																						to="https://www.freeconvert.com/"
 																					>
 																						freeconvert.com
-																					</Link>.
+																					</Link>
+																					.
 																				</p>
 																			</div>
 																			<div className="row">

@@ -45,25 +45,12 @@ export default function Home() {
 	let user_name = '';
 	let user_id = '';
 	const onToken = (description , plan_id , amount) => tokenization => {
-	// console.log('1',description);
-	// console.log('2',plan_id);
-	// console.log('3',amount);
-	// console.log('4',tokenization);
-	// const resolveAfter4Sec = new Promise(resolve => setTimeout(resolve, 4000));
-	// toast.promise(
-	// 	resolveAfter4Sec,
-	// 	{
-	// 	  pending: ' Please  Wait ',
-	// 	//   success: toast_success,
-	// 	//   error: toast_error,
-	// 	}
-	// )
+	
 	handleToggle();
 		PurchasePremium({tokenization,description,amount,plan_id})
 		.then((res)=>{
 		console.log('RES',res.data);
 		localStorage.setItem('user', JSON.stringify(res.data));
-		// console.log('update', JSON.parse(localStorage.getItem('user')));
 		handleClose();
 		if (res.status == 200) {
 			toast.success(res.message , {
@@ -95,7 +82,6 @@ export default function Home() {
 	const getPlanData = () => {
 		Plan().then((response) => {
 			setPlan(response.plan);
-			// setPlan(response.plan);
 		});
 	}
 	const handleClose = () => {
@@ -106,22 +92,6 @@ export default function Home() {
 	};
 	useEffect(()=>{
 		getPlanData();
-		// 	Plan()
-		//    .then((response)=>{
-			// 	//    if(response.status == 200){
-				// 	//    console.log('1',response);
-				// 	//    console.log('1plan',response.plan[0]);
-				// 	//    console.log('1plandata',response.plan[0].name)
-				// 	// //    var free =JSON.parse( response.plan[0].name);
-				// 	// //    console.log('***',free);
-				// 	//    setPlan ( response.plan);
-				// 	// //    console.log('set',Plan);
-				// 	// //   var free = response.plan[0].name ;
-				// 	//    console.log('2plan',response.plan[1]);
-				// 	//    console.log('3plan',response.plan[2]);
-				
-				// 	// }
-				// });
 			},[]);
 	let data = JSON.parse(localStorage.getItem('user'));
 	user_name = data.name;
@@ -353,25 +323,6 @@ export default function Home() {
 												}
 											/>
 										</ListItem>
-										{/* {plan.map(li => (
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													// <Typography variant="p" component="div" dangerouslySetInnerHTML={{
-													// 	__html: li
-													//   }}>
-													 <Typography variant="strong" component="b">
-															
-														 {li} 
-														</Typography>
-												}
-											/>
-										</ListItem>
-										))
-											} */}
 									
 									</List>
 								</Typography>
@@ -397,9 +348,7 @@ export default function Home() {
 								<>
 								<Typography variant="body2">
 										<StripeCheckout token={onToken(plan.title, plan.id, plan.amount*100)} 
-										    //  opened={() => {
-											// 	setAmount(4000),
-											//  }}				
+										  				
 											billingAddress={true}
 											name = {plan.title}
 											 zipCode={true}
@@ -428,258 +377,6 @@ export default function Home() {
 					</Grid>
 					))
 				}
-					{/* <Grid item xs={12} lg={4} xl={4}>
-						<Card>
-							<CardContent>
-								<Typography
-									sx={{ fontSize: 34 }}
-									color="revert"
-									direction="row"
-									gutterBottom
-									variant="h3"
-									component="div"
-								>
-									PREMIUM
-								</Typography>
-								<Typography variant="h7" component="div">
-									<List
-										sx={{
-											'& .MuiListItemIcon-root': {
-												minWidth: 'auto',
-												paddingRight: '10px'
-											}
-										}}
-									>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															Unlimited
-														</Typography>{' '}
-														Releases Included
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														Distribution within{' '}
-														<Typography variant="strong" component="b">
-															48h
-														</Typography>
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															Keep 100%{' '}
-														</Typography>of the earnings
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															24 / 7
-														</Typography>Live Support{' '}
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															Content ID{' '}
-														</Typography>
-													</Typography>
-												}
-											/>
-										</ListItem>
-									</List>
-								</Typography>
-								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
-									<Typography fontSize="50px" component="div">
-										{' '}
-										19.99{' '}
-									</Typography>
-									<Typography variant="p" component="div" id="euro">
-										{' '}
-										<Typography variant="p" component="div" fontSize="10px">
-											<EuroIcon />{' '}
-										</Typography>{' '}
-										<Typography component="div" variant="p" fontSize="14">
-											Per Year
-										</Typography>{' '}
-									</Typography>
-								</Typography>
-								<Typography variant="body2">
-							
-									
-										<Button size="big" variant="contained" className='button' onClick={Premium}>
-											Purchase Now
-										</Button>
-									
-								</Typography>
-							</CardContent>
-						</Card>
-					</Grid>
-					<Grid item xs={12} lg={4} xl={4}>
-						<Card>
-							<CardContent>
-								<Typography
-									sx={{ fontSize: 34 }}
-									color="revert"
-									direction="row"
-									gutterBottom
-									variant="h3"
-									component="div"
-								>
-									Basic
-								</Typography>
-								<Typography variant="h7" component="div">
-									<List
-										sx={{
-											'& .MuiListItemIcon-root': {
-												minWidth: 'auto',
-												paddingRight: '10px'
-											},
-											'& .MuiSvgIcon-fontSizeMedium': {
-												color: 'unset'
-											}
-										}}
-									>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															6
-														</Typography>{' '}
-														Releases Included
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														Distribution within{' '}
-														<Typography variant="strong" component="b">
-															10days
-														</Typography>
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															Keep 85%{' '}
-														</Typography>{' '}
-														of the earnings
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b" /> 24 / 7 Live
-														Support{' '}
-													</Typography>
-												}
-											/>
-										</ListItem>
-										<ListItem>
-											<ListItemIcon>
-												<CheckIcon />
-											</ListItemIcon>
-											<ListItemText
-												primary={
-													<Typography variant="p" component="div">
-														<Typography variant="strong" component="b">
-															No
-														</Typography>{' '}
-														Content ID
-													</Typography>
-												}
-											/>
-										</ListItem>
-									</List>
-								</Typography>
-								<Typography variant="" sx={{ p: 2, display: 'flex' }}>
-									<Typography fontSize='30' component = 'div' color='revert'>
-										<strike>9.99</strike>
-										</Typography>
-									<Typography fontSize="50px" component="div">
-										{' '}
-										4.99{' '}
-									</Typography>
-									<Typography variant="p" component="div" id="euro">
-										{' '}
-										<Typography variant="p" component="div" fontSize="10px">
-											<EuroIcon />{' '}
-										</Typography>{' '}
-										<Typography component="div" variant="p" fontSize="14">
-											Per Year
-										</Typography>{' '}
-									</Typography>
-								</Typography>
-								<Typography variant="body2">
-								
-								
-										<Button size="big" variant="contained" className='button' onClick={Basic}>
-											Purchase Now
-										</Button>
-									
-								</Typography>
-							</CardContent>
-						</Card>
-					</Grid>
-					 */}
 				</Grid>
 			</div>
 			<Script />

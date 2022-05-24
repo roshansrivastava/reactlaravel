@@ -50,7 +50,8 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('/country',[DashboardController::class,'Country']);
     Route::get('stripe', [StripeController::class, 'stripe']);
     Route::post('stripe', [StripeController::class, 'stripePost']);
-    Route::get('/released/music/album',[DashboardController::class,'album_Music']);
+    // Route::get('/released/music/song',[DashboardController::class,'album_Music']);
+    Route::get('/released/music/song/{id}',[DashboardController::class,'albumMusic']);
     Route::post('/released/music',[DashboardController::class,'releasedMusic']);
     
 });

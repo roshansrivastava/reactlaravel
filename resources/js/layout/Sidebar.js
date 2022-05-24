@@ -45,7 +45,6 @@ export default function sidebar() {
 								<AccountBalanceWalletOutlinedIcon /> Wallet
 							</a>
 						</li>
-						{/* {APIData.name == 1 && APIData.role_id==2 ( */}
 						{ data.role_id == 1 || data.role_id == 2 ?
 						<>
 							<li className="navigation-header">
@@ -79,16 +78,14 @@ export default function sidebar() {
 								<PeopleAltIcon /> Declined Albums
 							</a>
 						</li>
-						{/* { APIData.role == 'admin' && ( */}
+				
 							<li className="bold">
 								<a className="waves-effect waves-cyan " href="app-calendar.html">
 									<PeopleAltIcon /> Need Edit Albums
 								</a>
 							</li>
 						
-						{/* {name == 'roshan' && (
-							;saveStudentsdfvmlsd
-						)} */}
+						
 						<li className="bold">
 							<a className="waves-effect waves-cyan " href="app-calendar.html">
 								<PeopleAltIcon /> User Request

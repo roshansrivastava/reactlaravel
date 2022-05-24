@@ -9,14 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 export default function ForgetPassword() {
 	const navigate = useNavigate();
 	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-	const [Email, setEmail] = useState('');
-	const [EmailErr, setEmailError] = useState('');
-	const [slug, setSlug] = useState([]);
+	const [ Email, setEmail ] = useState('');
+	const [ EmailErr, setEmailError ] = useState('');
+	const [ slug, setSlug ] = useState([]);
 	const handleValidation = () => {
 		if (Email == '') {
 			setEmailError('please enter email');
@@ -29,26 +28,19 @@ export default function ForgetPassword() {
 		let payload = {
 			Email: Email
 		};
-		// console.log('vvv', payload);
-	     await Forget(payload)
+		await Forget(payload)
 			.then((res) => {
 				if (res.status == 200) {
-					console.log(res.slug);
-					console.log(setSlug('setslug', res.slug));
 					num = res.slug;
-					console.log('num', typeof (num));
+					// console.log('num', typeof num);
 					setSlug(num);
 					toast.success(res.message, {
 						position: toast.POSITION.TOP_RIGHT
-					  });
-					console.log(setSlug(num));
-					console.log('setslug =>', slug);
-					// navigate('/reset/password/');
+					});
 					setEmail('');
 				}
-				
 			})
-			.catch(function (error) {
+			.catch(function(error) {
 				toast.error(error.data.message, {
 					position: toast.POSITION.TOP_RIGHT
 				});
@@ -80,9 +72,7 @@ export default function ForgetPassword() {
 												value={Email}
 												onChange={(e) => setEmail(e.target.value)}
 											/>
-											<span style={{ color: "red" }}>
-												{EmailErr}
-											</span>
+											<span style={{ color: 'red' }}>{EmailErr}</span>
 											<label htmlFor="Email" className="center-align">
 												Email
 											</label>
@@ -94,7 +84,6 @@ export default function ForgetPassword() {
 												block
 												size="lg"
 												type="submit"
-												// onClick={}
 												className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12 mb-1"
 											>
 												Reset Password

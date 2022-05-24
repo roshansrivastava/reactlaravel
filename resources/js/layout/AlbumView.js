@@ -4,8 +4,8 @@ import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
 import { Song_Album } from '../api/Index';
 import Button from '@mui/material/Button';
-import { Link , NavLink} from "react-router-dom";
-import { DeleteUser , Single, searchusers} from '../api/Index';
+import { Link , useParams  } from 'react-router-dom';
+// import { Link , NavLink, } from "react-router-dom"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
 import EditUser from './EditUser';
@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function AlbumView() {
+	const { id } = useParams();
 	const [APIData, setAPIData] = useState([]);
 	const [Loading , setLoading] =useState(true);
 	const [state, setData] = useState({
@@ -26,13 +27,8 @@ export default function AlbumView() {
 	
 	const fetchData = async () => {
 
-		Song_Album()
+		Song_Album(id)
 		.then(res => {
-            // console.log('album',res);
-            // return;
-			// setData({
-			// 			users : res.data,
-			// 		});
 			console.log(res);
 		})
 		.catch(err => {
@@ -42,7 +38,7 @@ export default function AlbumView() {
     };
 	useEffect(() => {
         fetchData();
-		console.log('dd',state);
+		console.log('dd123',id);
     }, [])
 	
 	const handleChange = (event) =>{
@@ -118,7 +114,6 @@ export default function AlbumView() {
 										</tr>
 									</thead>
 									<tbody>
-										{/* {Table_Users} */}
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (
@@ -132,9 +127,6 @@ export default function AlbumView() {
 										<td> {<VisibilityIcon className="waves-effect waves-cyan " />}View</td>
 										<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
 											<ModeEditIcon onClick= {() => {update(user.id)}}/>
-												{/* <Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(user.id)}} >
-													Edit
-												</Button> */}
 												</Link>}</td>
 										<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
 

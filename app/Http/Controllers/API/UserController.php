@@ -42,7 +42,7 @@ class UserController extends Controller
             ->delay(now()->addSeconds(5));
             return response()->json([
                 'status'=> $this->successCode,
-                'message'=>'Please Verify Mail Registration Successfully',
+                'message'=>$this->responseMsg['success'][3],
                 'data' => $Success,
             ]);
             } catch (\Exception $e) {
@@ -69,7 +69,7 @@ class UserController extends Controller
       Mail::to($email)->send(new ResendVerificationMail($details));
            return response()->json([
             'status'=> $this->successCode,
-            'message'=>'Great! Successfully send in your mail',
+            'message'=>$this->responseMsg['success'][4],
            ]);
       } else {
         return $this->recordNotFound();   
@@ -93,7 +93,6 @@ public function User_login(Request $request)
     return $this->recordNotFoundEmail();
   }
   if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-  //  return Auth::user();
         $user = Auth::User();
         if($user->is_status == 1)
         {
@@ -101,7 +100,7 @@ public function User_login(Request $request)
          $success['data'] = $credentials;
          return response()->json([
              'user'      => Auth::user(),
-             'message'   => 'User Loging Successfully',
+             'message'   => $this->responseMsg['success'][5],
              'status'    => $this->successCode,
              'token'     => $success,
              'admin'     => $user->role_id ,
@@ -111,7 +110,7 @@ public function User_login(Request $request)
          else {
           return response()->json([
             'user'      => Auth::user(),
-            'message'   => 'Please Verify Mail',
+            'message'   =>$this->responseMsg['error'][6],
             'status'    => $this->validationCode,
           ]);
          }
@@ -130,12 +129,11 @@ public function User_login(Request $request)
 
     Public function Logout()
     {
-      //return [Auth::user()];
       if (Auth::check()) 
       {
         Auth::User()->AauthAcessToken()->delete();
         return response()->json(array(
-        'success' => 'you are logged out',
+        'success' =>$this->responseMsg['success'][6],
         'status' => $this->successCode,
         ));
       }
@@ -149,7 +147,6 @@ public function User_login(Request $request)
       // $user = Auth::user;
       $user = User::Search($request)->paginate(10);
       return response()->json(array(
-        'Success'=> 'Data Loading is Successfully',
         'Status' => $this->successCode,
         'data' => $user,
       ));
@@ -186,7 +183,7 @@ public function User_login(Request $request)
       $user = User::findOrFail($id);
       $user->delete();
       return response()->json([
-        'Message'=> 'Delete is successfully',
+        'Message'=>$this->responseMsg['success'][7],
         'status' => $this->successCode,
       ]);
     }
@@ -198,19 +195,13 @@ public function User_login(Request $request)
     public function AddUser(Request $request)
     {
       try{
-      // $this->validate($request,[
-      //   'name' => 'required|min:3|max:50',
-      //   'artistname'=>'required|min:5|max:20',
-      //   'email' => 'email',
-      //   'password' => 'required',
-      //   ]);
         $add_user['name']=$request->input('firstName');
         $add_user['fullname']=$request->input('lastName');
         $add_user['email']=$request->input('email');
         $add_user['password']=Hash::make($request->input('password'));
         $user = User::create($add_user);
         return response()->json([
-          'message'=>"User add successfully",
+          'message'=>$this->responseMsg['success'][0],
           'status'=>$this->successCode,
           'data'=>$user,
         ]);
@@ -225,7 +216,6 @@ public function User_login(Request $request)
         $update = User::find($id);
       return response()->json([
         'status'=>$this->successCode,
-        'message'=>"Render edit is data ",
         'data'=>$update,
       ]);
     }
@@ -265,7 +255,7 @@ public function User_login(Request $request)
           $slug1 =$updatedSlug->slug;
           return response()->json([
             'status'=> $this->successCode,
-            'message'=>'Please check Reset link sent in your mail ',
+            'message'=>$this->responseMsg['success'][8],
             'slug'=> $slug1,
         ]);
       }
@@ -285,16 +275,10 @@ public function resetPassword(Request $request){
           $changePassword = User::where('slug', $slug)->update([
               'password' =>  bcrypt($Password)
           ]);
-          return response()->json([
-              'message' => "Password changed successfully",
-              'status' => $this->successCode,
-          ]);
+          return $this->recordUpdate();
       }
       else{
-          return response()->json([
-              'message' => "password does not match",
-              'status' => 0,
-          ]);
+          return $this->passwordException();
       }
 
   }
@@ -319,10 +303,7 @@ public function resetPassword(Request $request){
       'password'=>$password,
       'is_status'=>1,
     ]);
-    return response()->json([
-      'message' => "edit is successfully",
-      'status' => $this->successCode,
-  ]);
+    return $this->recordUpdate();
   }
 catch (\Exception $e) {
   return $this->getExceptionResponse($e);
@@ -331,7 +312,6 @@ catch (\Exception $e) {
 
   public function Query(Request $request)
   {
-   // return $request->all();
      $search = User::Search($request->data)->get();
      return response()->json([
       'status'=> $this->successCode,

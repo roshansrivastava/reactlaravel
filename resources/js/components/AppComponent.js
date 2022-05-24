@@ -24,7 +24,6 @@ import PurchaseBasic from '../layout/PurchaseBasic';
 import PurchaseFree from '../layout/PurchaseFree';
 import ResetPassword from './ResetPassword'
 import Resend from './Resend';
-import Table from '../layout/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import NewAlbum from '../layout/NewAlbum';
 import AlbumView from '../layout/AlbumView';
@@ -37,9 +36,6 @@ export default function AppComponent() {
     <ToastContainer />
       <Router>
         <Routes>
-          {/* {data ? (
-            <> */}
-
               <Route exact path='/dashboard/home'element={<Home/>}></Route>
               <Route exact path='/dashboard'element={<Dashboard/>}></Route>
               <Route exact path='/dashboard/user'element={<User/>}></Route>
@@ -50,19 +46,13 @@ export default function AppComponent() {
               <Route exact path="/dashboard/purchase/basic"element={<PurchaseBasic/>}></Route>
               <Route exact path='/dashboard/purchase/free'element={<PurchaseFree/>}></Route>
               <Route exact path='/dashboard/release/newalbum'element={<NewAlbum token={data}/>}></Route>
-              <Route exact path='/dashboard/released/album/1'element={<AlbumView/>}></Route>
-            {/* </>
-          ) : (
-            <>             */}
+              <Route exact path='/dashboard/released/album/:id'element={<AlbumView/>}></Route>
               <Route exact path='/'element={<Registration/>}></Route>
               <Route exact path='/forget/password'element={<ForgetPassword/>}></Route>
               <Route exact path='/login'element={<Login/>}></Route>
               <Route exact path='/reset/password/:slug'element={<ResetPassword/>}></Route>
               <Route exact path='/resend'element={<Resend/>}></Route>
               <Route exact path='/table'element={<Table/>}></Route>
-            {/* </>
-          )} */}
-          {/* <Route element={PageNotFound}/> */}
         </Routes>
       </Router>
     </>

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
-import { Search } from '../api/Index';
-import Button from '@mui/material/Button';
 import { Link , NavLink} from "react-router-dom";
 import { DeleteUser , Single, searchusers} from '../api/Index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';

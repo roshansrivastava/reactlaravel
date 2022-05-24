@@ -118,16 +118,17 @@ class StripeController extends Controller
                 Mail::to($email)->send(new SubscriptionMail($subscription_data));
                   $user_latest = User::where('id',$user_id)->first();
                   return response()->Json([
-                    'status'=>200,
+                    'status'=>$this->successCode,
                     'data'=> $user_latest,
-                    'message'=>'congratulation your Payment is Successfully',
+                    'message'=>$this->responseMsg['success'][9],
                   ]);
                 }
-          }catch (\CardException $e) {
-          return response()->json([
-              'status'=> 500,
-              'message' =>"Your card's security code is incorrect.",
-          ]);
+
+                 }catch (\CardException $e) {
+                 return response()->json([
+                     'status'=> $this->$internalError,
+                     'message' =>$this->responseMsg['error'][8],
+                 ]);
       }
     }
 }

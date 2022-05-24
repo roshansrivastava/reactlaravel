@@ -28,12 +28,9 @@ export default function Music() {
 			pageNumber,
 		})
 		.then(res => {
-            // console.log('album',res);
-            // return;
 			setData({
 						users : res.data,
 					});
-			console.log(res);
 		})
 		.catch(err => {
 			console.log(err);
@@ -42,7 +39,6 @@ export default function Music() {
     };
 	useEffect(() => {
         fetchData();
-		console.log('dd',state);
     }, [])
 	
 	const handleChange = (event) =>{
@@ -55,7 +51,6 @@ export default function Music() {
 	const Delete = (id) => {
 		DeleteUser(id).then((res) => {
 			fetchData();
-			console.log(res);
 			
 		})
 	}
@@ -118,7 +113,6 @@ export default function Music() {
 										</tr>
 									</thead>
 									<tbody>
-										{/* {Table_Users} */}
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (
@@ -129,12 +123,9 @@ export default function Music() {
 										<td>{user.genre.name}</td>
 										<td><h6>Pending</h6></td>
 										<td><h6>Not-Requested</h6></td>
-										<td> {<Link  to={'/dashboard/released/album/1'}> <VisibilityIcon className="waves-effect waves-cyan " />View</Link> }</td>
+										<td> {<Link  to={`/dashboard/released/album/${user.id}`}> <VisibilityIcon className="waves-effect waves-cyan " />View</Link> }</td>
 										<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
 											<ModeEditIcon onClick= {() => {update(user.id)}}/>
-												{/* <Button variant="contained" className="waves-effect waves-cyan " onClick= {() => {update(user.id)}} >
-													Edit
-												</Button> */}
 												</Link>}</td>
 										<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
 

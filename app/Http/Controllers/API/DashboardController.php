@@ -16,17 +16,22 @@ use App\Models\Album_Submission;
 
 class DashboardController extends Controller
 {
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
 
     public function planUser()
     {
         try{
-        $plan = Plan::all();
-        return response()->json([
-            'status'=>$this->successCode,
-            'plan'=>$plan,
-        ]);
+            $plan = Plan::all();
+            return response()->json([
+                'status' => $this->successCode,
+                'plan' => $plan,
+            ]);
         }catch (\Exception $e) {
-                return $this->getExceptionResponse($e);
+            return $this->getExceptionResponse($e);
         }
 
     }
@@ -137,9 +142,10 @@ class DashboardController extends Controller
             }
     }
 
-    public function album_Music(){
+    public function albumMusic($id){
         try {
-        $song = Song::with('song')->get();
+        $song = Song::findOrFail($id)->with('album')->get();
+        return $song;
         return response()->json([
             'status'=> $this->successCode,
             'data'=> $song,

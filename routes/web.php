@@ -56,8 +56,7 @@ Route::post('upload-file',[FileUploadController::class,'uploads']);
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('/stripe/premium', [StripeController::class, 'stripePost']);
 Route::post('/released/music',[DashboardController::class,'releasedMusic']);
-Route::get('/dashboard/released/album/1',[DashboardController::class,'welcome']);
-
+Route::get('/dashboard/released/album/{id}',[DashboardController::class,'welcome']);
 
 Route::get('/users', function (Request $request) {
     // $users = User::paginate(10);

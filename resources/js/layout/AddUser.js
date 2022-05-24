@@ -19,7 +19,7 @@ import {
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
-import {AddUsers} from '../api/Index';
+import { AddUsers } from '../api/Index';
 
 // const useStyle = makeStyles((theme) => ({
 // 	padding: {
@@ -30,37 +30,33 @@ import {AddUsers} from '../api/Index';
 // 	}
 // }));
 export default function AddUser() {
-	
-
 	const initialValues = {
 		firstName: '',
 		lastName: '',
-        artistName:'',
+		artistName: '',
 		email: '',
 		password: ''
 	};
 	let validationSchema = Yup.object().shape({
 		firstName: Yup.string().required('Full name is required'),
 		lastName: Yup.string().required('Last name is Required'),
-        artistName:Yup.string().required('artist name is required'),
+		artistName: Yup.string().required('artist name is required'),
 		email: Yup.string().email('Invalid email').required('Required'),
 		password: Yup.string().required('Required!')
 	});
 	const onSubmit = (values, { resetForm }) => {
-        let formData ={
-		firstName: values.firstName,
-        lastName: values.lastName,
-        artistName:values.artistName,
-        email:values.email,
-        password:values.password,
-        }
-        AddUsers(formData).then(res => {
-            console.log('response',res);
+		let formData = {
+			firstName: values.firstName,
+			lastName: values.lastName,
+			artistName: values.artistName,
+			email: values.email,
+			password: values.password
+		};
+		AddUsers(formData).then((res) => {
+			console.log('response', res);
 			resetForm();
-        })
-		// console.log('xxxx',values);
+		});
 	};
-
 
 	return (
 		<div className="App">
@@ -106,8 +102,8 @@ export default function AddUser() {
 				<h1> ADD User</h1>
 				<Grid container justifyContent="center" spacing={1}>
 					<Grid item md={10}>
-						<Card >
-							<CardHeader/>
+						<Card>
+							<CardHeader />
 							<Formik
 								initialValues={initialValues}
 								validationSchema={validationSchema}
@@ -115,10 +111,10 @@ export default function AddUser() {
 							>
 								{({ dirty, isValid, values, handleChange, handleBlur }) => {
 									return (
-										<Form id='addUser'>
+										<Form id="addUser">
 											<CardContent>
-												<Grid item container spacing={1} justifyContent="center"  >
-													<Grid item xs={12} sm={12} md={9} id = 'fileds'>
+												<Grid item container spacing={1} justifyContent="center">
+													<Grid item xs={12} sm={12} md={9} id="fileds">
 														<Field
 															label="First Name"
 															variant="outlined"
@@ -138,7 +134,7 @@ export default function AddUser() {
 															component={TextField}
 														/>
 													</Grid>
-                                                    <Grid item xs={12} sm={12} md={9}>
+													<Grid item xs={12} sm={12} md={9}>
 														<Field
 															label="Last Name"
 															variant="outlined"
@@ -177,8 +173,6 @@ export default function AddUser() {
 													variant="contained"
 													color="primary"
 													type="Submit"
-													
-													
 												>
 													ADD User
 												</Button>

@@ -23,9 +23,9 @@ class Song extends Model
         'audio_locale_id'
     ];
 
-    public function song()
+    public function album()
     {
-        return $this->belongsTo('App\Models\Album','id');
+        return $this->belongsTo('App\Models\Album','id')->with('user');
     }
     
 

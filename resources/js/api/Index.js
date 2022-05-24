@@ -23,11 +23,10 @@ const Upload = (formData,payload) => Api.post('/upload-file',formData,payload);
 const Countri = () =>Api.get('/country');
 const ReleaseAlbum = (payload) =>Api.post('/release/albums',payload);
 const ReleaseMusic = (data) => Api.post(`/released/music?page=${data.pageNumber}`);
-const Song_Album = () => Api.get('/released/music/album');
+const Song_Album = (id) => Api.get('/released/music/song/'+id);
 export  {
     UserLogin,
     Userlogout,
-    // Getuser,
     DeleteUser,
     AddUsers,
     UpdateUsers,

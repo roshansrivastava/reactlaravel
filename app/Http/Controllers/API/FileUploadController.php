@@ -16,12 +16,6 @@ class FileUploadController extends Controller
         $file     = $request->file('files');
         $fileName = $file->getClientOriginalName();
         $file_extention = $file->getClientOriginalExtension();
-        // Storage::disk('local')->putFileAs(
-        //         'files/'.$fileName,
-        //         $file,
-        //         $fileName
-        //       );
-            //   $path = $file->getPath();
             $FilePath = 'roshantest/uploads'; 
             $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
             $Path = Storage::disk('s3')->url($File);
@@ -35,7 +29,8 @@ class FileUploadController extends Controller
                   'data'=>$fileupload,
               ]);
            
-            // return ['22',$All];
+            //  For using vaopor
+
             // Storage::copy(
             //     $request->input('key'),
             //     str_replace('tmp/', '', $request->input('key'))
@@ -44,6 +39,7 @@ class FileUploadController extends Controller
             // $upload['name'] = $fileName;
             // $upload['path'] = $FilePath;
         // $isFileExist = Storage::disk('s3')->exists($File);
+        
             }
             catch (\Exception $e) {
                 return $this->getExceptionResponse($e);
@@ -54,6 +50,5 @@ class FileUploadController extends Controller
         $id = FileUpload::find($id);
         $FilePath = $id->path . "/".$id->name; 
         return $file = Storage::disk('s3')->download($FilePath);
-       // dd($file);
     }
 }

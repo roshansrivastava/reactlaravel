@@ -20,13 +20,21 @@ class Controller extends BaseController
     public $somethingWrong      = 408;
     public $recodeExistCode     = 409;
     public $blockedUser         = 403;
+    public $internalError       = 500;
 
     public $responseMsg    =   [
 
         'success'   =>  [
             'Record saved successfully.',
             'Record updated successfully.',
-            'Record remove successfully.'
+            'Record remove successfully.',
+            'Please Verify Mail Registration Successfully.',
+            'Great! Successfully send in your mail.',
+            'User Loging Successfully',
+            'you are logged out',
+            'Delete is successfully',
+            'Please check Reset link sent in your mail ',
+            'congratulation your Payment is Successfully',
         ],
         'error' =>  [
         'Sorry! Record not found',
@@ -34,33 +42,25 @@ class Controller extends BaseController
         'Sorry! Record already exist.',
         'Sorry! Please enter valid emali & password .',
         'Sorry! Email not found',
-        'Please Enter valid password .'
+        'Please Enter valid password .',
+        'Please Verify Mail.',
+        "Your card's security code is incorrect.",
         
         ],
         'validation'=>[
         'Unauthorized user',
         'Sorry! invalid user',
-        'Sorry! your account is deactivated.'
+        'Sorry! your account is deactivated.',
+        'password does not match',
         ]
     ];
-    public $notifiType    =   [
-        'likeService'         => 1,
-        'likePost'            => 2,
-        'likeUser'            => 3,
-        'userFollow'          => 4,
-        'commentOnPost'       => 5,
-        'buyService'          => 6,
-        'classesReminder'     => 7,
-        'createPost'          => 8,
-        'completedService'    => 9,
-        'subscriptionExpired' => 10,
-        'sendMessage'         => 11,
-        // 'checkUserOnline'     => 12,
-        'checkUserDeactivate' => 13,
-        'checkPaymentStatus'  => 14,
-    ];
 
-
+    public function passwordException() {
+        return response()->json([
+            'message'   => $this->responseMsg['validation'][3],
+            'status'    => $this->invalidPassword,
+        ]);
+    }
     public function getExceptionResponse($e){
         return response()->json([
             'message'   => $e->getMessage(),
@@ -121,17 +121,6 @@ class Controller extends BaseController
             'message'   => $this->responseMsg['success'][1],
             'status'    => $this->successCode,
         ]);
-    }
-    public function filterRequestData($data){
-        $returnData = array();
-        $returnData['showPage']   = isset($data->limit) ? $data->limit : 20;
-        $returnData['SortBy']     = isset($data->sorting['by']) ? $data->sorting['by'] : 'id';
-        $returnData['SortOrder']  = isset($data->sorting['order']) ? $data->sorting['order'] : 'DESC';
-        return $returnData;
-    }
-
-    public function returnDynamicLimit($data){
-        return isset($data->limit) ? $data->limit : 10;
     }
 
 

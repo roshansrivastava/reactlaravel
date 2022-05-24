@@ -29,15 +29,15 @@ export default function Registration() {
 	const [ captcha, setcaptcha ] = useState(null);
 	const [ captchaError, setCaptchaError ] = useState('');
 	const [ open, setOpen ] = useState(false);
-	const [ FullnameErr , setFullnameErr ] = useState('');
+	const [ FullnameErr, setFullnameErr ] = useState('');
 	// var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	const checkboxHandler = () => {
 		setAgree(!agree);
 	};
 	let errorcount = 0;
 	var fullname = '';
-	var fname ='';
+	var fname = '';
 	const handleToken = (token) => {
 		setcaptcha((currentForm) => {
 			localStorage.setItem('captcha', token);
@@ -49,24 +49,23 @@ export default function Registration() {
 			return { ...currentForm, token: null };
 		});
 	};
-	
-	const Update = ()  => {
-					setFullName('');
-					setArtistName('');
-					setEmail('');
-					setPassword('');
-					setConfirmPassword('');
-					// setAgree(false);
-					setToken(null);
-	}
+
+	const Update = () => {
+		setFullName('');
+		setArtistName('');
+		setEmail('');
+		setPassword('');
+		setConfirmPassword('');
+		setToken(null);
+	};
 
 	const handleValidation = () => {
 		if (FullName == '') {
 			setfirstnameError('please enter first name');
 			errorcount++;
 		} else {
-			 fname = FullName;
-			   fname = fname.split(' ');
+			fname = FullName;
+			fname = fname.split(' ');
 			if (fname.length > 3) {
 				setFullnameErr(' Enter valid Firstname, Middlename and Lastname');
 				errorcount++;
@@ -80,44 +79,32 @@ export default function Registration() {
 						console.log('dsfdsf', fname[2]);
 						fullname = fname[1];
 						console.log('name 1==>', fullname);
-						// errorcount++;
 					} else if (fname[2] != '' || fname[2] != undefined) {
 						fullname = fname[1] + fname[2];
 						console.log('add two value 2 ', fullname);
-						// errorcount++;
 					}
 				}
-			} 
-			
-			// else {
-			// 	setfirstnameError(' Enter first name ');
-			// 	return false;
-			// }
+			}
 		}
 		if (ArtistName == '') {
 			setartistError('Please enter artist name ');
-						errorcount++;
-			// return false
+			errorcount++;
 		}
 		if (Email == '' || !Email.match(mailformat)) {
 			setemailError('please enter Valid email');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (Password == '' || Password.length < 7) {
 			setpasswordError('Password should be more than 7 characters');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (ConfirmPassword == '' || Password !== ConfirmPassword) {
 			setconfirmpasswordError('Please enter correct password ');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 		if (token == null || captcha == null) {
 			setCaptchaError('Please Varify Captcha');
-						errorcount++;
-						// return false;
+			errorcount++;
 		}
 	};
 
@@ -130,15 +117,13 @@ export default function Registration() {
 		setconfirmpasswordError('');
 		setCaptchaError('');
 		setfirstnameError('');
-
-
-	}
+	};
 
 	const saveStudent = async (e) => {
 		resetErrors();
 		handleValidation();
 		e.preventDefault();
-		console.log('fgdfgdfgd',errorcount);
+		console.log('fgdfgdfgd', errorcount);
 		if (errorcount) {
 			errorcount = 0;
 			return;
@@ -154,24 +139,18 @@ export default function Registration() {
 		};
 		console.log('bbb', payload);
 		await Register(payload)
-		.then( (res) => {
-			if (res.status == 200) {
-				localStorage.setItem('token', res.data.token);
-				setToken(res.data.token);
-				// handleClose();
-				Update();
-				handleClose();
-				toast.success(res.message,{
+			.then((res) => {
+				if (res.status == 200) {
+					localStorage.setItem('token', res.data.token);
+					setToken(res.data.token);
+
+					Update();
+					handleClose();
+					toast.success(res.message, {
 						position: toast.POSITION.TOP_RIGHT
-					
 					});
-					//  setTimeout(function() {
-						navigate('/login')
-					//  },6000)
-				
-					
-				}
-				else{
+					navigate('/login');
+				} else {
 					handleClose();
 					toast.error(res.message, {
 						position: toast.POSITION.TOP_RIGHT
@@ -188,13 +167,8 @@ export default function Registration() {
 	const handleToggle = () => {
 		setOpen(true);
 	};
-	// const Toast = () =>
-	// {
-		
-	// };
 	return (
 		<div className="flatbg-image">
-			
 			<div className="row">
 				<div className="col s12">
 					<div className="container">

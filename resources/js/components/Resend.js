@@ -4,73 +4,66 @@ import { ResendMail } from '../api/Index';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './component_custom.css';
-import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
 export default function Resend() {
-	// const navigate = useNavigate();
-	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-		const [Email, setEmail] = useState('');
-	const [EmailErr, setEmailError] = useState('');
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	const [ Email, setEmail ] = useState('');
+	const [ EmailErr, setEmailError ] = useState('');
 	const [ open, setOpen ] = useState(false);
-	// const [slug, setSlug] = useState([]);
 	const handleValidation = () => {
 		if (Email == '' || !Email.match(mailformat)) {
 			console.log('val');
 			setEmailError('please enter Valid email');
-			return true
+			return true;
 		}
 	};
 	var num = '';
 	const Save = async (e) => {
 		e.preventDefault();
-		if(handleValidation()) {
-			return false
+		if (handleValidation()) {
+			return false;
 		}
-		console.log('val tru');
-		setEmailError('')
+		setEmailError('');
 		handleToggle();
-		
+
 		let payload = {
 			Email: Email
 		};
-       await  ResendMail(payload)
+		await ResendMail(payload)
 			.then((res) => {
 				if (res.status == 200) {
 					toast.success(res.message, {
 						position: toast.POSITION.TOP_RIGHT
-					  });
+					});
 					setEmail('');
 					handleClose();
-				}
-				else {
+				} else {
 					toast.error(res.message, {
 						position: toast.POSITION.TOP_RIGHT
 					});
 					handleClose();
 				}
 			})
-			.catch(function (error) {
+			.catch(function(error) {
 				toast.error(error.data.message, {
 					position: toast.POSITION.TOP_RIGHT
 				});
 				handleClose();
 			});
-		};
-		const handleClose = () => {
-			setOpen(false);
-		};
-		const handleToggle = () => {
-			setOpen(true);
-		};
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
+	const handleToggle = () => {
+		setOpen(true);
+	};
 
 	return (
 		<div className="bgchange">
-			{/* <ToastContainer /> */}
 			<div className="row">
 				<div className="col s12">
 					<div className="container">
@@ -92,9 +85,7 @@ export default function Resend() {
 												value={Email}
 												onChange={(e) => setEmail(e.target.value)}
 											/>
-											<span style={{ color: "red" }}>
-												{EmailErr}
-											</span>
+											<span style={{ color: 'red' }}>{EmailErr}</span>
 											<label htmlFor="Email" className="center-align">
 												Email
 											</label>
