@@ -116,7 +116,6 @@ export default function Music() {
 									{   
                                 state?.users?.data ? 
                                     state?.users?.data?.map((user) => (
-										console.log('**',user.user.name),
 										<tr key ={user.id}>
 										<tr>{<AccountCircleIcon/>}</tr>
 										<td>{user.user.name}</td>

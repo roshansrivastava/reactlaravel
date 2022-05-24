@@ -94,6 +94,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
+    public function plan()
+    {
+        return $this->hasOne('App\Models\Plan', 'id', 'plan');
+    }
     // public function album()
     // {
     //     return $this->belongsTo('App\Models\Role', 'id', 'role_id');

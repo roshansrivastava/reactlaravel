@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import '../../css/app.css';
 import Registration from './Registration';
-import Example from './Example';
 import Login from './Login';
 import ForgetPassword from './ForgetPassword';
 import {
@@ -27,7 +26,6 @@ import Resend from './Resend';
 import { ToastContainer, toast } from 'react-toastify';
 import NewAlbum from '../layout/NewAlbum';
 import AlbumView from '../layout/AlbumView';
-// import PageNotFound from './PageNotFound';
 export default function AppComponent() {
   let data =localStorage.getItem('token');
 
@@ -52,7 +50,6 @@ export default function AppComponent() {
               <Route exact path='/login'element={<Login/>}></Route>
               <Route exact path='/reset/password/:slug'element={<ResetPassword/>}></Route>
               <Route exact path='/resend'element={<Resend/>}></Route>
-              <Route exact path='/table'element={<Table/>}></Route>
         </Routes>
       </Router>
     </>

@@ -144,9 +144,8 @@ class DashboardController extends Controller
 
     public function albumMusic($id){
         try {
-        $song = Song::findOrFail($id)->with('album')->get();
-        return $song;
-        return response()->json([
+            $song = Song::where('album_id',$id)->with('album')->first();
+            return response()->json([
             'status'=> $this->successCode,
             'data'=> $song,
             ]);

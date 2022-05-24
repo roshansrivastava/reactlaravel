@@ -5,31 +5,25 @@ import Script from '../layout/Script';
 import { Song_Album } from '../api/Index';
 import Button from '@mui/material/Button';
 import { Link , useParams  } from 'react-router-dom';
-// import { Link , NavLink, } from "react-router-dom"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Pagination from "react-js-pagination";
-import EditUser from './EditUser';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { BurstMode } from '@material-ui/icons';
 
 export default function AlbumView() {
 	const { id } = useParams();
 	const [APIData, setAPIData] = useState([]);
 	const [Loading , setLoading] =useState(true);
-	const [state, setData] = useState({
-        users: ''
-    });
+	const [state, setData] = useState([]);
 	const [query, setQuery] = useState("")
 	const [foundUsers, setFoundUsers] = useState([]);
-	let user ='';
-	let search = '';
 	
-	const fetchData = async () => {
-
+	const Data = async () => {
 		Song_Album(id)
 		.then(res => {
-			console.log(res);
+			setData(res.data);
 		})
 		.catch(err => {
 			console.log(err);
@@ -37,29 +31,17 @@ export default function AlbumView() {
 		
     };
 	useEffect(() => {
-        fetchData();
-		console.log('dd123',id);
+        Data();
     }, [])
 	
 	const handleChange = (event) =>{
 		setQuery(event.target.value);
 		fetchData();
-		
 	}
-
-	
-	const Delete = (id) => {
-		DeleteUser(id).then((res) => {
-			fetchData();
-			console.log(res);
-			
-		})
-	}
-	
-	
+	console.log('@@@',state);
+	console.log("albums:::",state?.album?.user?.plan?.title)
 	let data = JSON.parse(localStorage.getItem('user'));
 								
-
 					return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -97,14 +79,20 @@ export default function AlbumView() {
 						<div className='col-md-12'>
 							<div className='card'>
 								<div className='card-header'>
-								<h6> Your Albums
+								<h6> Your Albums 
 								</h6>
+								<div class="buttonPlan">
+								<button>
+									{state?.album?.user?.plan?.title}
+     							</button>
+								</div>
 						   </div>
 								
 								<div className='card-body'>
 									<table className='table table-bordered table-striped'>
 									<thead>
 										<tr> 
+    									<th colspan="2">Image</th>
 											<th>ID</th>
 											<th>Name</th>
 											<th>Genre</th>
@@ -114,45 +102,29 @@ export default function AlbumView() {
 										</tr>
 									</thead>
 									<tbody>
-									{   
-                                state?.users?.data ? 
-                                    state?.users?.data?.map((user) => (
-										console.log('**',user.user.name),
-										<tr key ={user.id}>
-										<tr>{<AccountCircleIcon/>}</tr>
-										<td>{user.user.name}</td>
-										<td>{user.genre.name}</td>
-										<td><h6>Pending</h6></td>
-										<td><h6>Not-Requested</h6></td>
-										<td> {<VisibilityIcon className="waves-effect waves-cyan " />}View</td>
-										<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
-											<ModeEditIcon onClick= {() => {update(user.id)}}/>
-												</Link>}</td>
-										<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
-
-											}</td>
-										
-										
-									</tr>
-                                    )) : "Loading..."
-                              }
+									  
+                               	    {/* state?.users?.data ? 
+										state?.users?.data?.map((user) => ( */}
+											<tr key ={state.id}>
+												{console.log('!!!',state.album)}
+											<tr>{<AccountCircleIcon/>}</tr>
+											<td>{state.title}</td>
+											{/* <td>{user.genre.name}</td>
+											<td><h6>Pending</h6></td>
+											<td><h6>Not-Requested</h6></td>
+											<td> {<Link  to={`/dashboard/released/album/${user.id}`}> <VisibilityIcon className="waves-effect waves-cyan " />View</Link> }</td>
+											<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
+												<ModeEditIcon onClick= {() => {update(user.id)}}/>
+													</Link>}</td>
+											<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
+	
+												}</td> */}
+											
+											
+										</tr>
+                              
 									</tbody>
 									</table>
-									<div>
-                                <Pagination
-                                    activePage={state?.users?.current_page ? state?.users?.current_page : 0}
-                                    itemsCountPerPage={state?.users?.per_page ? state?.users?.per_page : 0 }
-                                    totalItemsCount={state?.users?.total ? state?.users?.total : 0}
-                                    onChange={(pageNumber) => {
-                                        fetchData(pageNumber)
-                                    }}
-                                    pageRangeDisplayed={10}
-                                    itemClass="page-item"
-                                    linkClass="page-link"
-                                    firstPageText="First Page"
-                                    lastPageText="Last Lage"
-                                />
-                            </div>
 								</div>
 							</div>
 						</div>
