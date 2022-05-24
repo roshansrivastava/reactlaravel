@@ -16,25 +16,10 @@ use App\Models\Album_Submission;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        return $this->middleware('auth:api');
-    }
 
     public function planUser()
     {
         try{
-            // // $plam
-            // for ($plan = 0; $plan < max(3); $plan++) {
-                //     return['2',$plan];
-        // }
-        // // $description = $plan[0]['content_1'];
-        // // $description = $plan[0]['content_2'];
-        // // $description = $plan[0]['content_3'];
-        // // $description = $plan[0]['content_4'];
-        // // $description = $plan[0]['content_5'];
-        // // return $description;
-        
         $plan = Plan::all();
         return response()->json([
             'status'=>$this->successCode,
@@ -130,7 +115,7 @@ class DashboardController extends Controller
             }
             return response()->json([
             'status'=> $this->successCode,
-            'message'=>'data send successfully',
+            'message'=>$this->responseMsg['success'][0],
             'data' => $songdata,
             ]);
             } catch(\Exception $e){
@@ -145,7 +130,6 @@ class DashboardController extends Controller
             $album_genre = Album::with('user','genre','fileupload')->paginate(10);
             return response()->json([
                 'status'=> $this->successCode,
-                'message'=>'Music data loaded',
                 'data'=> $album_genre,
                 ]);
         } catch(\Exception $e){
@@ -158,7 +142,6 @@ class DashboardController extends Controller
         $song = Song::with('song')->get();
         return response()->json([
             'status'=> $this->successCode,
-            'message'=>'Song data loaded',
             'data'=> $song,
             ]);
         } catch(\Exception $e){

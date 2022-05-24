@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import Script from '../layout/Script';
@@ -19,6 +20,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function NewAlbum(props) {
+	const navigate = useNavigate();
 	const [ albumname, setalbumname ] = useState('');
 	const [ genername, setgenerename ] = useState('');
 	const [ datename, setdatename ] = useState('');
@@ -58,9 +60,6 @@ export default function NewAlbum(props) {
 	};
 
 	const UploadMusic = (musicData, index) => {
-		// setServiceList();
-		console.log('DOne',musicData);
-		console.log('121',serviceList);
 		const list = [ ...serviceList ];
 		list[index]['music'] = musicData;
 	}
@@ -70,11 +69,6 @@ export default function NewAlbum(props) {
 		setServiceList(list);
 	};
 
-	const Checkchange = (e) => {
-		// const {  value } = e.target;
-		// console.log('##',value);
-		setagree(!agree)
-	}
 	let errorcount = 0;
 	const handleValidation = () => {
 		if (albumname == '') {
@@ -155,15 +149,17 @@ export default function NewAlbum(props) {
 			ApplyName: applyname,
 			users: serviceList
 		};
-		console.log('musiclist',payload);
 		ReleaseAlbum(payload).
 		then((response) => {
-			console.log('12332', response);
-			toast.success(res.message,{
-				position: toast.POSITION.TOP_RIGHT
-			
-			});
-				navigate('/login')
+			setIsOpen(false);
+			if(response.status == 200){
+				toast.success(response.message,{
+					position: toast.POSITION.TOP_RIGHT
+				
+				});
+
+			}
+				navigate('/dashboard/music');
 		});
 	};
 
@@ -295,6 +291,7 @@ export default function NewAlbum(props) {
 	};
 
 	return (
+		
 		<div className="App">
 			<header className="page-topbar" id="header">
 				<Navbar />
@@ -329,6 +326,7 @@ export default function NewAlbum(props) {
 				</a>
 			</aside>
 			<div id="main">
+			
 				<div id='class-modal'>
 				<Modal
 					isOpen={modalIsOpen}
@@ -458,7 +456,7 @@ export default function NewAlbum(props) {
 															handleAddition={handleAddition}
 															handleDrag={handleDrag}
 															handleTagClick={handleTagClick}
-															inputFieldPosition="bottom"
+															// inputFieldPosition="bottom"
 															autocomplete
 															editable
 														/>

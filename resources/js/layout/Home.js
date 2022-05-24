@@ -34,7 +34,6 @@ export default function Home() {
 	const [Free ,setfree ] = useState('');
 	const [plans ,setPlan ] = useState([]);
 	const [user_data ,setuser_data ] = useState([]);
-	// const [user_plan ,setuserplan ] = useState(1);
 	var toast_success='';
 	var toast_error ='';
 	var amount ='';
@@ -93,19 +92,6 @@ export default function Home() {
 			padding: theme.spacing(2)
 		}
 	}));
-	// const redirect = () => 
-	// {
-	// 	navigate('/dashboard/purchase/free');
-	// }
-	
-	// const Premium = () =>
-	// {
-	// 	navigate('/dashboard/purchase/premium');
-	// }
-
-	// const Basic = () => {
-	// 	navigate('/dashboard/purchase/basic');
-	// }
 	const getPlanData = () => {
 		Plan().then((response) => {
 			setPlan(response.plan);
@@ -137,25 +123,11 @@ export default function Home() {
 				// 	// }
 				// });
 			},[]);
-	// const bull = (
-	// 	<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-	// 		•
-	// 	</Box>
-	// );
 	let data = JSON.parse(localStorage.getItem('user'));
-	// setuserplan(user_data.plan);
-	// console.log('set',user_data.plan)
-	// setuser_data(data);
 	user_name = data.name;
 	user_id = data.id;
 	var de = data.plan;
 	User_plan =user_data.plan == null ? de : user_data.plan;
-	// setplanname() user_data.plan;
-	// console.log('fd22',data);
-	// // useEffect(()=>
-	// // {
-	// // 	console.log('now',data);
-	// // });
 	const classes = useStyles();
 	
 	return (

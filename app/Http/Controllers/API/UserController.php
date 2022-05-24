@@ -33,12 +33,9 @@ class UserController extends Controller
     public function Register(RegisterRequest $request) 
     { 
         try {
-            // $plan_id = isset($request->plan_id) ? $request->plan_id : '1';
-            // $request->request->add(['plan' => $plan_id]);
             $result = User::create($request->authorize());
             $success['token'] = $result->createToken('Personal Access Token')->accessToken;
             $success['data'] = $result;
-            // if(count($success) > 0){
             $Success['activation_token'] = $result['activation_token'];
             // $result->notify(new RegisterVerificationMail());
             RegistrationsendNotification::dispatch($result)
