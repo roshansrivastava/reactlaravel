@@ -11,6 +11,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { BurstMode } from '@material-ui/icons';
+import ReactAudioPlayer from 'react-audio-player';
 
 export default function AlbumView() {
 	const { id } = useParams();
@@ -38,10 +39,13 @@ export default function AlbumView() {
 		setQuery(event.target.value);
 		fetchData();
 	}
+	let text1 = "";
+	let text2 = state?.composer;
+	let text3 =state?.language ;
+	let information = text1.concat("composer:", text2, ",","language:", text3);
 	console.log('@@@',state);
-	console.log("albums:::",state?.album?.user?.plan?.title)
-	let data = JSON.parse(localStorage.getItem('user'));
-								
+	// console.log("albums:::",state?.song_file);
+	let data = JSON.parse(localStorage.getItem('user'));	
 					return (
 		<div className="App">
 			<header className="page-topbar" id="header">
@@ -80,51 +84,45 @@ export default function AlbumView() {
 							<div className='card'>
 								<div className='card-header'>
 								<h6> Your Albums 
-								</h6>
-								<div class="buttonPlan">
-								<button>
+								<button class="buttonPlan">
 									{state?.album?.user?.plan?.title}
      							</button>
-								</div>
+								</h6>
 						   </div>
-								
 								<div className='card-body'>
-									<table className='table table-bordered table-striped'>
+								<div className='row'>
+									<div className='col-md-3' >
+									<img id="imgsong" src={state?.album?.fileupload?.path}/>
+										</div>
+										<div className='col-md-9'>
+											Songs		
+									<table className='table table-bordered table-striped' >
 									<thead>
-										<tr> 
-    									<th colspan="2">Image</th>
-											<th>ID</th>
+										<tr>
+											<th>Nr.</th>
 											<th>Name</th>
-											<th>Genre</th>
-											<th>Album Status</th>
-											<th>Request Status</th>
+											<th>Information</th>
+											<th>Feature-Artist</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
-									  
-                               	    {/* state?.users?.data ? 
-										state?.users?.data?.map((user) => ( */}
-											<tr key ={state.id}>
-												{console.log('!!!',state.album)}
-											<tr>{<AccountCircleIcon/>}</tr>
-											<td>{state.title}</td>
-											{/* <td>{user.genre.name}</td>
-											<td><h6>Pending</h6></td>
-											<td><h6>Not-Requested</h6></td>
-											<td> {<Link  to={`/dashboard/released/album/${user.id}`}> <VisibilityIcon className="waves-effect waves-cyan " />View</Link> }</td>
-											<td>{<Link className="waves-effect waves-cyan " to={`/dashboard/updateuser/${user.id}`}>
-												<ModeEditIcon onClick= {() => {update(user.id)}}/>
-													</Link>}</td>
-											<td>{<DeleteIcon className="waves-effect waves-cyan"onClick= {() => {Delete(user.id)}}/>
-	
-												}</td> */}
-											
-											
+											<tr>
+											<td>{state.id}</td>
+											<td>{state?.album?.title}</td>
+											<td>{information}</td>
+											<td>No Feature Artist</td>
 										</tr>
-                              
 									</tbody>
 									</table>
+									<ReactAudioPlayer
+										id="audio"
+									  src={state?.song_file}
+									  autoPlay
+									  controls
+									/>
+									      </div>
+									</div>
 								</div>
 							</div>
 						</div>

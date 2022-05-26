@@ -25,7 +25,7 @@ class Song extends Model
 
     public function album()
     {
-        return $this->belongsTo('App\Models\Album','id')->with('user');
+        return $this->belongsTo('App\Models\Album','id')->with('user','fileupload');
     }
     
 

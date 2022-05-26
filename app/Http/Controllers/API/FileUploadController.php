@@ -18,10 +18,14 @@ class FileUploadController extends Controller
         $file_extention = $file->getClientOriginalExtension();
             $FilePath = 'roshantest/uploads'; 
             $File = Storage::disk('s3')->putFileAs($FilePath, $file , $fileName);
-            $Path = Storage::disk('s3')->url($File);
+            // $Path = Storage::disk('s3')->url($File);
+            $url = Storage::temporaryUrl(
+                $File,
+                now()->addMinutes(30)
+            );
             $fileupload = new FileUpload;
             $fileupload['name']=$fileName;
-            $fileupload['path']=$Path;
+            $fileupload['path']=$url;
             $fileupload->save();
             return response()->json([
                   'status'=>$this->successCode,
@@ -39,7 +43,6 @@ class FileUploadController extends Controller
             // $upload['name'] = $fileName;
             // $upload['path'] = $FilePath;
         // $isFileExist = Storage::disk('s3')->exists($File);
-        
             }
             catch (\Exception $e) {
                 return $this->getExceptionResponse($e);

@@ -251,9 +251,22 @@ react tags
   font-size: 30px;
 }
 .buttonPlan{
-  position: absolute;
-  top:50%;
-  right: 0;
-  width: 120px;
-  transform: translateY(-50%);
+  float: right;
+  color: red;
+  padding: 9px;
+  margin-top: -8px;
+  background-color: gold;
+}
+
+#imgsong{
+  padding: 5px;
+  width: 100%;
+  max-width: 100%;
+  height: 205px;
+  margin-left: -23px;
+}
+
+
+#audio{
+  width: 100%;
 }

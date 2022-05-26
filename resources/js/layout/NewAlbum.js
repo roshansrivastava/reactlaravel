@@ -69,7 +69,7 @@ export default function NewAlbum(props) {
 				radio: '',
 				isrcname: '',
 				music: uploadMusicData
-			}
+			} 
 		]);
 	};
 
@@ -143,13 +143,13 @@ export default function NewAlbum(props) {
 
 	const Saveform = (e) => {
 		e.preventDefault();
-		CheckValidation();
-		if (error) {
-			setvalidationcheck(' Please  Fill checkbox ');
-			error = 0;
-			return;
-		}
-
+		// CheckValidation();
+		// if (error) {
+		// 	setvalidationcheck(' Please  Fill checkbox ');
+		// 	error = 0;
+		// 	return;
+		// }
+		
 		let payload = {
 			AlbumName: albumname,
 			GenerName: genername,
@@ -824,7 +824,7 @@ export default function NewAlbum(props) {
 														<div className="input-field col s12">
 															<button
 																className="btn cyan waves-effect waves-light right"
-																onClick={openModal}
+																onClick={Saveform}
 																type="buttton"
 															>
 																Next
