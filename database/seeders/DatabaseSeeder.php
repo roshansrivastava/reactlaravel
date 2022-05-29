@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             StoreSeeder::class,
             GenreSeeder::class,
-            CountrySeeder::class,
+            LanguageSeeder::class,
             ]);
     }
 }

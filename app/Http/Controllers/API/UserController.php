@@ -38,8 +38,8 @@ class UserController extends Controller
             $success['data'] = $result;
             $Success['activation_token'] = $result['activation_token'];
             // $result->notify(new RegisterVerificationMail());
-            RegistrationsendNotification::dispatch($result)
-            ->delay(now()->addMinutes(5));
+            RegistrationsendNotification::dispatch($result);
+            // ->delay(now()->addMinutes(5));
             return response()->json([
                 'status'=> $this->successCode,
                 'message'=>$this->responseMsg['success'][3],
